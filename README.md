@@ -16,11 +16,10 @@ Data de inicio: [21/03/2025]
 
 # Creditos
 
-[Daniel](https://github.com/FishingDonut/)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/FishingDonut/roguelike_cmd)
+| [Daniel](https://github.com/FishingDonut/)
+| [Erick](https://github.com/Erick-Mafra)
+| [Rodrigo](https://github.com/RodrigoBurattoRibas)
 
-[Erick]()
+![GitHub top language](https://img.shields.io/github/languages/top/FishingDonut/roguelike_cmd)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/FishingDonut/roguelike_cmd)
-
-[Rodrigo]()
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/FishingDonut/roguelike_cmd)
+![GitHub last commit](https://img.shields.io/github/last-commit/FishingDonut/roguelike_cmd)
