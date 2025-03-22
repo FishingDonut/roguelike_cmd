@@ -14,7 +14,7 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 Beta:
 
 ```
-    /meu_jogo
+    /root
     ├── src/            # Código-fonte principal
     │   ├── core/       # Lógica central do jogo (game loop, engine)
     │   ├── entities/   # Classes dos personagens, inimigos, etc.
