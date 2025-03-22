@@ -10,6 +10,24 @@ Instruções do trabalho [link](https://onedrive.live.com/?redeem=aHR0cHM6Ly8xZH
 
 Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 
+## Estrtutura do projeto
+Beta:
+
+```
+    /meu_jogo
+    ├── src/            # Código-fonte principal
+    │   ├── core/       # Lógica central do jogo (game loop, engine)
+    │   ├── entities/   # Classes dos personagens, inimigos, etc.
+    │   ├── utils/      # Funções auxiliares
+    │   ├── renderer/   # Responsável por desenhar no terminal
+    │   ├── main.cpp    # Arquivo principal do jogo
+    ├── include/        # Arquivos de cabeçalho (.h)
+    ├── assets/         # Arquivos de assets (opcional, ex: mapas)
+    ├── tests/          # Testes unitários (se for implementar)
+    ├── Makefile        # Arquivo para compilar o projeto
+    └── README.md       # Instruções do projeto
+```
+
 ## Status
 
 Data de inicio: [21/03/2025]
