@@ -10,7 +10,9 @@ int main(){
     GetConsoleCursorInfo(out, &cursorInfo);
     cursorInfo.bVisible = false; // set the cursor visibility
     SetConsoleCursorInfo(out, &cursorInfo);
+    system("cls");
     if(menu() == 1){
-    return 0;
+        system("cls");
+        return 0;
     }
 }
