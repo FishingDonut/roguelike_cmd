@@ -7,13 +7,19 @@
 using namespace std;
 int key;
 int main(){
-    ItemsMenu();
     SetConsoleTitle("RogueLike Game");
     system("cls");
     setlocale(LC_ALL, "");
     CONSOLE_SCREEN_BUFFER_INFO windowSize;
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO     cursorInfo;
+    GetConsoleCursorInfo(out, &cursorInfo);
+    cursorInfo.bVisible = false; // set the cursor visibility
+    SetConsoleCursorInfo(out, &cursorInfo);
+    ItemsMenu();
+    system("cls");
     GetConsoleScreenBufferInfo(out, &windowSize);
+    SetConsoleCursorPosition(out, {0, 0});
     int loaded = 0;
     if (windowSize.dwSize.X < 145){
         SetConsoleTitle("Please Resize Game");
@@ -26,12 +32,12 @@ int main(){
             }else{
                 loaded++;
             }
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {25, 0});
+            SetConsoleCursorPosition(out, {52, 0});
             for (int i = 0; i < loaded; i++)
             {
                 cout<<".";
             }
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {25, 0});
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {52, 0});
             cout<<"     ";
         } while (windowSize.dwSize.X < 145);
         
@@ -39,10 +45,6 @@ int main(){
     cout<<windowSize.dwSize.X;
     
 
-    CONSOLE_CURSOR_INFO     cursorInfo;
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = false; // set the cursor visibility
-    SetConsoleCursorInfo(out, &cursorInfo);
     if(menu() == 2){
         system("cls");
         return 0;
