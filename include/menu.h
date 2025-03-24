@@ -1,22 +1,41 @@
 #include<conio.h>
 #include<iostream>
-#include<locale.h>
+#include<string.h>
 using namespace std;
-void cleanmenu(int pos){
+void cleanmenu(short int pos){
     setlocale(LC_ALL, "pt_BR.UTF-8");
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, 0});
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, 16});
     cout<<"iniciar jogo   \n";
     cout<<"informações   \n";
     cout<<"sair   \n";
     cout<<"Você pode precionar esc para sair e enter para selecionar ;)";
+    pos+=16;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, pos});
 }
 int menu(/* args */)
-{
+{   
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, 0});
+    cout<<"+-----------------------------------------------------------------------------------------------------------------------------------------------+\n";
+    cout<<"|                                                                                                                                               |\n";
+    cout<<"|                                                                                                                                               |\n";
+    cout<<"|      :######*:                              =# +# -#:               -######*                               :###:  .*######- +######= *# +#:   |\n";
+    cout<<"|      -@@@@@@@*                              *@ +# =@-               *@@@@@@@:                              *@@@*  -@@@@@@@= @@@@@@@# @@ #@-   |\n";
+    cout<<"|      -@#   +@* :====: .-=-:=..=: .-- :====: *@:   =@-  =- -===-.    *@=   **. -===- :=:--.-=:  -===-.      @@+@%. -@#       @@   :*+ @@ #@-   |\n"
+        <<"|      -@*   =@*.@@@@@%.*@@@@@-=@+ :@# @@@@@% *@:*@:=@- +@=-@@@@@*    *@=      =@@@@@==@@@@@@@@ -@@@@@*     -@   @: -@%=====  @@       @@ #@-   |\n"
+        <<"|      -@@%%%@@*:@#:-@%.#@-:#@-=@+ :@#.@%--@@ *@:*@:=@+:@@.=@*  @#    *@= +@@@:-#+-*@+=@*-@@-%@ =@*-+@#     %@= *@+ :@@@@@@@* @@       @@ #@-   |\n"
+        <<"|      -@@%%@@%.:@*  @%.#@. =@-=@+ :@#.@@@@@@ *@:*@:=@@@@* =@@@@@#    *@= -*@@:=@@@@@+=@-.%@ #@ =@@@@@#    :@@%#%@%  .::::+@# @@       @@ #@-   |\n"
+        <<"|      -@*  #@* :@#..@%.#@:.+@-=@+.-@#.@%-=** *@:*@:=@*+@% =@*        *@+..:%@:*@*-*@+=@-.%@ #@ =@         =@@%%%@@-      +@# @@:   %* @@ #@-   |\n"
+        <<"|      -@*  .@@=:@@%%@%.*@%%@@-=@@%@@# @@%%@@ *@:*@:=@- *@-=@@%%@#    *@@@@@@@:*@@%@@+=@-.%@ #@ =@@%%@#    #@=   =@#.@@@@@@@# @@@@@@@# @@ #@-   |\n"
+        <<"|      :#+   -#*.+####= -%#*+@-.*##=*+ =####= =#:+#:-#: .#+.*###*:    :######+ :##*=#--#:.** +# .*###*:    *#.   .#*:#######: =######- *# +#:   |\n"
+        <<"|                       *%   @-                                                                                                                 |\n"
+        <<"|                       =@@@@%.                                                                                                                 |\n"
+        <<"|                        .....                                                                                                                  |\n"
+        <<"+-----------------------------------------------------------------------------------------------------------------------------------------------+\n";
     int option = 0;
     short int position = 0;
     do
-    {   
+    { 
+        SetConsoleTitle("RogueLike Game - Menu");  
         if (option == 0){
             cleanmenu(0);
         }
@@ -46,6 +65,7 @@ int menu(/* args */)
             position<=0?position=2:position--;
             break;
         case 80: case 's':
+            
             if (position>=2){
                 position=0;
             }else{
@@ -75,5 +95,5 @@ int menu(/* args */)
         break;
         }
     } while (option != 27);
-    
+    return 2;
 }
