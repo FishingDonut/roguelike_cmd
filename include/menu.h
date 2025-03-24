@@ -5,10 +5,10 @@ using namespace std;
 void cleanmenu(short int pos){
     setlocale(LC_ALL, "pt_BR.UTF-8");
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, 16});
-    cout<<"iniciar jogo   \n";
-    cout<<"informações   \n";
-    cout<<"sair   \n";
-    cout<<"Você pode precionar esc para sair e enter para selecionar ;)";
+    cout<<"Iniciar   \n";
+    cout<<"Informações   \n";
+    cout<<"Sair   \n";
+    cout<<"Você pode precionar ESC para sair e ENTER para selecionar;)";
     pos+=16;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, pos});
 }
@@ -43,15 +43,15 @@ int menu(/* args */)
         {
         case 0:
             cleanmenu(position);
-            cout<<"> iniciar jogo \n";
+            cout<<"> Iniciar \n";
             break;
         case 1:
             cleanmenu(position);
-            cout<<"> informações \n";
+            cout<<"> Informações \n";
             break;
         case 2:
             cleanmenu(position);
-            cout<<"> sair \n";    
+            cout<<"> Sair \n";    
         break;
         default:
             break;
