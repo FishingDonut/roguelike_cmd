@@ -50,10 +50,10 @@ public:
         _health -= health;
     }
 };
-int main(){
-    player p;
-    p.setPosition(1,1);
-    p._inventory.items[0].type = Items::potion;
-    p._inventory.items[0].quantity = 10;
-    return 0;
-}
+// int main(){
+//     player p;
+//     p.setPosition(1,1);
+//     p._inventory.items[0].type = Items::potion;
+//     p._inventory.items[0].quantity = 10;
+//     return 0;
+// }

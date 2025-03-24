@@ -2,10 +2,12 @@
 #include<conio.h>
 #include<windows.h>
 #include "./include/menu.h"
+#include "./include/itemsmenu.h"
 #include<locale.h>
 using namespace std;
 int key;
 int main(){
+    ItemsMenu();
     SetConsoleTitle("RogueLike Game");
     system("cls");
     setlocale(LC_ALL, "");
