@@ -25,5 +25,5 @@ public:
         _damage = damage;
         _position = position;
     }
-    }
+    
 };
