@@ -3,6 +3,7 @@
 #include<windows.h>
 #include "./include/menu.h"
 #include "./include/itemsmenu.h"
+#include "./include/maps.h"
 #include<locale.h>
 using namespace std;
 int key;
@@ -21,6 +22,13 @@ int main(){
     GetConsoleScreenBufferInfo(out, &windowSize);
     SetConsoleCursorPosition(out, {0, 0});
     int loaded = 0;
+    map mapteste = mapa();
+    for(int j = 0; j < 10; j++){
+        for(int i = 0; i < 10; i++){
+            cout << mapteste.map[j][i];
+        }
+        cout << endl;
+    }
     if (windowSize.dwSize.X < 145){
         SetConsoleTitle("Please Resize Game");
         cout<<"Waiting you resize window please place in fullscreen";
@@ -42,7 +50,7 @@ int main(){
         } while (windowSize.dwSize.X < 145);
         
     }
-    cout<<windowSize.dwSize.X;
+    //cout<<windowSize.dwSize.X;
     
 
     if(menu() == 2){
