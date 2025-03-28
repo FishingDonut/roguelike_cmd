@@ -60,6 +60,8 @@ int menu(/* args */)
         option = getch();
         switch (option)
         {
+        case 81: case 'q':
+            return 2;
         case 72: case 'w':
             //cout<<"Up";
             position<=0?position=2:position--;
