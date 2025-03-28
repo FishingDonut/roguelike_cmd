@@ -4,7 +4,7 @@ struct Position{
 };
 struct Items{
     enum TypeofItems{
-        potion,
+        potion = 2,
         armor,
         weapon,
         key,
@@ -18,38 +18,36 @@ struct Items{
     };
 };
 
-struct inventory{
+struct Inventory{
     Items items[10];
     short int size;
 };
-
-class player{
-private:
-    Position _position;
-    int _health = 100;
-public:
-    inventory _inventory;
+struct Player{
+    Position position;
+    int health = 100;
+    Inventory inventory;
     void setRelativePosition(int x, int y){
-        _position.x += x;
-        _position.y += y;
+        position.x += x;
+        position.y += y;
     }
     void setPosition(int x, int y){
-        _position.x = x;
-        _position.y = y;
+        position.x = x;
+        position.y = y;
     }
     Position getPosition(){
-        return _position;
+        return position;
     }
     int getHealth(){
-        return _health;
+        return health;
     }
     void addHealth(int health){
-        _health += health;
+        health += health;
     }
     void removeHealth(int health){
-        _health -= health;
+        health -= health;
     }
 };
+
 // int main(){
 //     player p;
 //     p.setPosition(1,1);

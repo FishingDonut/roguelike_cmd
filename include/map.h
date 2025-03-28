@@ -1,4 +1,3 @@
-#include <vector>
 using namespace std;
 struct Position{
     int x;
@@ -6,8 +5,7 @@ struct Position{
 };
 
 struct map{
-    vector<vector<int>> map;
-    
+    int map[10][10] = {};
     enum mapSpawnPositions{
         top,
         bottom,
