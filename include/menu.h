@@ -67,13 +67,8 @@ int menu(/* args */)
             position<=0?position=2:position--;
             break;
         case 80: case 's':
-            
-            if (position>=2){
-                position=0;
-            }else{
-                position++;
-            }
-            
+            //cout<<"Down";
+            position>=2?position=0:position++;
             break;
         case 75: case 'a':
             //cout<<"Left";
