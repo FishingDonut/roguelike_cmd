@@ -1,7 +1,11 @@
-#include<player.h>
+using namespace std;
+struct Position{
+    int x;
+    int y;
+};
 
 struct map{
-    int map[10][10];
+    int map[10][10] = {};
     enum mapSpawnPositions{
         top,
         bottom,
@@ -9,10 +13,12 @@ struct map{
         right,
     };
     enum entities{
-        enemy = 1,
+        parede = 1,
+        enemy = 2,
         key,
         chest,
         mimic,
+        porta = 99,
     };
     enum difficulty{
         //need logic to add difficulty when pass level
