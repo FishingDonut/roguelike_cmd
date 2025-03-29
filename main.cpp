@@ -10,7 +10,7 @@ int key;
 int main(){
     SetConsoleTitle("RogueLike Game");
     system("cls");
-    setlocale(LC_ALL, "");
+    //setlocale(LC_ALL, "Portuguese");
     CONSOLE_SCREEN_BUFFER_INFO windowSize;
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO     cursorInfo;
@@ -26,6 +26,18 @@ int main(){
     for(int j = 0; j < 10; j++){
         for(int i = 0; i < 10; i++){
             cout << mapteste.map[j][i];
+            switch (mapteste.map[j][i])
+            {
+            case mapteste.entities::parede:
+                cout<<char(219);
+                break;
+            case mapteste.entities::enemy:
+                cout << "!";
+                break;
+            
+            default:
+                break;
+            }
         }
         cout << endl;
     }

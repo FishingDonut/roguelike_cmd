@@ -13,10 +13,12 @@ struct map{
         right,
     };
     enum entities{
+        parede = 1,
         enemy = 2,
         key,
         chest,
         mimic,
+        porta = 99,
     };
     enum difficulty{
         //need logic to add difficulty when pass level
