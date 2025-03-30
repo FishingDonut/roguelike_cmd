@@ -20,6 +20,7 @@ struct map{
         mimic,
         portaSupInf = 91,
         portaLat = 92,
+        vazio = 9,
     };
     enum difficulty{
         //need logic to add difficulty when pass level

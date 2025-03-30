@@ -50,6 +50,9 @@ int main(){
                 case mapteste.entities::mimic:
                     cout << "\u00A4";
                     break;
+                case mapteste.entities::vazio:
+                    cout << "\u0000";
+                    break;
                 default:
                     break;
             }
