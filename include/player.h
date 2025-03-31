@@ -104,7 +104,7 @@ int loopPlayer()
                 break;
             }
 
-            SetConsoleCursorPosition(hConsole, {0, 32});
+            SetConsoleCursorPosition(hConsole, {0, 0});
             cout << getCharAtPosition(hConsole, newPosition);
 
             if (getCharAtPosition(hConsole, newPosition) == '0')
