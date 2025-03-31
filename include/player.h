@@ -36,11 +36,6 @@ struct Player
 
     int health = 100;
 
-    COORD getPosition()
-    {
-        return position;
-    }
-
     void setPosition(int x, int y)
     {
         position.X = x;
