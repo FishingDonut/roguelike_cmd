@@ -1,105 +1,99 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-#include "./include/menu.h"
-#include "./include/itemsmenu.h"
-#include "./include/maps.h"
 #include "./include/player.h"
 #include <locale.h>
 
 using namespace std;
 
+char getCharAtPosition(HANDLE hConsole, COORD position)
+{
+    char c;
+    DWORD read;
+    ReadConsoleOutputCharacterA(hConsole, &c, 1, position, &read);
+    return c;
+}
+
+void drawnMap(HANDLE &hConsole, int width, int height)
+{
+    for (short i = 0; i < width; ++i)
+    {
+        for (short j = 0; j < height; ++j)
+        {
+            if(i == 0 || i == width -1 || j == 0 || j == height -1){
+                SetConsoleCursorPosition(hConsole, {i, j});
+                cout << ".";
+            }
+        }
+    }
+}
+
 int main()
 {
-    SetConsoleTitle("RogueLike Game");
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD currentPosition = {0, 0};
+    COORD newPosition = {10, 10};
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    Player player = Player();
+    
     system("cls");
     SetConsoleOutputCP(CP_UTF8); // Definindo o console para usar caracteres UTF-8 (SAÍDA)
     SetConsoleCP(CP_UTF8);       // Definindo o console para usar caracteres UTF-8 (ENTRADA)
-    CONSOLE_SCREEN_BUFFER_INFO windowSize;
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = false; // set the cursor visibility
-    SetConsoleCursorInfo(out, &cursorInfo);
-    ItemsMenu();
-    system("cls");
-    GetConsoleScreenBufferInfo(out, &windowSize);
-    SetConsoleCursorPosition(out, {0, 0});
-    int loaded = 0;
-
-    map mapteste = mapa();
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
     
-    for (int j = 0; j < 16; j++)
+    int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    
+    player.position = newPosition;
+
+    drawnMap(hConsole, width, height);
+
+    while (player.health > 0)
     {
-        for (int i = 0; i < 16; i++)
+        currentPosition = newPosition;
+        int keyBoard = getch();
+
+        if (keyBoard)
         {
-            switch (mapteste.map[j][i])
+            switch (keyBoard)
             {
-            case 0:
-                cout << " ";
+            case 81:
+                SetConsoleCursorPosition(hConsole, player.position);
+                cout << "✞" << endl;
+                return 0;
                 break;
-            case mapteste.entities::parede:
-                cout << "\u2588";
+            case 119:
+                newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
                 break;
-            case mapteste.entities::enemy:
-                cout << "!";
+            case 115:
+                newPosition.Y < height-1
+                 ? newPosition.Y++ : newPosition.Y;
                 break;
-            case mapteste.entities::portaLat:
-                cout << "\u007C";
+            case 97:
+                newPosition.X > 0 ? newPosition.X-- : newPosition.X;
                 break;
-            case mapteste.entities::portaSupInf:
-                cout << "\u2014";
-                break;
-            case mapteste.entities::chest:
-                cout << "\u00A4";
-                break;
-            case mapteste.entities::mimic:
-                cout << "\u00A4";
-                break;
-            case mapteste.entities::vazio:
-                cout << "\u0000";
+            case 100:
+                newPosition.X < width-1 ? newPosition.X++ : newPosition.X;
                 break;
             default:
+                cout << keyBoard << endl;
                 break;
             }
+
+            SetConsoleCursorPosition(hConsole, {0, 0});
+            cout << getCharAtPosition(hConsole, newPosition);
+
+            if (getCharAtPosition(hConsole, newPosition) != ' ')
+            {
+                // newPosition = currentPosition;
+            }
+
+            player.setPosition(newPosition.X, newPosition.Y);
+            SetConsoleCursorPosition(hConsole, currentPosition);
+            cout << " ";
+            SetConsoleCursorPosition(hConsole, player.position);
+            cout << "@";
         }
-        cout << endl;
     }
-
-    if (windowSize.dwSize.X < 145)
-    {
-        SetConsoleTitle("Please Resize Game");
-        cout << "Waiting you resize window please place in fullscreen";
-        do
-        {
-            GetConsoleScreenBufferInfo(out, &windowSize);
-            if (loaded >= 4)
-            {
-                loaded = 0;
-            }
-            else
-            {
-                loaded++;
-            }
-            SetConsoleCursorPosition(out, {52, 0});
-            for (int i = 0; i < loaded; i++)
-            {
-                cout << ".";
-            }
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {52, 0});
-            cout << "     ";
-        } while (windowSize.dwSize.X < 145);
-    }
-    // cout<<windowSize.dwSize.X;
-
-    if (menu() == 0)
-    {
-        loopPlayer();
-        return 0;
-    }
-    if (menu() == 2)
-    {
-        system("cls");
-        return 0;
-    }
+    return 0;
 }
