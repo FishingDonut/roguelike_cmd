@@ -266,7 +266,11 @@ map mapa(){
 
     for (int i = 0; i < 16; i++){
         for (int j = 0; j < 16; j++){
+<<<<<<< HEAD
             newMap.map[i][j] = SalaG3[i][j];
+=======
+            newMap.map[i][j] = SalaL1[i][j];
+>>>>>>> 6d9fbb3ebeb7a7ac4f89bf7e8a8a3a278da0c348
         }
     }
     return newMap;
