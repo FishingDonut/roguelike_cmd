@@ -51,7 +51,10 @@ int main(){
                     cout << "\u00A4";
                     break;
                 case mapteste.entities::vazio:
-                    cout << "\u0000";
+                    cout << " ";
+                    break;
+                case mapteste.entities::fakewall:
+                    cout << "\u2588";
                     break;
                 default:
                     break;
