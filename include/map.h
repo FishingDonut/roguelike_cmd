@@ -5,7 +5,7 @@ struct Position{
 };
 
 struct map{
-    int map[16][16] = {};
+    int map[10][10] = {};
     enum mapSpawnPositions{
         top,
         bottom,
@@ -18,9 +18,7 @@ struct map{
         key,
         chest,
         mimic,
-        portaSupInf = 91,
-        portaLat = 92,
-        vazio = 9,
+        porta = 99,
     };
     enum difficulty{
         //need logic to add difficulty when pass level
