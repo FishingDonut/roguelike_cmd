@@ -185,7 +185,7 @@ map mapa(){
     };
     for (int i = 0; i < 16; i++){
         for (int j = 0; j < 16; j++){
-            newMap.map[i][j] = SalaL2[i][j];
+            newMap.map[i][j] = SalaL1[i][j];
         }
     }
     return newMap;

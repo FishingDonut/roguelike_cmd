@@ -1,8 +1,4 @@
 using namespace std;
-struct Position{
-    int x;
-    int y;
-};
 
 struct map{
     int map[16][16] = {};

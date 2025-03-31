@@ -1,3 +1,5 @@
+#include<string>
+using namespace std;
 struct Position{
     int x;
     int y;
@@ -16,6 +18,9 @@ struct Items{
         strengh,
         luck,
     };
+    string art;
+    int midX;
+    int midY;
 };
 
 struct Inventory{
