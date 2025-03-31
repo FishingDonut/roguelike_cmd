@@ -107,7 +107,7 @@ int loopPlayer()
             SetConsoleCursorPosition(hConsole, {0, 0});
             cout << getCharAtPosition(hConsole, newPosition);
 
-            if (getCharAtPosition(hConsole, newPosition) == '0')
+            if (getCharAtPosition(hConsole, newPosition) != ' ')
             {
                 newPosition = currentPosition;
             }
@@ -115,7 +115,7 @@ int loopPlayer()
             player.setPosition(newPosition.X, newPosition.Y);
             SetConsoleCursorPosition(hConsole, currentPosition);
             cout << " ";
-            SetConsoleCursorPosition(hConsole, player.getPosition());
+            SetConsoleCursorPosition(hConsole, player.position);
             cout << "@";
         }
     }
