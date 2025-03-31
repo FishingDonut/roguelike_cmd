@@ -12,7 +12,9 @@ int main()
 {
     SetConsoleTitle("RogueLike Game");
     system("cls");
-    setlocale(LC_ALL, "pt_BR.UTF-8");
+    //setlocale(LC_ALL, "Portuguese");
+    SetConsoleOutputCP(CP_UTF8); // Definindo o console para usar caracteres UTF-8 (SAÍDA)
+    SetConsoleCP(CP_UTF8); // Definindo o console para usar caracteres UTF-8 (ENTRADA)
     CONSOLE_SCREEN_BUFFER_INFO windowSize;
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
@@ -25,22 +27,36 @@ int main()
     SetConsoleCursorPosition(out, {0, 0});
     int loaded = 0;
     map mapteste = mapa();
-    for (int j = 0; j < 10; j++)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            cout << mapteste.map[j][i];
+    for(int j = 0; j < 16; j++){
+        for(int i = 0; i < 16; i++){
             switch (mapteste.map[j][i])
             {
-            case mapteste.entities::parede:
-                cout << char(219);
-                break;
-            case mapteste.entities::enemy:
-                cout << "!";
-                break;
-
-            default:
-                break;
+                case 0:
+                    cout << " ";
+                    break;
+                case mapteste.entities::parede:
+                    cout<< "\u2588";
+                    break;
+                case mapteste.entities::enemy:
+                    cout << "!";
+                    break;
+                case mapteste.entities::portaLat:
+                    cout << "\u007C";
+                    break;
+                case mapteste.entities::portaSupInf:
+                    cout << "\u2014";
+                    break;
+                case mapteste.entities::chest:
+                    cout << "\u00A4";
+                    break;
+                case mapteste.entities::mimic:
+                    cout << "\u00A4";
+                    break;
+                case mapteste.entities::vazio:
+                    cout << "\u0000";
+                    break;
+                default:
+                    break;
             }
         }
         cout << endl;
