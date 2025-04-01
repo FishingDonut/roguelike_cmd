@@ -1,4 +1,5 @@
 #include "./map.h"
+#include <ctime>
 map newMap;
 map mapa(){
     newMap.spawnPos[map::bottom] = {5,5};
@@ -255,14 +256,130 @@ map mapa(){
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
     };
-
+    
     srand(time(NULL));
-    rand()%14+1;
+    //rand()%14+1;
+    int seed[5][5]={};
 
-    for (int i = 0; i < 16; i++){
-        for (int j = 0; j < 16; j++){
-            newMap.map[i][j] = SalaG3[i][j];
-        }
+    for (size_t i = 0; i < 5; i++){
+       for (size_t j = 0; j < 5; j++){
+        seed[i][j]=rand()%14+1;
+       }
     }
+    for (size_t i = 0; i < 5; i++){
+        for (size_t j = 0; j < 5; j++){
+         cout<<seed[i][j]<<",";
+        }
+        cout<<endl;
+     }
+    int mapSelect = seed[3][3];
+    switch (mapSelect)
+    {
+    case 1:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = inicial1[i][j];
+            }
+        }
+        break;
+    case 2:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = inicial2[i][j];
+            }
+        }
+        break;
+    case 3:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = inicial3[i][j];
+            }
+        }
+        break;
+    case 4:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = inicial4[i][j];
+            }
+        }
+        break;
+    case 5:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaP1[i][j];
+            }
+        }
+        break;
+    case 6:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaP2[i][j];
+            }
+        }
+        break;
+    case 7:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaM1[i][j];
+            }
+        }
+        break;
+        default:
+            break;
+    case 8:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaM2[i][j];
+            }
+        }
+        break;
+    case 9:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaG1[i][j];
+            }
+        }
+        break;
+    case 10:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaG2[i][j];
+            }
+        }
+        break;
+    case 11:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaG3[i][j];
+            }
+        }
+        break;
+    case 12:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaL1[i][j];
+            }
+        }
+        break;
+    case 13:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = SalaL2[i][j];
+            }
+        }
+        break;
+    case 14:
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                newMap.map[i][j] = Template[i][j];
+            }
+        }
+        break;
+    }
+    // for (int i = 0; i < 16; i++){
+    //     for (int j = 0; j < 16; j++){
+    //         newMap.map[i][j] = SalaG3[i][j];
+    //     }
+    // }
     return newMap;
 }
