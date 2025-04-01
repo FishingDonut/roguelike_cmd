@@ -1,4 +1,4 @@
-#include"./include/map.h"
+#include "./map.h"
 map newMap;
 map mapa(){
     newMap.spawnPos[map::bottom] = {5,5};
@@ -256,13 +256,8 @@ map mapa(){
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
     };
 
-
-
-
-
-
-
-
+    srand(time(NULL));
+    rand()%14+1;
 
     for (int i = 0; i < 16; i++){
         for (int j = 0; j < 16; j++){

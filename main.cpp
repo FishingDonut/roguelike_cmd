@@ -4,7 +4,6 @@
 #include "./include/menu.h"
 #include "./include/itemsmenu.h"
 #include "./include/maps.h"
-#include "./include/player.h"
 #include <locale.h>
 using namespace std;
 int key;

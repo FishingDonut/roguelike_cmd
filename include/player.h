@@ -25,6 +25,8 @@ struct Items
         strengh,
         luck,
     };
+    string art;
+    short int midX, midY;
 };
 
 struct Inventory
