@@ -261,13 +261,13 @@ map mapa(){
     //rand()%14+1;
     int seed[5][5]={};
 
-    for (size_t i = 0; i < 5; i++){
-       for (size_t j = 0; j < 5; j++){
+    for (short int i = 0; i < 5; i++){
+       for (short int j = 0; j < 5; j++){
         seed[i][j]=rand()%14+1;
        }
     }
-    for (size_t i = 0; i < 5; i++){
-        for (size_t j = 0; j < 5; j++){
+    for (short int i = 0; i < 5; i++){
+        for (short int j = 0; j < 5; j++){
          cout<<seed[i][j]<<",";
         }
         cout<<endl;

@@ -105,7 +105,29 @@ void ItemsMenu(){
     midY -= 19/2;
     SetConsoleCursorPosition(console, {midX, midY});  
     // cout<<"center";
-    Draw(p.inventory.items[0].art,midX);
+
+    int input;
+    int move = 0;
+    do
+    {   
+        input = getch();
+        switch (input)
+        {
+        case 'd': case 77:
+                move >= 1 ? move = 0 : move++;
+            break;
+        
+        default:
+        cout<< input;
+        break;
+        }
+        Draw(p.inventory.items[move].art,midX);
+        system("cls");
+    } while (input != 27);
+
+
+    
+    
     getch();
 
     // cout<<" __";

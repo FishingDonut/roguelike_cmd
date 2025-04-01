@@ -30,6 +30,7 @@ int main()
         for(int i = 0; i < 16; i++){
             switch (mapteste.map[j][i])
             {
+                //desenhando piso
                 case 0:
                     cout << " ";
                     break;
@@ -98,11 +99,11 @@ int main()
         COORD newPosition = {0, 0};
         Player player = Player();
         player.position = newPosition;
-
-        while (true)
+        int a=0;
+        while (a!=27)
         {
             currentPosition = newPosition;
-            int a = getch();
+            a = getch();
 
             if (a)
             {
