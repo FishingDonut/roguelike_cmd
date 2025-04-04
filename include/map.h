@@ -1,8 +1,4 @@
 using namespace std;
-struct Position{
-    int x;
-    int y;
-};
 
 struct map{
     int map[16][16] = {};
@@ -15,9 +11,10 @@ struct map{
     enum entities{
         parede = 1,
         enemy = 2,
-        key,
+        item,
         chest,
         mimic,
+        fakewall = 11,
         portaSupInf = 91,
         portaLat = 92,
         vazio = 9,

@@ -4,6 +4,10 @@
 
 using namespace std;
 
+struct Position{
+    short int x;
+    short int y;
+};
 struct Items
 {
     enum TypeofItems
@@ -21,6 +25,8 @@ struct Items
         strengh,
         luck,
     };
+    string art;
+    short int midX, midY;
 };
 
 struct Inventory
