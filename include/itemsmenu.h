@@ -86,6 +86,7 @@ void AllItems(Inventory &inventory){
 "     `._,._,'\n";
     apple.midX = 15/2;
     inventory.items[2]=apple;
+    inventory.size = 3;
     // Items shield;
     // shield.durability = 100;
     // shield.quantity=1;
@@ -167,12 +168,13 @@ void ItemsMenu(){
         switch (input)
         {
         case 'd': case 77:
-                move >= 2 ? move = 0 : move++;
+                move >= p.inventory.size -1 ? move = 0 : move++;
             break;
         case 'a': case 75:
-                move <= 0 ? move = 2 : move--;
+                move <= 0 ? move = p.inventory.size -1 : move--;
             break;
         }
+        
         SetConsoleCursorPosition(console, {midX, midY+10});
         Draw(clearString,30);
         Draw(p.inventory.items[move].art,p.inventory.items[move].midX);
