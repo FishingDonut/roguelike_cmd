@@ -1,14 +1,14 @@
 #include<windows.h>
 #include "./player.h"
+#include<string.h>
 void Draw(string art,short int startX){
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(console, &csbi);
     int consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     int consoleHeight = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-
-    int midX = consoleWidth / 2;
-    int midY = consoleHeight / 2 - 19;
+    short int midX = consoleWidth / 2 - startX;
+    int midY = consoleHeight / 2 - 10;
     int counter = 0;
     int lineOffset = 0;
     std::string line;
@@ -17,7 +17,7 @@ void Draw(string art,short int startX){
     {
         counter++;
         line = art.substr(pos, newPos - pos);
-        SetConsoleCursorPosition(console, { startX, (SHORT)(midY + lineOffset) });
+        SetConsoleCursorPosition(console, { midX, (SHORT)(midY + lineOffset) });
         std::cout << line;
         pos = newPos + 1;
         lineOffset++;
@@ -52,28 +52,81 @@ void AllItems(Inventory &inventory){
     sword.midX = 16/2;
     sword.midY = 19/2;
     inventory.items[0] = sword;
-    Items shield;
-    shield.durability = 100;
-    shield.quantity=1;
-    shield.type = Items::armor;
-    shield.art = "           _ . - = - . _\n"
-        "       . \"  \\  \\   /  /  \" .\n"
-        "     ,  \\                 /  .\n"
-        "   . \\   _,.--~=~\"~=~--.._   / .\n"
-        "  ;  _.-\"  / \\ !   ! / \\  \"-._  .\n"
-        " / ,\"     / ,` .---. `, \\     \". \\\n"
-        "/.'   `~  |   /:::::\\   |  ~`   '.\\\n"
-        "\\`.  `~   |   \\:::::/   | ~`  ~ .'/\n"
-        " \\ `.  `~ \\ `, `~~~' ,` /   ~`.' /\n"
-        "  .  \"-._  \\ / !   ! \\ /  _.-\"  .\n"
-        "   ./    \"=~~.._  _..~~=`\"    \\.\n"
-        "     ,/         \"\"          \\,\n"
-        "       . _/             \\_ . \n"
-        "          \" - ./. .\\. - \"\n";
-    inventory.items[1] = shield;
-    sword.midX = 32/2;
-    sword.midY = 19/2;
+    Items chest;
+    chest.art = "         __________\n"
+"        /\\____;;___\\\n"
+"       | /         /\n"
+"       `. ())oo() .\n"
+"        |\\(%()*^^()^\\\n"
+"        | |-%-------|\n"
+"        \\ | %  ))   |\n"
+"         \\|%________|\n";
+    chest.midX = 21/2;
+    Items potion;
+    potion.type = Items::potion;
+    potion.art = 
+    "   _\n"
+    "  |=|\n"
+    "  | |\n"
+    "  | |\n"
+    " /   \\\n"
+    ".     .\n"
+    "|-----|\n"
+    "|     |\n"
+    "|-----|\n";
+    potion.midX = 7/2;
+    potion.midY = 10;
+    inventory.items[1] = potion;
+    Items apple;
+    apple.type = Items::key;
+    apple.art = "     ,--./,-.\n"
+"    / #      \\\n"
+"   |          |\n"
+"    \\        /   \n"
+"     `._,._,'\n";
+    apple.midX = 15/2;
+    inventory.items[2]=apple;
+    // Items shield;
+    // shield.durability = 100;
+    // shield.quantity=1;
+    // shield.type = Items::armor;
+    // shield.art = "           _ . - = - . _\n"
+    //     "       . \"  \\  \\   /  /  \" .\n"
+    //     "     ,  \\                 /  .\n"
+    //     "   . \\   _,.--~=~\"~=~--.._   / .\n"
+    //     "  ;  _.-\"  / \\ !   ! / \\  \"-._  .\n"
+    //     " / ,\"     / ,` .---. `, \\     \". \\\n"
+    //     "/.'   `~  |   /:::::\\   |  ~`   '.\\\n"
+    //     "\\`.  `~   |   \\:::::/   | ~`  ~ .'/\n"
+    //     " \\ `.  `~ \\ `, `~~~' ,` /   ~`.' /\n"
+    //     "  .  \"-._  \\ / !   ! \\ /  _.-\"  .\n"
+    //     "   ./    \"=~~.._  _..~~=`\"    \\.\n"
+    //     "     ,/         \"\"          \\,\n"
+    //     "       . _/             \\_ .\n"
+    //     "          \" - ./. .\\. - \"\n";
+    //     sword.midX = 0;
+    //     sword.midY = 19/2;
+    //     inventory.items[1] = shield;
 }
+string clearString = "                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n"
+"                                             \n";
 void ItemsMenu(){
     system("cls");
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -114,15 +167,16 @@ void ItemsMenu(){
         switch (input)
         {
         case 'd': case 77:
-                move >= 1 ? move = 0 : move++;
+                move >= 2 ? move = 0 : move++;
             break;
-        
-        default:
-        cout<< input;
-        break;
+        case 'a': case 75:
+                move <= 0 ? move = 2 : move--;
+            break;
         }
-        Draw(p.inventory.items[move].art,midX);
-        system("cls");
+        SetConsoleCursorPosition(console, {midX, midY+10});
+        Draw(clearString,30);
+        Draw(p.inventory.items[move].art,p.inventory.items[move].midX);
+
     } while (input != 27);
 
 
