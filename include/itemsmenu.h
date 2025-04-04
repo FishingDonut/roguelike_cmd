@@ -28,7 +28,7 @@ void Draw(string art,short int startX){
 void AllItems(Inventory &inventory){
     Items sword;
     sword.durability = 100;
-    sword.quantity=1;
+    sword.quantity = 1;
     sword.type = Items::weapon;
     sword.art = "      .         \n"
         "     /:\\    (\"\"\")\n"
@@ -175,7 +175,7 @@ void ItemsMenu(){
             break;
         }
         
-        SetConsoleCursorPosition(console, {midX, midY+10});
+        SetConsoleCursorPosition(console, {midX, (SHORT)(midY+10)});
         Draw(clearString,30);
         Draw(p.inventory.items[move].art,p.inventory.items[move].midX);
 
