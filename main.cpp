@@ -14,15 +14,19 @@ char getCharAtPosition(HANDLE hConsole, COORD position)
     return c;
 }
 
-void drawnMap(HANDLE &hConsole, int width, int height)
+void drawnMap(HANDLE &hConsole, int width, int height, int** matriz)
 {
     for (short i = 0; i < width; ++i)
     {
         for (short j = 0; j < height; ++j)
         {
-            if(i == 0 || i == width -1 || j == 0 || j == height -1){
+            matriz[i][j] = 0;
+
+            if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
+            {
                 SetConsoleCursorPosition(hConsole, {i, j});
                 cout << ".";
+                matriz[i][j] = 1;
             }
         }
     }
@@ -35,18 +39,23 @@ int main()
     COORD newPosition = {10, 10};
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     Player player = Player();
-    
+
     system("cls");
-    SetConsoleOutputCP(CP_UTF8); // Definindo o console para usar caracteres UTF-8 (SAÍDA)
-    SetConsoleCP(CP_UTF8);       // Definindo o console para usar caracteres UTF-8 (ENTRADA)
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     GetConsoleScreenBufferInfo(hConsole, &csbi);
-    
+
     int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-    
+
+    // Alocação dinâmica de matriz
+    int** map = new int*[width];
+    for (int i = 0; i < width; i++)
+        map[i] = new int[height];
+
     player.position = newPosition;
 
-    drawnMap(hConsole, width, height);
+    drawnMap(hConsole, width, height, map);
 
     while (player.health > 0)
     {
@@ -60,6 +69,18 @@ int main()
             case 81:
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
+                
+                system("cls");
+
+                for (short i = 0; i < width; ++i)
+                {
+                    for (short j = 0; j < height; ++j)
+                    {            
+                        SetConsoleCursorPosition(hConsole, {i, j});
+                        cout << map[i][j];
+                    }
+                }
+
                 return 0;
                 break;
             case 119:
