@@ -1,5 +1,4 @@
 #include<windows.h>
-#include "./player.h"
 #include<string.h>
 void Draw(string art,short int startX){
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);

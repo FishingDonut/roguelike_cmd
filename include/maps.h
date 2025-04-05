@@ -258,21 +258,28 @@ map mapa(){
     };
     
     srand(time(NULL));
-    //rand()%14+1;
     int seed[5][5]={};
+
 
     for (short int i = 0; i < 5; i++){
        for (short int j = 0; j < 5; j++){
-        seed[i][j]=rand()%14+1;
-       }
-    }
-    for (short int i = 0; i < 5; i++){
-        for (short int j = 0; j < 5; j++){
-         cout<<seed[i][j]<<",";
+        if(i == 2 && j == 2){
+            seed[i][j]=rand()%4+1;
+        }else{
+            do{
+                seed[i][j]=rand()%13+1;
+            }while(seed[i][j] <= 4);
         }
-        cout<<endl;
-     }
-    int mapSelect = seed[3][3];
+    
+        }
+    }
+    // for (short int i = 0; i < 5; i++){
+    //     for (short int j = 0; j < 5; j++){
+    //      cout<<seed[i][j]<<",";
+    //     }
+    //     cout<<endl;
+    //  }
+    int mapSelect = seed[2][2];
     switch (mapSelect)
     {
     case 1:
@@ -368,18 +375,6 @@ map mapa(){
             }
         }
         break;
-    case 14:
-        for (int i = 0; i < 16; i++){
-            for (int j = 0; j < 16; j++){
-                newMap.map[i][j] = Template[i][j];
-            }
-        }
-        break;
     }
-    // for (int i = 0; i < 16; i++){
-    //     for (int j = 0; j < 16; j++){
-    //         newMap.map[i][j] = SalaG3[i][j];
-    //     }
-    // }
     return newMap;
 }

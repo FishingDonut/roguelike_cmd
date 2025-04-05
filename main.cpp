@@ -1,9 +1,9 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include "./include/player.h"
 #include "./include/menu.h"
 #include "./include/itemsmenu.h"
-#include "./include/maps.h"
 #include <locale.h>
 
 using namespace std;
@@ -25,49 +25,6 @@ int main()
     GetConsoleScreenBufferInfo(out, &windowSize);
     SetConsoleCursorPosition(out, {0, 0});
     int loaded = 0;
-
-    map mapteste = mapa();
-    
-    for (int j = 0; j < 16; j++)
-    {
-        for (int i = 0; i < 16; i++)
-        {
-            switch (mapteste.map[j][i])
-            {
-                //desenhando piso
-                case 0:
-                    cout << " ";
-                    break;
-                case mapteste.entities::parede:
-                    cout<< "\u2588";
-                    break;
-                case mapteste.entities::enemy:
-                    cout << "!";
-                    break;
-                case mapteste.entities::portaLat:
-                    cout << "\u007C";
-                    break;
-                case mapteste.entities::portaSupInf:
-                    cout << "\u2014";
-                    break;
-                case mapteste.entities::chest:
-                    cout << "\u00A4";
-                    break;
-                case mapteste.entities::mimic:
-                    cout << "\u00A4";
-                    break;
-                case mapteste.entities::vazio:
-                    cout << " ";
-                    break;
-                case mapteste.entities::fakewall:
-                    cout << "\u2588";
-                    break;
-                default:
-                    break;
-            }
-        }
-        cout << endl;
-    }
 
     if (windowSize.dwSize.X < 145)
     {
@@ -95,14 +52,17 @@ int main()
     }
     // cout<<windowSize.dwSize.X;
 
-    if (menu() == 0)
+    int selectMenu;
+    do
     {
-        loopPlayer();
-        return 0;
-    }
-    if (menu() == 2)
-    {
-        system("cls");
-        return 0;
-    }
+        selectMenu = menu();
+        switch (selectMenu)
+        {
+        case 0:
+            loopPlayer();
+            break;
+        }
+    } while (selectMenu !=2);
+            system("cls");
+            return 0;
 }
