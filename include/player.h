@@ -74,6 +74,9 @@ int loopPlayer()
     {
         for (int i = 0; i < 16; i++)
         {
+            if(rand()%100 <5 && mapteste.map[j][i] == 0){
+                mapteste.map[j][i] = mapteste.entities::enemy;
+            } 
             switch (mapteste.map[j][i])
             {
                 //desenhando piso
