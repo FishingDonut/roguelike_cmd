@@ -1,7 +1,83 @@
 #include "./map.h"
 #include <ctime>
+
+struct Seed
+{
+    int loc[5][5];
+};
+void generateSeed(Seed &seed){
+    srand(time(NULL));
+
+    for (short int i = 0; i < 5; i++){
+       for (short int j = 0; j < 5; j++){
+        if(i == 2 && j == 2){
+            seed.loc[i][j]=rand()%4+1;
+        }else{
+            do{
+                seed.loc[i][j]=rand()%13+1;
+            }while(seed.loc[i][j] <= 4);
+        }
+        }
+    }
+
+    // for (short int i = 0; i < 5; i++){
+    //     for (short int j = 0; j < 5; j++){
+    //      cout<<seed[i][j]<<",";
+    //     }
+    //     cout<<endl;
+    //  }
+    
+}
+
+void printMap(map mapteste){
+    
+    for (int j = 0; j < 16; j++)
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            if(rand()%100 < 1 && mapteste.map[j][i] == 0){
+                mapteste.map[j][i] = mapteste.entities::enemy;
+            } 
+            switch (mapteste.map[j][i])
+            {
+                //desenhando piso
+                case 0:
+                    cout << " ";
+                    break;
+                case mapteste.entities::parede:
+                    cout<< "\u2588";
+                    break;
+                case mapteste.entities::enemy:
+                    cout << "!";
+                    break;
+                case mapteste.entities::portaLat:
+                    cout << "\u007C";
+                    break;
+                case mapteste.entities::portaSupInf:
+                    cout << "-";
+                    break;
+                case mapteste.entities::chest:
+                    cout << "\u00A4";
+                    break;
+                case mapteste.entities::mimic:
+                    cout << "\u00A4";
+                    break;
+                case mapteste.entities::vazio:
+                    cout << " ";
+                    break;
+                case mapteste.entities::fakewall:
+                    cout << "\u2588";
+                    break;
+                default:
+                    break;
+            }
+        }
+        cout << endl;
+    }
+}
+
 map newMap;
-map mapa(){
+map mapa(int mapSelect){
     newMap.spawnPos[map::bottom] = {5,5};
     newMap.enemy; // Inimigo = Número 2
     int inicial1[16][16]={ 
@@ -221,19 +297,19 @@ map mapa(){
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
     };
     int SalaL2[16][16]={ 
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 1, 91, 1, 1},
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0, 1},
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0, 1},
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0, 1},
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0, 1},
-        {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 1, 0, 0, 0, 1},
-        {9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
-        {9, 9, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {9, 9, 9, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
-        {9, 9, 9, 92, 0, 0, 0, 1, 4, 1, 0, 0, 0, 0, 0, 1},
-        {9, 9, 9, 1, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 1},
-        {9, 9, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {9, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 91, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9},
+        {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 9, 9, 9},
+        {92, 0, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 92, 9, 9, 9},
+        {1, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1, 9, 9, 9},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
@@ -256,30 +332,6 @@ map mapa(){
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
     };
-    
-    srand(time(NULL));
-    int seed[5][5]={};
-
-
-    for (short int i = 0; i < 5; i++){
-       for (short int j = 0; j < 5; j++){
-        if(i == 2 && j == 2){
-            seed[i][j]=rand()%4+1;
-        }else{
-            do{
-                seed[i][j]=rand()%13+1;
-            }while(seed[i][j] <= 4);
-        }
-    
-        }
-    }
-    // for (short int i = 0; i < 5; i++){
-    //     for (short int j = 0; j < 5; j++){
-    //      cout<<seed[i][j]<<",";
-    //     }
-    //     cout<<endl;
-    //  }
-    int mapSelect = seed[2][2];
     switch (mapSelect)
     {
     case 1:

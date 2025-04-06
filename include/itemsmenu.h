@@ -167,10 +167,10 @@ void ItemsMenu(){
         switch (input)
         {
         case 'd': case 77:
-                move >= p.inventory.size -1 ? move = 0 : move++;
+                move >= p.inventory.size - 1 ? move = 0 : move++;
             break;
         case 'a': case 75:
-                move <= 0 ? move = p.inventory.size -1 : move--;
+                move <= 0 ? move = p.inventory.size - 1 : move--;
             break;
         }
         

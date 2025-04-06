@@ -51,7 +51,8 @@ int main()
         } while (windowSize.dwSize.X < 145);
     }
     // cout<<windowSize.dwSize.X;
-
+    Game game;
+    game.returnType = Game::exit;
     int selectMenu;
     do
     {
@@ -59,10 +60,14 @@ int main()
         switch (selectMenu)
         {
         case 0:
-            loopPlayer();
+            game = loopPlayer(game);
+            if (game.returnType == Game::inventory)
+            {
+                ItemsMenu();
+            }
             break;
         }
     } while (selectMenu !=2);
-            system("cls");
-            return 0;
+    system("cls");
+    return 0;
 }

@@ -3,7 +3,6 @@
 #include <windows.h>
 
 using namespace std;
-
 struct Items
 {
     enum TypeofItems
