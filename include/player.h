@@ -137,6 +137,8 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.returnType = Game::exit;
                 return gameSaved;
                 break;
+                
+            // start movimentação do player
             case 119:
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
                 break;
@@ -149,6 +151,8 @@ Game loopPlayer(Game gameSaved)
             case 100:
                 newPosition.X++;
                 break;
+            // end movimentação do player
+
             case 9:
                 gameSaved.player = player;
                 gameSaved.map = mapCurrent;
@@ -160,7 +164,7 @@ Game loopPlayer(Game gameSaved)
                 break;
             }
 
-            switch (mapCurrent.map[newPosition.Y][newPosition.X])
+            switch (mapCurrent.map[newPosition.X][newPosition.Y])
             {
             case mapCurrent.entities::portaSupInf:
                 if (newPosition.Y > 0 && inMap.y < 4)
