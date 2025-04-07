@@ -105,7 +105,7 @@ Game loopPlayer(Game gameSaved)
         player.position = newPosition;
         inMap = {2,2};
     }
-    char test= '@';
+    char playerChar= '@';
     bool swapMap;
     Game gameReturn;
     while (player.health > 0)
@@ -289,7 +289,7 @@ Game loopPlayer(Game gameSaved)
             SetConsoleCursorPosition(hConsole, currentPosition);
             cout << " ";
             SetConsoleCursorPosition(hConsole, player.position);
-            cout << test;
+            cout << playerChar;
         }
     }
     gameReturn.player = player;
