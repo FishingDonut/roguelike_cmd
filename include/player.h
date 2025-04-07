@@ -33,6 +33,32 @@ char getCharAtPosition(HANDLE hConsole, COORD position)
     ReadConsoleOutputCharacterA(hConsole, &c, 1, position, &read);
     return c;
 }
+
+void debugPrint(HANDLE hConsole, map mapteste, COORD newPosition, int a)
+{
+    // next char
+    SetConsoleCursorPosition(hConsole, {(SHORT)22, (SHORT)22});
+    cout << getCharAtPosition(hConsole, newPosition);
+
+    // map value array
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < 16; j++)
+        {
+            SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
+            cout << mapteste.map[i][j];
+        }
+    }
+
+    // cordenada e value array map
+    SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
+    cout << "row: " << newPosition.Y << " column: " << newPosition.X << " value: " << mapteste.map[newPosition.Y][newPosition.X];
+
+    // value int key
+    SetConsoleCursorPosition(hConsole, {(SHORT)21, (SHORT)21});
+    cout << a << endl;
+}
+
 struct Game
 {
     Player player;
@@ -95,6 +121,7 @@ Game loopPlayer(Game gameSaved)
 
         int a = getch();
         SetConsoleCursorPosition(hConsole, {0, 0});
+
         if (swapMap)
             printMap(mapteste);
 
@@ -105,13 +132,6 @@ Game loopPlayer(Game gameSaved)
             case 81:
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
-                // for (int j = 0; j < 16; j++)
-                // {
-                //     for (int i = 0; i < 16; i++)
-                //     {
-                //         SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
-                //         cout << mapteste.map[i][j];
-                //     }}
 
                 gameSaved.player = player;
                 gameSaved.map = mapteste;
@@ -140,12 +160,9 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.returnType = Game::inventory;
                 return gameSaved;
             default:
-                cout << a << endl;
+                debugPrint(hConsole, mapteste, newPosition, a);
                 break;
             }
-
-            SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
-            cout << newPosition.Y << newPosition.X << mapteste.map[newPosition.Y][newPosition.X];
 
             switch (mapteste.map[newPosition.Y][newPosition.X])
             {
@@ -274,10 +291,10 @@ Game loopPlayer(Game gameSaved)
             }
 
             player.setPosition(newPosition.X, newPosition.Y);
-            
+
             SetConsoleCursorPosition(hConsole, currentPosition);
             cout << " ";
-            
+
             SetConsoleCursorPosition(hConsole, player.position);
             cout << playerChar;
         }
