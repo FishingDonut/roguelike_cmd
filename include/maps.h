@@ -35,7 +35,7 @@ void generateSeed(Seed &seed)
     //  }
 }
 
-void mM(map &currentMap, int newMap[16][16])
+void definedMap(map &currentMap, int newMap[16][16])
 {
     for (int i = 0; i < 16; i++)
     {
@@ -57,7 +57,7 @@ void printMap(map mapteste)
             {
                 mapteste.map[j][i] = mapteste.entities::enemy;
             }
-            
+
             switch (mapteste.map[j][i])
             {
             // desenhando piso
@@ -356,42 +356,42 @@ map mapa(int mapSelect)
     switch (mapSelect)
     {
     case 1:
-        mM(newMap, inicial1);
+        definedMap(newMap, inicial1);
         break;
     case 2:
-        mM(newMap, inicial2);
+        definedMap(newMap, inicial2);
         break;
     case 3:
-        mM(newMap, inicial3);
+        definedMap(newMap, inicial3);
     case 4:
-        mM(newMap, inicial4);
+        definedMap(newMap, inicial4);
         break;
     case 5:
-        mM(newMap, SalaP1);
+        definedMap(newMap, SalaP1);
         break;
     case 6:
-        mM(newMap, SalaP2);
+        definedMap(newMap, SalaP2);
         break;
     case 7:
-        mM(newMap, SalaM1);
+        definedMap(newMap, SalaM1);
         break;
     case 8:
-        mM(newMap, SalaM2);
+        definedMap(newMap, SalaM2);
         break;
     case 9:
-        mM(newMap, SalaG1);
+        definedMap(newMap, SalaG1);
         break;
     case 10:
-        mM(newMap, SalaG2);
+        definedMap(newMap, SalaG2);
         break;
     case 11:
-        mM(newMap, SalaG3);
+        definedMap(newMap, SalaG3);
         break;
     case 12:
-        mM(newMap, SalaL1);
+        definedMap(newMap, SalaL1);
         break;
     case 13:
-        mM(newMap, SalaL2);
+        definedMap(newMap, SalaL2);
         break;
     default:
         break;
