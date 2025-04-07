@@ -175,7 +175,7 @@ void ItemsMenu(){
             break;
         }
         
-        SetConsoleCursorPosition(console, {midX, midY+10});
+        SetConsoleCursorPosition(console, {midX, (SHORT)(midY+10)});
         Draw(clearString,30);
         Draw(p.inventory.items[move].art,p.inventory.items[move].midX);
 
