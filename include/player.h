@@ -100,6 +100,7 @@ Game loopPlayer(Game gameSaved)
         newPosition = {3, 3};
         player = gameSaved.player;
         /*por algum motivo da bug se não setar o size manualmente*/
+        player.inventory.size = 0;
         player.inventory.size = gameSaved.player.inventory.size;
     }
     else
@@ -111,7 +112,7 @@ Game loopPlayer(Game gameSaved)
         printMap(mapCurrent);
         currentPosition = {3, 3};
         newPosition = {3, 3};
-        Player player = Player();
+        player = Player();
         player.inventory.size = 0;
         player.position = newPosition;
         inMap = {2, 2};
@@ -132,6 +133,7 @@ Game loopPlayer(Game gameSaved)
 
         if (a)
         {
+            cout<<player.inventory.size;
             switch (a)
             {
             case 81:
@@ -281,7 +283,7 @@ Game loopPlayer(Game gameSaved)
                     }
                     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
                     cout << player.inventory.items[player.inventory.size - 1].art;
-                    break;
+                    
                 }
             }
 

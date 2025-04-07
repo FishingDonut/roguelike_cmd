@@ -15,6 +15,7 @@ struct Items
     TypeofItems type;
     short int quantity;
     float durability;
+    short int damage;
     enum effects
     {
         strengh,
