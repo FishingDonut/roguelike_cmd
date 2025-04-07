@@ -267,13 +267,17 @@ Game loopPlayer(Game gameSaved)
                 break;
             }
             }
+
             if (getCharAtPosition(hConsole, newPosition) != ' ')
             {
                 newPosition = currentPosition;
             }
+
             player.setPosition(newPosition.X, newPosition.Y);
+            
             SetConsoleCursorPosition(hConsole, currentPosition);
             cout << " ";
+            
             SetConsoleCursorPosition(hConsole, player.position);
             cout << playerChar;
         }
