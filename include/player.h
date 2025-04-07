@@ -34,7 +34,7 @@ char getCharAtPosition(HANDLE hConsole, COORD position)
     return c;
 }
 
-void debugPrint(HANDLE hConsole, map mapteste, COORD newPosition, int a)
+void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
 {
     // next char
     SetConsoleCursorPosition(hConsole, {(SHORT)22, (SHORT)22});
@@ -46,13 +46,13 @@ void debugPrint(HANDLE hConsole, map mapteste, COORD newPosition, int a)
         for (int j = 0; j < 16; j++)
         {
             SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
-            cout << mapteste.map[i][j];
+            cout << mapCurrent.map[i][j];
         }
     }
 
     // cordenada e value array map
     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
-    cout << "row: " << newPosition.Y << " column: " << newPosition.X << " value: " << mapteste.map[newPosition.Y][newPosition.X];
+    cout << "row: " << newPosition.Y << " column: " << newPosition.X << " value: " << mapCurrent.map[newPosition.Y][newPosition.X];
 
     // value int key
     SetConsoleCursorPosition(hConsole, {(SHORT)21, (SHORT)21});
@@ -77,7 +77,7 @@ Game loopPlayer(Game gameSaved)
 {
     Seed seed;
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    map mapteste;
+    map mapCurrent;
     COORD newPosition;
     COORD currentPosition;
     Player player;
@@ -87,9 +87,9 @@ Game loopPlayer(Game gameSaved)
 
     if (gameSaved.returnType != Game::exit)
     {
-        mapteste = gameSaved.map;
+        mapCurrent = gameSaved.map;
         seed = gameSaved.seed;
-        printMap(mapteste);
+        printMap(mapCurrent);
         currentPosition = {3, 3};
         newPosition = {3, 3};
         player = gameSaved.player;
@@ -101,9 +101,9 @@ Game loopPlayer(Game gameSaved)
     {
         generateSeed(seed);
         // selecionando a sala inicial
-        mapteste = mapa(seed.loc[2][2]);
-        // map mapteste = mapa(3);
-        printMap(mapteste);
+        mapCurrent = mapa(seed.loc[2][2]);
+        // map mapCurrent = mapa(3);
+        printMap(mapCurrent);
         currentPosition = {3, 3};
         newPosition = {3, 3};
         Player player = Player();
@@ -123,7 +123,7 @@ Game loopPlayer(Game gameSaved)
         SetConsoleCursorPosition(hConsole, {0, 0});
 
         if (swapMap)
-            printMap(mapteste);
+            printMap(mapCurrent);
 
         if (a)
         {
@@ -134,7 +134,7 @@ Game loopPlayer(Game gameSaved)
                 cout << "✞" << endl;
 
                 gameSaved.player = player;
-                gameSaved.map = mapteste;
+                gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
                 gameSaved.inSeed = inMap;
                 gameSaved.returnType = Game::exit;
@@ -154,25 +154,25 @@ Game loopPlayer(Game gameSaved)
                 break;
             case 9:
                 gameSaved.player = player;
-                gameSaved.map = mapteste;
+                gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
                 gameSaved.inSeed = inMap;
                 gameSaved.returnType = Game::inventory;
                 return gameSaved;
             default:
-                debugPrint(hConsole, mapteste, newPosition, a);
+                debugPrint(hConsole, mapCurrent, newPosition, a);
                 break;
             }
 
-            switch (mapteste.map[newPosition.Y][newPosition.X])
+            switch (mapCurrent.map[newPosition.Y][newPosition.X])
             {
-            case mapteste.entities::portaSupInf:
+            case mapCurrent.entities::portaSupInf:
                 if (newPosition.Y > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on bottom*/
                     swapMap = true;
                     inMap.y++;
-                    mapteste = mapa(seed.loc[inMap.y][inMap.x]);
+                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
                     newPosition = {2, 2};
                 }
                 else if (inMap.y > 1)
@@ -180,17 +180,17 @@ Game loopPlayer(Game gameSaved)
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.y--;
-                    mapteste = mapa(seed.loc[inMap.y][inMap.x]);
+                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
                     newPosition = {2, 2};
                 }
                 break;
-            case mapteste.entities::portaLat:
+            case mapCurrent.entities::portaLat:
                 if (newPosition.X > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on right*/
                     swapMap = true;
                     inMap.x++;
-                    mapteste = mapa(seed.loc[inMap.y][inMap.x]);
+                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
                     newPosition = {2, 2};
                 }
                 else if (inMap.y > 1)
@@ -198,14 +198,14 @@ Game loopPlayer(Game gameSaved)
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.x--;
-                    mapteste = mapa(seed.loc[inMap.y][inMap.x]);
+                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
                     newPosition = {2, 2};
                 }
                 break;
-            case mapteste.entities::item:
+            case mapCurrent.entities::item:
                 /*item*/
                 break;
-            case mapteste.entities::chest:
+            case mapCurrent.entities::chest:
             {
                 /*chest*/
                 if (player.inventory.size == 10)
@@ -300,7 +300,7 @@ Game loopPlayer(Game gameSaved)
         }
     }
     gameSaved.player = player;
-    gameSaved.map = mapteste;
+    gameSaved.map = mapCurrent;
     gameSaved.seed = seed;
     gameSaved.inSeed = inMap;
     gameSaved.returnType = Game::exit;
