@@ -144,16 +144,12 @@ Game loopPlayer(Game gameSaved)
                 break;
             }
 
-            // SetConsoleCursorPosition(hConsole, {0, 0});
-            // cout << getCharAtPosition(hConsole, newPosition);
             SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
             cout << newPosition.Y << newPosition.X << mapteste.map[newPosition.Y][newPosition.X];
 
             switch (mapteste.map[newPosition.Y][newPosition.X])
             {
             case mapteste.entities::portaSupInf:
-                // SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                // cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
                 if (newPosition.Y > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on bottom*/
@@ -172,8 +168,6 @@ Game loopPlayer(Game gameSaved)
                 }
                 break;
             case mapteste.entities::portaLat:
-                // SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                // cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
                 if (newPosition.X > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on right*/
