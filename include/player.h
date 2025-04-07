@@ -169,11 +169,11 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.returnType = Game::inventory;
                 return gameSaved;
             default:
-                debugPrint(hConsole, mapCurrent, newPosition, a);
+                    debugPrint(hConsole, mapCurrent, newPosition, a);
                 break;
             }
 
-            switch (mapCurrent.map[newPosition.X][newPosition.Y])
+            switch (mapCurrent.map[newPosition.Y][newPosition.X])
             {
             case mapCurrent.entities::portaSupInf:
                 if (newPosition.Y > 0 && inMap.y < 4)
@@ -194,7 +194,7 @@ Game loopPlayer(Game gameSaved)
                 }
                 break;
             case mapCurrent.entities::portaLat:
-                if (newPosition.X > 0 && inMap.y < 4)
+                if (newPosition.X > 0 && inMap.x < 4)
                 {
                     /*logic to select next map on right*/
                     swapMap = true;
@@ -202,7 +202,7 @@ Game loopPlayer(Game gameSaved)
                     mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
                     newPosition = {2, 2};
                 }
-                else if (inMap.y > 1)
+                else if (inMap.x > 1)
                 {
                     /* return to before room if has in room 5S*/
                     swapMap = true;

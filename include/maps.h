@@ -49,7 +49,6 @@ void definedMap(map &currentMap, int newMap[16][16])
             }
         }
     }
-
 }
 
 void printMap(map mapCurrent)
