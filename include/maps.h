@@ -31,9 +31,9 @@ void generateSeed(Seed &seed){
 
 void printMap(map mapteste){
     
-    for (int j = 0; j < 16; j++)
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
         {
             if(rand()%100 < 1 && mapteste.map[j][i] == 0){
                 mapteste.map[j][i] = mapteste.entities::enemy;
