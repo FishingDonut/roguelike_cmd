@@ -64,7 +64,6 @@ struct Game
     Player player;
     map map;
     Seed seed;
-    Position inSeed;
     enum ReturnTypes
     {
         exit,
@@ -95,7 +94,6 @@ Game loopPlayer(Game gameSaved)
         player = gameSaved.player;
         /*por algum motivo da bug se não setar o size manualmente*/
         player.inventory.size = gameSaved.player.inventory.size;
-        inMap = gameSaved.inSeed;
     }
     else
     {
@@ -136,7 +134,6 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.player = player;
                 gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
-                gameSaved.inSeed = inMap;
                 gameSaved.returnType = Game::exit;
                 return gameSaved;
                 break;
@@ -156,7 +153,6 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.player = player;
                 gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
-                gameSaved.inSeed = inMap;
                 gameSaved.returnType = Game::inventory;
                 return gameSaved;
             default:
@@ -302,7 +298,6 @@ Game loopPlayer(Game gameSaved)
     gameSaved.player = player;
     gameSaved.map = mapCurrent;
     gameSaved.seed = seed;
-    gameSaved.inSeed = inMap;
     gameSaved.returnType = Game::exit;
     return gameSaved;
 }
