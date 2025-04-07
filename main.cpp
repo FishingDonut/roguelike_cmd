@@ -67,7 +67,7 @@ int main()
             }
             break;
         }
-    } while (selectMenu !=2);
+    } while (selectMenu != 2);
     system("cls");
     return 0;
 }
