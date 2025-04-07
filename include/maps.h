@@ -37,56 +37,56 @@ void generateSeed(Seed &seed)
 
 void definedMap(map &currentMap, int newMap[16][16])
 {
-    for (int i = 0; i < 16; i++)
+    for (int j = 0; j < 16; j++)
     {
-        for (int j = 0; j < 16; j++)
+        for (int i = 0; i < 16; i++)
         {
             currentMap.map[i][j] = newMap[i][j];
 
             if (rand() % 100 < 1 && currentMap.map[i][j] == 0)
             {
-                currentMap.map[j][i] = currentMap.entities::enemy;
+                currentMap.map[i][j] = currentMap.entities::enemy;
             }
         }
     }
 
 }
 
-void printMap(map mapteste)
+void printMap(map mapCurrent)
 {
 
-    for (int i = 0; i < 16; i++)
+    for (int j = 0; j < 16; j++)
     {
-        for (int j = 0; j < 16; j++)
+        for (int i = 0; i < 16; i++)
         {
-            switch (mapteste.map[j][i])
+            switch (mapCurrent.map[j][i])
             {
             // desenhando piso
             case 0:
                 cout << " ";
                 break;
-            case mapteste.entities::parede:
+            case mapCurrent.entities::parede:
                 cout << "\u2588";
                 break;
-            case mapteste.entities::enemy:
+            case mapCurrent.entities::enemy:
                 cout << "!";
                 break;
-            case mapteste.entities::portaLat:
+            case mapCurrent.entities::portaLat:
                 cout << "\u007C";
                 break;
-            case mapteste.entities::portaSupInf:
+            case mapCurrent.entities::portaSupInf:
                 cout << "-";
                 break;
-            case mapteste.entities::chest:
+            case mapCurrent.entities::chest:
                 cout << "\u00A4";
                 break;
-            case mapteste.entities::mimic:
+            case mapCurrent.entities::mimic:
                 cout << "\u00A4";
                 break;
-            case mapteste.entities::vazio:
+            case mapCurrent.entities::vazio:
                 cout << " ";
                 break;
-            case mapteste.entities::fakewall:
+            case mapCurrent.entities::fakewall:
                 cout << "\u2588";
                 break;
             default:
