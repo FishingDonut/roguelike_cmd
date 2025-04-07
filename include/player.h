@@ -89,8 +89,6 @@ Game loopPlayer(Game gameSaved)
     char playerChar = '@';
     bool swapMap;
 
-    Game gameReturn; // qual o sentido dessa variavel e pq nao usar gameSaved
-
     while (player.health > 0)
     {
         currentPosition = newPosition;
@@ -115,12 +113,12 @@ Game loopPlayer(Game gameSaved)
                 //         cout << mapteste.map[i][j];
                 //     }}
 
-                gameReturn.player = player;
-                gameReturn.map = mapteste;
-                gameReturn.seed = seed;
-                gameReturn.inSeed = inMap;
-                gameReturn.returnType = Game::exit;
-                return gameReturn;
+                gameSaved.player = player;
+                gameSaved.map = mapteste;
+                gameSaved.seed = seed;
+                gameSaved.inSeed = inMap;
+                gameSaved.returnType = Game::exit;
+                return gameSaved;
                 break;
             case 119:
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
@@ -135,12 +133,12 @@ Game loopPlayer(Game gameSaved)
                 newPosition.X++;
                 break;
             case 9:
-                gameReturn.player = player;
-                gameReturn.map = mapteste;
-                gameReturn.seed = seed;
-                gameReturn.inSeed = inMap;
-                gameReturn.returnType = Game::inventory;
-                return gameReturn;
+                gameSaved.player = player;
+                gameSaved.map = mapteste;
+                gameSaved.seed = seed;
+                gameSaved.inSeed = inMap;
+                gameSaved.returnType = Game::inventory;
+                return gameSaved;
             default:
                 cout << a << endl;
                 break;
@@ -286,10 +284,10 @@ Game loopPlayer(Game gameSaved)
             cout << playerChar;
         }
     }
-    gameReturn.player = player;
-    gameReturn.map = mapteste;
-    gameReturn.seed = seed;
-    gameReturn.inSeed = inMap;
-    gameReturn.returnType = Game::exit;
-    return gameReturn;
+    gameSaved.player = player;
+    gameSaved.map = mapteste;
+    gameSaved.seed = seed;
+    gameSaved.inSeed = inMap;
+    gameSaved.returnType = Game::exit;
+    return gameSaved;
 }
