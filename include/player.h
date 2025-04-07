@@ -46,7 +46,14 @@ void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
         for (int j = 0; j < 16; j++)
         {
             SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
-            cout << mapCurrent.map[i][j];
+            if (mapCurrent.map[i][j] == 0)
+            {
+                cout << " ";
+            }
+            else
+            {
+                cout << mapCurrent.map[i][j];
+            }
         }
     }
 
@@ -137,7 +144,7 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.returnType = Game::exit;
                 return gameSaved;
                 break;
-                
+
             // start movimentação do player
             case 119:
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
@@ -151,7 +158,7 @@ Game loopPlayer(Game gameSaved)
             case 100:
                 newPosition.X++;
                 break;
-            // end movimentação do player
+                // end movimentação do player
 
             case 9:
                 gameSaved.player = player;
