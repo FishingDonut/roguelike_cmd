@@ -1,15 +1,19 @@
 #include "./primitiveTypes.h"
+
 using namespace std;
 
-struct map{
+struct map
+{
     int map[16][16] = {};
-    enum mapSpawnPositions{
+    enum mapSpawnPositions
+    {
         top,
         bottom,
         left,
         right,
     };
-    enum entities{
+    enum entities
+    {
         parede = 1,
         enemy = 2,
         item,
@@ -20,8 +24,9 @@ struct map{
         portaLat = 92,
         vazio = 9,
     };
-    enum difficulty{
-        //need logic to add difficulty when pass level
+    enum difficulty
+    {
+        // need logic to add difficulty when pass level
         easy,
         medium,
         hard,

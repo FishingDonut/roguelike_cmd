@@ -1,36 +1,11 @@
 #include <iostream>
 #include <conio.h>
 #include "./maps.h"
+#include "./items.h"
+#include "./primitiveTypes.h"
 #include <windows.h>
+
 using namespace std;
-
-
-struct Items
-{
-    enum TypeofItems
-    {
-        potion = 2,
-        armor,
-        weapon,
-        key,
-    };
-    TypeofItems type;
-    short int quantity;
-    float durability;
-    enum effects
-    {
-        strengh,
-        luck,
-    };
-    string art;
-    short int midX, midY;
-};
-
-struct Inventory
-{
-    Items items[10];
-    short int size;
-};
 
 struct Player
 {
@@ -64,7 +39,8 @@ struct Game
     map map;
     Seed seed;
     Position inSeed;
-    enum ReturnTypes{
+    enum ReturnTypes
+    {
         exit,
         inventory,
     };
@@ -80,7 +56,9 @@ Game loopPlayer(Game gameSaved)
     COORD currentPosition;
     Player player;
     Position inMap;
+
     setlocale(LC_ALL, "pt_BR.UTF-8");
+
     if (gameSaved.returnType != Game::exit)
     {
         mapteste = gameSaved.map;
@@ -92,9 +70,11 @@ Game loopPlayer(Game gameSaved)
         /*por algum motivo da bug se não setar o size manualmente*/
         player.inventory.size = gameSaved.player.inventory.size;
         inMap = gameSaved.inSeed;
-    }else{
+    }
+    else
+    {
         generateSeed(seed);
-        //selecionando a sala inicial
+        // selecionando a sala inicial
         mapteste = mapa(seed.loc[2][2]);
         // map mapteste = mapa(3);
         printMap(mapteste);
@@ -103,19 +83,23 @@ Game loopPlayer(Game gameSaved)
         Player player = Player();
         player.inventory.size = 0;
         player.position = newPosition;
-        inMap = {2,2};
+        inMap = {2, 2};
     }
-    char playerChar= '@';
+
+    char playerChar = '@';
     bool swapMap;
+
     Game gameReturn; // qual o sentido dessa variavel e pq nao usar gameSaved
+
     while (player.health > 0)
     {
         currentPosition = newPosition;
-        
+
         int a = getch();
         SetConsoleCursorPosition(hConsole, {0, 0});
-        if (swapMap) printMap(mapteste);
-        
+        if (swapMap)
+            printMap(mapteste);
+
         if (a)
         {
             switch (a)
@@ -130,7 +114,7 @@ Game loopPlayer(Game gameSaved)
                 //         SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
                 //         cout << mapteste.map[i][j];
                 //     }}
-                
+
                 gameReturn.player = player;
                 gameReturn.map = mapteste;
                 gameReturn.seed = seed;
@@ -162,121 +146,131 @@ Game loopPlayer(Game gameSaved)
                 break;
             }
 
-            //SetConsoleCursorPosition(hConsole, {0, 0});
-            //cout << getCharAtPosition(hConsole, newPosition);
-            SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
+            // SetConsoleCursorPosition(hConsole, {0, 0});
+            // cout << getCharAtPosition(hConsole, newPosition);
+            SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
             cout << newPosition.Y << newPosition.X << mapteste.map[newPosition.Y][newPosition.X];
-            
+
             switch (mapteste.map[newPosition.Y][newPosition.X])
             {
-            case mapteste.entities::portaSupInf: 
-                //SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                //cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
+            case mapteste.entities::portaSupInf:
+                // SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
+                // cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
                 if (newPosition.Y > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on bottom*/
                     swapMap = true;
                     inMap.y++;
                     mapteste = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2,2};
-                }else if(inMap.y > 1){
+                    newPosition = {2, 2};
+                }
+                else if (inMap.y > 1)
+                {
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.y--;
                     mapteste = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2,2};
+                    newPosition = {2, 2};
                 }
                 break;
             case mapteste.entities::portaLat:
-                //SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                //cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
+                // SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
+                // cout<< newPosition.X << newPosition.Y << mapteste.map[newPosition.X][newPosition.Y];
                 if (newPosition.X > 0 && inMap.y < 4)
                 {
                     /*logic to select next map on right*/
                     swapMap = true;
                     inMap.x++;
                     mapteste = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2,2};
-                }else if(inMap.y > 1){
+                    newPosition = {2, 2};
+                }
+                else if (inMap.y > 1)
+                {
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.x--;
                     mapteste = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2,2};
+                    newPosition = {2, 2};
                 }
                 break;
             case mapteste.entities::item:
                 /*item*/
                 break;
-            case mapteste.entities::chest:{
+            case mapteste.entities::chest:
+            {
                 /*chest*/
                 if (player.inventory.size == 10)
                 {
-                    SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                    cout<<"Inventory full";
-                }else{
-                int itemSelect = rand()%3+1;
+                    SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
+                    cout << "Inventory full";
+                }
+                else
+                {
+                    int itemSelect = rand() % 3 + 1;
                     switch (itemSelect)
                     {
-                    case 1:{
+                    case 1:
+                    {
                         Items potion;
                         potion.type = Items::potion;
-                        potion.art = 
-                        "   _\n"
-                        "  |=|\n"
-                        "  | |\n"
-                        "  | |\n"
-                        " /   \\\n"
-                        ".     .\n"
-                        "|-----|\n"
-                        "|     |\n"
-                        "|-----|\n";
-                        potion.midX = 7/2;
+                        potion.art =
+                            "   _\n"
+                            "  |=|\n"
+                            "  | |\n"
+                            "  | |\n"
+                            " /   \\\n"
+                            ".     .\n"
+                            "|-----|\n"
+                            "|     |\n"
+                            "|-----|\n";
+                        potion.midX = 7 / 2;
                         potion.midY = 10;
                         player.inventory.items[player.inventory.size++] = potion;
                         break;
                     }
-                    case 2:{
+                    case 2:
+                    {
                         /*weapons*/
                         Items sword;
                         sword.durability = 100;
                         sword.quantity = 1;
                         sword.type = Items::weapon;
                         sword.art = "      .         \n"
-                            "     /:\\    (\"\"\")\n"
-                            "     |:|     III\n"
-                            "     |:|     III\n"
-                            "     |:|     III\n"
-                            "     |:|   __III__\n"
-                            "     |:| /:-.___,-:\\\n"
-                            "     |:| \\]  |:|  [/\n"
-                            "     |:|     |:|\n"
-                            "     |:|     |:|\n"
-                            "     |:|     |:|\n"
-                            " /]  |:|  [\\ |:|\n"
-                            " \\:-'\"\"\"`-:/ |:|\n"
-                            "   \"\"III\"\"   |:|\n"
-                            "     III     |:|\n"
-                            "     III     |:|\n"
-                            "     III     |:|\n"
-                            "    (___)    \\:/\n"
-                            "              \"\n";
-                        sword.midX = 16/2;
-                        sword.midY = 19/2;
+                                    "     /:\\    (\"\"\")\n"
+                                    "     |:|     III\n"
+                                    "     |:|     III\n"
+                                    "     |:|     III\n"
+                                    "     |:|   __III__\n"
+                                    "     |:| /:-.___,-:\\\n"
+                                    "     |:| \\]  |:|  [/\n"
+                                    "     |:|     |:|\n"
+                                    "     |:|     |:|\n"
+                                    "     |:|     |:|\n"
+                                    " /]  |:|  [\\ |:|\n"
+                                    " \\:-'\"\"\"`-:/ |:|\n"
+                                    "   \"\"III\"\"   |:|\n"
+                                    "     III     |:|\n"
+                                    "     III     |:|\n"
+                                    "     III     |:|\n"
+                                    "    (___)    \\:/\n"
+                                    "              \"\n";
+                        sword.midX = 16 / 2;
+                        sword.midY = 19 / 2;
                         player.inventory.items[player.inventory.size++] = sword;
                         break;
                     }
-                    
+
                     default:
                         break;
                     }
-                    SetConsoleCursorPosition(hConsole,{(SHORT)20,(SHORT)20});
-                    cout << player.inventory.items[player.inventory.size-1].art;
+                    SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
+                    cout << player.inventory.items[player.inventory.size - 1].art;
                     break;
                 }
             }
-                
-            case 5:{
+
+            case 5:
+            {
                 /*mimic*/
                 break;
             }
