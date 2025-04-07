@@ -1,12 +1,13 @@
-#include<string>
+#include <string>
+#include "./primitiveTypes.h"
+
 using namespace std;
-struct Position{
-    int x;
-    int y;
-};
-struct Items{
-    enum TypeofItems{
-        potion,
+
+struct Items
+{
+    enum TypeofItems
+    {
+        potion = 2,
         armor,
         weapon,
         key,
@@ -14,14 +15,17 @@ struct Items{
     TypeofItems type;
     short int quantity;
     float durability;
-    enum effects{
+    enum effects
+    {
         strengh,
         luck,
     };
     string art;
+    short int midX, midY;
 };
 
-struct Inventory{
+struct Inventory
+{
     Items items[10];
     short int size;
 };

@@ -1,4 +1,6 @@
-struct Position{
-    short int x;
-    short int y;
+#pragma once
+
+struct Position
+{
+    int x, y;
 };
