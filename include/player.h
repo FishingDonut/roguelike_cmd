@@ -107,7 +107,7 @@ Game loopPlayer(Game gameSaved)
     }
     char playerChar= '@';
     bool swapMap;
-    Game gameReturn;
+    Game gameReturn; // qual o sentido dessa variavel e pq nao usar gameSaved
     while (player.health > 0)
     {
         currentPosition = newPosition;
