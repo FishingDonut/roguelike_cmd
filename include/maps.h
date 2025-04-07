@@ -43,10 +43,10 @@ void definedMap(map &currentMap, int newMap[16][16])
         {
             currentMap.map[i][j] = newMap[i][j];
 
-            // if (rand() % 100 < 5 && currentMap.map[i][j] == currentMap.entities::enemy)
-            // {
-            //     currentMap.map[j][i] = 1;
-            // }
+            if (rand() % 100 < 1 && currentMap.map[i][j] == 0)
+            {
+                currentMap.map[j][i] = currentMap.entities::enemy;
+            }
         }
     }
 
