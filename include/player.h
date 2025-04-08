@@ -119,21 +119,33 @@ Game loopPlayer(Game gameSaved)
 
     char playerChar = '@';
     bool swapMap;
+    int a;
 
     while (player.health > 0)
     {
         currentPosition = newPosition;
 
-        int a = getch();
+        if(kbhit()){
+            a = getch();
+        } else {
+            a = 0;
+        }
+
         SetConsoleCursorPosition(hConsole, {0, 0});
 
         if (swapMap)
             printMap(mapCurrent);
+            swapMap = false;
 
+
+            SetConsoleCursorPosition(hConsole, player.position);
+            cout << playerChar;
         if (a)
         {
             switch (a)
             {
+            case 0:
+                break;
             case 81:
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
@@ -292,18 +304,28 @@ Game loopPlayer(Game gameSaved)
             }
             }
 
-            if (getCharAtPosition(hConsole, newPosition) != ' ')
-            {
-                newPosition = currentPosition;
-            }
+// Apaga o player da posição anterior
+if (newPosition.X != currentPosition.X || newPosition.Y != currentPosition.Y)
+{
+    SetConsoleCursorPosition(hConsole, currentPosition);
+    cout << " ";
+}
 
-            player.setPosition(newPosition.X, newPosition.Y);
+// Verifica se a nova posição é válida antes de mover
+if (getCharAtPosition(hConsole, newPosition) != ' ')
+{
+    newPosition = currentPosition; // volta se tiver parede ou obstáculo
+}
 
-            SetConsoleCursorPosition(hConsole, currentPosition);
-            cout << " ";
+// Atualiza posição do player
+player.setPosition(newPosition.X, newPosition.Y);
 
-            SetConsoleCursorPosition(hConsole, player.position);
-            cout << playerChar;
+// Desenha o player na nova posição
+SetConsoleCursorPosition(hConsole, player.position);
+cout << playerChar;
+
+// Pausa para dar tempo visual de ver o movimento
+Sleep(100);
         }
     }
     gameSaved.player = player;
