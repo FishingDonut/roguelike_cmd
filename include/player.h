@@ -13,6 +13,7 @@ struct Player
     Inventory inventory;
 
     int health = 100;
+    int shield = 100;
     void setPosition(int x, int y)
     {
         position.X = x;
@@ -41,9 +42,9 @@ void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
     cout << getCharAtPosition(hConsole, newPosition);
 
     // map value array
-    for (int i = 0; i < 16; i++)
+    for (int j = 0; j < 16; j++)
     {
-        for (int j = 0; j < 16; j++)
+        for (int i = 0; i < 16; i++)
         {
             SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
             if (mapCurrent.map[i][j] == 0)
@@ -78,6 +79,15 @@ struct Game
     };
     ReturnTypes returnType;
 };
+
+void hudPrint(Player player){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hConsole,{(SHORT)16,(SHORT)0});
+
+    cout << "100 / "<< player.health << "     ";
+    cout << "10 / "<< player.inventory.size << "  ";
+    
+}
 
 Game loopPlayer(Game gameSaved)
 {
@@ -124,7 +134,7 @@ Game loopPlayer(Game gameSaved)
     while (player.health > 0)
     {
         currentPosition = newPosition;
-
+        hudPrint(player);
         int a = getch();
         SetConsoleCursorPosition(hConsole, {0, 0});
 
@@ -221,75 +231,77 @@ Game loopPlayer(Game gameSaved)
                 {
                     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
                     cout << "Inventory full";
+                    break;
                 }
                 else
                 {
                     int itemSelect = rand() % 3 + 1;
                     switch (itemSelect)
                     {
-                    case 1:
-                    {
-                        Items potion;
-                        potion.type = Items::potion;
-                        potion.art =
-                            "   _\n"
-                            "  |=|\n"
-                            "  | |\n"
-                            "  | |\n"
-                            " /   \\\n"
-                            ".     .\n"
-                            "|-----|\n"
-                            "|     |\n"
-                            "|-----|\n";
-                        potion.midX = 7 / 2;
-                        potion.midY = 10;
-                        player.inventory.items[player.inventory.size++] = potion;
-                        break;
-                    }
-                    case 2:
-                    {
-                        /*weapons*/
-                        Items sword;
-                        sword.durability = 100;
-                        sword.quantity = 1;
-                        sword.type = Items::weapon;
-                        sword.art = "      .         \n"
-                                    "     /:\\    (\"\"\")\n"
-                                    "     |:|     III\n"
-                                    "     |:|     III\n"
-                                    "     |:|     III\n"
-                                    "     |:|   __III__\n"
-                                    "     |:| /:-.___,-:\\\n"
-                                    "     |:| \\]  |:|  [/\n"
-                                    "     |:|     |:|\n"
-                                    "     |:|     |:|\n"
-                                    "     |:|     |:|\n"
-                                    " /]  |:|  [\\ |:|\n"
-                                    " \\:-'\"\"\"`-:/ |:|\n"
-                                    "   \"\"III\"\"   |:|\n"
-                                    "     III     |:|\n"
-                                    "     III     |:|\n"
-                                    "     III     |:|\n"
-                                    "    (___)    \\:/\n"
-                                    "              \"\n";
-                        sword.midX = 16 / 2;
-                        sword.midY = 19 / 2;
-                        player.inventory.items[player.inventory.size++] = sword;
-                        break;
-                    }
+                        case 1:
+                        {
+                            Items potion;
+                            potion.type = Items::potion;
+                            potion.art =
+                                "   _\n"
+                                "  |=|\n"
+                                "  | |\n"
+                                "  | |\n"
+                                " /   \\\n"
+                                ".     .\n"
+                                "|-----|\n"
+                                "|     |\n"
+                                "|-----|\n";
+                            potion.midX = 7 / 2;
+                            potion.midY = 10;
+                            player.inventory.items[player.inventory.size++] = potion;
+                            break;
+                        }
+                        case 2:
+                        {
+                            /*weapons*/
+                            Items sword;
+                            sword.durability = 100;
+                            sword.quantity = 1;
+                            sword.type = Items::weapon;
+                            sword.art = "      .         \n"
+                                        "     /:\\    (\"\"\")\n"
+                                        "     |:|     III\n"
+                                        "     |:|     III\n"
+                                        "     |:|     III\n"
+                                        "     |:|   __III__\n"
+                                        "     |:| /:-.___,-:\\\n"
+                                        "     |:| \\]  |:|  [/\n"
+                                        "     |:|     |:|\n"
+                                        "     |:|     |:|\n"
+                                        "     |:|     |:|\n"
+                                        " /]  |:|  [\\ |:|\n"
+                                        " \\:-'\"\"\"`-:/ |:|\n"
+                                        "   \"\"III\"\"   |:|\n"
+                                        "     III     |:|\n"
+                                        "     III     |:|\n"
+                                        "     III     |:|\n"
+                                        "    (___)    \\:/\n"
+                                        "              \"\n";
+                            sword.midX = 16 / 2;
+                            sword.midY = 19 / 2;
+                            player.inventory.items[player.inventory.size++] = sword;
+                            break;
+                        }
 
-                    default:
-                        break;
+                        default:
+                            break;
                     }
                     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
                     cout << player.inventory.items[player.inventory.size - 1].art;
-                    
+                    break;
                 }
             }
 
             case 5:
             {
                 /*mimic*/
+                player.health -= 10;
                 break;
             }
             }
