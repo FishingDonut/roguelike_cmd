@@ -42,9 +42,9 @@ void definedMap(map &currentMap, int newMap[16][16])
     int amout = 0;
     currentMap.clearEnemyRoom();
 
-    for (int j = 0; j < 16; j++)
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
         {
             currentMap.map[i][j] = newMap[i][j];
             
@@ -53,7 +53,7 @@ void definedMap(map &currentMap, int newMap[16][16])
                 {
                     currentMap.map[i][j] = currentMap.entities::enemy;
                     currentMap.enemyList[amout] = enemy();
-                    currentMap.enemyList[amout].position = {i, j};
+                    currentMap.enemyList[amout].position = {j, i};
                     amout++;
                 }
             }
@@ -72,11 +72,11 @@ void printMap(map mapCurrent)
         }
     }   
 
-    for (int j = 0; j < 16; j++)
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
         {
-            switch (mapCurrent.map[j][i])
+            switch (mapCurrent.map[i][j])
             {
             // desenhando piso
             case 0:

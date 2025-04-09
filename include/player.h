@@ -42,11 +42,11 @@ void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
     cout << getCharAtPosition(hConsole, newPosition);
 
     // map value array
-    for (int j = 0; j < 16; j++)
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
         {
-            SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
+            SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
             if (mapCurrent.map[i][j] == 0)
             {
                 cout << " ";
@@ -150,7 +150,6 @@ Game loopPlayer(Game gameSaved)
         cout << playerChar;
         if (a)
         {
-            cout<<player.inventory.size;
             switch (a)
             {
             case 0:
