@@ -63,12 +63,12 @@ void definedMap(map &currentMap, int newMap[16][16])
 
 void printMap(map mapCurrent)
 {
-    if(mapteste.enemyList){
-        for(int i = 0; i < mapteste.maxEnemy; i++){
-            enemy enemy = mapteste.enemyList[i];
-            mapteste.map[enemy.position.y][enemy.position.x] = mapteste.entities::vazio;
-            mapteste.map[enemy.position.y += 1][enemy.position.x += 1] = mapteste.entities::enemy;
-            mapteste.enemyList[i].position = {enemy.position.x +=1, enemy.position.y += 1};
+    if(mapCurrent.enemyList){
+        for(int i = 0; i < mapCurrent.maxEnemy; i++){
+            enemy enemy = mapCurrent.enemyList[i];
+            mapCurrent.map[enemy.position.y][enemy.position.x] = mapCurrent.entities::vazio;
+            mapCurrent.map[enemy.position.y += 1][enemy.position.x += 1] = mapCurrent.entities::enemy;
+            mapCurrent.enemyList[i].position = {enemy.position.x +=1, enemy.position.y += 1};
         }
     }   
 
