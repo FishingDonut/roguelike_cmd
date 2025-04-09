@@ -1,5 +1,7 @@
 #include "./map.h"
+#include "./enemy.h"
 #include <ctime>
+#include <windows.h>
 
 struct Seed
 {
@@ -37,15 +39,23 @@ void generateSeed(Seed &seed)
 
 void definedMap(map &currentMap, int newMap[16][16])
 {
+    int amout = 0;
+    currentMap.clearEnemyRoom();
+
     for (int j = 0; j < 16; j++)
     {
         for (int i = 0; i < 16; i++)
         {
             currentMap.map[i][j] = newMap[i][j];
-
-            if (rand() % 100 < 1 && currentMap.map[i][j] == 0)
-            {
-                currentMap.map[i][j] = currentMap.entities::enemy;
+            
+            if(amout < currentMap.maxEnemy){
+                if (rand() % 100 < 10 && currentMap.map[i][j] == 0)
+                {
+                    currentMap.map[i][j] = currentMap.entities::enemy;
+                    currentMap.enemyList[amout] = enemy();
+                    currentMap.enemyList[amout].position = {i, j};
+                    amout++;
+                }
             }
         }
     }
@@ -53,6 +63,14 @@ void definedMap(map &currentMap, int newMap[16][16])
 
 void printMap(map mapCurrent)
 {
+    if(mapteste.enemyList){
+        for(int i = 0; i < mapteste.maxEnemy; i++){
+            enemy enemy = mapteste.enemyList[i];
+            mapteste.map[enemy.position.y][enemy.position.x] = mapteste.entities::vazio;
+            mapteste.map[enemy.position.y += 1][enemy.position.x += 1] = mapteste.entities::enemy;
+            mapteste.enemyList[i].position = {enemy.position.x +=1, enemy.position.y += 1};
+        }
+    }   
 
     for (int j = 0; j < 16; j++)
     {

@@ -130,22 +130,31 @@ Game loopPlayer(Game gameSaved)
 
     char playerChar = '@';
     bool swapMap;
+    int a;
 
     while (player.health > 0)
     {
         currentPosition = newPosition;
+
+        kbhit() ? a = getch() : a = 0;
         hudPrint(player);
-        int a = getch();
+
         SetConsoleCursorPosition(hConsole, {0, 0});
 
-        if (swapMap)
+        if (swapMap){
             printMap(mapCurrent);
+            swapMap = false;
+        }
 
+        SetConsoleCursorPosition(hConsole, player.position);
+        cout << playerChar;
         if (a)
         {
             cout<<player.inventory.size;
             switch (a)
             {
+            case 0:
+                break;
             case 81:
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
@@ -306,18 +315,28 @@ Game loopPlayer(Game gameSaved)
             }
             }
 
-            if (getCharAtPosition(hConsole, newPosition) != ' ')
+            // Apaga o player da posição anterior
+            if (newPosition.X != currentPosition.X || newPosition.Y != currentPosition.Y)
             {
-                newPosition = currentPosition;
+                SetConsoleCursorPosition(hConsole, currentPosition);
+                cout << " ";
             }
 
+            // Verifica se a nova posição é válida antes de mover
+            if (getCharAtPosition(hConsole, newPosition) != ' ')
+            {
+                newPosition = currentPosition; // volta se tiver parede ou obstáculo
+            }
+
+            // Atualiza posição do player
             player.setPosition(newPosition.X, newPosition.Y);
 
-            SetConsoleCursorPosition(hConsole, currentPosition);
-            cout << " ";
-
+            // Desenha o player na nova posição
             SetConsoleCursorPosition(hConsole, player.position);
             cout << playerChar;
+
+            // Pausa para dar tempo visual de ver o movimento
+            Sleep(100);
         }
     }
     gameSaved.player = player;

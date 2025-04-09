@@ -1,9 +1,13 @@
 #include "./primitiveTypes.h"
+#include "./enemy.h"
 
 using namespace std;
 
 struct map
 {
+    static const int maxEnemy = 4;
+    enemy enemyList[maxEnemy];
+
     int map[16][16] = {};
     enum mapSpawnPositions
     {
@@ -34,4 +38,10 @@ struct map
     entities entity;
     Position spawnPos[4];
     difficulty enemyLevel;
+
+    void clearEnemyRoom(){
+        for(int i = 0; i < maxEnemy; i++){
+            enemyList[i] = {};
+        }
+    }
 };
