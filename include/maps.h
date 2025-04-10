@@ -81,8 +81,10 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
             e.position.y < position.y ? dirY = 1 : dirY = -1;
             e.position.x < position.x ? dirX = 1 : dirX = -1;
 
-            e.position.x += dirX;
-            e.position.y += dirY;
+            if(mapCurrent.map[e.position.y + dirY][e.position.x] == mapCurrent.entities::floor){
+                e.position.x += dirX;
+                e.position.y += dirY;
+            }
 
             mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::enemy;
 
