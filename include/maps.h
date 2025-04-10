@@ -48,7 +48,8 @@ void definedMap(map &currentMap, int newMap[16][16])
         {
             currentMap.map[i][j] = newMap[i][j];
 
-            if(amout < currentMap.maxEnemy){
+            if (amout < currentMap.maxEnemy)
+            {
                 if (rand() % 100 < 4 && currentMap.map[i][j] == 0)
                 {
                     currentMap.map[i][j] = currentMap.entities::enemy;
@@ -69,7 +70,7 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
         {
             int dirX = 0;
             int dirY = 0;
-            
+
             enemy &e = mapCurrent.enemyList[i];
 
             mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::floor;
@@ -77,17 +78,18 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
             SetConsoleCursorPosition(hConsole, {(SHORT)e.position.x, (SHORT)e.position.y});
             cout << " ";
 
-            //define a direção
+            // define a direção
             e.position.y < position.y ? dirY = 1 : dirY = -1;
             e.position.x < position.x ? dirX = 1 : dirX = -1;
 
-            //anula a direção se estiver na reta do player
+            // anula a direção se estiver na reta do player
             e.position.y - position.y == 0 ? dirY = 0 : dirY = dirY;
             e.position.x - position.x == 0 ? dirX = 0 : dirX = dirX;
 
-            e.position.y - position.y < e.position.x - position.x ?  dirY = dirY : dirX = dirX;
+            e.position.y - position.y < e.position.x - position.x ? dirY = dirY : dirX = dirX;
 
-            if(mapCurrent.map[e.position.y + dirY][e.position.x] == mapCurrent.entities::floor && dirX != 0 && dirY != 0){ 
+            if (mapCurrent.map[e.position.y + dirY][e.position.x] == mapCurrent.entities::floor && dirX != 0 && dirY != 0)
+            {
                 e.position.x += dirX;
                 e.position.y += dirY;
             }
