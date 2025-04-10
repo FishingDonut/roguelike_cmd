@@ -42,11 +42,11 @@ void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
     cout << getCharAtPosition(hConsole, newPosition);
 
     // map value array
-    for (int j = 0; j < 16; j++)
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int j = 0; j < 16; j++)
         {
-            SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
+            SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
             if (mapCurrent.map[i][j] == 0)
             {
                 cout << " ";
@@ -88,6 +88,9 @@ void hudPrint(Player player){
     cout << "10 / "<< player.inventory.size << "  ";
     
 }
+
+
+
 
 Game loopPlayer(Game gameSaved)
 {
@@ -136,21 +139,26 @@ Game loopPlayer(Game gameSaved)
     {
         currentPosition = newPosition;
 
-        kbhit() ? a = getch() : a = 0;
+        // kbhit() ? a = getch() : a = 0;
+        
+        a = getch();
+        
         hudPrint(player);
 
         SetConsoleCursorPosition(hConsole, {0, 0});
 
-        if (swapMap){
-            printMap(mapCurrent);
-            swapMap = false;
-        }
+        printMap(mapCurrent);
+        updateMoveEnemies(mapCurrent, {player.position.X, player.position.Y}, hConsole);
+        
+        // if (swapMap){
+        //     printMap(mapCurrent);
+        //     swapMap = false;
+        // }
 
         SetConsoleCursorPosition(hConsole, player.position);
         cout << playerChar;
         if (a)
         {
-            cout<<player.inventory.size;
             switch (a)
             {
             case 0:

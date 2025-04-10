@@ -17,6 +17,7 @@ void cleanmenu(short int pos)
 }
 int menu()
 {
+    system("cls");
     setlocale(LC_ALL, "pt_BR.UTF-8");
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0, 0});
     cout << "+-----------------------------------------------------------------------------------------------------------------------------------------------+\n";
