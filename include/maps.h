@@ -47,7 +47,7 @@ void definedMap(map &currentMap, int newMap[16][16])
         for (int j = 0; j < 16; j++)
         {
             currentMap.map[i][j] = newMap[i][j];
-            
+
             if(amout < currentMap.maxEnemy){
                 if (rand() % 100 < 10 && currentMap.map[i][j] == 0)
                 {
@@ -61,21 +61,39 @@ void definedMap(map &currentMap, int newMap[16][16])
     }
 }
 
+void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
+{
+    int dirX = 0;
+    int dirY = 0;
+
+    if (mapCurrent.enemyList)
+    {
+        for (int i = 0; i < mapCurrent.maxEnemy; i++)
+        {
+            enemy &e = mapCurrent.enemyList[i];
+
+            mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::floor;
+
+            SetConsoleCursorPosition(hConsole, {(SHORT)e.position.x, (SHORT)e.position.y});
+            cout << " ";
+
+            
+            e.position.y < position.y ? dirY = 1 : dirY = -1;
+            e.position.x < position.x ? dirX = 1 : dirX = -1;
+
+            e.position.x += dirX;
+            e.position.y += dirY;
+
+            mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::enemy;
+
+            SetConsoleCursorPosition(hConsole, {(SHORT)e.position.x, (SHORT)e.position.y});
+            cout << "s";
+        }
+    }
+}
+
 void printMap(map &mapCurrent)
 {
-    if(mapCurrent.enemyList){
-        for(int i = 0; i < mapCurrent.maxEnemy; i++){
-            enemy& e = mapCurrent.enemyList[i];
-            
-            mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::vazio;
-            
-            e.position.y += 1;
-            e.position.x += 1;
-            
-            mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::enemy;
-        }
-    }   
-
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
