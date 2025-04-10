@@ -18,6 +18,7 @@ struct map
     };
     enum entities
     {
+        floor = 0,
         parede = 1,
         enemy = 2,
         item,
