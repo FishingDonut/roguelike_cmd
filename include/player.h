@@ -89,6 +89,9 @@ void hudPrint(Player player){
     
 }
 
+
+
+
 Game loopPlayer(Game gameSaved)
 {
     Seed seed;
@@ -136,15 +139,21 @@ Game loopPlayer(Game gameSaved)
     {
         currentPosition = newPosition;
 
-        kbhit() ? a = getch() : a = 0;
+        // kbhit() ? a = getch() : a = 0;
+        
+        a = getch();
+        
         hudPrint(player);
 
         SetConsoleCursorPosition(hConsole, {0, 0});
 
-        if (swapMap){
-            printMap(mapCurrent);
-            swapMap = false;
-        }
+        printMap(mapCurrent);
+        updateMoveEnemies(mapCurrent, {player.position.X, player.position.Y}, hConsole);
+        
+        // if (swapMap){
+        //     printMap(mapCurrent);
+        //     swapMap = false;
+        // }
 
         SetConsoleCursorPosition(hConsole, player.position);
         cout << playerChar;
