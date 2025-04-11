@@ -50,7 +50,7 @@ void definedMap(map &currentMap, int newMap[16][16])
 
             if (amout < currentMap.maxEnemy)
             {
-                if (rand() % 100 < 4 && currentMap.map[i][j] == 0)
+                if (rand() % 100 < 1 && currentMap.map[i][j] == 0)
                 {
                     currentMap.map[i][j] = currentMap.entities::enemy;
                     currentMap.enemyList[amout] = enemy();
@@ -62,7 +62,7 @@ void definedMap(map &currentMap, int newMap[16][16])
     }
 }
 
-void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
+void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
 {
     if (mapCurrent.enemyList)
     {
@@ -73,31 +73,36 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE hConsole)
 
             enemy &e = mapCurrent.enemyList[i];
 
+            //limpa posição anterior
             mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::floor;
-
             SetConsoleCursorPosition(hConsole, {(SHORT)e.position.x, (SHORT)e.position.y});
             cout << " ";
+            
+
+            //Start Rules move
 
             // define a direção
             e.position.y < position.y ? dirY = 1 : dirY = -1;
             e.position.x < position.x ? dirX = 1 : dirX = -1;
-
+            
             // anula a direção se estiver na reta do player
-            e.position.y - position.y == 0 ? dirY = 0 : dirY = dirY;
-            e.position.x - position.x == 0 ? dirX = 0 : dirX = dirX;
+            e.position.y - position.y == 0 ? dirY = 0 : 0;
+            e.position.x - position.x == 0 ? dirX = 0 : 0;
+    
 
-            e.position.y - position.y < e.position.x - position.x ? dirY = dirY : dirX = dirX;
-
-            if (mapCurrent.map[e.position.y + dirY][e.position.x] == mapCurrent.entities::floor && dirX != 0 && dirY != 0)
+            // atualiza a posição se for piso.
+            if (mapCurrent.map[e.position.y + dirY][e.position.x] == mapCurrent.entities::floor)
             {
                 e.position.x += dirX;
                 e.position.y += dirY;
             }
-
+            
+            //End Rules move
+            
+            //define a posição do inimigo
             mapCurrent.map[e.position.y][e.position.x] = mapCurrent.entities::enemy;
-
             SetConsoleCursorPosition(hConsole, {(SHORT)e.position.x, (SHORT)e.position.y});
-            cout << "s";
+            cout << "!";
         }
     }
 }
