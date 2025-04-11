@@ -145,15 +145,15 @@ Game loopPlayer(Game gameSaved)
         
         hudPrint(player);
 
-        SetConsoleCursorPosition(hConsole, {0, 0});
-
-        printMap(mapCurrent);
+        
+        // printMap(mapCurrent);
         updateMoveEnemies(mapCurrent, {player.position.X, player.position.Y}, hConsole);
         
-        // if (swapMap){
-        //     printMap(mapCurrent);
-        //     swapMap = false;
-        // }
+        SetConsoleCursorPosition(hConsole, {0, 0});
+        if (swapMap){
+            printMap(mapCurrent);
+            swapMap = false;
+        }
 
         SetConsoleCursorPosition(hConsole, player.position);
         cout << playerChar;
@@ -202,6 +202,9 @@ Game loopPlayer(Game gameSaved)
 
             switch (mapCurrent.map[newPosition.Y][newPosition.X])
             {
+            case mapCurrent.entities::enemy:
+                newPosition = currentPosition; // volta se tiver parede ou obstáculo
+                break;
             case mapCurrent.entities::portaSupInf:
                 if (newPosition.Y > 0 && inMap.y < 4)
                 {
@@ -344,7 +347,7 @@ Game loopPlayer(Game gameSaved)
             cout << playerChar;
 
             // Pausa para dar tempo visual de ver o movimento
-            Sleep(100);
+            // Sleep(100);
         }
     }
     gameSaved.player = player;
