@@ -5,3 +5,4 @@ conio.manpage
 .vscode
 *.exe
 *.obj 
+.vscode*

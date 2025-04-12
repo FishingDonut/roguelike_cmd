@@ -76,6 +76,8 @@ struct Game
     {
         exit,
         inventory,
+        start,
+        saved,
     };
     ReturnTypes returnType;
 };
@@ -92,7 +94,7 @@ void hudPrint(Player player){
 
 
 
-Game loopPlayer(Game gameSaved)
+void loopPlayer(Game &gameSaved)
 {
     Seed seed;
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -104,13 +106,13 @@ Game loopPlayer(Game gameSaved)
 
     setlocale(LC_ALL, "pt_BR.UTF-8");
 
-    if (gameSaved.returnType != Game::exit)
+    if (gameSaved.returnType != Game::start)
     {
         mapCurrent = gameSaved.map;
         seed = gameSaved.seed;
         printMap(mapCurrent);
-        currentPosition = {3, 3};
-        newPosition = {3, 3};
+        currentPosition = gameSaved.player.position;
+        newPosition = gameSaved.player.position;
         player = gameSaved.player;
         /*por algum motivo da bug se não setar o size manualmente*/
         player.inventory.size = 0;
@@ -120,7 +122,7 @@ Game loopPlayer(Game gameSaved)
     {
         generateSeed(seed);
         // selecionando a sala inicial
-        mapCurrent = mapa(seed.loc[2][2]);
+        mapa(mapCurrent,seed.loc[2][2]);
         // map mapCurrent = mapa(3);
         printMap(mapCurrent);
         currentPosition = {3, 3};
@@ -135,7 +137,7 @@ Game loopPlayer(Game gameSaved)
     bool swapMap;
     int a;
 
-    while (player.health > 0)
+    while (player.health > 0 && gameSaved.returnType != Game::exit && gameSaved.returnType != Game::inventory)
     {
         currentPosition = newPosition;
 
@@ -171,7 +173,6 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
                 gameSaved.returnType = Game::exit;
-                return gameSaved;
                 break;
 
             // start movimentação do player
@@ -194,16 +195,15 @@ Game loopPlayer(Game gameSaved)
                 gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
                 gameSaved.returnType = Game::inventory;
-                return gameSaved;
             default:
-                    debugPrint(hConsole, mapCurrent, newPosition, a);
+                    // debugPrint(hConsole, mapCurrent, newPosition, a);
                 break;
             }
 
             switch (mapCurrent.map[newPosition.Y][newPosition.X])
             {
             case mapCurrent.entities::enemy:
-                newPosition = currentPosition; // volta se tiver parede ou obstáculo
+                //newPosition = currentPosition; // volta se tiver parede ou obstáculo
                 break;
             case mapCurrent.entities::portaSupInf:
                 if (newPosition.Y > 0 && inMap.y < 4)
@@ -211,16 +211,16 @@ Game loopPlayer(Game gameSaved)
                     /*logic to select next map on bottom*/
                     swapMap = true;
                     inMap.y++;
-                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2, 2};
+                    mapa(mapCurrent,seed.loc[inMap.y][inMap.x]);
+                    currentPosition = {2, 2};
                 }
                 else if (inMap.y > 1)
                 {
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.y--;
-                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2, 2};
+                    mapa(mapCurrent,seed.loc[inMap.y][inMap.x]);
+                    currentPosition = {2, 2};
                 }
                 break;
             case mapCurrent.entities::portaLat:
@@ -229,16 +229,16 @@ Game loopPlayer(Game gameSaved)
                     /*logic to select next map on right*/
                     swapMap = true;
                     inMap.x++;
-                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2, 2};
+                    mapa(mapCurrent,seed.loc[inMap.y][inMap.x]);
+                    currentPosition = {2, 2};
                 }
                 else if (inMap.x > 1)
                 {
                     /* return to before room if has in room 5S*/
                     swapMap = true;
                     inMap.x--;
-                    mapCurrent = mapa(seed.loc[inMap.y][inMap.x]);
-                    newPosition = {2, 2};
+                    mapa(mapCurrent,seed.loc[inMap.y][inMap.x]);
+                    currentPosition = {2, 2};
                 }
                 break;
             case mapCurrent.entities::item:
@@ -316,6 +316,7 @@ Game loopPlayer(Game gameSaved)
                     cout << player.inventory.items[player.inventory.size - 1].art;
                     break;
                 }
+                break;
             }
 
             case 5:
@@ -332,13 +333,43 @@ Game loopPlayer(Game gameSaved)
                 SetConsoleCursorPosition(hConsole, currentPosition);
                 cout << " ";
             }
+            //verifica se o player colidiu com o inimigo
+            for (short int i = 0; i < mapCurrent.maxEnemy; i++)
+            {
+                if (mapCurrent.enemyList[i].position.x == newPosition.X && mapCurrent.enemyList[i].position.y == newPosition.Y)
+                {
+                    
+                    player.health -= 10; // add damage if player collision with enemy
+                }
+            }
+            //verifica se o player atacou o inimigo
+            if (a == 32)
+            {
+                for (short int i = 0; i < mapCurrent.maxEnemy; i++)
+                {
+                    for(int x = -1;x<2;x++){
+                        for(int y = -1;y<2;y++){
+                            if (mapCurrent.enemyList[i].position.x == currentPosition.X + x && mapCurrent.enemyList[i].position.y == currentPosition.Y + y){
+                                mapCurrent.enemyList[i].health -= 10;
+                                if(mapCurrent.enemyList[i].health <= 0){
+                                    SetConsoleCursorPosition(hConsole, {(SHORT)mapCurrent.enemyList[i].position.x, (SHORT)mapCurrent.enemyList[i].position.y});
+                                    cout << ' ';
+                                    mapCurrent.enemyList[i].position.x = -1;
+                                    mapCurrent.enemyList[i].position.y = -1;
+                                    mapCurrent.enemyList[i]={};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             // Verifica se a nova posição é válida antes de mover
             if (getCharAtPosition(hConsole, newPosition) != ' ')
             {
                 newPosition = currentPosition; // volta se tiver parede ou obstáculo
             }
-
+            
             // Atualiza posição do player
             player.setPosition(newPosition.X, newPosition.Y);
 
@@ -350,9 +381,8 @@ Game loopPlayer(Game gameSaved)
             // Sleep(100);
         }
     }
-    gameSaved.player = player;
-    gameSaved.map = mapCurrent;
-    gameSaved.seed = seed;
-    gameSaved.returnType = Game::exit;
-    return gameSaved;
+    // gameSaved.player = player;
+    // gameSaved.map = mapCurrent;
+    // gameSaved.seed = seed;
+    // gameSaved.returnType = Game::exit;
 }

@@ -5,7 +5,7 @@ using namespace std;
 
 struct map
 {
-    static const int maxEnemy = 4;
+    static const short int maxEnemy = 4;
     enemy enemyList[maxEnemy];
 
     int map[16][16] = {};
