@@ -52,20 +52,45 @@ int main()
     }
     // cout<<windowSize.dwSize.X;
     Game game;
-    game.returnType = Game::exit;
+    game.player = Player();
     int selectMenu;
+    game.returnType = Game::start;
     do
     {
+        if (game.returnType == Game::inventory){
+                ItemsMenu();
+                cout<<game.returnType;
+                game.returnType = Game::saved;
+        }else if (game.returnType == Game::exit)
+        {
+           game.returnType = Game::start;
+        }
+        
         selectMenu = menu();
         switch (selectMenu)
         {
         case 0:
-            game = loopPlayer(game);
-            if (game.returnType == Game::inventory)
-            {
-                ItemsMenu();
-            }
+            loopPlayer(game);
+            
             break;
+            case 1: // Info selected
+            // info(); // Call info screen function if you have one
+            system("cls");
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0,0});
+            cout << "Game Information:\n";
+            cout << "- Use W, A, S, D to move.\n";
+            cout << "- Press SPACEBAR to attack adjacent enemies.\n";
+            cout << "- Press TAB to open inventory (not fully implemented).\n";
+            cout << "- Press Q to quit.\n";
+            cout << "- '@' is you.\n";
+            cout << "- '!' is an enemy.\n";
+            cout << "- '\u00A4' is a chest (or mimic!).\n";
+            cout << "- '\u2588' is a wall.\n";
+            cout << "- '|' and '-' are doors.\n\n";
+            cout << "Press any key to return to menu...";
+            getch(); // Wait for key press
+            break; // Break from switch case 1
+
         }
     } while (selectMenu != 2);
     system("cls");
