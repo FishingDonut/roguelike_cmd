@@ -95,10 +95,6 @@ void hudPrint(Player player){
     // FALTA FAZER A DO INIMIGO, SEPARADA DA DO PLAYER, AGUARDANDO O DANIEL FINALIZAR OS INIMIGOS;
 }
 
-
-
-
-
 void loopPlayer(Game &gameSaved)
 {
     Seed seed;
