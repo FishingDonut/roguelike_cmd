@@ -7,6 +7,7 @@ struct map
 {
     static const short int maxEnemy = 4;
     enemy enemyList[maxEnemy];
+    bool boss = false;
 
     int map[16][16] = {};
     enum mapSpawnPositions

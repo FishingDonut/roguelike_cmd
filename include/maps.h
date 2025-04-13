@@ -58,7 +58,7 @@ void definedMap(map &currentMap, short int newMap[16][16])
             // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
             // - A posição atual no mapa é um piso (floor)
             // - A chance aleatória (1%) ocorreu
-            if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 10))
+            if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 1))
             {
                 // Se todas as condições forem verdadeiras, adicione o inimigo:
                 currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
@@ -76,57 +76,6 @@ void definedMap(map &currentMap, short int newMap[16][16])
 }
 
 
-void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
-{
-    if (mapCurrent.enemyList)
-    {
-        for (int i = 0; i < mapCurrent.maxEnemy; i++)
-        {
-            int dirX = 0;
-            int dirY = 0;
-
-            enemy &currentEnemy = mapCurrent.enemyList[i];
-            if (currentEnemy.health > 0){
-            
-            //limpa posição anterior
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            cout << " ";
-
-            // define a direção
-            currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
-            currentEnemy.position.x < position.x ? dirX = 1 : dirX = -1;
-            
-            // anula a direção se estiver na reta do player
-            currentEnemy.position.y - position.y == 0 ? dirY = 0 : 0;
-            currentEnemy.position.x - position.x == 0 ? dirX = 0 : 0;
-    
-            // verifica se a proxima posição é parede
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::parede ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaLat ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaSupInf ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::fakewall)
-            {
-                dirX = 0;
-                dirY = 0;
-            }
-
-            // atualiza a posição se for piso e não é a posição do player
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor && currentEnemy.position.x != position.x && currentEnemy.position.y != position.y)
-            {
-                currentEnemy.position.x += dirX;
-                currentEnemy.position.y += dirY;
-            }
-            
-            //define a posição do inimigo
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            if(currentEnemy.health > 0) 
-                cout << "!";
-            }
-        }
-    }
-}
 
 void printMap(map &mapCurrent)
 {
@@ -172,6 +121,71 @@ void printMap(map &mapCurrent)
         }
         cout << endl;
     }
+}
+
+void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
+{
+    if (mapCurrent.enemyList)
+    {
+        for (int i = 0; i < mapCurrent.maxEnemy; i++)
+        {
+            int dirX = 0;
+            int dirY = 0;
+
+            enemy &currentEnemy = mapCurrent.enemyList[i];
+            if (currentEnemy.health > 0){
+            
+            //limpa posição anterior
+            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
+            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+            cout << " ";
+
+            // define a direção
+            currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
+            currentEnemy.position.x < position.x ? dirX = 1 : dirX = -1;
+            
+            // anula a direção se estiver na reta do player
+            currentEnemy.position.y - position.y == 0 ? dirY = 0 : 0;
+            currentEnemy.position.x - position.x == 0 ? dirX = 0 : 0;
+    
+            // verifica se a proxima posição é parede
+            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::parede ||
+                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaLat ||
+                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaSupInf ||
+                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::fakewall)
+            {
+                dirX = 0;
+                dirY = 0;
+            }
+
+            // atualiza a posição se for piso e não é a posição do player
+            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor )
+            {
+                currentEnemy.position.x += dirX;
+                currentEnemy.position.y += dirY;
+            }
+            
+            //define a posição do inimigo
+            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
+            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+            if(currentEnemy.health > 0) 
+                cout << mapCurrent.enemyList->c;
+            }
+        }
+    }
+
+    if(mapCurrent.boss){
+        mapCurrent.clearEnemyRoom();
+        SetConsoleCursorPosition(hConsole, {0, 0});
+        printMap(mapCurrent);
+        mapCurrent.map[5][5] = mapCurrent.entities::enemy;
+        mapCurrent.enemyList[0] = enemy();
+        mapCurrent.enemyList[0].health=20;
+        mapCurrent.enemyList[0].c = 'D';
+        mapCurrent.enemyList[0].position = {(short)5, (short)5};
+        mapCurrent.boss = false;
+    }
+
 }
 
 void mapa(map &newMap,int mapSelect)

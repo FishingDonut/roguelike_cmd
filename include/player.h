@@ -35,37 +35,37 @@ char getCharAtPosition(HANDLE hConsole, COORD position)
     return c;
 }
 
-// void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
-// {
-//     // next char
-//     SetConsoleCursorPosition(hConsole, {(SHORT)22, (SHORT)22});
-//     cout << getCharAtPosition(hConsole, newPosition);
+void debugPrint(HANDLE hConsole, map mapCurrent, COORD newPosition, int a)
+{
+    // next char
+    SetConsoleCursorPosition(hConsole, {(SHORT)22, (SHORT)22});
+    cout << getCharAtPosition(hConsole, newPosition);
 
-//     // map value array
-//     for (int j = 0; j < 16; j++)
-//     {
-//         for (int i = 0; i < 16; i++)
-//         {
-//             SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
-//             if (mapCurrent.map[i][j] == 0)
-//             {
-//                 cout << " ";
-//             }
-//             else
-//             {
-//                 cout << mapCurrent.map[i][j];
-//             }
-//         }
-//     }
+    // map value array
+    for (int j = 0; j < 16; j++)
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            SetConsoleCursorPosition(hConsole, {(SHORT)i, (SHORT)j});
+            if (mapCurrent.map[i][j] == 0)
+            {
+                cout << " ";
+            }
+            else
+            {
+                cout << mapCurrent.map[i][j];
+            }
+        }
+    }
 
-//     // cordenada e value array map
-//     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
-//     cout << "row: " << newPosition.Y << " column: " << newPosition.X << " value: " << mapCurrent.map[newPosition.Y][newPosition.X];
+    // cordenada e value array map
+    SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
+    cout << "row: " << newPosition.Y << " column: " << newPosition.X << " value: " << mapCurrent.map[newPosition.Y][newPosition.X];
 
-//     // value int key
-//     SetConsoleCursorPosition(hConsole, {(SHORT)21, (SHORT)21});
-//     cout << a << endl;
-// }
+    // value int key
+    SetConsoleCursorPosition(hConsole, {(SHORT)21, (SHORT)21});
+    cout << a << endl;
+}
 
 struct Game
 {
@@ -214,6 +214,7 @@ void loopPlayer(Game &gameSaved)
                 gameSaved.returnType = Game::inventory;
             default:
                     // debugPrint(hConsole, mapCurrent, newPosition, a);
+                    mapCurrent.boss = true;
                 break;
             }
 
