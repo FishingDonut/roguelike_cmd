@@ -112,7 +112,7 @@ int menu()
                 return 0;
                 break;
             case 1:
-                // info();
+                //Informações
                 return 1;
                 break;
             case 2:
