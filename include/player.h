@@ -106,10 +106,6 @@ void hudPrint(Player player, int points){
     // FALTA FAZER A DO INIMIGO, SEPARADA DA DO PLAYER, AGUARDANDO O DANIEL FINALIZAR OS INIMIGOS;
 }
 
-
-
-
-
 void loopPlayer(Game &gameSaved)
 {
     int StartTime = time(NULL);
