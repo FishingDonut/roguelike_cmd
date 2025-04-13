@@ -37,30 +37,44 @@ void generateSeed(Seed &seed)
     //  }
 }
 
-void definedMap(map &currentMap,short int newMap[16][16])
+void definedMap(map &currentMap, short int newMap[16][16])
 {
-    int amout = 0;
-    currentMap.clearEnemyRoom();
+    int amount = 0;
+    currentMap.clearEnemyRoom(); // Garante que a lista de inimigos está limpa
 
+    
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
         {
             currentMap.map[i][j] = newMap[i][j];
-
-            if (amout < currentMap.maxEnemy)
+        }
+    }
+    for (int i = 0; i < 16; i++) 
+    {
+        for (int j = 0; j < 16; j++)
+        {
+            // Verifica se:
+            // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
+            // - A posição atual no mapa é um piso (floor)
+            // - A chance aleatória (1%) ocorreu
+            if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 10))
             {
-                if (rand() % 100 < 1 && currentMap.map[i][j] == 0)
-                {
-                    currentMap.map[i][j] = currentMap.entities::enemy;
-                    currentMap.enemyList[amout] = enemy();
-                    currentMap.enemyList[amout].position = {j, i};
-                    amout++;
-                }
+                // Se todas as condições forem verdadeiras, adicione o inimigo:
+                currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
+                currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
+                currentMap.enemyList[amount].health=10;
+                // Define a posição do inimigo na lista.
+                // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
+                currentMap.enemyList[amount].position = {(short)j, (short)i};
+
+                amount++; // Incrementa o contador de inimigos adicionados à lista
             }
         }
     }
+     
 }
+
 
 void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
 {
@@ -72,14 +86,12 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
             int dirY = 0;
 
             enemy &currentEnemy = mapCurrent.enemyList[i];
-
+            if (currentEnemy.health > 0){
+            
             //limpa posição anterior
             mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
             SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
             cout << " ";
-            
-
-            //Start Rules move
 
             // define a direção
             currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
@@ -99,19 +111,19 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
                 dirY = 0;
             }
 
-            // atualiza a posição se for piso.
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor)
+            // atualiza a posição se for piso e não é a posição do player
+            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor && currentEnemy.position.x != position.x && currentEnemy.position.y != position.y)
             {
                 currentEnemy.position.x += dirX;
                 currentEnemy.position.y += dirY;
             }
             
-            //End Rules move
-            
             //define a posição do inimigo
             mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
             SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            if(currentEnemy.health > 0) cout << "!";
+            if(currentEnemy.health > 0) 
+                cout << "!";
+            }
         }
     }
 }
@@ -132,7 +144,6 @@ void printMap(map &mapCurrent)
                 cout << "\u2588";
                 break;
             case mapCurrent.entities::enemy:
-                
                 cout << "!";
                 break;
             case mapCurrent.entities::portaLat:
@@ -153,6 +164,8 @@ void printMap(map &mapCurrent)
             case mapCurrent.entities::fakewall:
                 cout << "\u2588";
                 break;
+            case mapCurrent.entities::armadilha:
+                cout << " ";
             default:
                 break;
             }
@@ -242,7 +255,7 @@ void mapa(map &newMap,int mapSelect)
     short int SalaP1[16][16] = {
         {1, 1, 91, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
-        {92, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
+        {92, 0, 21, 0, 92, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {1, 1, 91, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
@@ -278,14 +291,13 @@ void mapa(map &newMap,int mapSelect)
     short int SalaM1[16][16] = {
         {1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9},
         {1, 4, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
-        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
+        {1, 11, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
-        {92, 0, 1, 1, 0, 1, 1, 0, 0, 92, 9, 9, 9, 9, 9, 9},
-        {92, 0, 0, 1, 0, 0, 1, 0, 0, 92, 9, 9, 9, 9, 9, 9},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 9, 9, 9, 9, 9, 9},
+        {92, 0, 0, 0, 0, 0, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
+        {92, 0, 0, 0, 0, 0, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
+        {1, 21, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 5, 1, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
-
         {1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
         {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9},
@@ -298,9 +310,9 @@ void mapa(map &newMap,int mapSelect)
         {1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
-        {1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
-        {92, 0, 0, 0, 4, 0, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
-        {92, 0, 0, 1, 0, 1, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
+        {1, 0, 0, 1, 21, 1, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
+        {92, 0, 0, 21, 4, 21, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
+        {92, 0, 0, 1, 21, 1, 0, 0, 0, 92, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 9, 9, 9, 9, 9},
@@ -323,9 +335,9 @@ void mapa(map &newMap,int mapSelect)
         {92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92},
         {92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-        {1, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 1},
-        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+        {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 21, 1, 0, 1},
+        {1, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 21, 4, 21, 0, 1},
+        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 21, 1, 0, 1},
         {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 1, 1, 1}};
@@ -344,8 +356,8 @@ void mapa(map &newMap,int mapSelect)
         {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
         {1, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1},
         {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-        {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 21, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 1, 1, 1}};
 
 
@@ -360,10 +372,10 @@ void mapa(map &newMap,int mapSelect)
         {92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92},
         {92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-        {1, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1},
-        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-        {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+        {1, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 21, 5, 1, 0, 1},
+        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1},
+        {1, 21, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 1, 1, 1}};
 

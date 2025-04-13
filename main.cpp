@@ -20,7 +20,6 @@ int main()
     GetConsoleCursorInfo(out, &cursorInfo);
     cursorInfo.bVisible = false; // set the cursor visibility
     SetConsoleCursorInfo(out, &cursorInfo);
-    ItemsMenu();
     system("cls");
     GetConsoleScreenBufferInfo(out, &windowSize);
     SetConsoleCursorPosition(out, {0, 0});
@@ -58,7 +57,7 @@ int main()
     do
     {
         if (game.returnType == Game::inventory){
-                ItemsMenu();
+                ItemsMenu(game.player.inventory);
                 cout<<game.returnType;
                 game.returnType = Game::saved;
         }else if (game.returnType == Game::exit)
@@ -73,23 +72,24 @@ int main()
             loopPlayer(game);
             
             break;
-            case 1: // Info selected
-            // info(); // Call info screen function if you have one
+            case 1: // "Informações" foi selecionadas
             system("cls");
             SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0,0});
             cout << "Game Information:\n";
-            cout << "- Use W, A, S, D to move.\n";
-            cout << "- Press SPACEBAR to attack adjacent enemies.\n";
-            cout << "- Press TAB to open inventory (not fully implemented).\n";
-            cout << "- Press Q to quit.\n";
-            cout << "- '@' is you.\n";
-            cout << "- '!' is an enemy.\n";
-            cout << "- '\u00A4' is a chest (or mimic!).\n";
-            cout << "- '\u2588' is a wall.\n";
-            cout << "- '|' and '-' are doors.\n\n";
-            cout << "Press any key to return to menu...";
-            getch(); // Wait for key press
-            break; // Break from switch case 1
+            cout << "- Use W, A, S, D para se mover.\n";
+            cout << "- Pressione ESPAÇO para dar um ataque em área.\n";
+            cout << "- Pressione TAB para abrir o inventário.\n";
+            cout << "- Pressione Q para sair do jogo.\n";
+            cout << "- '@' é você.\n";
+            cout << "- '!' são inimigos.\n";
+            cout << "- '\u00A4' é um baú (ou um mímico!).\n";
+            cout << "- '\u2588' são paredes (você não pode passar delas).\n";
+            cout << "- '|' e '-' são portas.\n\n";
+            cout << "Objetivo: Sobreviva ao máximo de tempo possível (quanto mais tempo se passa dentro da dungeon, mais difícil fica), \n";
+            cout << "mate o máximo de inimigos possíveis e derrote o Boss para conseguir a maior quantidade de pontos possível\n\n";
+            cout << "Pressione qualquer tecla para retornar ao menu...";
+            getch(); // Aguardando uma tecla ser pressionada
+            break;
 
         }
     } while (selectMenu != 2);

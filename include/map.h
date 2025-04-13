@@ -28,6 +28,7 @@ struct map
         portaSupInf = 91,
         portaLat = 92,
         vazio = 9,
+        armadilha = 21,
     };
     enum difficulty
     {
@@ -38,8 +39,7 @@ struct map
     };
     entities entity;
     Position spawnPos[4];
-    difficulty enemyLevel;
-
+    difficulty enemyLevel = map::difficulty::easy;
     void clearEnemyRoom(){
         for(int i = 0; i < maxEnemy; i++){
             enemyList[i] = {};

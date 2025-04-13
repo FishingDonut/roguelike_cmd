@@ -127,7 +127,7 @@ string clearString = "                                             \n"
 "                                             \n"
 "                                             \n"
 "                                             \n";
-void ItemsMenu(){
+void ItemsMenu(Inventory &inventory){
     system("cls");
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO windowInfo;
@@ -152,8 +152,6 @@ void ItemsMenu(){
             cout<<"<- A";
         }
     }
-    Player p;
-    AllItems(p.inventory);
     midX -= 20/2;
     midY -= 19/2;
     SetConsoleCursorPosition(console, {midX, midY});  
@@ -167,16 +165,16 @@ void ItemsMenu(){
         switch (input)
         {
         case 'd': case 77:
-                move >= p.inventory.size - 1 ? move = 0 : move++;
+                move > inventory.size - 1 ? move = 0 : move++;
             break;
         case 'a': case 75:
-                move <= 0 ? move = p.inventory.size - 1 : move--;
+                if(inventory.size > 0) move < 0 ? move = inventory.size - 1 : move--;
             break;
         }
         
         SetConsoleCursorPosition(console, {midX, (SHORT)(midY+10)});
         Draw(clearString,30);
-        Draw(p.inventory.items[move].art,p.inventory.items[move].midX);
+        Draw(inventory.items[move].art,inventory.items[move].midX);
 
     } while (input != 27);
 
