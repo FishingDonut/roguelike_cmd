@@ -173,11 +173,15 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
                 }
 
                 // atualiza a posição se for piso e não é a posição do player
-                if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor)
+                short nextX = currentEnemy.position.x + dirX;
+                short nextY = currentEnemy.position.y + dirY;
+                
+                if (mapCurrent.map[nextY][nextX] == mapCurrent.entities::floor &&
+                    !(nextX == position.x && nextY == position.y)) // evita colisão com o player
                 {
-                    currentEnemy.position.x += dirX;
-                    currentEnemy.position.y += dirY;
-                }
+                    currentEnemy.position.x = nextX;
+                    currentEnemy.position.y = nextY;
+                }                
 
                 // define a posição do inimigo
                 mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
