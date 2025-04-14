@@ -128,10 +128,11 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
             if(currentEnemy.health > 0){ 
                 cout << "!";
             }
-            if(currentEnemy.health < 0){
-                cout<< " ";
-            }
-            }
+        }
+        if(currentEnemy.health <= 0 && currentEnemy.position.x != 0){//apaga inimigo morto e confirma que é um inimigo valido
+            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+            cout<< " ";
+        }
         }
     }
 }
