@@ -257,8 +257,16 @@ void loopPlayer(Game &gameSaved)
             //cout<<player.inventory.size;
             switch (a)
             {
-            
+            case 113: case 81: case 27:
+                SetConsoleCursorPosition(hConsole, player.position);
+                cout << "✞" << endl;
 
+                gameSaved.player = player;
+                gameSaved.map = mapCurrent;
+                gameSaved.seed = seed;
+                gameSaved.points += (time(NULL) - StartTime)% 30;
+                gameSaved.returnType = Game::exit;
+            break;
             // start movimentação do player
             case 119:
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
