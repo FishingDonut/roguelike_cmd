@@ -58,6 +58,7 @@ void drawnMap(HANDLE &hConsole, int width, int height, int **matriz)
         }
     }
 }
+
 int main()
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
