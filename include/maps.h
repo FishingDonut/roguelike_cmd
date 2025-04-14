@@ -133,6 +133,7 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
         mapCurrent.map[5][5] = mapCurrent.entities::enemy;
         mapCurrent.enemyList[0] = enemy();
         mapCurrent.enemyList[0].health = 20;
+        mapCurrent.enemyList[0].damage = 20;
         mapCurrent.enemyList[0].c = 'D';
         mapCurrent.enemyList[0].position = {(short)5, (short)5};
         mapCurrent.boss = false;
