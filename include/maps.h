@@ -37,11 +37,17 @@ void generateSeed(Seed &seed)
     //  }
 }
 int enemyHealth = 10, enemyDamage = 10;
+
 void definedMap(map &currentMap, short int newMap[16][16])
 {
     int amount = 0;
+    currentMap.exploredRooms++;
     currentMap.clearEnemyRoom(); // Garante que a lista de inimigos está limpa
 
+    if(currentMap.exploredRooms >= 7){
+        currentMap.boss = true;
+    }
+    
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
@@ -49,29 +55,32 @@ void definedMap(map &currentMap, short int newMap[16][16])
             currentMap.map[i][j] = newMap[i][j];
         }
     }
-    enemyHealth += rand() % 10 + 1;
-    enemyDamage += rand() % 10 + 1;
-    for (int i = 0; i < 16; i++)
-    {
-        for (int j = 0; j < 16; j++)
+
+    if(!currentMap.boss){
+        enemyHealth += rand() % 10 + 1;
+        enemyDamage += rand() % 10 + 1;
+        for (int i = 0; i < 16; i++)
         {
-            // Verifica se:
-            // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
-            // - A posição atual no mapa é um piso (floor)
-            // - A chance aleatória (1%) ocorreu
-            if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 1))
+            for (int j = 0; j < 16; j++)
             {
-                // Se todas as condições forem verdadeiras, adicione o inimigo:
-                currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
-                currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
-                currentMap.enemyList[amount].health = enemyHealth;
-                currentMap.enemyList[amount].damage = enemyDamage;
+                // Verifica se:
+                // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
+                // - A posição atual no mapa é um piso (floor)
+                // - A chance aleatória (1%) ocorreu
+                if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 1))
+                {
+                    // Se todas as condições forem verdadeiras, adicione o inimigo:
+                    currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
+                    currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
+                    currentMap.enemyList[amount].health = enemyHealth;
+                    currentMap.enemyList[amount].damage = enemyDamage;
 
-                // Define a posição do inimigo na lista.
-                // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
-                currentMap.enemyList[amount].position = {(short)j, (short)i};
+                    // Define a posição do inimigo na lista.
+                    // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
+                    currentMap.enemyList[amount].position = {(short)j, (short)i};
 
-                amount++; // Incrementa o contador de inimigos adicionados à lista
+                    amount++; // Incrementa o contador de inimigos adicionados à lista
+                }
             }
         }
     }

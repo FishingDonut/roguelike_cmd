@@ -273,6 +273,7 @@ void loopPlayer(Game &gameSaved)
             case 27:
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
+                Sleep(1000);
 
                 gameSaved.player = player;
                 gameSaved.map = mapCurrent;
