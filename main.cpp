@@ -57,15 +57,14 @@ int main()
     do
     {
         if (game.returnType == Game::inventory){
-                ItemsMenu(game.player.inventory);
+                ItemsMenu(game.player.inventory,game.player);
                 cout<<game.returnType;
                 game.returnType = Game::saved;
         }else if (game.returnType == Game::exit)
         {
            game.returnType = Game::start;
         }
-        
-        selectMenu = menu();
+        game.returnType == Game::saved ? selectMenu = 0 : selectMenu = menu();
         switch (selectMenu)
         {
         case 0:

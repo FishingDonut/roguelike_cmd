@@ -88,22 +88,30 @@ int menu()
             return 2;
         case 72:
         case 'w':
+            Beep(1300, 20);
+            Sleep(10); // pequena pausa
+            Beep(900, 20);
             // cout<<"Up";
             position <= 0 ? position = 2 : position--;
             break;
         case 80:
         case 's':
+            Beep(1300, 20);
+            Sleep(10); // pequena pausa
+            Beep(900, 20);
             // cout<<"Down";
             position >= 2 ? position = 0 : position++;
             break;
         case 75:
         case 'a':
+
             // cout<<"Left";
             break;
         case 77:
         case 'd':
         case 13:
         case 32:
+            Beep(100,10);
             // enter/select option
             switch (position)
             {

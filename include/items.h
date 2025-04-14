@@ -7,15 +7,17 @@ struct Items
 {
     enum TypeofItems
     {
-        potion = 2,
+        consumables,
         armor,
         weapon,
-        key,
+        empty,
     };
-    TypeofItems type;
+    TypeofItems type = empty;
     short int quantity;
     float durability;
-    short int damage;
+    short int damage = 0;
+    short int defense = 0;
+    short int heal = 0;
     enum effects
     {
         strengh,
@@ -23,10 +25,11 @@ struct Items
     };
     string art;
     short int midX, midY;
+    string description[3] ={"", "", ""};
 };
 
 struct Inventory
 {
-    Items items[10];
+    Items items[10] = {Items()};
     short int size;
 };

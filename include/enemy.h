@@ -6,5 +6,5 @@
 struct enemy
 {
     Position position;
-    short int health = 0;
+    short int health = 0,damage = 0;
 };
