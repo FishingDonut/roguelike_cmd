@@ -447,7 +447,20 @@ void loopPlayer(Game &gameSaved)
                             break;
                     }
                     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
-                    cout << player.inventory.items[player.inventory.size - 1].art;
+                    string tipoItem;
+                    switch (player.inventory.items[player.inventory.size-1].type)
+                    {
+                    case Items::weapon:
+                        tipoItem = "Arma";
+                        break;
+                    case Items::armor:
+                        tipoItem = "Escudo";
+                        break;
+                    case Items::consumables:
+                        tipoItem = "Consumível";
+                        break;
+                    }
+                    cout << "Você encontrou um novo Item do tipo:"+tipoItem;
                     break;
                 }
                 break;
