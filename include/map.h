@@ -8,6 +8,8 @@ struct map
     static const short int maxEnemy = 4;
     enemy enemyList[maxEnemy];
     bool boss = false;
+    bool roundBoss = false;
+    bool endGame = false;
     int exploredRooms = 0;
 
     int map[16][16] = {};

@@ -3,6 +3,7 @@
 #include "./maps.h"
 #include "./items.h"
 #include "./primitiveTypes.h"
+#include "./printEndGame.h"
 #include <windows.h>
 
 using namespace std;
@@ -228,6 +229,17 @@ void loopPlayer(Game &gameSaved)
     bool passado = false, armadilha = false; // variaveis pro controle da armadilha
     while (gameSaved.returnType != Game::exit && gameSaved.returnType != Game::inventory)
     {
+        if(mapCurrent.endGame){
+
+            system("cls");
+            getch();
+
+            gameSaved.player = player;
+            gameSaved.map = mapCurrent;
+            gameSaved.seed = seed;
+            gameSaved.points += (time(NULL) - StartTime) % 30;
+            gameSaved.returnType = Game::exit;
+        }
 
         if (armadilha)
         { // se a armdilha foi ativado avisa que está no proximo movimento pós armadilha

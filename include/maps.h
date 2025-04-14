@@ -171,11 +171,16 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
         mapCurrent.enemyList[0].damage = 20;
         mapCurrent.enemyList[0].c = 'D';
         mapCurrent.enemyList[0].position = {(short)5, (short)5};
+        mapCurrent.roundBoss = true;
         mapCurrent.boss = false;
     }
 
     if (mapCurrent.enemyList)
     {
+        if(mapCurrent.roundBoss and mapCurrent.enemyList[0].health <= 0){
+            mapCurrent.endGame = true; 
+        }
+
         for (int i = 0; i < mapCurrent.maxEnemy; i++)
         {
             int dirX = 0;
