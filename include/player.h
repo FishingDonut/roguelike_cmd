@@ -489,7 +489,20 @@ void loopPlayer(Game &gameSaved)
                         break;
                     }
                     SetConsoleCursorPosition(hConsole, {(SHORT)20, (SHORT)20});
-                    cout << player.inventory.items[player.inventory.size - 1].art;
+                    string tipoItem;
+                    switch (player.inventory.items[player.inventory.size-1].type)
+                    {
+                    case Items::weapon:
+                        tipoItem = "Arma";
+                        break;
+                    case Items::armor:
+                        tipoItem = "Escudo";
+                        break;
+                    case Items::consumables:
+                        tipoItem = "Consumível";
+                        break;
+                    }
+                    cout << "Você encontrou um novo Item do tipo:"+tipoItem;
                     break;
                 }
                 break;
@@ -531,7 +544,7 @@ void loopPlayer(Game &gameSaved)
             // verifica se o player colidiu com o inimigo
             for (short int i = 0; i < mapCurrent.maxEnemy; i++)
             {
-                if (mapCurrent.enemyList[i].position.x == newPosition.X && mapCurrent.enemyList[i].position.y == newPosition.Y)
+                if (mapCurrent.enemyList[i].health > 0 && mapCurrent.enemyList[i].position.x == newPosition.X && mapCurrent.enemyList[i].position.y == newPosition.Y)
                 {
                     player.health -= (mapCurrent.enemyList[i].damage - player.shield); // Adicionando dano do inimigo ao player
                 }
@@ -567,10 +580,10 @@ void loopPlayer(Game &gameSaved)
                                     SetConsoleCursorPosition(hConsole, {(SHORT)mapCurrent.enemyList[i].position.x, (SHORT)mapCurrent.enemyList[i].position.y});
                                     cout << ' ';
 
-                                    gameSaved.points += 10;
-                                    mapCurrent.enemyList[i].position.x = 1;
-                                    mapCurrent.enemyList[i].position.y = 1;
-                                    mapCurrent.enemyList[i] = {};
+                                    
+                                    gameSaved.points+=10;
+                                    mapCurrent.map[mapCurrent.enemyList[i].position.y][mapCurrent.enemyList[i].position.x] = mapCurrent.entities::floor;
+
                                 }
                             }
                         }
