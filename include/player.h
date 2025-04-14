@@ -16,8 +16,6 @@ struct Player
     int health = 100, shield = 0, damage = 10;
     void setPosition(int x, int y)
     {
-        int tone = rand() % 40 + 180; // entre 180 e 220 Hz
-        Beep(tone, 40);
         position.X = x;
         position.Y = y;
     }
@@ -183,7 +181,7 @@ void hudPrint(Player player, int points)
     cout << "   |====================|";
     // FALTA FAZER A DO INIMIGO, SEPARADA DA DO PLAYER, AGUARDANDO O DANIEL FINALIZAR OS INIMIGOS;
 }
-
+short int tone = 0;
 void loopPlayer(Game &gameSaved)
 {
     int StartTime = time(NULL);
@@ -303,15 +301,23 @@ void loopPlayer(Game &gameSaved)
                 break;
             // start movimentação do player
             case 119:
+                tone = rand() % 40 + 180; // entre 180 e 220 Hz
+                Beep(tone, 40);
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
                 break;
             case 115:
+                tone = rand() % 40 + 180; // entre 180 e 220 Hz
+                Beep(tone, 40);
                 newPosition.Y++;
                 break;
             case 97:
+                tone = rand() % 40 + 180; // entre 180 e 220 Hz
+                Beep(tone, 40);
                 newPosition.X > 0 ? newPosition.X-- : newPosition.X;
                 break;
             case 100:
+                tone = rand() % 40 + 180; // entre 180 e 220 Hz
+                Beep(tone, 40);
                 newPosition.X++;
                 break;
                 // end movimentação do player
