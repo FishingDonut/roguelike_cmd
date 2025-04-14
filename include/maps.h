@@ -36,13 +36,43 @@ void generateSeed(Seed &seed)
     //     cout<<endl;
     //  }
 }
-int enemyHealth =10,enemyDamage=10;
+int enemyHealth = 10, enemyDamage = 10;
+
+short int (*bossRoom())[16]
+{
+    static short int room[16][16] = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+
+    return room;
+}
+
 void definedMap(map &currentMap, short int newMap[16][16])
 {
     int amount = 0;
+    currentMap.exploredRooms++;
     currentMap.clearEnemyRoom(); // Garante que a lista de inimigos está limpa
 
-    
+    if (currentMap.exploredRooms >= rand() % 10 + 6)
+    {
+        currentMap.boss = true;
+        newMap = bossRoom();
+    }
+
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
@@ -50,95 +80,37 @@ void definedMap(map &currentMap, short int newMap[16][16])
             currentMap.map[i][j] = newMap[i][j];
         }
     }
-    enemyHealth+=rand()%10+1;
-    enemyDamage+=rand()%10+1;
-    for (int i = 0; i < 16; i++) 
-    {
-        for (int j = 0; j < 16; j++)
-        {
-            // Verifica se:
-            // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
-            // - A posição atual no mapa é um piso (floor)
-            // - A chance aleatória (1%) ocorreu
-            if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 1))
-            {
-                // Se todas as condições forem verdadeiras, adicione o inimigo:
-                currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
-                currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
-                currentMap.enemyList[amount].health=enemyHealth;
-                currentMap.enemyList[amount].damage=enemyDamage;
-                
-                // Define a posição do inimigo na lista.
-                // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
-                currentMap.enemyList[amount].position = {(short)j, (short)i};
 
-                amount++; // Incrementa o contador de inimigos adicionados à lista
+    if (!currentMap.boss)
+    {
+        enemyHealth += rand() % 10 + 1;
+        enemyDamage += rand() % 10 + 1;
+        for (int i = 0; i < 16; i++)
+        {
+            for (int j = 0; j < 16; j++)
+            {
+                // Verifica se:
+                // - Ainda há espaço na lista de inimigos (amount < maxEnemy)
+                // - A posição atual no mapa é um piso (floor)
+                // - A chance aleatória (1%) ocorreu
+                if (amount < currentMap.maxEnemy && currentMap.map[i][j] == map::entities::floor && (rand() % 100 < 1))
+                {
+                    // Se todas as condições forem verdadeiras, adicione o inimigo:
+                    currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
+                    currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
+                    currentMap.enemyList[amount].health = enemyHealth;
+                    currentMap.enemyList[amount].damage = enemyDamage;
+
+                    // Define a posição do inimigo na lista.
+                    // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
+                    currentMap.enemyList[amount].position = {(short)j, (short)i};
+
+                    amount++; // Incrementa o contador de inimigos adicionados à lista
+                }
             }
         }
     }
-     
 }
-
-
-<<<<<<< HEAD
-void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
-{
-    if (mapCurrent.enemyList)
-    {
-        for (int i = 0; i < mapCurrent.maxEnemy; i++)
-        {
-            int dirX = 0;
-            int dirY = 0;
-
-            enemy &currentEnemy = mapCurrent.enemyList[i];
-            if (currentEnemy.health > 0){
-            
-            //limpa posição anterior
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            cout << " ";
-
-            // define a direção
-            currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
-            currentEnemy.position.x < position.x ? dirX = 1 : dirX = -1;
-            
-            // anula a direção se estiver na reta do player
-            currentEnemy.position.y - position.y == 0 ? dirY = 0 : 0;
-            currentEnemy.position.x - position.x == 0 ? dirX = 0 : 0;
-    
-            // verifica se a proxima posição é parede
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::parede ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaLat ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaSupInf ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::fakewall)
-            {
-                dirX = 0;
-                dirY = 0;
-            }
-
-            // atualiza a posição se for piso e não é a posição do player
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor && currentEnemy.position.x != position.x && currentEnemy.position.y != position.y)
-            {
-                currentEnemy.position.x += dirX;
-                currentEnemy.position.y += dirY;
-            }
-            
-            //define a posição do inimigo
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            if(currentEnemy.health > 0){ 
-                cout << "!";
-            }
-        }
-        if(currentEnemy.health <= 0 && currentEnemy.position.x != 0){//apaga inimigo morto e confirma que é um inimigo valido
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            cout<< " ";
-        }
-        }
-    }
-}
-=======
->>>>>>> d67747a068484470967291d9273ddd5d7942fb42
 
 void printMap(map &mapCurrent)
 {
@@ -188,79 +160,92 @@ void printMap(map &mapCurrent)
 
 void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
 {
+    if (mapCurrent.boss)
+    {
+        mapCurrent.clearEnemyRoom();
+        SetConsoleCursorPosition(hConsole, {0, 0});
+        printMap(mapCurrent);
+        mapCurrent.map[7][6] = mapCurrent.entities::enemy;
+        mapCurrent.enemyList[0] = enemy();
+        mapCurrent.enemyList[0].health = 20;
+        mapCurrent.enemyList[0].damage = 20;
+        mapCurrent.enemyList[0].c = 'D';
+        mapCurrent.enemyList[0].position = {(short)7, (short)6};
+        mapCurrent.roundBoss = true;
+        mapCurrent.boss = false;
+    }
+
     if (mapCurrent.enemyList)
     {
+        if(mapCurrent.roundBoss and mapCurrent.enemyList[0].health <= 0){
+            mapCurrent.endGame = true; 
+        }
+
         for (int i = 0; i < mapCurrent.maxEnemy; i++)
         {
             int dirX = 0;
             int dirY = 0;
 
             enemy &currentEnemy = mapCurrent.enemyList[i];
-            if (currentEnemy.health > 0){
-            
-            //limpa posição anterior
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-            cout << " ";
-
-            // define a direção
-            currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
-            currentEnemy.position.x < position.x ? dirX = 1 : dirX = -1;
-            
-            // anula a direção se estiver na reta do player
-            currentEnemy.position.y - position.y == 0 ? dirY = 0 : 0;
-            currentEnemy.position.x - position.x == 0 ? dirX = 0 : 0;
-    
-            // verifica se a proxima posição é parede
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::parede ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaLat ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaSupInf ||
-                mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::fakewall)
+            if (currentEnemy.health > 0)
             {
-                dirX = 0;
-                dirY = 0;
-            }
 
-            // atualiza a posição se for piso e não é a posição do player
-            if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::floor )
+                // limpa posição anterior
+                mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::floor;
+                SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+                cout << " ";
+
+                // define a direção
+                currentEnemy.position.y < position.y ? dirY = 1 : dirY = -1;
+                currentEnemy.position.x < position.x ? dirX = 1 : dirX = -1;
+
+                // anula a direção se estiver na reta do player
+                currentEnemy.position.y - position.y == 0 ? dirY = 0 : 0;
+                currentEnemy.position.x - position.x == 0 ? dirX = 0 : 0;
+
+                // verifica se a proxima posição é parede
+                if (mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::parede ||
+                    mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaLat ||
+                    mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::portaSupInf ||
+                    mapCurrent.map[currentEnemy.position.y + dirY][currentEnemy.position.x + dirX] == mapCurrent.entities::fakewall)
+                {
+                    dirX = 0;
+                    dirY = 0;
+                }
+
+                // atualiza a posição se for piso e não é a posição do player
+                short nextX = currentEnemy.position.x + dirX;
+                short nextY = currentEnemy.position.y + dirY;
+
+                if (mapCurrent.map[nextY][nextX] == mapCurrent.entities::floor &&
+                    !(nextX == position.x && nextY == position.y)) // evita colisão com o player
+                {
+                    currentEnemy.position.x = nextX;
+                    currentEnemy.position.y = nextY;
+                }
+
+                // define a posição do inimigo
+                mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
+                SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+
+                if (currentEnemy.health > 0)
+                {
+                    cout << mapCurrent.enemyList->c;
+                }
+            }
+            if (currentEnemy.health <= 0 && currentEnemy.position.x != 0 && currentEnemy.position.y != 0)
             {
-                currentEnemy.position.x += dirX;
-                currentEnemy.position.y += dirY;
-            }
-            
-            //define a posição do inimigo
-            mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
-            SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-
-            if(currentEnemy.health > 0) 
-                cout << mapCurrent.enemyList->c;
-            }
-            if(currentEnemy.health < 0){
-                cout<< " ";
-            }
+                SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+                cout << " ";
             }
         }
     }
-
-    if(mapCurrent.boss){
-        mapCurrent.clearEnemyRoom();
-        SetConsoleCursorPosition(hConsole, {0, 0});
-        printMap(mapCurrent);
-        mapCurrent.map[5][5] = mapCurrent.entities::enemy;
-        mapCurrent.enemyList[0] = enemy();
-        mapCurrent.enemyList[0].health=20;
-        mapCurrent.enemyList[0].c = 'D';
-        mapCurrent.enemyList[0].position = {(short)5, (short)5};
-        mapCurrent.boss = false;
-    }
-
 }
 
-void mapa(map &newMap,int mapSelect)
+void mapa(map &newMap, int mapSelect)
 {
     newMap.spawnPos[map::bottom] = {5, 5};
     newMap.enemy; // Inimigo = Número 2
-
 
     short int inicial1[16][16] = {
         {1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 9, 9, 9, 9, 9, 9},
@@ -441,7 +426,6 @@ void mapa(map &newMap,int mapSelect)
         {1, 21, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 1, 1, 1}};
-
 
     short int SalaG3[16][16] = {
         {1, 1, 1, 1, 1, 1, 1, 91, 91, 1, 1, 1, 1, 1, 1, 1},

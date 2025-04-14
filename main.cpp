@@ -78,6 +78,7 @@ int main()
             cout << "- Use W, A, S, D para se mover.\n";
             cout << "- Pressione ESPAÇO para dar um ataque em área.\n";
             cout << "- Pressione TAB para abrir o inventário.\n";
+            cout << "- - Pressione C para usar o item no inventário.\n";
             cout << "- Pressione Q para sair do jogo.\n";
             cout << "- '@' é você.\n";
             cout << "- '!' são inimigos.\n";
