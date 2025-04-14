@@ -38,16 +38,41 @@ void generateSeed(Seed &seed)
 }
 int enemyHealth = 10, enemyDamage = 10;
 
+short int (*bossRoom())[16]
+{
+    static short int room[16][16] = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+
+    return room;
+}
+
 void definedMap(map &currentMap, short int newMap[16][16])
 {
     int amount = 0;
     currentMap.exploredRooms++;
     currentMap.clearEnemyRoom(); // Garante que a lista de inimigos está limpa
 
-    if(currentMap.exploredRooms >= 7){
+    if (currentMap.exploredRooms >= 7)
+    {
         currentMap.boss = true;
+        newMap = bossRoom();
     }
-    
+
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
@@ -56,7 +81,8 @@ void definedMap(map &currentMap, short int newMap[16][16])
         }
     }
 
-    if(!currentMap.boss){
+    if (!currentMap.boss)
+    {
         enemyHealth += rand() % 10 + 1;
         enemyDamage += rand() % 10 + 1;
         for (int i = 0; i < 16; i++)
@@ -185,19 +211,20 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
                 // atualiza a posição se for piso e não é a posição do player
                 short nextX = currentEnemy.position.x + dirX;
                 short nextY = currentEnemy.position.y + dirY;
-                
+
                 if (mapCurrent.map[nextY][nextX] == mapCurrent.entities::floor &&
                     !(nextX == position.x && nextY == position.y)) // evita colisão com o player
                 {
                     currentEnemy.position.x = nextX;
                     currentEnemy.position.y = nextY;
-                }                
+                }
 
                 // define a posição do inimigo
                 mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
                 SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
-                
-                if (currentEnemy.health > 0){
+
+                if (currentEnemy.health > 0)
+                {
                     cout << mapCurrent.enemyList->c;
                 }
             }
