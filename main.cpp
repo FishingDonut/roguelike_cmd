@@ -81,6 +81,7 @@ int main()
             cout << "- Pressione Q para sair do jogo.\n";
             cout << "- '@' é você.\n";
             cout << "- '!' são inimigos.\n";
+            cout << "- '#' é armadilha.\n";
             cout << "- '\u00A4' é um baú (ou um mímico!).\n";
             cout << "- '\u2588' são paredes (você não pode passar delas).\n";
             cout << "- '|' e '-' são portas.\n\n";
