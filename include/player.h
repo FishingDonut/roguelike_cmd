@@ -13,9 +13,11 @@ struct Player
     Inventory inventory;
 
 
-    int health = 100, shield = 100, damage = 10;
+    int health = 100, shield = 0, damage = 10;
     void setPosition(int x, int y)
     {
+        int tone = rand() % 40 + 180; // entre 180 e 220 Hz
+        Beep(tone, 40);
         position.X = x;
         position.Y = y;
     }
@@ -79,10 +81,73 @@ struct Game
         start,
         saved,
     };
+    Position inMap;
     ReturnTypes returnType;
     int points = 0;
 };
-
+void descriptionItems(Items &item){
+    unsigned short int randomNumber = rand()%3+1;
+    switch (item.type)
+    {
+    case Items::weapon:{
+        switch (randomNumber)
+        {
+            case 1:{
+                item.description[0] = "Uma espada envolta em névoa negra. Cada golpe dela rouba um fragmento da alma do inimigo.";
+                item.description[1] = "Dano:"+to_string(item.damage);
+                break;
+            }
+            case 2:{
+                item.description[0] = "Forjada com aço temperado em ódio e banhada em sombras eternas, ela emite um sussurro constante";
+                item.description[1] = "A cada balanço, uma presença invisível parece acompanhar o corte, trazendo desespero ao campo de batalha.";
+                item.description[2] = "Dano:"+to_string(item.damage);
+                break;
+            }
+            case 3:{
+                item.description[0]="Esta espada brilha como o próprio sol nascente, irradiando calor mesmo na escuridão mais densa.";
+                item.description[1]="Ao tocar a carne, suas chamas se espalham e consomem o inimigo pouco a pouco.";
+                item.description[2]="Dano:"+to_string(item.damage);
+                break;
+            }
+        }
+            break;
+        }
+        case Items::armor:{
+            switch (randomNumber)
+            {
+            case 1:{
+                item.description[0]="Um escudo de metal negro polido que absorve o som ao redor.";
+                item.description[1]="Os inimigos hesitam ao atacar, como se algo os observasse por trás do vazio.";
+                item.description[2]="Defesa:"+to_string(item.defense);
+                break;
+            }
+            case 2:{
+                item.description[0]="Forjado por monges que fizeram voto de silêncio, este escudo bloqueia mais do que ataques.";
+                item.description[1]="Ele cria uma aura de paz antinatural, abafando até o som da própria respiração.";
+                item.description[2]="Defesa:"+to_string(item.defense);
+                break;
+            }
+            case 3:{
+                item.description[0]="As runas esculpidas em sua face brilham fracamente quando o perigo se aproxima.";
+                item.description[1]="Muitos dizem que ele protege mais a alma do que o corpo — e isso o torna ainda mais raro.";
+                item.description[2]="Defesa:"+to_string(item.defense);
+                break;
+            }
+            default:
+                break;
+            }
+            break;
+        }
+        case Items::consumables:{
+            item.description[0]="Este item lhe cura";
+            item.description[1]="Cura:"+to_string(item.heal);
+            break;
+        }
+        
+        default:
+        break;
+    }
+}
 void hudPrint(Player player, int points){
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(hConsole,{(SHORT)16,(SHORT)0});
@@ -130,6 +195,7 @@ void loopPlayer(Game &gameSaved)
         /*por algum motivo da bug se não setar o size manualmente*/
         player.inventory.size = 0;
         player.inventory.size = gameSaved.player.inventory.size;
+        inMap = gameSaved.inMap;
     }
     else
     {
@@ -149,11 +215,11 @@ void loopPlayer(Game &gameSaved)
     char playerChar = '@';
     bool swapMap;
     int a;
-    bool passado,armadilha = false;
-    while (player.health > 0 && gameSaved.returnType != Game::exit && gameSaved.returnType != Game::inventory)
+    bool passado = false,armadilha = false;//variaveis pro controle da armadilha
+    while ( gameSaved.returnType != Game::exit && gameSaved.returnType != Game::inventory)
     {
         
-        if (armadilha){
+        if (armadilha){//se a armdilha foi ativado avisa que está no proximo movimento pós armadilha
             passado = true;
         }
         
@@ -172,6 +238,17 @@ void loopPlayer(Game &gameSaved)
             SetConsoleCursorPosition(hConsole, player.position);
             cout << playerChar;
         }
+        if(player.health <= 0){
+        
+            SetConsoleCursorPosition(hConsole, player.position);
+            cout << "✞" << endl;
+
+            gameSaved.player = player;
+            gameSaved.map = mapCurrent;
+            gameSaved.seed = seed;
+            gameSaved.points += (time(NULL) - StartTime)% 30;
+            gameSaved.returnType = Game::exit;
+        }
         a = getch();
         updateMoveEnemies(mapCurrent, {player.position.X, player.position.Y}, hConsole);
 
@@ -180,16 +257,7 @@ void loopPlayer(Game &gameSaved)
             //cout<<player.inventory.size;
             switch (a)
             {
-            case 81:
-                SetConsoleCursorPosition(hConsole, player.position);
-                cout << "✞" << endl;
-
-                gameSaved.player = player;
-                gameSaved.map = mapCurrent;
-                gameSaved.seed = seed;
-                gameSaved.points += (StartTime - time(NULL) )% 30;
-                gameSaved.returnType = Game::exit;
-                break;
+            
 
             // start movimentação do player
             case 119:
@@ -210,7 +278,8 @@ void loopPlayer(Game &gameSaved)
                 gameSaved.player = player;
                 gameSaved.map = mapCurrent;
                 gameSaved.seed = seed;
-                gameSaved.points += (StartTime - time(NULL) )% 30;
+                gameSaved.points += (time(NULL)-StartTime)% 30;
+                gameSaved.inMap = inMap;
                 gameSaved.returnType = Game::inventory;
             default:
                     // debugPrint(hConsole, mapCurrent, newPosition, a);
@@ -264,6 +333,7 @@ void loopPlayer(Game &gameSaved)
                 break;
             case mapCurrent.entities::chest:
             {
+                mapCurrent.map[newPosition.Y][newPosition.X] = mapCurrent.entities::floor;
                 /*chest*/
                 if (player.inventory.size == 10)
                 {
@@ -273,13 +343,13 @@ void loopPlayer(Game &gameSaved)
                 }
                 else
                 {
-                    int itemSelect = rand() % 3 + 1;
+                    int itemSelect = rand() % 4 + 1;
                     switch (itemSelect)
                     {
                         case 1:
                         {
                             Items potion;
-                            potion.type = Items::potion;
+                            potion.type = Items::consumables;
                             potion.art =
                                 "   _\n"
                                 "  |=|\n"
@@ -292,14 +362,15 @@ void loopPlayer(Game &gameSaved)
                                 "|-----|\n";
                             potion.midX = 7 / 2;
                             potion.midY = 10;
+                            potion.heal = (rand() % 50 + 1);
+                            descriptionItems(potion);
                             player.inventory.items[player.inventory.size++] = potion;
                             break;
                         }
                         case 2:
                         {
-                            /*weapons*/
                             Items sword;
-                            sword.durability = 100;
+                            // sword.durability = 100; // Para uma possível atualização
                             sword.quantity = 1;
                             sword.type = Items::weapon;
                             sword.art = "      .         \n"
@@ -323,8 +394,53 @@ void loopPlayer(Game &gameSaved)
                                         "              \"\n";
                             sword.midX = 16 / 2;
                             sword.midY = 19 / 2;
+                            sword.damage = (rand() % 10);
+                            descriptionItems(sword);
                             player.inventory.items[player.inventory.size++] = sword;
-                            player.damage += (rand() % 100);
+                            player.damage += sword.damage;
+                            break;
+                        }
+                        case 3:
+                        {
+                            Items shield;
+                            shield.quantity = 1;
+                            shield.type = Items::armor;
+                            shield.art = "|\\===============/|\n"
+                                         "| \\_____________/ |\n"
+                                         "|      _____      |\n"
+                                         "|     |     |     |\n"
+                                         "|     |     |     |\n"
+                                         "|  ====     ====  |\n"
+                                         "|  ||         ||  |\n"
+                                         "|  ||         ||  |\n"
+                                         "|  ====     ====  |\n"
+                                         "|    ||     ||    |\n"
+                                         "|    ||     ||    |\n"
+                                         "|    ||     ||    |\n"
+                                         "|    ||     ||    |\n"
+                                         "|    =========    |\n"
+                                         "|=================|\n";
+                            shield.midX = 19/2;
+                            shield.midY = 15/2;
+                            shield.defense = (rand() % 10);
+                            descriptionItems(shield);
+                            player.inventory.items[player.inventory.size++] = shield;
+                            player.shield += shield.defense;
+                            break;
+                        }
+                        case 4:
+                        {    
+                            Items apple;
+                            apple.type = Items::consumables;
+                            apple.art = "     ,--./,-.\n"
+                                        "    / #      \\\n"
+                                        "   |          |\n"
+                                        "    \\        /   \n"
+                                        "     `._,._,'\n";
+                            apple.midX = 15/2;
+                            apple.heal = (rand() % 10 + 1);
+                            descriptionItems(apple);
+                            player.inventory.items[player.inventory.size++] = apple;
                             break;
                         }
 
@@ -341,12 +457,21 @@ void loopPlayer(Game &gameSaved)
             case 5:
             {
                 /*mimic*/
+                mapCurrent.map[newPosition.Y][newPosition.X] = mapCurrent.entities::floor;
+                SetConsoleCursorPosition(hConsole,currentPosition);
+                cout << " ";
                 player.health -= 10;
+                Beep(900, 50);
+                Beep(700, 50);
+
                 break;
             }
 
             case mapCurrent.entities::armadilha:
             {
+                Beep(500, 30);   // início
+                Beep(1000, 50);  // aumento de tensão
+                Beep(300, 80);   // som grave tipo pancada
                 player.health -= 10;
                 armadilha = true;
                 break;
@@ -356,8 +481,8 @@ void loopPlayer(Game &gameSaved)
                 break;
             }
             // Apaga o player da posição anterior
-            if (newPosition.X != currentPosition.X || newPosition.Y != currentPosition.Y)
-            {
+            if (!passado && newPosition.X != currentPosition.X || newPosition.Y != currentPosition.Y)
+            { 
                 SetConsoleCursorPosition(hConsole, currentPosition);
                 cout << " ";
             }
@@ -367,8 +492,7 @@ void loopPlayer(Game &gameSaved)
             {
                 if (mapCurrent.enemyList[i].position.x == newPosition.X && mapCurrent.enemyList[i].position.y == newPosition.Y)
                 {
-                    
-                    player.health -= 10; // Adicionando dano do inimigo ao player
+                    player.health -= (mapCurrent.enemyList[i].damage - player.shield); // Adicionando dano do inimigo ao player
                 }
             }
             //verifica se o player atacou o inimigo
@@ -376,10 +500,12 @@ void loopPlayer(Game &gameSaved)
             {
                 for(int x = -1;x<2;x++){
                     for(int y = -1;y<2;y++){
-                        if(mapCurrent.map[currentPosition.X + x][currentPosition.Y + y] == mapCurrent.entities::fakewall){
+                        //COOR usa X Y mas nós criamos todos os mapas pensando em Y,X
+                        //Visualmente no arquivo Maps.h facilita porem deixa está confusão no código
+                        if(mapCurrent.map[currentPosition.Y + y][currentPosition.X + x] == mapCurrent.entities::fakewall){
                             SetConsoleCursorPosition(hConsole,{(SHORT)(currentPosition.X + x),(SHORT)(currentPosition.Y + y)});
-                            cout << ' ';
-                        }
+                            cout << " ";
+                        } 
                     }
                 }
             
@@ -387,9 +513,9 @@ void loopPlayer(Game &gameSaved)
                 {
                     for(int x = -1;x<2;x++){
                         for(int y = -1;y<2;y++){
-                            if (mapCurrent.enemyList[i].position.x == currentPosition.X + x && mapCurrent.enemyList[i].position.y == currentPosition.Y + y){
-                                mapCurrent.enemyList[i].health -= 10;
-                                if(mapCurrent.enemyList[i].health <= 0 || mapCurrent.entities::fakewall == currentPosition.X + x || mapCurrent.entities::fakewall == currentPosition.Y + y ){
+                            if (mapCurrent.enemyList[i].position.x == currentPosition.X + x && mapCurrent.enemyList[i].position.y == currentPosition.Y + y && mapCurrent.enemyList[i].health > 0){
+                                mapCurrent.enemyList[i].health -= player.damage;
+                                if(mapCurrent.enemyList[i].health <= 0){
                                     SetConsoleCursorPosition(hConsole, {(SHORT)mapCurrent.enemyList[i].position.x, (SHORT)mapCurrent.enemyList[i].position.y});
                                     cout << ' ';
                                     
@@ -403,37 +529,17 @@ void loopPlayer(Game &gameSaved)
                     }
                 }
             }
-
+            
+            
             // Verifica se a nova posição é válida antes de mover
 
-            if (getCharAtPosition(hConsole, newPosition) != ' ' && getCharAtPosition(hConsole, newPosition) != '\u0023')
-            {
+            if (getCharAtPosition(hConsole, newPosition) != ' ' && getCharAtPosition(hConsole, newPosition) != '\u0023'){
                 newPosition = currentPosition;
-            }            else if (mapCurrent.map[newPosition.Y][newPosition.X] == mapCurrent.entities::chest)
-            {
-                mapCurrent.map[newPosition.Y][newPosition.X] = mapCurrent.entities::floor;
-            }
-            else if (mapCurrent.map[newPosition.Y][newPosition.X] == mapCurrent.entities::mimic)
-            {
-                mapCurrent.map[newPosition.Y][newPosition.X] = mapCurrent.entities::floor;
-            }
-            else if (mapCurrent.map[newPosition.Y][newPosition.X] == mapCurrent.entities::armadilha)
-            {
-                mapCurrent.map[newPosition.Y][newPosition.X] = mapCurrent.entities::floor;
             }
 
             
             // Atualiza posição do player
-
             player.setPosition(newPosition.X, newPosition.Y);
-
-            // SetConsoleCursorPosition(hConsole, currentPosition);
-            // if (!armadilha)
-            // {
-            //     cout << " ";
-            // }
-            
-            
             
             SetConsoleCursorPosition(hConsole, player.position);
             cout << playerChar;
@@ -450,8 +556,4 @@ void loopPlayer(Game &gameSaved)
             }
         }
     }
-    // gameSaved.player = player;
-    // gameSaved.map = mapCurrent;
-    // gameSaved.seed = seed;
-    // gameSaved.returnType = Game::exit;
 }

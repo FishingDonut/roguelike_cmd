@@ -36,7 +36,7 @@ void generateSeed(Seed &seed)
     //     cout<<endl;
     //  }
 }
-
+int enemyHealth =10,enemyDamage=10;
 void definedMap(map &currentMap, short int newMap[16][16])
 {
     int amount = 0;
@@ -50,6 +50,8 @@ void definedMap(map &currentMap, short int newMap[16][16])
             currentMap.map[i][j] = newMap[i][j];
         }
     }
+    enemyHealth+=rand()%10+1;
+    enemyDamage+=rand()%10+1;
     for (int i = 0; i < 16; i++) 
     {
         for (int j = 0; j < 16; j++)
@@ -63,7 +65,9 @@ void definedMap(map &currentMap, short int newMap[16][16])
                 // Se todas as condições forem verdadeiras, adicione o inimigo:
                 currentMap.map[i][j] = currentMap.entities::enemy; // Coloca o inimigo visualmente no mapa
                 currentMap.enemyList[amount] = enemy();            // Adiciona um novo inimigo à lista
-                currentMap.enemyList[amount].health=10;
+                currentMap.enemyList[amount].health=enemyHealth;
+                currentMap.enemyList[amount].damage=enemyDamage;
+                
                 // Define a posição do inimigo na lista.
                 // ATENÇÃO: COORD usa X, Y. No loop, j é coluna (X) e i é linha (Y).
                 currentMap.enemyList[amount].position = {(short)j, (short)i};
@@ -168,8 +172,13 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
             //define a posição do inimigo
             mapCurrent.map[currentEnemy.position.y][currentEnemy.position.x] = mapCurrent.entities::enemy;
             SetConsoleCursorPosition(hConsole, {(SHORT)currentEnemy.position.x, (SHORT)currentEnemy.position.y});
+
             if(currentEnemy.health > 0) 
                 cout << mapCurrent.enemyList->c;
+            }
+            if(currentEnemy.health < 0){
+                cout<< " ";
+            }
             }
         }
     }
