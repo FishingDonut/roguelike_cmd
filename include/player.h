@@ -85,6 +85,7 @@ struct Game
     ReturnTypes returnType;
     int points = 0;
 };
+
 void descriptionItems(Items &item)
 {
     unsigned short int randomNumber = rand() % 3 + 1;
@@ -158,6 +159,7 @@ void descriptionItems(Items &item)
         break;
     }
 }
+
 void hudPrint(Player player, int points)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -227,18 +229,21 @@ void loopPlayer(Game &gameSaved)
     bool swapMap;
     int a;
     bool passado = false, armadilha = false; // variaveis pro controle da armadilha
+
     while (gameSaved.returnType != Game::exit && gameSaved.returnType != Game::inventory)
     {
-        if(mapCurrent.endGame){
-
-            system("cls");
-            getch();
-
+        if (mapCurrent.endGame)
+        {
             gameSaved.player = player;
             gameSaved.map = mapCurrent;
             gameSaved.seed = seed;
             gameSaved.points += (time(NULL) - StartTime) % 30;
             gameSaved.returnType = Game::exit;
+
+            printEndGamre();
+            getch();
+
+            return;
         }
 
         if (armadilha)

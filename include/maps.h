@@ -67,7 +67,7 @@ void definedMap(map &currentMap, short int newMap[16][16])
     currentMap.exploredRooms++;
     currentMap.clearEnemyRoom(); // Garante que a lista de inimigos está limpa
 
-    if (currentMap.exploredRooms >= 7)
+    if (currentMap.exploredRooms >= rand() % 10 + 6)
     {
         currentMap.boss = true;
         newMap = bossRoom();
@@ -165,12 +165,12 @@ void updateMoveEnemies(map &mapCurrent, Position position, HANDLE &hConsole)
         mapCurrent.clearEnemyRoom();
         SetConsoleCursorPosition(hConsole, {0, 0});
         printMap(mapCurrent);
-        mapCurrent.map[5][5] = mapCurrent.entities::enemy;
+        mapCurrent.map[7][6] = mapCurrent.entities::enemy;
         mapCurrent.enemyList[0] = enemy();
         mapCurrent.enemyList[0].health = 20;
         mapCurrent.enemyList[0].damage = 20;
         mapCurrent.enemyList[0].c = 'D';
-        mapCurrent.enemyList[0].position = {(short)5, (short)5};
+        mapCurrent.enemyList[0].position = {(short)7, (short)6};
         mapCurrent.roundBoss = true;
         mapCurrent.boss = false;
     }
