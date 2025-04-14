@@ -47,6 +47,7 @@ void drawnMap(HANDLE &hConsole, int width, int height, int **matriz)
                 break;
             case 1:
                 cout << "-";
+                break;
             case 2:
                 cout << "@";
                 break;
@@ -128,13 +129,13 @@ int main()
             player.setPosition(newPosition.X, newPosition.Y);
 
             SetConsoleCursorPosition(hConsole, {currentPosition});
-            
+
             map[currentPosition.X][currentPosition.Y] = currentObjPosition;
-            
+
             cout << currentObjPosition;
-            
+
             SetConsoleCursorPosition(hConsole, {player.position});
-            
+
             cout << "@";
 
             map[player.position.X][player.position.Y] = 2;
