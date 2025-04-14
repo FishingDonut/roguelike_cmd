@@ -43,7 +43,13 @@ struct map
     difficulty enemyLevel = map::difficulty::easy;
     void clearEnemyRoom(){
         for(int i = 0; i < maxEnemy; i++){
-            enemyList[i] = {};
+            ::enemy &e = enemyList[i];
+            if (e.health > 0) {
+                map[e.position.y][e.position.x] = floor;
+            }
+            e.health = 0;
+            enemyList[i] = ::enemy();
+            enemyList[i].health = 0;
         }
     }
 };
