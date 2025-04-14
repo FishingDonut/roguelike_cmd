@@ -280,6 +280,9 @@ void loopPlayer(Game &gameSaved)
                 gameSaved.points += (time(NULL) - StartTime) % 30;
                 gameSaved.returnType = Game::exit;
                 break;
+            case 102:
+                mapCurrent.boss = true;
+                break;
             // start movimentação do player
             case 119:
                 newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
@@ -304,7 +307,6 @@ void loopPlayer(Game &gameSaved)
                 gameSaved.returnType = Game::inventory;
             default:
                 // debugPrint(hConsole, mapCurrent, newPosition, a);
-                mapCurrent.boss = true;
                 break;
             }
 
