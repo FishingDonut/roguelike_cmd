@@ -1,63 +1,16 @@
-#include <iostream>
+//libs
 #include <conio.h>
-#include <windows.h>
-#include "./include/player.h"
 #include <locale.h>
+#include <iostream>
+#include <windows.h>
+// person libs
+#include "global.h"
+#include "./include/entity/player.h"
+#include "./include/tools/drawnMap.h"
+#include "./include/tools/assembleMap.h"
+#include "./include/tools/getCharAtPosition.h"
 
 using namespace std;
-
-char getCharAtPosition(HANDLE hConsole, COORD position)
-{
-    char c;
-    DWORD read;
-    ReadConsoleOutputCharacterA(hConsole, &c, 1, position, &read);
-    return c;
-}
-
-void assembleMap(HANDLE &hConsole, int width, int height, int **matriz)
-{
-    for (short i = 0; i < width; ++i)
-    {
-        for (short j = 0; j < height; ++j)
-        {
-            matriz[i][j] = 0;
-
-            if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
-            {
-                SetConsoleCursorPosition(hConsole, {i, j});
-                cout << ".";
-                matriz[i][j] = 1;
-            }
-        }
-    }
-}
-
-void drawnMap(HANDLE &hConsole, int width, int height, int **matriz)
-{
-    system("cls");
-    for (short i = 0; i < width; ++i)
-    {
-        for (short j = 0; j < height; ++j)
-        {
-            SetConsoleCursorPosition(hConsole, {i, j});
-            switch (matriz[i][j])
-            {
-            case 0:
-                cout << " ";
-                break;
-            case 1:
-                cout << "-";
-                break;
-            case 2:
-                cout << "@";
-                break;
-            default:
-                cout << "?";
-                break;
-            }
-        }
-    }
-}
 
 int main()
 {
@@ -73,20 +26,15 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     GetConsoleScreenBufferInfo(hConsole, &csbi);
-
-    int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-    int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-
-    // Alocação dinâmica de matriz
-    int **map = new int *[width];
-    for (int i = 0; i < width; i++)
-        map[i] = new int[height];
+    
+    // matriz fixa
+    int map[height][width];
 
     player.position = newPosition;
-
-    assembleMap(hConsole, width, height, map);
-    drawnMap(hConsole, width, height, map);
-
+    
+    assembleMap(hConsole, map);
+    drawnMap(hConsole, map);
+    
     currentObjPosition = map[player.position.X][player.position.Y];
     map[player.position.X][player.position.Y] = 2;
 
@@ -94,12 +42,14 @@ int main()
     {
         currentPosition = newPosition;
         int keyBoard = getch();
-
+        
         if (keyBoard)
         {
             switch (keyBoard)
             {
-            case 81:
+                case 113:
+                case 81:
+                system("cls");
                 SetConsoleCursorPosition(hConsole, player.position);
                 cout << "✞" << endl;
                 return 0;
