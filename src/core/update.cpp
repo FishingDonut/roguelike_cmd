@@ -52,12 +52,12 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
         SetConsoleCursorPosition(hConsole, {0, 0});
         cout << getCharAtPosition(hConsole, newPosition);
 
-        currentObjPosition = map[newPosition.X][newPosition.Y];
+        currentObjPosition = map[newPosition.Y][newPosition.X];
         player.setPosition(newPosition.X, newPosition.Y);
 
         SetConsoleCursorPosition(hConsole, {currentPosition});
 
-        map[currentPosition.X][currentPosition.Y] = currentObjPosition;
+        map[currentPosition.Y][currentPosition.X] = currentObjPosition;
 
         cout << currentObjPosition;
 
@@ -65,7 +65,7 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
 
         cout << player.skin;
 
-        map[player.position.X][player.position.Y] = 2;
+        map[player.position.Y][player.position.X] = player.valueMap;
         return 0;
     }
 }

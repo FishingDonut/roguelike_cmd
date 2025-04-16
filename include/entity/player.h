@@ -10,6 +10,7 @@ struct Player
     COORD position;
     int health = 100;
     char skin = '@';
+    int valueMap = 2;
 
     void setPosition(int x, int y)
     {

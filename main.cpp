@@ -33,7 +33,7 @@ int main()
     init(hConsole, map);
 
     currentObjPosition = map[player.position.X][player.position.Y];
-    map[player.position.X][player.position.Y] = 2;
+    map[player.position.X][player.position.Y] = player.valueMap;
 
     while (player.health > 0)
     {
