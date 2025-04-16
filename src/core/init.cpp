@@ -35,7 +35,11 @@ void drawnMap(HANDLE &hConsole, int matriz[height][width])
                 // cout << " ";
                 break;
             case 1:
-                std::cout << "-";
+                if (i == 0 || i == height -1){
+                    std::cout << "-";
+                } else {
+                    std::cout << "|";
+                }
                 break;
             case 2:
                 std::cout << "@";
