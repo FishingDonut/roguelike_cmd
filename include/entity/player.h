@@ -8,6 +8,8 @@ using namespace std;
 struct Player
 {
     COORD position;
+    COORD newPosition;
+    
     int health = 100;
     char skin = '@';
     int valueMap = 2;

@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "../global.h"
 #include "core/init.h"
+#include "GameData.h"
 
 void assembleMap(HANDLE &hConsole, int matriz[height][width])
 {
@@ -53,6 +54,14 @@ void drawnMap(HANDLE &hConsole, int matriz[height][width])
 }
 
 void init(HANDLE &hConsole, int matriz[height][width]){
+    system("cls");
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
+    gameData.mapData.nearbyObject = gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y];
+    gameData.mapData.previousObject = gameData.mapData.nearbyObject;
+    gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y] = gameData.player.valueMap;
+
     assembleMap(hConsole, matriz);
     drawnMap(hConsole, matriz);
 }

@@ -9,6 +9,7 @@
 #include "./include/core/init.h"
 #include "./include/core/update.h"
 #include "./include/entity/player.h"
+#include "GameData.h"
 // states
 #include "./include/states/menu_state.h"
 #include "./include/states/playing_state.h"
@@ -84,30 +85,10 @@ void loopGame()
 
 int main()
 {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD newPosition = {10, 10};
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    Player player = Player();
+    GameData gameData;
 
-    int nearbyObject;
-    int previousObject;
-
-    system("cls");
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-    GetConsoleScreenBufferInfo(hConsole, &csbi);
-
-    // matriz fixa
-    int map[height][width];
-
-    player.position = newPosition;
-
-    init(hConsole, map);
-
-    nearbyObject = map[player.position.X][player.position.Y];
-    previousObject = nearbyObject;
-    map[player.position.X][player.position.Y] = player.valueMap;
-
+    init(gameData.hConsole, gameData.mapData.mapAll);
     loopGame();
+
     return 0;
 }
