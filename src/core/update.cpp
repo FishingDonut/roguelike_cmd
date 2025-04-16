@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[height][width], int currentObjPosition)
+int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[height][width], int previousObject)
 {
     COORD currentPosition = newPosition;
 
@@ -52,14 +52,14 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
         SetConsoleCursorPosition(hConsole, {0, 0});
         cout << getCharAtPosition(hConsole, newPosition);
 
-        currentObjPosition = map[newPosition.Y][newPosition.X];
+        previousObject = map[newPosition.Y][newPosition.X];
         player.setPosition(newPosition.X, newPosition.Y);
 
         SetConsoleCursorPosition(hConsole, {currentPosition});
 
-        map[currentPosition.Y][currentPosition.X] = currentObjPosition;
+        map[currentPosition.Y][currentPosition.X] = previousObject;
 
-        cout << currentObjPosition;
+        cout << previousObject;
 
         SetConsoleCursorPosition(hConsole, {player.position});
 

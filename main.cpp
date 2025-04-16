@@ -18,7 +18,7 @@ int main()
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     Player player = Player();
 
-    int currentObjPosition;
+    int previousObject;
 
     system("cls");
     SetConsoleOutputCP(CP_UTF8);
@@ -32,12 +32,12 @@ int main()
 
     init(hConsole, map);
 
-    currentObjPosition = map[player.position.X][player.position.Y];
+    previousObject = map[player.position.X][player.position.Y];
     map[player.position.X][player.position.Y] = player.valueMap;
 
     while (player.health > 0)
     {
-        if (update(hConsole, newPosition, player, map, currentObjPosition) == 2)
+        if (update(hConsole, newPosition, player, map, previousObject) == 2)
         {
             return 0;
         }
