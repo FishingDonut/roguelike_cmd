@@ -7,7 +7,8 @@ SRC = \
     main.cpp \
     src/core/update.cpp \
     src/core/init.cpp \
-    src/tools/getCharAtPosition.cpp
+    src/tools/getCharAtPosition.cpp \
+    src/tools/debugMatriz.cpp 
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)

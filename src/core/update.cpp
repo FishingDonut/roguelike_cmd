@@ -5,11 +5,12 @@
 #include "global.h"
 #include "entity/player.h"
 #include "tools/getCharAtPosition.h"
+#include "tools/debugMatriz.h"
 #include "core/update.h"
 
 using namespace std;
 
-int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[height][width], int &currentObjPosition)
+int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[height][width], int currentObjPosition)
 {
     COORD currentPosition = newPosition;
 
@@ -19,6 +20,9 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
     {
         switch (keyBoard)
         {
+        case 102:
+            printMatriz(hConsole, map);
+            break;
         case 113:
         case 81:
             system("cls");
