@@ -49,14 +49,17 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
             break;
         }
 
+        //atualiza matriz
+        nearbyObject = map[newPosition.Y][newPosition.X];               // pega obg futuro
+        player.setPosition(newPosition.X, newPosition.Y);               // atualiza a posição player
+        map[currentPosition.Y][currentPosition.X] = previousObject;     // atualiza a posição antiga do player colocando obj pertencente.
+        map[player.position.Y][player.position.X] = player.valueMap;    // atualiza a posição player na matriz
+        // se nao colocasse o player na matriz nao presisaria ter que salvar os obj em variaveis;
+
+        //renderiza
         SetConsoleCursorPosition(hConsole, {0, 0});
         cout << getCharAtPosition(hConsole, newPosition);
 
-        nearbyObject = map[newPosition.Y][newPosition.X];
-        player.setPosition(newPosition.X, newPosition.Y);   
-        map[currentPosition.Y][currentPosition.X] = previousObject;
-        map[player.position.Y][player.position.X] = player.valueMap;
-        
         SetConsoleCursorPosition(hConsole, {currentPosition});
         cout << previousObject;
 
