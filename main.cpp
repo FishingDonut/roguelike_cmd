@@ -37,7 +37,7 @@ int main()
 
     while (player.health > 0)
     {
-        if (update(hConsole, newPosition, player, map, currentObjPosition) != 2)
+        if (update(hConsole, newPosition, player, map, currentObjPosition) == 2)
         {
             return 0;
         }
