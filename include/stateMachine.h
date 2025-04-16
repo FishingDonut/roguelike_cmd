@@ -5,3 +5,7 @@ enum StateMachine {
     STATE_PLAYING,
     STATE_GAME_OVER
 };
+
+extern StateMachine currentState;
+extern StateMachine nextState;
+extern bool stateChanged;

@@ -5,11 +5,82 @@
 #include <windows.h>
 // person libs
 #include "global.h"
+#include "stateMachine.h"
 #include "./include/core/init.h"
 #include "./include/core/update.h"
 #include "./include/entity/player.h"
+// states
+#include "./include/states/menu_state.h"
+#include "./include/states/playing_state.h"
 
 using namespace std;
+
+StateMachine currentState = STATE_MENU;
+StateMachine nextState = currentState;
+bool stateChanged = false;
+
+void switchState()
+{
+    if (!stateChanged && currentState == nextState)
+    {
+        return;
+    }
+
+    // exit state
+    switch (currentState)
+    {
+    case STATE_MENU:
+        menu_exit();
+        break;
+    case STATE_PLAYING:
+        playing_exit();
+        break;
+    }
+
+    currentState = nextState;
+
+    // enter state
+    switch (currentState)
+    {
+    case STATE_MENU:
+        menu_enter();
+        break;
+    case STATE_PLAYING:
+        playing_enter();
+        break;
+    }
+    
+    stateChanged = false;
+
+    return;
+}
+
+void loopGame()
+{
+    bool running = true;
+
+    while (running)
+    {
+        switchState();
+
+        switch (currentState)
+        {
+        case STATE_MENU:
+            menu_update();
+            break;
+        case STATE_PLAYING:
+            playing_update();
+            break;
+        case STATE_GAME_OVER:
+            return;
+            break;
+        default:
+            break;
+        }
+    }
+
+    return;
+}
 
 int main()
 {
@@ -37,12 +108,6 @@ int main()
     previousObject = nearbyObject;
     map[player.position.X][player.position.Y] = player.valueMap;
 
-    while (player.health > 0)
-    {
-        if (update(hConsole, newPosition, player, map, nearbyObject, previousObject) == 2)
-        {
-            return 0;
-        }
-    }
+    loopGame();
     return 0;
 }
