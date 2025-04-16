@@ -34,6 +34,7 @@ int main()
     init(hConsole, map);
 
     nearbyObject = map[player.position.X][player.position.Y];
+    previousObject = nearbyObject;
     map[player.position.X][player.position.Y] = player.valueMap;
 
     while (player.health > 0)

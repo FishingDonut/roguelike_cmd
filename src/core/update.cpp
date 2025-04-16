@@ -50,7 +50,7 @@ int update(HANDLE hConsole, COORD &newPosition, Player &player, int (&map)[heigh
         }
 
         //atualiza matriz
-        nearbyObject = map[newPosition.Y][newPosition.X];               // pega obg futuro
+        map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject;               // pega obg futuro
         player.setPosition(newPosition.X, newPosition.Y);               // atualiza a posição player
         map[currentPosition.Y][currentPosition.X] = previousObject;     // atualiza a posição antiga do player colocando obj pertencente.
         map[player.position.Y][player.position.X] = player.valueMap;    // atualiza a posição player na matriz
