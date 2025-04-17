@@ -14,6 +14,7 @@
 #include "./include/states/menu_state.h"
 #include "./include/states/playing_state.h"
 #include "./include/states/paused_state.h"
+#include "./include/states/game_over_state.h"
 
 using namespace std;
 
@@ -43,6 +44,7 @@ void switchState()
         paused_exit();
         break;
     case STATE_GAME_OVER:
+        game_over_exit();
         break;
     }
 
@@ -61,8 +63,11 @@ void switchState()
     case STATE_PAUSED:
         paused_enter();
         break;
+    case STATE_GAME_OVER:
+        game_over_enter();
+        break;
     }
-    
+
     stateChanged = false;
 
     return;
@@ -86,6 +91,7 @@ void loopGame()
             paused_update();
             break;
         case STATE_GAME_OVER:
+            game_over_update();
             return;
             break;
         default:

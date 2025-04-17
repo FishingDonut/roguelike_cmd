@@ -24,10 +24,7 @@ void handle_input()
         break;
     case 113:
     case 81:
-        system("cls");
-        SetConsoleCursorPosition(hConsole, player.position);
-        cout << "✞" << endl;
-        gameData.running = false;
+        nextState = STATE_GAME_OVER;
         break;
     case 119:
         newPosition.Y > 0 ? newPosition.Y-- : 0;
