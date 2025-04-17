@@ -9,6 +9,7 @@ struct Player
 {
     COORD position;
     COORD newPosition;
+    COORD oldPosition;
     
     int health = 100;
     char skin = '@';
