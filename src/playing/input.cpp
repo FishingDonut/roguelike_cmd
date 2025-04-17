@@ -2,7 +2,7 @@
 
 #include "../stateMachine.h"
 #include "../GameData.h"
-#include "include/input/playing_input.h"
+#include "include/playing/input.h"
 #include "tools/debugMatriz.h"
 
 void handle_input()

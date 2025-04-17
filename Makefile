@@ -13,7 +13,7 @@ SRC = \
     src/states/menu_state.cpp \
     src/states/playing_state.cpp \
     src/states/paused_state.cpp \
-    src/input/playing_input.cpp
+    src/playing/input.cpp
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)

@@ -14,7 +14,7 @@
 #include "core/render.h"
 #include "stateMachine.h"
 #include "states/playing_state.h"
-#include "input/playing_input.h"
+#include "playing/input.h"
 
 void playing_enter()
 {
