@@ -92,7 +92,6 @@ void loopGame()
             break;
         case STATE_GAME_OVER:
             game_over_update();
-            return;
             break;
         default:
             break;
