@@ -5,7 +5,6 @@ CXXFLAGS = -std=c++17 -Wall -Iinclude -Isrc -I. -Iinclude/tools
 # Fontes existentes no projeto
 SRC = \
     main.cpp \
-    src/core/update.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
     src/core/mapValueToChar.cpp\

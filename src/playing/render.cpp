@@ -10,9 +10,7 @@ void render_frame()
 {
     HANDLE hConsole = gameData.hConsole;
     Player &player = gameData.player;
-    COORD &newPos = gameData.player.newPosition;
     COORD &oldPos = gameData.player.oldPosition;
-    int &currentObject = gameData.mapData.currentObject;
     int &previousObject = gameData.mapData.previousObject;
 
     // SetConsoleCursorPosition(hConsole, {0, 0});

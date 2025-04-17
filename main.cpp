@@ -7,7 +7,6 @@
 #include "global.h"
 #include "stateMachine.h"
 #include "./include/core/init.h"
-#include "./include/core/update.h"
 #include "./include/entity/player.h"
 #include "GameData.h"
 // states
@@ -23,6 +22,8 @@ StateMachine nextState = currentState;
 StateMachine previousState = currentState;
 
 bool stateChanged = false;
+
+GameData gameData;
 
 void switchState()
 {

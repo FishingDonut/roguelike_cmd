@@ -10,7 +10,6 @@
 #include "entity/player.h"
 #include "tools/getCharAtPosition.h"
 #include "tools/debugMatriz.h"
-#include "core/update.h"
 #include "core/render.h"
 #include "stateMachine.h"
 #include "states/playing_state.h"

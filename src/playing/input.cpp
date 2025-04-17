@@ -8,7 +8,6 @@
 void handle_input()
 {
     HANDLE hConsole = gameData.hConsole;
-    Player &player = gameData.player;
     COORD &newPosition = gameData.player.newPosition;
     int (&map)[height][width] = gameData.mapData.mapAll;
 
