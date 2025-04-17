@@ -17,13 +17,13 @@
 
 using namespace std;
 
+GameData gameData;
+
 StateMachine currentState = STATE_MENU;
 StateMachine nextState = currentState;
 StateMachine previousState = currentState;
 
 bool stateChanged = false;
-
-GameData gameData;
 
 void switchState()
 {

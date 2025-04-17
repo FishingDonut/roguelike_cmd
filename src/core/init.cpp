@@ -1,11 +1,12 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
 #include "../global.h"
 #include "core/init.h"
 #include "core/render.h"
 #include "GameData.h"
 
-void assembleMap(HANDLE &hConsole, int matriz[height][width])
+void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 {
     for (short i = 0; i < height; ++i)
     {
@@ -23,15 +24,28 @@ void assembleMap(HANDLE &hConsole, int matriz[height][width])
     }
 }
 
-void init(HANDLE &hConsole, int matriz[height][width]){
+void init(HANDLE &hConsole, int (&matriz)[height][width])
+{
     system("cls");
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
-    gameData.mapData.currentObject = gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y];
-    gameData.mapData.previousObject = gameData.mapData.currentObject;
-    gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y] = gameData.player.valueMap;
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hConsole, &cursorInfo);
+    cursorInfo.bVisible = FALSE; // Oculta o cursor
+    SetConsoleCursorInfo(hConsole, &cursorInfo);
+    
+    gameData.player.setPosition(5, 5);
+    gameData.player.newPosition = {5, 5};
 
+    gameData.mapData.currentObject = gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X];
+    gameData.mapData.previousObject = gameData.mapData.currentObject;
+    gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X] = gameData.player.valueMap;
+
+
+    // getch();
     assembleMap(hConsole, matriz);
+    // getch();
     drawMap(hConsole, matriz);
+    // getch();
 }

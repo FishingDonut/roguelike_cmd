@@ -15,6 +15,7 @@ void game_over_enter()
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 14, (SHORT)(height / 2)});
     std::cout << "[ GAME OVER ]";
     getch();
+    return;
 }
 
 void game_over_update()
@@ -23,6 +24,7 @@ void game_over_update()
     SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
     cout << "✞" << endl;
     gameData.running = false;
+    return;
 }
 
 void game_over_exit()
