@@ -8,6 +8,7 @@ SRC = \
     src/core/update.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
+    src/core/mapValueToChar.cpp\
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
     src/states/menu_state.cpp \
