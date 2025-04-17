@@ -34,11 +34,11 @@ void playing_update()
     handle_input();
 
     // atualiza matriz
-    map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject; // pega obg futuro
-    player.setPosition(newPosition.X, newPosition.Y);                                                                          // atualiza a posição player
-    map[currentPosition.Y][currentPosition.X] = previousObject;                                                                // atualiza a posição antiga do player colocando obj pertencente.
-    map[player.position.Y][player.position.X] = player.valueMap;                                                               // atualiza a posição player na matriz
-    // se nao colocasse o player na matriz nao presisaria ter que salvar os obj em variaveis;
+    map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject;  // pega obg futuro
+    player.setPosition(newPosition.X, newPosition.Y);                                                                           // atualiza a posição player
+    map[currentPosition.Y][currentPosition.X] = previousObject;                                                                 // atualiza a posição antiga do player colocando obj pertencente.
+    map[player.position.Y][player.position.X] = player.valueMap;                                                                // atualiza a posição player na matriz
+                                                                                                                                // se nao colocasse o player na matriz nao presisaria ter que salvar os obj em variaveis;
 
     // renderiza
     SetConsoleCursorPosition(hConsole, {0, 0});
