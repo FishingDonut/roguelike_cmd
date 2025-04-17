@@ -58,9 +58,7 @@ void switchState()
 
 void loopGame()
 {
-    bool running = true;
-
-    while (running)
+    while (gameData.running)
     {
         switchState();
 
@@ -79,14 +77,11 @@ void loopGame()
             break;
         }
     }
-
     return;
 }
 
 int main()
 {
-    GameData gameData;
-
     init(gameData.hConsole, gameData.mapData.mapAll);
     loopGame();
 

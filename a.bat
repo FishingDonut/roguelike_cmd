@@ -1,3 +1,5 @@
+cls
+
 @echo off
 
 rem Limpa o projeto (mostra só o erro, se tiver)

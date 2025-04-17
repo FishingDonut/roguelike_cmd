@@ -10,6 +10,7 @@ struct GameData
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     Player player = Player();
     MapData mapData = MapData();
+    bool running = true;
 };
 
 extern GameData gameData;
