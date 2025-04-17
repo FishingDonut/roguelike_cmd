@@ -13,11 +13,14 @@
 // states
 #include "./include/states/menu_state.h"
 #include "./include/states/playing_state.h"
+#include "./include/states/paused_state.h"
 
 using namespace std;
 
 StateMachine currentState = STATE_MENU;
 StateMachine nextState = currentState;
+StateMachine previousState = currentState;
+
 bool stateChanged = false;
 
 void switchState()
@@ -36,8 +39,14 @@ void switchState()
     case STATE_PLAYING:
         playing_exit();
         break;
+    case STATE_PAUSED:
+        paused_exit();
+        break;
+    case STATE_GAME_OVER:
+        break;
     }
 
+    previousState = currentState;
     currentState = nextState;
 
     // enter state
@@ -48,6 +57,9 @@ void switchState()
         break;
     case STATE_PLAYING:
         playing_enter();
+        break;
+    case STATE_PAUSED:
+        paused_enter();
         break;
     }
     
@@ -69,6 +81,9 @@ void loopGame()
             break;
         case STATE_PLAYING:
             playing_update();
+            break;
+        case STATE_PAUSED:
+            paused_update();
             break;
         case STATE_GAME_OVER:
             return;

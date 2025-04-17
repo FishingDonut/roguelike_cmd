@@ -37,7 +37,8 @@ void playing_update()
         switch (keyBoard)
         {
         case 102:
-            printMatriz(hConsole, map);
+            // printMatriz(hConsole, map);
+            nextState = STATE_PAUSED;
             break;
         case 113:
         case 81:
