@@ -33,5 +33,5 @@ void init(HANDLE &hConsole, int matriz[height][width]){
     gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y] = gameData.player.valueMap;
 
     assembleMap(hConsole, matriz);
-    drawnMap(hConsole, matriz);
+    drawMap(hConsole, matriz);
 }

@@ -4,7 +4,7 @@
 #include "global.h"
 #include "GameData.h"
 
-void drawnMap(HANDLE &hConsole, int matriz[height][width])
+void drawMap(HANDLE &hConsole, int matriz[height][width])
 {
     system("cls");
     for (short i = 0; i < height; ++i)

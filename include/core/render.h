@@ -3,4 +3,4 @@
 #include <windows.h>
 #include "global.h"
 
-void drawnMap(HANDLE &hConsole, int matriz[height][width]);
+void drawMap(HANDLE &hConsole, int matriz[height][width]);

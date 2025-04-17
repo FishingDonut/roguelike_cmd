@@ -1,20 +1,23 @@
-#include <conio.h>
-#include <locale.h>
+// C++
 #include <iostream>
+#include <conio.h>
 #include <windows.h>
+#include <locale.h>
+
+// Internos do projeto
 #include "global.h"
+#include "GameData.h"
 #include "entity/player.h"
 #include "tools/getCharAtPosition.h"
 #include "tools/debugMatriz.h"
 #include "core/update.h"
-#include "GameData.h"
-#include "states/playing_state.h"
-#include "stateMachine.h"
 #include "core/render.h"
+#include "stateMachine.h"
+#include "states/playing_state.h"
 
 void playing_enter()
 {
-    drawnMap(gameData.hConsole, gameData.mapData.mapAll);
+    drawMap(gameData.hConsole, gameData.mapData.mapAll);
 }
 
 void playing_update()
@@ -84,7 +87,7 @@ void playing_update()
     }
 }
 
-    void playing_exit()
-    {
-        return;
-    }
+void playing_exit()
+{
+    return;
+}
