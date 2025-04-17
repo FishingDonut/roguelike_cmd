@@ -28,8 +28,8 @@ void init(HANDLE &hConsole, int matriz[height][width]){
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
-    gameData.mapData.nearbyObject = gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y];
-    gameData.mapData.previousObject = gameData.mapData.nearbyObject;
+    gameData.mapData.currentObject = gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y];
+    gameData.mapData.previousObject = gameData.mapData.currentObject;
     gameData.mapData.mapAll[gameData.player.position.X][gameData.player.position.Y] = gameData.player.valueMap;
 
     assembleMap(hConsole, matriz);

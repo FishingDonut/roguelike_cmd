@@ -20,7 +20,7 @@ int update()
     COORD &newPosition = gameData.player.newPosition;
     COORD currentPosition = newPosition;
     int (&map)[height][width] = gameData.mapData.mapAll;
-    int &nearbyObject = gameData.mapData.nearbyObject;
+    int &currentObject = gameData.mapData.currentObject;
     int &previousObject = gameData.mapData.previousObject;
 
     int keyBoard = getch();
@@ -59,7 +59,7 @@ int update()
         }
 
         // atualiza matriz
-        map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject; // pega obg futuro
+        map[newPosition.Y][newPosition.X] != 2 ? currentObject = map[newPosition.Y][newPosition.X] : currentObject = previousObject; // pega obg futuro
         player.setPosition(newPosition.X, newPosition.Y);                                                                          // atualiza a posição player
         map[currentPosition.Y][currentPosition.X] = previousObject;                                                                // atualiza a posição antiga do player colocando obj pertencente.
         map[player.position.Y][player.position.X] = player.valueMap;                                                               // atualiza a posição player na matriz
@@ -75,7 +75,7 @@ int update()
         SetConsoleCursorPosition(hConsole, {player.position});
         cout << player.skin;
 
-        previousObject = nearbyObject;
+        previousObject = currentObject;
         return 0;
     }
 }

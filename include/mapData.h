@@ -4,7 +4,7 @@
 
 struct MapData
 {
-    int nearbyObject;
+    int currentObject;
     int previousObject;
     int mapAll[height][width];    
 };
