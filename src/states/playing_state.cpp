@@ -14,6 +14,7 @@
 #include "core/render.h"
 #include "stateMachine.h"
 #include "states/playing_state.h"
+#include "input/playing_input.h"
 
 void playing_enter()
 {
@@ -30,62 +31,27 @@ void playing_update()
     int &nearbyObject = gameData.mapData.nearbyObject;
     int &previousObject = gameData.mapData.previousObject;
 
-    int keyBoard = getch();
+    handle_input();
 
-    if (keyBoard)
-    {
-        switch (keyBoard)
-        {
-        case 102:
-            // printMatriz(hConsole, map);
-            nextState = STATE_PAUSED;
-            break;
-        case 113:
-        case 81:
-            system("cls");
-            SetConsoleCursorPosition(hConsole, player.position);
-            cout << "✞" << endl;
-            gameData.running = false;
-            break;
-        case 119:
-            newPosition.Y > 0 ? newPosition.Y-- : newPosition.Y;
-            break;
-        case 115:
-            newPosition.Y < height - 1
-                ? newPosition.Y++
-                : newPosition.Y;
-            break;
-        case 97:
-            newPosition.X > 0 ? newPosition.X-- : newPosition.X;
-            break;
-        case 100:
-            newPosition.X < width - 1 ? newPosition.X++ : newPosition.X;
-            break;
-        default:
-            cout << keyBoard << endl;
-            break;
-        }
+    // atualiza matriz
+    map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject; // pega obg futuro
+    player.setPosition(newPosition.X, newPosition.Y);                                                                          // atualiza a posição player
+    map[currentPosition.Y][currentPosition.X] = previousObject;                                                                // atualiza a posição antiga do player colocando obj pertencente.
+    map[player.position.Y][player.position.X] = player.valueMap;                                                               // atualiza a posição player na matriz
+    // se nao colocasse o player na matriz nao presisaria ter que salvar os obj em variaveis;
 
-        // atualiza matriz
-        map[newPosition.Y][newPosition.X] != 2 ? nearbyObject = map[newPosition.Y][newPosition.X] : nearbyObject = previousObject; // pega obg futuro
-        player.setPosition(newPosition.X, newPosition.Y);                                                                          // atualiza a posição player
-        map[currentPosition.Y][currentPosition.X] = previousObject;                                                                // atualiza a posição antiga do player colocando obj pertencente.
-        map[player.position.Y][player.position.X] = player.valueMap;                                                               // atualiza a posição player na matriz
-        // se nao colocasse o player na matriz nao presisaria ter que salvar os obj em variaveis;
+    // renderiza
+    SetConsoleCursorPosition(hConsole, {0, 0});
+    cout << getCharAtPosition(hConsole, newPosition);
 
-        // renderiza
-        SetConsoleCursorPosition(hConsole, {0, 0});
-        cout << getCharAtPosition(hConsole, newPosition);
+    SetConsoleCursorPosition(hConsole, {currentPosition});
+    cout << previousObject;
 
-        SetConsoleCursorPosition(hConsole, {currentPosition});
-        cout << previousObject;
+    SetConsoleCursorPosition(hConsole, {player.position});
+    cout << player.skin;
 
-        SetConsoleCursorPosition(hConsole, {player.position});
-        cout << player.skin;
-
-        previousObject = nearbyObject;
-        return;
-    }
+    previousObject = nearbyObject;
+    return;
 }
 
 void playing_exit()
