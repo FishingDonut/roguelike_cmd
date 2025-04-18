@@ -23,6 +23,10 @@ void drawMap(HANDLE &hConsole, int matriz[height][width])
                 {
                     c = '-';
                 }
+                if (j == 0 || j == width - 1)
+                {
+                    c = '|';
+                }
             }
             std::cout << c;
         }
