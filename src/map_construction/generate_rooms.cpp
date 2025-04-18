@@ -9,7 +9,7 @@
 #include "include/entity/room.h"
 #include "include/core/mapValueToChar.h"
 
-const int maxRoom = 4;
+const int maxRoom = 7;
 
 void clearMap(int (&map)[height][width])
 {
