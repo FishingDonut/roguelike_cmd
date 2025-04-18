@@ -28,10 +28,10 @@ bool isCollind(Room rooms[gameData.mapData.maxRooms], int roomCount, Room newRoo
     for (int i = 0; i < roomCount; i++)
     {
         otherRoom = rooms[i];
-        if (newRoom.x < otherRoom.x + otherRoom.width &&
-            newRoom.x + newRoom.width > otherRoom.x &&
-            newRoom.y < otherRoom.y + otherRoom.height &&
-            newRoom.y + newRoom.height > otherRoom.y)
+        if (newRoom.x + 1 < otherRoom.x + otherRoom.width   + 1 &&
+            newRoom.x + 1 + newRoom.width > otherRoom.x     + 1 &&
+            newRoom.y - 1 < otherRoom.y + otherRoom.height  - 1 &&
+            newRoom.y - 1 + newRoom.height > otherRoom.y    - 1)
         {
             return true;
         }
@@ -106,12 +106,13 @@ void connectRoom(Room (&rooms)[gameData.mapData.maxRooms], int (&map)[height][wi
     return;
 }
 
-void set_position_player(Room room, int (&map)[height][width]){
+void set_position_player(Room room, int (&map)[height][width])
+{
     Player &player = gameData.player;
     player.setPosition(room.centerX(), room.centerY());
     player.newPosition = player.position;
     map[room.centerY()][room.centerX()] = player.valueMap;
-    
+
     return;
 }
 
@@ -122,11 +123,12 @@ int generate_rooms()
     int (&map)[height][width] = gameData.mapData.mapAll;
 
     const int maxRooms = gameData.mapData.maxRooms;
-    Room (&listRoom)[maxRooms] = gameData.mapData.rooms;
-    
+    Room(&listRoom)[maxRooms] = gameData.mapData.rooms;
+
     int coutRoom = 0;
     int min = 5;
     int max = 20;
+    int border = 3;
 
     clearMap(map);
 
@@ -137,8 +139,8 @@ int generate_rooms()
         room.height = min + (rand() % (max - min + 1));
         room.width = min + (rand() % (max - min + 1));
 
-        room.y = (rand() % (height - room.height - 1));
-        room.x = (rand() % (width - room.width - 1));
+        room.y = border + (rand() % (height - room.height - border*2));
+        room.x = border + (rand() % (width - room.width - border*2));
 
         if (isCollind(listRoom, coutRoom, room))
         {
