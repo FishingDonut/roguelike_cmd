@@ -64,15 +64,18 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
 
     for (int i = 0; i < newRoom.maxEnemy; i++)
     {
-        if ((rand() % 10) > 2)
+        if ((rand() % 10) > 5 && countEnemy < newRoom.maxEnemy)
         {
+            do
+            {
+                newPX = newRoom.x + (rand() % newRoom.width);
+                newPY = newRoom.y + (rand() % newRoom.height);
+            } while (map[newPY][newPX] != 0);
+
             Enemy enemy = Enemy();
+
             enemy.health = 10;
             enemy.damage = 10;
-
-            newPX = newRoom.x + (rand() % newRoom.width);
-            newPY = newRoom.y + (rand() % newRoom.height);
-
             enemy.newPosition = {(SHORT)newPX, (SHORT)newPY};
 
             map[newPY][newPX] = enemy.valueMap;
@@ -149,14 +152,12 @@ void set_position_player(Room room, int (&map)[height][width])
 
 int generate_rooms()
 {
-    srand(time(0));
-
     int (&map)[height][width] = gameData.mapData.mapAll;
 
     const int maxRooms = gameData.mapData.maxRooms;
     Room(&listRoom)[maxRooms] = gameData.mapData.rooms;
 
-    int coutRoom = 0;
+    int countRoom = 0;
     int min = 5;
     int max = 20;
     int border = 3;
@@ -173,16 +174,17 @@ int generate_rooms()
         room.y = border + (rand() % (height - room.height - border * 2));
         room.x = border + (rand() % (width - room.width - border * 2));
 
-        if (isColliding(listRoom, coutRoom, room, 1))
+        if (isColliding(listRoom, countRoom, room, 1))
         {
             i--;
             continue;
         }
 
         createRoom(room, map);
-        generateEnemy(room, map);
-        listRoom[coutRoom++] = room;
+        listRoom[countRoom++] = room;
+        generateEnemy(listRoom[countRoom -1], map);
     }
+
     connectRoom(listRoom, map);
     set_position_player(listRoom[0], map);
 
