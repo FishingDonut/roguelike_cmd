@@ -20,6 +20,7 @@
 void playing_enter()
 {
     drawMap(gameData.hConsole, gameData.mapData.mapAll);
+    return;
 }
 
 void playing_update()

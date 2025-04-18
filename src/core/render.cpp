@@ -27,4 +27,5 @@ void drawMap(HANDLE &hConsole, int matriz[height][width])
             std::cout << c;
         }
     }
+    return;
 }

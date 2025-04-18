@@ -151,6 +151,8 @@ int main()
     int map[h][w];
     Room listRoom[maxRoom];
     int coutRoom = 0;
+    int min = 5;
+    int max = 20;
 
     clearMap(map);
 
@@ -158,8 +160,8 @@ int main()
     {
         Room room;
 
-        room.h = 5 + (rand() % (16 - 5 + 1));
-        room.w = 5 + (rand() % (16 - 5 + 1));
+        room.h = min + (rand() % (max - min + 1));
+        room.w = min + (rand() % (max - min + 1));
 
         room.y = (rand() % (h - room.h - 1));
         room.x = (rand() % (w - room.w - 1));
