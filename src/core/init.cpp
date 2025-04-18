@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <ctime>
 #include "../global.h"
 #include "core/init.h"
 #include "core/render.h"
@@ -26,6 +27,7 @@ void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 
 void init(HANDLE &hConsole, int (&matriz)[height][width])
 {
+    srand(time(0));
     system("cls");
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
