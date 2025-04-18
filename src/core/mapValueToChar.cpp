@@ -3,6 +3,7 @@
 
 #include "core/mapValueToChar.h"
 #include "include/GameData.h"
+#include "include/entity/enemy.h"
 
 char mapValueToChar(int i){    
     switch (i)
@@ -15,7 +16,7 @@ char mapValueToChar(int i){
                 return ']';
             }
         case 2: return gameData.player.skin;    // player
-        case 3: return '*';                     // item
+        case 3: return Enemy().skin;            // enemy
         default: return ' ';
     }
 }

@@ -7,6 +7,7 @@
 #include "include/global.h"
 #include "include/GameData.h"
 #include "include/entity/room.h"
+#include "include/entity/enemy.h"
 #include "include/core/mapValueToChar.h"
 
 void clearMap(int (&map)[height][width])
@@ -35,13 +36,12 @@ bool isColliding(Room rooms[], int roomCount, Room newRoom, int padding = 1)
 
         if (overlapX && overlapY)
         {
-            return true; 
+            return true;
         }
     }
 
     return false;
 }
-
 
 void createRoom(Room newRoom, int (&map)[height][width])
 {
@@ -50,6 +50,34 @@ void createRoom(Room newRoom, int (&map)[height][width])
         for (int j = newRoom.x; j < newRoom.x + newRoom.width; j++)
         {
             map[i][j] = 0;
+        }
+    }
+    return;
+}
+
+void generateEnemy(Room &newRoom, int (&map)[height][width])
+{
+    int countEnemy = 0;
+
+    int newPX;
+    int newPY;
+
+    for (int i = 0; i < newRoom.maxEnemy; i++)
+    {
+        if ((rand() % 10) > 2)
+        {
+            Enemy enemy = Enemy();
+            enemy.health = 10;
+            enemy.damage = 10;
+
+            newPX = newRoom.x + (rand() % newRoom.width);
+            newPY = newRoom.y + (rand() % newRoom.height);
+
+            enemy.newPosition = {(SHORT)newPX, (SHORT)newPY};
+
+            map[newPY][newPX] = enemy.valueMap;
+            newRoom.enemies[countEnemy] = enemy;
+            countEnemy++;
         }
     }
 }
@@ -140,10 +168,10 @@ int generate_rooms()
         Room room;
 
         room.height = min + (rand() % (max - min + 1));
-        room.width = min + (rand() % (max*2 - min + 1));
+        room.width = min + (rand() % (max * 2 - min + 1));
 
-        room.y = border + (rand() % (height - room.height - border*2));
-        room.x = border + (rand() % (width - room.width - border*2));
+        room.y = border + (rand() % (height - room.height - border * 2));
+        room.x = border + (rand() % (width - room.width - border * 2));
 
         if (isColliding(listRoom, coutRoom, room, 1))
         {
@@ -152,6 +180,7 @@ int generate_rooms()
         }
 
         createRoom(room, map);
+        generateEnemy(room, map);
         listRoom[coutRoom++] = room;
     }
     connectRoom(listRoom, map);
