@@ -9,8 +9,6 @@
 #include "include/entity/room.h"
 #include "include/core/mapValueToChar.h"
 
-const int maxRoom = 7;
-
 void clearMap(int (&map)[height][width])
 {
     for (int i = 0; i < height; i++)
@@ -23,7 +21,7 @@ void clearMap(int (&map)[height][width])
     return;
 }
 
-bool isCollind(Room rooms[maxRoom], int roomCount, Room newRoom)
+bool isCollind(Room rooms[gameData.mapData.maxRooms], int roomCount, Room newRoom)
 {
     Room otherRoom;
 
@@ -53,15 +51,15 @@ void createRoom(Room newRoom, int (&map)[height][width])
     }
 }
 
-void connectRoom(Room (&rooms)[maxRoom], int (&map)[height][width])
+void connectRoom(Room (&rooms)[gameData.mapData.maxRooms], int (&map)[height][width])
 {
     Room room, nearest;
 
-    for (int i = 0; i < maxRoom; i++)
+    for (int i = 0; i < gameData.mapData.maxRooms; i++)
     {
         room = rooms[i];
         nearest = rooms[i];
-        for (int j = i + 1; j < maxRoom; j++)
+        for (int j = i + 1; j < gameData.mapData.maxRooms; j++)
         {
             if (!rooms[j].connect)
             {
@@ -123,14 +121,16 @@ int generate_rooms()
 
     int (&map)[height][width] = gameData.mapData.mapAll;
 
-    Room listRoom[maxRoom];
+    const int maxRooms = gameData.mapData.maxRooms;
+    Room (&listRoom)[maxRooms] = gameData.mapData.rooms;
+    
     int coutRoom = 0;
     int min = 5;
     int max = 20;
 
     clearMap(map);
 
-    for (int i = 0; i < maxRoom; i++)
+    for (int i = 0; i < maxRooms; i++)
     {
         Room room;
 
