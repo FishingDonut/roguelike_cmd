@@ -21,24 +21,27 @@ void clearMap(int (&map)[height][width])
     return;
 }
 
-bool isCollind(Room rooms[gameData.mapData.maxRooms], int roomCount, Room newRoom)
+bool isColliding(Room rooms[], int roomCount, Room newRoom, int padding = 1)
 {
-    Room otherRoom;
-
     for (int i = 0; i < roomCount; i++)
     {
-        otherRoom = rooms[i];
-        if (newRoom.x + 1 < otherRoom.x + otherRoom.width   + 1 &&
-            newRoom.x + 1 + newRoom.width > otherRoom.x     + 1 &&
-            newRoom.y - 1 < otherRoom.y + otherRoom.height  - 1 &&
-            newRoom.y - 1 + newRoom.height > otherRoom.y    - 1)
+        Room other = rooms[i];
+
+        bool overlapX = newRoom.x - padding < other.x + other.width + padding &&
+                        newRoom.x + newRoom.width + padding > other.x - padding;
+
+        bool overlapY = newRoom.y - padding < other.y + other.height + padding &&
+                        newRoom.y + newRoom.height + padding > other.y - padding;
+
+        if (overlapX && overlapY)
         {
-            return true;
+            return true; 
         }
     }
 
     return false;
 }
+
 
 void createRoom(Room newRoom, int (&map)[height][width])
 {
@@ -137,12 +140,12 @@ int generate_rooms()
         Room room;
 
         room.height = min + (rand() % (max - min + 1));
-        room.width = min + (rand() % (max - min + 1));
+        room.width = min + (rand() % (max*2 - min + 1));
 
         room.y = border + (rand() % (height - room.height - border*2));
         room.x = border + (rand() % (width - room.width - border*2));
 
-        if (isCollind(listRoom, coutRoom, room))
+        if (isColliding(listRoom, coutRoom, room, 1))
         {
             i--;
             continue;
