@@ -19,7 +19,7 @@ void menu_update() {
     std::cout << "~~APERTE PARA COMEÇAR~~";
     getch();
 
-    nextState = STATE_PLAYING;
+    nextState = STATE_MAP_CONSTRUCTION;
     stateChanged = true;
 }
 

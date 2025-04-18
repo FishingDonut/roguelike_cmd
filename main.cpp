@@ -11,6 +11,7 @@
 #include "GameData.h"
 // states
 #include "./include/states/menu_state.h"
+#include "./include/states/map_construction_state.h"
 #include "./include/states/playing_state.h"
 #include "./include/states/paused_state.h"
 #include "./include/states/game_over_state.h"
@@ -38,6 +39,9 @@ void switchState()
     case STATE_MENU:
         menu_exit();
         break;
+    case STATE_MAP_CONSTRUCTION:
+        map_construction_enter();
+        break;
     case STATE_PLAYING:
         playing_exit();
         break;
@@ -57,6 +61,9 @@ void switchState()
     {
     case STATE_MENU:
         menu_enter();
+        break;
+    case STATE_MAP_CONSTRUCTION:
+        map_construction_update();
         break;
     case STATE_PLAYING:
         playing_enter();
@@ -84,6 +91,9 @@ void loopGame()
         {
         case STATE_MENU:
             menu_update();
+            break;
+        case STATE_MAP_CONSTRUCTION:
+            map_construction_exit();
             break;
         case STATE_PLAYING:
             playing_update();

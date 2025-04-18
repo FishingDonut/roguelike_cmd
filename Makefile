@@ -11,12 +11,14 @@ SRC = \
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
     src/states/menu_state.cpp \
+    src/states/map_construction_state.cpp \
     src/states/playing_state.cpp \
     src/states/paused_state.cpp \
     src/states/game_over_state.cpp \
     src/playing/input.cpp \
     src/playing/render.cpp \
-    src/playing/update_logic.cpp
+    src/playing/update_logic.cpp \
+    src/map_construction/generate_rooms.cpp
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)

@@ -2,6 +2,7 @@
 
 enum StateMachine {
     STATE_MENU,
+    STATE_MAP_CONSTRUCTION,
     STATE_PLAYING,
     STATE_PAUSED,
     STATE_GAME_OVER
