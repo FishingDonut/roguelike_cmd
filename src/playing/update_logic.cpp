@@ -15,17 +15,29 @@ void update_logic()
     int nearbyObject;
 
     oldPosition = player.position;
-    
+
     nearbyObject = map[newPosition.Y][newPosition.X];
-    if(nearbyObject == 2){
+
+    switch (nearbyObject)
+    {
+    case 0:
+        break;
+    case 1:
+        newPosition = oldPosition;
         return;
+        break;
+    case 2:
+        return;
+        break;
+    default:
+        break;
     }
 
     previousObject = currentObject;
     currentObject = nearbyObject;
-    
+
     player.setPosition(newPosition.X, newPosition.Y);
-    
+
     map[oldPosition.Y][oldPosition.X] = previousObject;
     map[player.position.Y][player.position.X] = player.valueMap;
     return;
