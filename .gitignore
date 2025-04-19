@@ -1,10 +1,6 @@
-conio.h
-codigoprof
-mygame.exe
-conio.manpage
 .vscode
 *.exe
 *.obj 
-.vscode/*
 a.md
 b.md
+main.exe
