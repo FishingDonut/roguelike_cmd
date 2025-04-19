@@ -18,6 +18,8 @@ SRC = \
     src/playing/input.cpp \
     src/playing/render.cpp \
     src/playing/update_logic.cpp \
+    src/playing/player/update_player.cpp \
+    src/playing/enemies/update_enemies.cpp \
     src/map_construction/clearMap.cpp \
     src/map_construction/connectRoom.cpp \
     src/map_construction/createRoom.cpp \
