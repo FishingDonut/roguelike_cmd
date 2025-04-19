@@ -22,7 +22,7 @@ void game_over_update()
 {
     system("cls");
     SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
-    cout << "✞" << endl;
+    cout << "✞" << "\x1b[32m" << gameData.seed << "\x1b[0m" << endl;
     gameData.running = false;
     return;
 }

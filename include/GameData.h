@@ -11,6 +11,7 @@ struct GameData
     Player player = Player();
     MapData mapData = MapData();
     bool running = true;
+    int seed;
 };
 
 extern GameData gameData;

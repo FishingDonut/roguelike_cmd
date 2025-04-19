@@ -27,7 +27,9 @@ void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 
 void init(HANDLE &hConsole, int (&matriz)[height][width])
 {
-    srand(time(0));
+    gameData.seed = time(0);
+    srand(gameData.seed);
+    
     system("cls");
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
