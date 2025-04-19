@@ -29,6 +29,14 @@ void update_enemies()
             position.Y == player.newPosition.Y ? directionY = 0 : 0;
             position.X == player.newPosition.X ? directionX = 0 : 0;
 
+            if(directionY != 0 && directionX != 0){
+                if(rand() % 10 > 5){
+                    directionY = 0;
+                } else {
+                    directionX = 0;
+                }
+            }
+
             oldPosition = position;
             newPosition = {(SHORT)(position.X + directionX), (SHORT)(position.Y + directionY)};
 
