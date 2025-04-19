@@ -22,6 +22,17 @@ void clearMap(int (&map)[height][width])
     return;
 }
 
+Room generateRandomRoom(int mapHeight, int mapWidth, int min, int max, int border)
+{
+    Room room;
+    room.height = min + (rand() % (max - min + 1));
+    room.width = min + (rand() % (max * 2 - min + 1));
+    room.y = border + (rand() % (mapHeight - room.height - border * 2));
+    room.x = border + (rand() % (mapWidth - room.width - border * 2));
+
+    return room;
+}
+
 bool isColliding(Room rooms[], int roomCount, Room newRoom, int padding = 1)
 {
     for (int i = 0; i < roomCount; i++)
@@ -164,25 +175,16 @@ int generate_rooms()
 
     clearMap(map);
 
-    for (int i = 0; i < maxRooms; i++)
+    while (countRoom < maxRooms)
     {
-        Room room;
+        Room room = generateRandomRoom(height, width, min, max, border);
 
-        room.height = min + (rand() % (max - min + 1));
-        room.width = min + (rand() % (max * 2 - min + 1));
-
-        room.y = border + (rand() % (height - room.height - border * 2));
-        room.x = border + (rand() % (width - room.width - border * 2));
-
-        if (isColliding(listRoom, countRoom, room, 1))
+        if (!isColliding(listRoom, countRoom, room, 1))
         {
-            i--;
-            continue;
+            createRoom(room, map);
+            listRoom[countRoom++] = room;
+            generateEnemy(listRoom[countRoom - 1], map);
         }
-
-        createRoom(room, map);
-        listRoom[countRoom++] = room;
-        generateEnemy(listRoom[countRoom -1], map);
     }
 
     connectRoom(listRoom, map);
