@@ -18,7 +18,14 @@ SRC = \
     src/playing/input.cpp \
     src/playing/render.cpp \
     src/playing/update_logic.cpp \
-    src/map_construction/generate_rooms.cpp
+    src/map_construction/clearMap.cpp \
+    src/map_construction/connectRoom.cpp \
+    src/map_construction/createRoom.cpp \
+    src/map_construction/generate_rooms.cpp \
+    src/map_construction/generateEnemy.cpp \
+    src/map_construction/generateRandomRoom.cpp \
+    src/map_construction/isColliding.cpp \
+    src/map_construction/set_position_player.cpp
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)
