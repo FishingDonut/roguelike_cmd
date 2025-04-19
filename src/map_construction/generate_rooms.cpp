@@ -1,15 +1,13 @@
+// libs
 #include <algorithm>
 #include <windows.h>
 #include <iostream>
 #include <random>
 #include <ctime>
-
+// my libs
 #include "include/global.h"
 #include "include/GameData.h"
 #include "include/entity/room.h"
-#include "include/entity/enemy.h"
-#include "include/core/mapValueToChar.h"
-
 // map_construction
 #include "map_construction/generate_rooms.h"
 #include "map_construction/map_construction.h"
