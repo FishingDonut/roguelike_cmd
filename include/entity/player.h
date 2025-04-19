@@ -14,6 +14,8 @@ struct Player
     int health = 100;
     char skin = '@';
     int valueMap = 2;
+    int currentObject = 0;
+    int previousObject = 0;
 
     void setPosition(int x, int y)
     {

@@ -42,8 +42,8 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
     gameData.player.setPosition(5, 5);
     gameData.player.newPosition = {5, 5};
 
-    gameData.mapData.currentObject = gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X];
-    gameData.mapData.previousObject = gameData.mapData.currentObject;
+    gameData.player.currentObject = gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X];
+    gameData.player.previousObject = gameData.player.currentObject;
     gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X] = gameData.player.valueMap;
 
 
