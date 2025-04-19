@@ -9,6 +9,7 @@ struct Room
     int y, x;
     int height, width;
     bool connect = false;
+    int enemyCount = 0;
 
     Enemy enemies[maxEnemy];
 

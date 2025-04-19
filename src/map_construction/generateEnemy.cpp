@@ -4,7 +4,7 @@
 
 void generateEnemy(Room &newRoom, int (&map)[height][width])
 {
-    int countEnemy = 0;
+    int &countEnemy = newRoom.enemyCount;
 
     int newPX;
     int newPY;
@@ -24,6 +24,10 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
             enemy.health = 10;
             enemy.damage = 10;
             enemy.newPosition = {(SHORT)newPX, (SHORT)newPY};
+            enemy.oldPosition = enemy.newPosition;
+            enemy.currentObject = 0;
+            enemy.previousObject = 0;
+            enemy.setPosition();
 
             map[newPY][newPX] = enemy.valueMap;
             newRoom.enemies[countEnemy] = enemy;
