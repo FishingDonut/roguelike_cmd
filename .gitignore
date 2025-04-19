@@ -6,3 +6,5 @@ conio.manpage
 *.exe
 *.obj 
 .vscode/*
+a.md
+b.md
