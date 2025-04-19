@@ -15,14 +15,89 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 ## Estrtutura do projeto
 
 ```
-    /root
-    ├── include/  
-        ├── map.h       # Struct base mapa (.h)
-        ├── maps.h      # Desenha o mapa   (.h)
-        ├── player.h    # loop principal   (.h)
-    ├── main.cpp        # Arquivo principal do jogo (.cpp)
-    ├── a.exe           # .exe do game completo.    (.exe)
-    └── README.md       # Instruções do projeto     (.md)
+/root
+├── include/                             # Cabeçalhos (.h) com declarações e interfaces do projeto
+│   ├── GameData.h                       # Struct principal contendo os dados do jogo (jogador, mapa, inimigos etc.)
+│   ├── global.h                         # Variáveis globais ou definições amplamente usadas
+│   ├── mapData.h                        # Estrutura ou constantes específicas do mapa
+│   ├── stateMachine.h                   # Declaração da máquina de estados do jogo
+│
+│   ├── core/                            # Funções e lógica centrais e independentes de estados
+│   │   ├── init.h                       # Inicialização de variáveis e recursos
+│   │   ├── mapValueToChar.h            # Conversão de valores do mapa para caracteres visuais
+│   │   └── render.h                    # Funções de renderização do mapa geral
+│
+│   ├── entity/                          # Entidades do jogo (jogador, inimigos, salas)
+│   │   ├── enemy.h                      # Lógica/estrutura de inimigos
+│   │   ├── player.h                     # Estrutura e funções do jogador
+│   │   └── room.h                       # Representação de salas no mapa
+│
+│   ├── map_construction/               # Lógica de geração procedural de mapas
+│   │   ├── clearMap.h                  # Função para limpar o mapa
+│   │   ├── connectRoom.h               # Conectar salas com corredores
+│   │   ├── createRoom.h                # Criação de uma única sala
+│   │   ├── generate_rooms.h            # Geração geral de múltiplas salas
+│   │   ├── generateEnemy.h             # Spawning de inimigos
+│   │   ├── generateRandomRoom.h        # Criar uma sala aleatória
+│   │   ├── isColliding.h               # Verifica colisões entre salas
+│   │   ├── map_construction.h          # Header geral para incluir todos acima
+│   │   └── set_position_player.h       # Define posição inicial do jogador
+│
+│   ├── playing/                         # Lógica durante o estado de jogo ativo
+│   │   ├── input.h                      # Captura e interpretação de input do jogador
+│   │   ├── render.h                     # Renderização específica do estado "jogando"
+│   │   └── update_logic.h              # Atualização de movimentação e eventos
+│
+│   ├── states/                          # Definições dos estados do jogo
+│   │   ├── game_over_state.h           # Estado de fim de jogo
+│   │   ├── map_construction_state.h    # Estado que gera o mapa antes do gameplay
+│   │   ├── menu_state.h                # Tela de menu inicial
+│   │   ├── paused_state.h              # Estado de pausa
+│   │   └── playing_state.h             # Estado ativo de gameplay
+│
+│   └── tools/                           # Ferramentas utilitárias
+│       ├── debugMatriz.h               # Funções de debug para imprimir matrizes
+│       └── getCharAtPosition.h         # Retorna caractere em certa posição no mapa
+│
+├── src/                                 # Implementações (.cpp) das funções declaradas em include/
+│   ├── core/
+│   │   ├── init.cpp
+│   │   ├── mapValueToChar.cpp
+│   │   └── render.cpp
+│
+│   ├── map_construction/
+│   │   ├── clearMap.cpp
+│   │   ├── connectRoom.cpp
+│   │   ├── createRoom.cpp
+│   │   ├── generate_rooms.cpp
+│   │   ├── generateEnemy.cpp
+│   │   ├── generateRandomRoom.cpp
+│   │   ├── isColliding.cpp
+│   │   └── set_position_player.cpp
+│
+│   ├── playing/
+│   │   ├── input.cpp
+│   │   ├── render.cpp
+│   │   └── update_logic.cpp
+│
+│   ├── states/
+│   │   ├── game_over_state.cpp
+│   │   ├── map_construction_state.cpp
+│   │   ├── menu_state.cpp
+│   │   ├── paused_state.cpp
+│   │   └── playing_state.cpp
+│
+│   ├── tools/
+│   │   ├── debugMatriz.cpp
+│   │   └── getCharAtPosition.cpp
+│
+│   └── global.cpp                      # Implementação de variáveis/funções globais
+│
+├── main.cpp                            # Arquivo principal; inicializa o jogo e a máquina de estados
+├── main.exe                            # Binário gerado após a compilação
+├── a.bat                               # Script de build ou execução rápida (provavelmente no Windows)
+├── Makefile                            # Regras de compilação (para `make`)
+└── README.md                           # Documentação do projeto (como compilar, jogar, etc.)
 ```
 
 ## Status
