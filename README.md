@@ -3,8 +3,8 @@
 
 ### Descrição.
 
-
-Tramalho da Univali M1
+Tramalho da Univali M1.
+Feito sozinho.
 
 ## Links
 
@@ -27,15 +27,13 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 
 ## Status
 
-Data de inicio: [21/03/2025]
+Data de inicio: [14/04/2025]
 
 Data de finalização: [14/04/2025]
 
 # Creditos
 
 | [Daniel](https://github.com/FishingDonut/)
-| [Erick](https://github.com/Erick-Mafra)
-| [Rodrigo](https://github.com/RodrigoBurattoRibas)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/FishingDonut/roguelike_cmd)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/FishingDonut/roguelike_cmd)
