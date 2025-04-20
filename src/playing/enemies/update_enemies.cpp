@@ -12,6 +12,8 @@ void update_enemies()
     for (int j = 0; j < maxRooms; j++)
     {
         Room &room = rooms[j];
+        bool isPlayerInRoom = room.isInRoom(player.position);
+
         for (int i = 0; i < room.enemyCount; i++)
         {
             Enemy &enemy = room.enemies[i];
@@ -23,16 +25,28 @@ void update_enemies()
             int directionY = 0;
             int directionX = 0;
 
-            position.Y < player.newPosition.Y ? directionY = 1 : directionY = -1;
-            position.X < player.newPosition.X ? directionX = 1 : directionX = -1;
-            
-            position.Y == player.newPosition.Y ? directionY = 0 : 0;
-            position.X == player.newPosition.X ? directionX = 0 : 0;
+            if (isPlayerInRoom)
+            {
+                position.Y < player.newPosition.Y ? directionY = 1 : directionY = -1;
+                position.X < player.newPosition.X ? directionX = 1 : directionX = -1;
 
-            if(directionY != 0 && directionX != 0){
-                if(rand() % 10 > 5){
+                position.Y == player.newPosition.Y ? directionY = 0 : 0;
+                position.X == player.newPosition.X ? directionX = 0 : 0;
+            }
+            else
+            {
+                directionY = (rand() % 3) - 1;
+                directionX = (rand() % 3) - 1;
+            }
+
+            if (directionY != 0 && directionX != 0)
+            {
+                if (rand() % 10 > 5)
+                {
                     directionY = 0;
-                } else {
+                }
+                else
+                {
                     directionX = 0;
                 }
             }
