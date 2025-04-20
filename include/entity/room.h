@@ -9,6 +9,7 @@ struct Room
     int y, x;
     int height, width;
     bool connect = false;
+    bool exploredRoom = false;
     int enemyCount = 0;
 
     Enemy enemies[maxEnemy];
@@ -23,6 +24,7 @@ struct Room
             y - 1 < position.Y &&
             y + height > position.Y)
         {
+            exploredRoom = true; 
             return true;
         }
         return false;

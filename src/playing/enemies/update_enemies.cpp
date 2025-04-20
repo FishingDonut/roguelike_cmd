@@ -25,7 +25,7 @@ void update_enemies()
             int directionY = 0;
             int directionX = 0;
 
-            if (isPlayerInRoom)
+            if (isPlayerInRoom || room.exploredRoom)
             {
                 position.Y < player.newPosition.Y ? directionY = 1 : directionY = -1;
                 position.X < player.newPosition.X ? directionX = 1 : directionX = -1;
