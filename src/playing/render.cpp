@@ -31,7 +31,7 @@ namespace Playing
                 SetConsoleCursorPosition(hConsole, {enemy.oldPosition});
                 cout << mapValueToChar(enemy.previousObject);
                 SetConsoleCursorPosition(hConsole, {enemy.position});
-                cout << enemy.skin;
+                cout << "\x1b[31m"<< enemy.skin << "\x1b[0m";
             }
         }
 
