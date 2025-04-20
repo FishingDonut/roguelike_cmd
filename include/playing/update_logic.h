@@ -1,3 +1,6 @@
 #pragma once
 
-void update_logic();
+namespace Playing
+{
+    void update_logic();
+}

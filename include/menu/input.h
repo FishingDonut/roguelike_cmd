@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Playing
+namespace Menu
 {
     void handle_input();
 }

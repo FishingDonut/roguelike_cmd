@@ -20,17 +20,18 @@
 void playing_enter()
 {
     drawMap(gameData.hConsole, gameData.mapData.mapAll);
+    drawMargin(gameData.hConsole);
     return;
 }
 
 void playing_update()
 {
     // controle de key
-    handle_input();
+    Playing::handle_input();
     // atualiza matriz
-    update_logic();
+    Playing::update_logic();
     // renderiza
-    render_frame();
+    Playing::render_frame();
     return;
 }
 

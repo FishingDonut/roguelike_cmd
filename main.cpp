@@ -24,7 +24,7 @@ StateMachine currentState = STATE_MENU;
 StateMachine nextState = currentState;
 StateMachine previousState = currentState;
 
-bool stateChanged = false;
+bool stateChanged = true;
 
 void switchState()
 {

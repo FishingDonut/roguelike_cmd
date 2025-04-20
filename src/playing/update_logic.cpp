@@ -6,9 +6,12 @@
 #include "include/playing/player/update_player.h"
 #include "include/playing/enemies/update_enemies.h"
 
-void update_logic()
+namespace Playing
 {
-    update_player();
-    update_enemies();
-    return;
+    void update_logic()
+    {
+        update_player();
+        update_enemies();
+        return;
+    }
 }
