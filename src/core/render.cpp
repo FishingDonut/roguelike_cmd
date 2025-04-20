@@ -17,18 +17,31 @@ void drawMap(HANDLE &hConsole, int matriz[height][width])
 
             c = mapValueToChar(matriz[i][j]);
 
-            if (matriz[i][j] == 1)
-            {
-                if (i == 0 || i == height - 1)
-                {
-                    c = '-';
-                }
-                if (j == 0 || j == width - 1)
-                {
-                    c = '|';
-                }
-            }
             std::cout << c;
+        }
+    }
+    return;
+}
+
+void drawMargin(HANDLE &hConsole)
+{
+    for (short i = 0; i < height; ++i)
+    {
+        for (short j = 0; j < width; ++j)
+        {
+            SetConsoleCursorPosition(hConsole, {j, i});
+
+            char c = ' ';
+            if (j == 0 || j == width - 1)
+            {
+                c = '|';
+                cout << c;
+            }
+            else if (i == 0 || i == height - 1)
+            {
+                c = '-';
+                cout << c;
+            }
         }
     }
     return;
