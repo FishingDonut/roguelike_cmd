@@ -3,13 +3,15 @@
 #include <windows.h>
 #include "global.h"
 #include "entity/player.h"
-#include "mapData.h"
+#include "Data/mapData.h"
+#include "Data/MenuData.h"
 
 struct GameData
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     Player player = Player();
     MapData mapData = MapData();
+    MenuData menuData = MenuData();
     bool running = true;
     int seed;
 };
