@@ -6,6 +6,8 @@
 #include "core/init.h"
 #include "core/render.h"
 #include "GameData.h"
+#include "stateMachine.h"
+#include "states/menu_state.h"
 
 void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 {
@@ -37,17 +39,7 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
     cursorInfo.bVisible = FALSE; // Oculta o cursor
     SetConsoleCursorInfo(hConsole, &cursorInfo);
     
-    gameData.player.setPosition(5, 5);
-    gameData.player.newPosition = {5, 5};
-
-    gameData.player.currentObject = gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X];
-    gameData.player.previousObject = gameData.player.currentObject;
-    gameData.mapData.mapAll[gameData.player.position.Y][gameData.player.position.X] = gameData.player.valueMap;
-
-
-    // getch();
-    assembleMap(hConsole, matriz);
-    // getch();
-    drawMargin(hConsole);
-    // getch();
+    menu_enter();
+    // assembleMap(hConsole, matriz);
+    return;
 }

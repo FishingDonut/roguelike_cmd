@@ -12,7 +12,7 @@ extern bool stateChanged;
 
 void game_over_enter()
 {
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6, (SHORT)(height / 2)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 7, (SHORT)(height / 2)});
     std::cout << "[ GAME OVER ]";
     getch();
     return;

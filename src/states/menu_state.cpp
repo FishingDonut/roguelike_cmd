@@ -16,7 +16,6 @@ extern bool stateChanged;
 void menu_enter()
 {
     system("cls");
-
     drawMargin(gameData.hConsole);
     
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 11, (SHORT)(height / 2) - 2});
