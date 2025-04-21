@@ -1,5 +1,6 @@
 #include <string>
 #include "core/colorChar.h"
+#include "core/Colors.h"
 
 std::string colorChar(Colors color)
 {

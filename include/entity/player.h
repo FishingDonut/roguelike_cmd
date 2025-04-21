@@ -2,7 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-#include "core/colorChar.h"
+#include "core/Colors.h"
 
 using namespace std;
 
