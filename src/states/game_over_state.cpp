@@ -6,6 +6,7 @@
 #include "states/game_over_state.h"
 #include "stateMachine.h"
 #include "GameData.h"
+#include "core/colorChar.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -22,7 +23,7 @@ void game_over_update()
 {
     system("cls");
     SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
-    cout << "✞" << "\x1b[32m" << gameData.seed << "\x1b[0m" << endl;
+    cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << endl;
     gameData.running = false;
     return;
 }

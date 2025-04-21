@@ -7,6 +7,7 @@ SRC = \
     main.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
+    src/core/colorChar.cpp\
     src/core/mapValueToChar.cpp\
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
@@ -20,6 +21,8 @@ SRC = \
     src/playing/update_logic.cpp \
     src/playing/player/update_player.cpp \
     src/playing/enemies/update_enemies.cpp \
+    src/playing/enemies/direction_enemy.cpp \
+    src/playing/enemies/collision_enemy.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
     src/map_construction/clearMap.cpp \
