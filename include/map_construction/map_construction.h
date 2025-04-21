@@ -1,5 +1,6 @@
 #pragma once
 
+#include "clearExplored.h"
 #include "clearMap.h"
 #include "connectRoom.h"
 #include "createRoom.h"

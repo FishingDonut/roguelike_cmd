@@ -15,6 +15,7 @@
 int generate_rooms()
 {
     int (&map)[height][width] = gameData.mapData.world;
+    int (&explored)[height][width] = gameData.mapData.explored;
 
     const int maxRooms = gameData.mapData.maxRooms;
     Room(&listRoom)[maxRooms] = gameData.mapData.rooms;
@@ -25,6 +26,7 @@ int generate_rooms()
     int border = 3;
 
     clearMap(map);
+    clearExplored(explored);
 
     while (countRoom < maxRooms)
     {
