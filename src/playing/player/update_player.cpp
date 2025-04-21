@@ -33,7 +33,7 @@ void update_player()
     // case 3:
     //     newPosition = oldPosition;
     //     return;
-    //     break;
+        break;
     default:
         newPosition = oldPosition;
         return;
