@@ -25,6 +25,7 @@ SRC = \
     src/playing/enemies/collision_enemy.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
+    src/map_construction/clearExplored.cpp \
     src/map_construction/clearMap.cpp \
     src/map_construction/connectRoom.cpp \
     src/map_construction/createRoom.cpp \
