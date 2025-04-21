@@ -30,10 +30,10 @@ void update_player()
         newPosition = oldPosition;
         return;
         break;
-    case 3:
-        newPosition = oldPosition;
-        return;
-        break;
+    // case 3:
+    //     newPosition = oldPosition;
+    //     return;
+    //     break;
     default:
         newPosition = oldPosition;
         return;
