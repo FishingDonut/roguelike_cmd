@@ -113,7 +113,7 @@ void loopGame()
 
 int main()
 {
-    init(gameData.hConsole, gameData.mapData.mapAll);
+    init(gameData.hConsole, gameData.mapData.world);
     loopGame();
 
     return 0;

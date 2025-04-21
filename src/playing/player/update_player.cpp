@@ -9,7 +9,7 @@ void update_player()
     Player &player = gameData.player;
     COORD &newPosition = gameData.player.newPosition;
     COORD &oldPosition = gameData.player.oldPosition;
-    int (&map)[height][width] = gameData.mapData.mapAll;
+    int (&map)[height][width] = gameData.mapData.world;
     int &currentObject = gameData.player.currentObject;
     int &previousObject = gameData.player.previousObject;
     int nearbyObject;

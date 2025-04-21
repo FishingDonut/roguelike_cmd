@@ -6,6 +6,6 @@
 struct MapData
 {
     static constexpr int maxRooms = 12;
-    int mapAll[height][width];
+    int world[height][width];
     Room rooms[maxRooms];
 };

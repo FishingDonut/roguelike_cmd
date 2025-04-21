@@ -9,7 +9,7 @@ void collision_enemy(Enemy &enemy)
     COORD &newPosition = enemy.newPosition;
     int &previousObject = enemy.previousObject;
     int &currentObject = enemy.currentObject;
-    auto &map = gameData.mapData.mapAll;
+    auto &map = gameData.mapData.world;
     int nearbyObject = map[newPosition.Y][newPosition.X];
 
     switch (nearbyObject)

@@ -14,7 +14,7 @@
 
 int generate_rooms()
 {
-    int (&map)[height][width] = gameData.mapData.mapAll;
+    int (&map)[height][width] = gameData.mapData.world;
 
     const int maxRooms = gameData.mapData.maxRooms;
     Room(&listRoom)[maxRooms] = gameData.mapData.rooms;
