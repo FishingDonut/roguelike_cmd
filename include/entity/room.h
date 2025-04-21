@@ -4,7 +4,7 @@
 
 struct Room
 {
-    static constexpr int maxEnemy = 4;
+    static constexpr int maxEnemy = 10;
 
     int y, x;
     int height, width;

@@ -21,6 +21,11 @@ void direction_enemy(bool isPlayerInRoom, Enemy &enemy, Room room)
         position.Y == player.newPosition.Y ? directionY = 0 : 0;
         position.X == player.newPosition.X ? directionX = 0 : 0;
     }
+    else if (!room.isInRoom(position))
+    {
+        position.Y < room.centerY() ? directionY = 1 : directionY = -1;
+        position.X < room.centerX() ? directionX = 1 : directionX = -1;
+    }
     else
     {
         directionY = (rand() % 3) - 1;
@@ -29,7 +34,7 @@ void direction_enemy(bool isPlayerInRoom, Enemy &enemy, Room room)
 
     if (directionY != 0 && directionX != 0)
     {
-        if (rand() % 10 > 5)
+        if (rand() % 10 > 4)
         {
             directionY = 0;
         }
