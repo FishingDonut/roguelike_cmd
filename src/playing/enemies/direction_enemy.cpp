@@ -1,6 +1,7 @@
 #include "../stateMachine.h"
 #include "../GameData.h"
 #include "include/playing/enemies/direction_enemy.h"
+#include "core/colorChar.h"
 
 void direction_enemy(bool isPlayerInRoom, Enemy &enemy, Room room)
 {
@@ -13,6 +14,7 @@ void direction_enemy(bool isPlayerInRoom, Enemy &enemy, Room room)
 
     if (isPlayerInRoom || room.exploredRoom)
     {
+        enemy.color = COLOR_RED;
         position.Y < player.newPosition.Y ? directionY = 1 : directionY = -1;
         position.X < player.newPosition.X ? directionX = 1 : directionX = -1;
 

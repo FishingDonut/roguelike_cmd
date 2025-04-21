@@ -3,6 +3,7 @@
 #include "include/stateMachine.h"
 #include "include/GameData.h"
 #include "include/core/mapValueToChar.h"
+#include "include/core/colorChar.h"
 #include "include/playing/render.h"
 #include "include/tools/getCharAtPosition.h"
 
@@ -31,11 +32,11 @@ namespace Playing
                 SetConsoleCursorPosition(hConsole, {enemy.oldPosition});
                 cout << mapValueToChar(enemy.previousObject);
                 SetConsoleCursorPosition(hConsole, {enemy.position});
-                cout << "\x1b[31m"<< enemy.skin << "\x1b[0m";
+                cout << colorChar(enemy.color) << enemy.skin << colorChar(COLOR_RESET);
             }
         }
 
         SetConsoleCursorPosition(hConsole, {player.position});
-        cout << player.skin;
+        cout << colorChar(player.color) << player.skin << colorChar(COLOR_RESET);
     }
 }

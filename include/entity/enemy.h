@@ -3,6 +3,8 @@
 #include <conio.h>
 #include <windows.h>
 
+#include "core/colorChar.h"
+
 using namespace std;
 
 struct Enemy
@@ -11,6 +13,7 @@ struct Enemy
     COORD newPosition;
     COORD oldPosition;
     
+    Colors color = COLOR_GREEN;
     char skin = 'S';
     int health = 0;
     int damage = 0;

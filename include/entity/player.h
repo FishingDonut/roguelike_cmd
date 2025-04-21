@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include "core/colorChar.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ struct Player
     COORD oldPosition;
     
     int health = 100;
+    Colors color = COLOR_WHITE;
     char skin = '@';
     int valueMap = 2;
     int currentObject = 0;

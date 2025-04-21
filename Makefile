@@ -7,6 +7,7 @@ SRC = \
     main.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
+    src/core/colorChar.cpp\
     src/core/mapValueToChar.cpp\
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
