@@ -11,11 +11,10 @@ namespace Playing
 {
     void render_frame()
     {
-        const int maxRooms = gameData.mapData.maxRooms;
-
+        auto &explored = gameData.mapData.explored;
+        auto &world = gameData.mapData.world;
         HANDLE hConsole = gameData.hConsole;
         Player &player = gameData.player;
-        Room(&rooms)[maxRooms] = gameData.mapData.rooms;
 
         // SetConsoleCursorPosition(hConsole, {0, 0});
         // cout << getCharAtPosition(hConsole, newPos);
@@ -23,16 +22,27 @@ namespace Playing
         SetConsoleCursorPosition(hConsole, {player.oldPosition});
         cout << mapValueToChar(player.previousObject);
 
-        for (int j = 0; j < maxRooms; j++)
+        for (int i = 0; i < height; i++)
         {
-            Room &room = rooms[j];
-            for (int i = 0; i < room.enemyCount; i++)
+            for (int j = 0; j < width; j++)
             {
-                Enemy &enemy = room.enemies[i];
-                SetConsoleCursorPosition(hConsole, {enemy.oldPosition});
-                cout << mapValueToChar(enemy.previousObject);
-                SetConsoleCursorPosition(hConsole, {enemy.position});
-                cout << colorChar(enemy.color) << enemy.skin << colorChar(COLOR_RESET);
+                if (explored[i][j] == 2)
+                {
+                    SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
+                    cout << ' ';
+                }
+
+                if (explored[i][j] != 0)
+                {
+                    continue;
+                }
+
+                if (getCharAtPosition(hConsole, {(SHORT)j, (SHORT)i}) == mapValueToChar(world[i][j]))
+                {
+                    continue;
+                }
+                SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
+                cout << mapValueToChar(world[i][j]);
             }
         }
 

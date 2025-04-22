@@ -7,12 +7,17 @@
 
 void drawMap(HANDLE &hConsole, int matriz[height][width])
 {
+    auto& explored = gameData.mapData.explored; 
     char c;
     system("cls");
     for (short i = 0; i < height; ++i)
     {
         for (short j = 0; j < width; ++j)
         {
+            if(explored[i][j] == 1){
+                continue;
+            }
+
             SetConsoleCursorPosition(hConsole, {j, i});
 
             c = mapValueToChar(matriz[i][j]);

@@ -18,6 +18,7 @@ struct Player
     int valueMap = 2;
     int currentObject = 0;
     int previousObject = 0;
+    int VISION_RADIUS = 10;
 
     void setPosition(int x, int y)
     {

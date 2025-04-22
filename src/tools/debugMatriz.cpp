@@ -11,10 +11,10 @@ void printMatriz(HANDLE hConsole, int matriz[height][width])
         for (int j = 0; j < width; j++)
         {
             SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
-            if (matriz[i][j] != 0)
-            {
+            // if (matriz[i][j] != 0)
+            // {
                 std::cout << matriz[i][j];
-            }
+            // }
             // } else {
             //     std::cout << " ";
             // }

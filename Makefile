@@ -23,6 +23,7 @@ SRC = \
     src/playing/enemies/update_enemies.cpp \
     src/playing/enemies/direction_enemy.cpp \
     src/playing/enemies/collision_enemy.cpp \
+    src/playing/explored/update_exploration.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
     src/map_construction/clearExplored.cpp \

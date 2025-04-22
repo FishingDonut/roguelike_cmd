@@ -21,7 +21,7 @@ namespace Playing
             nextState = STATE_PAUSED;
             break;
         case 102:
-            printMatriz(hConsole, map);
+            printMatriz(hConsole, gameData.mapData.explored);
             break;
         case 113:
         case 81:
