@@ -23,7 +23,7 @@ void updateExploration()
             {
                 if (dist >= (radius) * (radius)) // hide flov
                 {
-                    explored[y][x] = 1;
+                    // explored[y][x] = 1;
                 }
                 if (dist <= (radius + 1) * (radius + 1)) // clear flov
                 {
