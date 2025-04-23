@@ -18,18 +18,18 @@ void updateExploration()
             int x = positionP.X + dx;
             int dist = dx * dx + dy * dy;
 
-            if (x >= 0 && x < width &&
-                y >= 0 && y < height)
+            if (x >= 1 && x < width - 1 &&
+                y >= 1 && y < height - 1)
             {
-                if (dist >= (radius) * (radius)) //hide flov
+                if (dist >= (radius) * (radius)) // hide flov
                 {
                     explored[y][x] = 1;
                 }
-                if (dist <= (radius + 1) * (radius + 1)) //clear flov
+                if (dist <= (radius + 1) * (radius + 1)) // clear flov
                 {
                     explored[y][x] = 2;
                 }
-                if (dist <= radius * radius) //view flov
+                if (dist <= radius * radius) // view flov
                 {
                     explored[y][x] = 0;
                 }
