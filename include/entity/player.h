@@ -13,7 +13,7 @@ struct Player
     COORD oldPosition;
     
     int health = 100;
-    Colors color = COLOR_WHITE;
+    Colors color = COLOR_YELLOW;
     char skin = '@';
     int valueMap = 2;
     int currentObject = 0;
