@@ -10,7 +10,7 @@ char mapValueToChar(int i)
     switch (i)
     {
     case 0:
-        return '.'; // floor
+        return ' '; // floor
         break;
     case 1:
         return '#'; // wall
