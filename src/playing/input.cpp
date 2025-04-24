@@ -28,6 +28,10 @@ namespace Playing
         {
             nextState = STATE_GAME_OVER;
         }
+        else if (keyBoard == 32) // attack
+        {
+            gameData.player.isAttack = true;
+        }
         else if (keyBoard == config.UP)
         {
             if (newPosition.Y > 0)
@@ -50,7 +54,8 @@ namespace Playing
         }
         else
         {
-            cout << keyBoard << endl; // debug: mostra código da tecla pressionada
+            SetConsoleCursorPosition(hConsole, {width / 2, 3});
+            cout << keyBoard << endl;
         }
     }
 }

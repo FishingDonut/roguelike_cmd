@@ -3,6 +3,7 @@
 #include "../stateMachine.h"
 #include "../GameData.h"
 #include "include/playing/player/update_player.h"
+#include "include/playing/player/attack.h"
 
 bool check_collision(int tile)
 {
@@ -48,6 +49,16 @@ void update_player()
     int &previousObject = gameData.player.previousObject;
     int nearbyObject;
 
+    if(player.isAttack){
+        attack();
+        player.isAttack = false;
+    }
+
+    if(newPosition.Y == player.position.Y && newPosition.X == player.position.X){
+        update_map();
+        return;
+    }
+
     oldPosition = player.position;
     nearbyObject = map[newPosition.Y][newPosition.X];
 
@@ -57,6 +68,7 @@ void update_player()
         return;
     }
 
+    player.setDirection();
     player.setPosition(newPosition.X, newPosition.Y);
     previousObject = currentObject;
     currentObject = nearbyObject;

@@ -10,11 +10,17 @@ void attack()
     auto& player = gameData.player;
     auto& oldPosition = player.oldPosition;
     auto& position = gameData.player.position;
-    auto& newPosition = gameData.player.newPosition;
     auto& world = gameData.mapData.world;
     auto& rooms = gameData.mapData.rooms;
 
 
+    for (int i = 1; i <= 3; i++)
+    {
+        SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(player.position.X + player.dirX * i), (SHORT)(player.position.Y + player.dirY * i)});
+        cout << i;
+    }
+
+    return;
     for (int i = 0; i < maxRooms; i++)
     {
         auto& enemyCount = rooms[i].enemyCount;
