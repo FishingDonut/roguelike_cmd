@@ -40,6 +40,7 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
     cursorInfo.bVisible = FALSE; // Oculta o cursor
     SetConsoleCursorInfo(hConsole, &cursorInfo);
     
+    gameData.config.setVimKeys();
     menu_enter();
     // assembleMap(hConsole, matriz);
     return;
