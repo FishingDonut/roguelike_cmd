@@ -9,25 +9,25 @@ void collision_enemy(Enemy &enemy)
     COORD &newPosition = enemy.newPosition;
     int &previousObject = enemy.previousObject;
     int &currentObject = enemy.currentObject;
-    auto &map = gameData.mapData.mapAll;
+    auto &map = gameData.mapData.world;
     int nearbyObject = map[newPosition.Y][newPosition.X];
 
     switch (nearbyObject)
     {
-    case 0:
+    case FLOOR:
         previousObject = currentObject;
         currentObject = nearbyObject;
 
         enemy.setPosition();
 
         map[oldPosition.Y][oldPosition.X] = previousObject;
-        map[position.Y][position.X] = enemy.valueMap;
+        map[position.Y][position.X] = ENEMY;
         break;
-    case 1:
+    case WALL:
         newPosition = oldPosition;
         return;
         break;
-    case 2:
+    case PLAYER:
         return;
         break;
     default:

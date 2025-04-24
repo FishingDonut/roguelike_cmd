@@ -17,7 +17,7 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
             {
                 newPX = newRoom.x + (rand() % newRoom.width);
                 newPY = newRoom.y + (rand() % newRoom.height);
-            } while (map[newPY][newPX] != 0);
+            } while (map[newPY][newPX] != FLOOR);
 
             Enemy enemy = Enemy();
 
@@ -25,11 +25,11 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
             enemy.damage = 10;
             enemy.newPosition = {(SHORT)newPX, (SHORT)newPY};
             enemy.oldPosition = enemy.newPosition;
-            enemy.currentObject = 0;
-            enemy.previousObject = 0;
+            enemy.currentObject = FLOOR;
+            enemy.previousObject = FLOOR;
             enemy.setPosition();
 
-            map[newPY][newPX] = enemy.valueMap;
+            map[newPY][newPX] = ENEMY;
             newRoom.enemies[countEnemy] = enemy;
             countEnemy++;
         }

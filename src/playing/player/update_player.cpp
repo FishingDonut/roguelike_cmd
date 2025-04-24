@@ -9,7 +9,7 @@ void update_player()
     Player &player = gameData.player;
     COORD &newPosition = gameData.player.newPosition;
     COORD &oldPosition = gameData.player.oldPosition;
-    int (&map)[height][width] = gameData.mapData.mapAll;
+    int (&map)[height][width] = gameData.mapData.world;
     int &currentObject = gameData.player.currentObject;
     int &previousObject = gameData.player.previousObject;
     int nearbyObject;
@@ -20,17 +20,17 @@ void update_player()
 
     switch (nearbyObject)
     {
-    case 0:
+    case FLOOR:
         break;
-    case 1:
+    case WALL:
         newPosition = oldPosition;
         return;
         break;
-    case 2:
+    case PLAYER:
         newPosition = oldPosition;
         return;
         break;
-    case 3:
+    case ENEMY:
     //     newPosition = oldPosition;
     //     return;
         break;
@@ -46,6 +46,6 @@ void update_player()
     player.setPosition(newPosition.X, newPosition.Y);
 
     map[oldPosition.Y][oldPosition.X] = previousObject;
-    map[player.position.Y][player.position.X] = player.valueMap;
+    map[player.position.Y][player.position.X] = PLAYER;
     return;
 }

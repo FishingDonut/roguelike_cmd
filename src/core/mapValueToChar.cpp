@@ -8,15 +8,15 @@
 char mapValueToChar(int i){    
     switch (i)
     {
-        case 0: return ' ';                     // floor
-        case 1:                                 // wall
+        case FLOOR: return ' ';                     // floor
+        case WALL:                                 // wall
             if((rand() % 10) + 1 > 1){
                 return '/';
             } else{
                 return '\\';
             }
-        case 2: return gameData.player.skin;    // player
-        case 3: return Enemy().skin;            // enemy
+        case PLAYER: return gameData.player.skin;    // player
+        case ENEMY: return Enemy().skin;            // enemy
         default: return '?';
     }
 }

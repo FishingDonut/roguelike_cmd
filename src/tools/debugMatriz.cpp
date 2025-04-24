@@ -1,7 +1,7 @@
 #include "iostream"
 #include "windows.h"
 #include "global.h"
-#include "global.h"
+#include "TileMapValue.h"
 #include "tools/debugMatriz.h"
 
 void printMatriz(HANDLE hConsole, int matriz[height][width])
@@ -11,7 +11,7 @@ void printMatriz(HANDLE hConsole, int matriz[height][width])
         for (int j = 0; j < width; j++)
         {
             SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
-            if (matriz[i][j] != 0)
+            if (matriz[i][j] != FLOOR)
             {
                 std::cout << matriz[i][j];
             }

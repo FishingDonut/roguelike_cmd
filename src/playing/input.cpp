@@ -11,7 +11,7 @@ namespace Playing
     {
         HANDLE hConsole = gameData.hConsole;
         COORD &newPosition = gameData.player.newPosition;
-        int (&map)[height][width] = gameData.mapData.mapAll;
+        int (&map)[height][width] = gameData.mapData.world;
 
         int keyBoard = getch();
 
