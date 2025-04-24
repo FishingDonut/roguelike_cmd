@@ -19,6 +19,7 @@ SRC = \
     src/playing/input.cpp \
     src/playing/render.cpp \
     src/playing/update_logic.cpp \
+    src/playing/player/attack.cpp \
     src/playing/player/update_player.cpp \
     src/playing/enemies/update_enemies.cpp \
     src/playing/enemies/direction_enemy.cpp \
