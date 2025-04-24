@@ -12,6 +12,7 @@ struct GameData
     Player player = Player();
     MapData mapData = MapData();
     MenuData menuData = MenuData();
+    int screenBuffer[height][width];
     bool running = true;
     int seed;
 };

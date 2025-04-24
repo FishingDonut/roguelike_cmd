@@ -13,6 +13,7 @@ void render_frame_explored()
 {
     auto &explored = gameData.mapData.explored;
     auto &world = gameData.mapData.world;
+    auto &screenBuffer = gameData.screenBuffer;
     HANDLE hConsole = gameData.hConsole;
 
     for (int i = 0; i < height; i++)
@@ -21,33 +22,24 @@ void render_frame_explored()
         {
             int tile = world[i][j];
 
+            // faz nada
+            if (explored[i][j] == 1)
+            {
+                continue;
+            }
+
             // desenha
             if (explored[i][j] == 0)
             {
-                SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
-                switch (tile)
+                if (screenBuffer[i][j] == tile)
                 {
-                case 0:
-                    if (getCharAtPosition(hConsole, {(SHORT)j, (SHORT)i}) == '.')
-                    {
-                        break;
-                    }
-                    cout << '.';
-                    break;
-                case 1:
-                    if (getCharAtPosition(hConsole, {(SHORT)j, (SHORT)i}) == mapValueToChar(1))
-                    {
-                        break;
-                    }
-                    cout << mapValueToChar(1);
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    cout << mapValueToChar(tile);
-                    break;
+                    continue;
+                }
+                else
+                {
+                    SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
+                    std::cout << mapValueToChar(tile);
+                    continue;
                 }
             }
 
@@ -55,29 +47,9 @@ void render_frame_explored()
             if (explored[i][j] == 2)
             {
                 SetConsoleCursorPosition(hConsole, {(SHORT)j, (SHORT)i});
-                switch (tile)
-                {
-                case 0:
-                    cout << " ";
-                    break;
-                case 1:
-                    cout << mapValueToChar(1);
-                    break;
-                case 2:
-                    cout << " ";
-                    break;
-                case 3:
-                    cout << " ";
-                    break;
-                default:
-                    cout << mapValueToChar(tile);
-                    break;
+                if(tile == 3){
+                    std::cout << " ";
                 }
-            }
-
-            // faz nada
-            if (explored[i][j] == 1)
-            {
                 continue;
             }
         }

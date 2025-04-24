@@ -11,6 +11,7 @@ void render_frame_enemy()
 {
     const int maxRooms = gameData.mapData.maxRooms;
     auto &explored = gameData.mapData.explored;
+    auto &screenBuffer = gameData.screenBuffer;
     HANDLE hConsole = gameData.hConsole;
     Room(&rooms)[maxRooms] = gameData.mapData.rooms;
 
@@ -19,9 +20,10 @@ void render_frame_enemy()
         Room &room = rooms[i];
         int &enemyCount = room.enemyCount;
 
-        // if(!room.isInRoom(gameData.player.position)){
-        //     continue;
-        // }
+        if (!room.isInRoom(gameData.player.position))
+        {
+            continue;
+        }
 
         for (int j = 0; j < enemyCount; j++)
         {
@@ -29,15 +31,27 @@ void render_frame_enemy()
             Colors color = enemy.color;
             COORD &position = enemy.position;
 
-            if (explored[position.Y][position.X] == 0)
+            switch (explored[position.Y][position.X])
             {
+            case 0:
+                if(screenBuffer[position.Y][position.X] == enemy.valueMap){
+                    continue;
+                }
+
+                screenBuffer[position.Y][position.X] = enemy.valueMap;
                 SetConsoleCursorPosition(hConsole, {position});
                 std::cout << colorChar(color) << enemy.skin << colorChar(COLOR_RESET);
+                break;
+            case 2:
+            if(screenBuffer[position.Y][position.X] == 0){
+                continue;
             }
-            else
-            {
+                screenBuffer[position.Y][position.X] = 0;
                 SetConsoleCursorPosition(hConsole, {position});
                 std::cout << mapValueToChar(0);
+                break;
+            default:
+                break;
             }
         }
     }

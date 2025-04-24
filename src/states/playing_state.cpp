@@ -11,6 +11,7 @@
 #include "tools/getCharAtPosition.h"
 #include "tools/debugMatriz.h"
 #include "core/render.h"
+#include "core/update_screen_buffer.h"
 #include "stateMachine.h"
 #include "states/playing_state.h"
 #include "playing/input.h"
@@ -21,6 +22,7 @@ void playing_enter()
 {
     drawMap(gameData.hConsole, gameData.mapData.world);
     drawMargin(gameData.hConsole);
+    update_screen_buffer();
     return;
 }
 

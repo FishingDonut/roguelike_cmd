@@ -9,6 +9,7 @@ SRC = \
     src/core/render.cpp\
     src/core/colorChar.cpp\
     src/core/mapValueToChar.cpp\
+    src/core/update_screen_buffer.cpp\
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
     src/states/menu_state.cpp \

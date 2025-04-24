@@ -23,6 +23,9 @@ namespace Playing
         case 102:
             printMatriz(hConsole, gameData.mapData.explored);
             break;
+        case 13:
+            printMatriz(hConsole, gameData.screenBuffer);
+            break;
         case 113:
         case 81:
             nextState = STATE_GAME_OVER;
