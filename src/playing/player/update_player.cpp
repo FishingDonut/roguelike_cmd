@@ -46,6 +46,6 @@ void update_player()
     player.setPosition(newPosition.X, newPosition.Y);
 
     map[oldPosition.Y][oldPosition.X] = previousObject;
-    map[player.position.Y][player.position.X] = player.valueMap;
+    map[player.position.Y][player.position.X] = PLAYER;
     return;
 }

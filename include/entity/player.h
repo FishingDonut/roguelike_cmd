@@ -16,7 +16,6 @@ struct Player
     int health = 100;
     Colors color = COLOR_WHITE;
     char skin = '@';
-    int valueMap = 2;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
 

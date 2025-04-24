@@ -29,7 +29,7 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
             enemy.previousObject = FLOOR;
             enemy.setPosition();
 
-            map[newPY][newPX] = enemy.valueMap;
+            map[newPY][newPX] = ENEMY;
             newRoom.enemies[countEnemy] = enemy;
             countEnemy++;
         }

@@ -18,7 +18,6 @@ struct Enemy
     char skin = 'S';
     int health = 0;
     int damage = 0;
-    int valueMap = 3;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
 

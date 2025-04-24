@@ -9,7 +9,7 @@ void set_position_player(Room room, int (&map)[height][width])
     Player &player = gameData.player;
     player.setPosition(room.centerX(), room.centerY());
     player.newPosition = player.position;
-    map[room.centerY()][room.centerX()] = player.valueMap;
+    map[room.centerY()][room.centerX()] = PLAYER;
 
     return;
 }
