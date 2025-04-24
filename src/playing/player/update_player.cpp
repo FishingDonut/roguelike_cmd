@@ -20,17 +20,17 @@ void update_player()
 
     switch (nearbyObject)
     {
-    case 0:
+    case FLOOR:
         break;
-    case 1:
+    case WALL:
         newPosition = oldPosition;
         return;
         break;
-    case 2:
+    case PLAYER:
         newPosition = oldPosition;
         return;
         break;
-    case 3:
+    case ENEMY:
     //     newPosition = oldPosition;
     //     return;
         break;

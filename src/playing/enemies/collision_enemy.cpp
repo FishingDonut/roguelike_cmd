@@ -14,7 +14,7 @@ void collision_enemy(Enemy &enemy)
 
     switch (nearbyObject)
     {
-    case 0:
+    case FLOOR:
         previousObject = currentObject;
         currentObject = nearbyObject;
 
@@ -23,11 +23,11 @@ void collision_enemy(Enemy &enemy)
         map[oldPosition.Y][oldPosition.X] = previousObject;
         map[position.Y][position.X] = ENEMY;
         break;
-    case 1:
+    case WALL:
         newPosition = oldPosition;
         return;
         break;
-    case 2:
+    case PLAYER:
         return;
         break;
     default:
