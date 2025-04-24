@@ -68,8 +68,8 @@ void update_player()
         return;
     }
 
-    player.setDirection();
     player.setPosition(newPosition.X, newPosition.Y);
+    player.setDirection();
     previousObject = currentObject;
     currentObject = nearbyObject;
 
