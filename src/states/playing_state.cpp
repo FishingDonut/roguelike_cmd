@@ -19,7 +19,7 @@
 
 void playing_enter()
 {
-    drawMap(gameData.hConsole, gameData.mapData.mapAll);
+    drawMap(gameData.hConsole, gameData.mapData.world);
     drawMargin(gameData.hConsole);
     return;
 }
