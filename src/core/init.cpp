@@ -9,6 +9,7 @@
 #include "GameData.h"
 #include "stateMachine.h"
 #include "states/menu_state.h"
+#include "core/setConfigKey.h"
 
 void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 {
@@ -40,7 +41,7 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
     cursorInfo.bVisible = FALSE; // Oculta o cursor
     SetConsoleCursorInfo(hConsole, &cursorInfo);
     
-    gameData.config.setVimKeys();
+    setConfigKey();
     menu_enter();
     // assembleMap(hConsole, matriz);
     return;

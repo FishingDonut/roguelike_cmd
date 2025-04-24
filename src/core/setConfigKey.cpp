@@ -1,5 +1,3 @@
-#pragma once
-
 #include <conio.h>
 
 #include "GameData.h"
