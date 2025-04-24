@@ -4,6 +4,40 @@
 #include "../GameData.h"
 #include "include/playing/player/update_player.h"
 
+bool check_collision(int tile)
+{
+    switch (tile)
+    {
+    case FLOOR:
+        return false;
+        break;
+    case WALL:
+        return true;
+        break;
+    case PLAYER:
+        return true;
+        break;
+    case ENEMY:
+        return false;
+        break;
+    default:
+        return true;
+        break;
+    }
+}
+
+void update_map()
+{
+    Player &player = gameData.player;
+    COORD &oldPosition = gameData.player.oldPosition;
+    int (&map)[height][width] = gameData.mapData.world;
+    int &previousObject = gameData.player.previousObject;
+
+    map[oldPosition.Y][oldPosition.X] = previousObject;
+    map[player.position.Y][player.position.X] = PLAYER;
+    return;
+}
+
 void update_player()
 {
     Player &player = gameData.player;
@@ -15,37 +49,18 @@ void update_player()
     int nearbyObject;
 
     oldPosition = player.position;
-
     nearbyObject = map[newPosition.Y][newPosition.X];
 
-    switch (nearbyObject)
+    if (check_collision(nearbyObject))
     {
-    case FLOOR:
-        break;
-    case WALL:
         newPosition = oldPosition;
         return;
-        break;
-    case PLAYER:
-        newPosition = oldPosition;
-        return;
-        break;
-    case ENEMY:
-    //     newPosition = oldPosition;
-    //     return;
-        break;
-    default:
-        newPosition = oldPosition;
-        return;
-        break;
     }
 
+    player.setPosition(newPosition.X, newPosition.Y);
     previousObject = currentObject;
     currentObject = nearbyObject;
 
-    player.setPosition(newPosition.X, newPosition.Y);
-
-    map[oldPosition.Y][oldPosition.X] = previousObject;
-    map[player.position.Y][player.position.X] = PLAYER;
+    update_map();
     return;
 }
