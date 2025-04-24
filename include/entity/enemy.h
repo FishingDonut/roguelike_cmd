@@ -4,6 +4,7 @@
 #include <windows.h>
 
 #include "core/Colors.h"
+#include "TileMapvalue.h"
 
 using namespace std;
 
@@ -18,8 +19,8 @@ struct Enemy
     int health = 0;
     int damage = 0;
     int valueMap = 3;
-    int currentObject = 0;
-    int previousObject = 0;
+    int currentObject = FLOOR;
+    int previousObject = FLOOR;
 
     void setPosition()
     {

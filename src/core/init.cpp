@@ -2,7 +2,8 @@
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
-#include "../global.h"
+#include "global.h"
+#include "TileMapValue.h"
 #include "core/init.h"
 #include "core/render.h"
 #include "GameData.h"
@@ -15,11 +16,11 @@ void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
     {
         for (short j = 0; j < width; ++j)
         {
-            matriz[i][j] = 0;
+            matriz[i][j] = FLOOR;
 
             if (i == 0 || i == height - 1 || j == 0 || j == width - 1)
             {
-                matriz[i][j] = 1;
+                matriz[i][j] = WALL;
             }
         }
     }

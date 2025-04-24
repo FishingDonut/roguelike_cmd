@@ -1,4 +1,5 @@
 #include "global.h"
+#include "TileMapValue.h"
 #include "map_construction/clearMap.h"
 
 void clearMap(int (&map)[height][width])
@@ -7,7 +8,7 @@ void clearMap(int (&map)[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            map[i][j] = 1;
+            map[i][j] = WALL;
         }
     }
     return;

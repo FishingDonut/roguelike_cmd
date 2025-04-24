@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "core/Colors.h"
+#include "TileMapValue.h"
 
 using namespace std;
 
@@ -16,8 +17,8 @@ struct Player
     Colors color = COLOR_WHITE;
     char skin = '@';
     int valueMap = 2;
-    int currentObject = 0;
-    int previousObject = 0;
+    int currentObject = FLOOR;
+    int previousObject = FLOOR;
 
     void setPosition(int x, int y)
     {

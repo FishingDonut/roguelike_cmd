@@ -8,7 +8,7 @@ void createRoom(Room newRoom, int (&map)[height][width])
     {
         for (int j = newRoom.x; j < newRoom.x + newRoom.width; j++)
         {
-            map[i][j] = 0;
+            map[i][j] = FLOOR;
         }
     }
     return;
