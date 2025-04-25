@@ -5,18 +5,35 @@
 #include "include/GameData.h"
 #include "include/entity/enemy.h"
 
-char mapValueToChar(int i){    
+char mapValueToChar(int i)
+{
     switch (i)
     {
-        case FLOOR: return ' ';                     // floor
-        case WALL:                                 // wall
-            if((rand() % 10) + 1 > 1){
-                return '/';
-            } else{
-                return '\\';
-            }
-        case PLAYER: return gameData.player.skin;    // player
-        case ENEMY: return Enemy().skin;            // enemy
-        default: return '?';
+    case FLOOR: // floor
+        return ' ';
+    case WALL: // wall
+        if ((rand() % 10) + 1 > 1)
+        {
+            return '/';
+        }
+        else
+        {
+            return '\\';
+        }
+    case PLAYER: // player
+        return gameData.player.skin;
+    case ENEMY: // enemy
+        return Enemy().skin;
+    case STAIR: // escadas
+        if ((rand() % 10) + 1 > 1)
+        {
+            return '>';
+        }
+        else
+        {
+            return '<';
+        }
+    default:
+        return '?';
     }
 }

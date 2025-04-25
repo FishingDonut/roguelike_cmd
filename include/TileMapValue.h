@@ -5,5 +5,6 @@ enum TileMapvalue {
     WALL = 1,
     PLAYER = 2,
     ENEMY = 3,
-    ITENS = 4
+    ITENS = 4,
+    STAIR = 5
 };

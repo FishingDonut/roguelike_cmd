@@ -9,3 +9,4 @@
 #include "generate_rooms.h"
 #include "isColliding.h"
 #include "set_position_player.h"
+#include "set_position_stair.h"

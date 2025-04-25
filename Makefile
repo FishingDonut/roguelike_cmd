@@ -37,7 +37,8 @@ SRC = \
     src/map_construction/generateEnemy.cpp \
     src/map_construction/generateRandomRoom.cpp \
     src/map_construction/isColliding.cpp \
-    src/map_construction/set_position_player.cpp
+    src/map_construction/set_position_player.cpp \
+    src/map_construction/set_position_stair.cpp
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)

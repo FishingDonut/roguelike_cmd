@@ -40,6 +40,7 @@ int generate_rooms()
 
     connectRoom(listRoom, map);
     set_position_player(listRoom[0], map);
+    set_position_stair(listRoom[maxRooms - 1], map);
 
     return 0;
 }
