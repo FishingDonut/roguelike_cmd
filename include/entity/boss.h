@@ -9,14 +9,14 @@
 #include "core/clearEntity.h"
 #include "entity/enemy.h"
 
-struct Enemy
+struct Boss
 {
     COORD position;
     COORD newPosition;
     COORD oldPosition;
     
     Colors color = COLOR_GREEN;
-    char skin = 'S';
+    char skin = 'O';
     int health = 0;
     int damage = 0;
     int currentObject = FLOOR;
@@ -40,7 +40,7 @@ struct Enemy
             return;
         }
         if(health <= 0){
-            clearEnemy(*this);
+            clearBoss(*this);
             return;
         }
         health += newhealth;
