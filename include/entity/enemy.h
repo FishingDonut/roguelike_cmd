@@ -17,7 +17,7 @@ struct Enemy
     
     Colors color = COLOR_GREEN;
     char skin = 'S';
-    int health = 4;
+    int health = 0;
     int damage = 0;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
