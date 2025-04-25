@@ -23,6 +23,12 @@ void setConfigKey()
     case 'l':
         config.setVimKeys();
         break;
+    case 72:
+    case 80:
+    case 75:
+    case 77:
+        config.setArrow();
+        break;
     default:
         config.setDefaultKeys();
         break;

@@ -19,8 +19,8 @@ void menu_enter()
     system("cls");
     drawMargin(gameData.hConsole);
     
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 19, (SHORT)(height / 2) - 2});
-    std::cout << "[ APERTE WASD ou HJKL PARA COMEÇAR ]";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});
+    std::cout << "[ APERTE WASD, Setas ou HJKL PARA COMEÇAR ]";
     setConfigKey();
 
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2)});
@@ -39,8 +39,8 @@ void menu_update()
 
 void menu_exit()
 {
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 19, (SHORT)(height / 2) - 2});
-    std::cout << "                                     ";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});
+    std::cout << "                                            ";
 
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2)});
     std::cout << "         ";
