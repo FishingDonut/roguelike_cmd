@@ -100,7 +100,7 @@ void loopGame()
             menu_update();
             break;
         case STATE_INFO:
-            menu_update();
+            info_update();
             break;
         case STATE_MAP_CONSTRUCTION:
             map_construction_exit();
