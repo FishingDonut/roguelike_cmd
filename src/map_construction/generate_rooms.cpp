@@ -53,6 +53,7 @@ int generate_rooms()
             {
                 gameData.bossFloor = true;
                 listRoom[countRoom++] = room;
+                generateBoss(listRoom[countRoom - 1], map);
                 continue;
             }
 

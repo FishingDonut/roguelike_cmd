@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "global.h"
 #include "entity/player.h"
+#include "entity/boss.h"
 #include "Data/mapData.h"
 #include "Data/MenuData.h"
 #include "Data/ConfigData.h"
@@ -11,6 +12,7 @@ struct GameData
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     Player player = Player();
+    Boss boss;
     MapData mapData = MapData();
     MenuData menuData = MenuData();
     Config config = Config();
