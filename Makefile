@@ -26,6 +26,7 @@ SRC = \
     src/playing/enemies/update_enemies.cpp \
     src/playing/enemies/direction_enemy.cpp \
     src/playing/enemies/collision_enemy.cpp \
+    src/playing/enemies/render_frame_enemy.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
     src/map_construction/clearMap.cpp \
