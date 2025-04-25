@@ -1,13 +1,18 @@
 #include "../stateMachine.h"
 #include "../GameData.h"
-#include "include/playing/enemies/update_enemies.h"
-#include "include/playing/enemies/direction_enemy.h"
-#include "include/playing/enemies/collision_enemy.h"
+#include "include/playing/boss/update_boss.h"
+#include "playing/boss/direction_boss.h"
 
 void update_boss()
 {
     if(!gameData.floorCount){
         return;
     }
+
+    if(!gameData.boss.alive){
+        return;
+    }
+
+    direction_boss();
     return;
 }
