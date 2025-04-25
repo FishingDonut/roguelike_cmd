@@ -15,6 +15,8 @@ struct GameData
     MenuData menuData = MenuData();
     Config config = Config();
     bool running = true;
+    int floorCount = 0;
+    bool bossFloor = false;
     int seed;
 };
 
