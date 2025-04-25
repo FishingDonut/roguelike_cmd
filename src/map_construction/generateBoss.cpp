@@ -14,6 +14,7 @@ void generateBoss(Room &room, int (&world)[height][width])
     boss.newPosition.Y = room.centerY();
     boss.newPosition.X = room.centerX();
     boss.setPosition();
+    room.exploredRoom = false;
     
     int initY = boss.position.Y - (boss.height / 2);
     int initX = boss.position.X - (boss.width / 2);
