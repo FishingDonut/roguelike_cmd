@@ -19,7 +19,8 @@ struct Player
     char skin = '@';
     int currentObject = FLOOR;
     int previousObject = FLOOR;
-    bool isAttack = false;
+    bool isAttackUpdate = false;
+    bool isAttackFrame = false;
     const int maxAttackDistance = 20;
     int attackDistance = 3;
     int dirY = -1;

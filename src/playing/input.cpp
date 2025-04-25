@@ -30,7 +30,8 @@ namespace Playing
         }
         else if (keyBoard == 32) // attack
         {
-            gameData.player.isAttack = true;
+            gameData.player.isAttackUpdate = true;
+            gameData.player.isAttackFrame = true;
         }
         else if (keyBoard == config.UP)
         {

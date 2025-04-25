@@ -49,9 +49,9 @@ void update_player()
     int &previousObject = gameData.player.previousObject;
     int nearbyObject;
 
-    if(player.isAttack){
+    if(player.isAttackUpdate){
         attack();
-        player.isAttack = false;
+        player.isAttackUpdate = false;
     }
 
     if(newPosition.Y == player.position.Y && newPosition.X == player.position.X){

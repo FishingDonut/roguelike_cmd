@@ -7,12 +7,8 @@
 void attack()
 {
     const int maxRooms = gameData.mapData.maxRooms;
-    const int maxAttackDistance = gameData.player.maxAttackDistance;
     auto &player = gameData.player;
     auto &attackDistance = gameData.player.attackDistance;
-    auto &oldPosition = player.oldPosition;
-    auto &position = gameData.player.position;
-    auto &world = gameData.mapData.world;
     auto &rooms = gameData.mapData.rooms;
 
     for (int i = 0; i < maxRooms; i++)
