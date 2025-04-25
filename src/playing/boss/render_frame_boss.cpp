@@ -7,5 +7,8 @@
 
 void render_frame_boss()
 {
+    if(!gameData.bossFloor){
+        return;
+    }
     return;
 }
