@@ -34,6 +34,9 @@ int generate_rooms()
         {
             createRoom(room, map);
             listRoom[countRoom++] = room;
+            if(0 >= countRoom - 1){
+                continue;
+            }
             generateEnemy(listRoom[countRoom - 1], map);
         }
     }
