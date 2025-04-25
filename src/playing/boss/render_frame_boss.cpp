@@ -7,23 +7,40 @@
 
 void render_frame_boss()
 {
-    if(!gameData.bossFloor){
+    if (!gameData.bossFloor)
+    {
         return;
     }
 
     Boss &boss = gameData.boss;
-    auto& hConsole = gameData.hConsole;
-    auto& world = gameData.mapData.world;
+    auto &oldPosition = gameData.boss.oldPosition;
+    auto &hConsole = gameData.hConsole;
+    auto &world = gameData.mapData.world;
+
+    int oldInitY = oldPosition.Y - (boss.height / 2);
+    int oldInitX = oldPosition.X - (boss.width / 2);
+    for (int i = 0; i < boss.height; i++)
+    {
+        for (int j = 0; j < boss.width; j++)
+        {
+            int y = oldInitY + i;
+            int x = oldInitX + j;
+            // Limpa com FLOOR (ou talvez previousObject se quiser guardar)
+            SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
+            std::cout << mapValueToChar(world[y][x]);
+        }
+    }
     
     int initY = boss.position.Y - (boss.height / 2);
     int initX = boss.position.X - (boss.width / 2);
 
     for (int i = 0; i < boss.height; i++)
     {
-        for (int j = 0; j < boss.width; j++){
+        for (int j = 0; j < boss.width; j++)
+        {
             int y = initY + i;
             int x = initX + j;
-            
+
             SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
             std::cout << colorChar(boss.color) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);
         }
