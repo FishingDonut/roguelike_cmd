@@ -25,7 +25,7 @@ void render_frame_boss()
         {
             int y = oldInitY + i;
             int x = oldInitX + j;
-            // Limpa com FLOOR (ou talvez previousObject se quiser guardar)
+
             SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
             std::cout << mapValueToChar(world[y][x]);
         }
@@ -42,7 +42,7 @@ void render_frame_boss()
             int x = initX + j;
 
             SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
-            std::cout << colorChar(boss.color) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);
+            std::cout << colorChar(boss.color) << boss.skin << colorChar(COLOR_RESET);
         }
     }
 
