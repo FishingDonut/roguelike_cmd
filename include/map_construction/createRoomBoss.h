@@ -2,4 +2,4 @@
 
 #include "entity/room.h"
 
-void createRoomBoss(Room &room);
+Room createRoomBoss(int mapHeight, int mapWidth, int border);
