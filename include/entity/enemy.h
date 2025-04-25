@@ -17,7 +17,7 @@ struct Enemy
     
     Colors color = COLOR_GREEN;
     char skin = 'S';
-    int health = 0;
+    int health = 4;
     int damage = 0;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
@@ -34,7 +34,7 @@ struct Enemy
         return;
     }
 
-    void updateHealth(int health)
+    void updateHealth(int newhealth)
     {
         if(!alive){
             return;
@@ -43,7 +43,7 @@ struct Enemy
             clearEnemy(*this);
             return;
         }
-        health += health;
+        health += newhealth;
         return;
     }
 };
