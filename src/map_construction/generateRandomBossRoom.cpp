@@ -1,8 +1,8 @@
-#include "map_construction/createRoomBoss.h"
+#include "map_construction/generateRandomBossRoom.h"
 #include "entity/room.h"
 #include "GameData.h"
 
-Room createRoomBoss(int mapHeight, int mapWidth, int border){
+Room generateRandomBossRoom(int mapHeight, int mapWidth, int border){
     int min = 10;
     int max = 30;
 
