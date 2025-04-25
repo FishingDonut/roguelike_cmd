@@ -11,7 +11,7 @@ namespace Menu
         const int maxOptions = gameData.menuData.maxOptions;
         StateMachine selectState[maxOptions + 1] = {
             STATE_MAP_CONSTRUCTION,
-            STATE_MENU,
+            STATE_INFO,
             STATE_GAME_OVER};
 
         int &cursorOldPosition = gameData.menuData.cursorOldPosition;
