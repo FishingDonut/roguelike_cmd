@@ -21,14 +21,13 @@ void credits_enter()
     std::cout << "Parabens voce ganhou!";
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 8), (SHORT)(height / 2) - 1});
     std::cout << "score: " << gameData.score;
+    getch();
+    gameData.running = false;
     return;
 }
 
 void credits_update()
 {
-    getch();
-    nextState = STATE_GAME_OVER;
-    stateChanged = true;
     return;
 }
 
