@@ -21,7 +21,7 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
 
             Enemy enemy = Enemy();
 
-            enemy.health = 10;
+            enemy.health = 2;
             enemy.damage = 1;
             enemy.newPosition = {(SHORT)newPX, (SHORT)newPY};
             enemy.oldPosition = enemy.newPosition;
