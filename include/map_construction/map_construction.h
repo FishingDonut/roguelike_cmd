@@ -3,6 +3,7 @@
 #include "clearMap.h"
 #include "connectRoom.h"
 #include "createRoom.h"
+#include "createRoomBoss.h"
 #include "generate_rooms.h"
 #include "generateEnemy.h"
 #include "generateRandomRoom.h"

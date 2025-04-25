@@ -38,6 +38,7 @@ SRC = \
     src/map_construction/clearMap.cpp \
     src/map_construction/connectRoom.cpp \
     src/map_construction/createRoom.cpp \
+    src/map_construction/createRoomBoss.cpp \
     src/map_construction/generate_rooms.cpp \
     src/map_construction/generateEnemy.cpp \
     src/map_construction/generateRandomRoom.cpp \
