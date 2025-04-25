@@ -7,6 +7,7 @@ void generateBoss(Room &room, int (&world)[height][width])
 {
     gameData.boss = Boss();
     Boss &boss = gameData.boss;
+    boss.room = room;
     boss.alive = true;
     boss.health = 5;
     boss.damage = 1;

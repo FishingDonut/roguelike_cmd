@@ -7,7 +7,7 @@
 #include "TileMapvalue.h"
 #include "core/mapValueToChar.h"
 #include "core/clearEntity.h"
-#include "entity/enemy.h"
+#include "entity/room.h"
 
 struct Boss
 {
@@ -25,6 +25,7 @@ struct Boss
     int width = 3;
     int height = 3;
     bool alive = true;
+    Room room;
 
     void setPosition()
     {
