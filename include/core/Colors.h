@@ -3,6 +3,7 @@
 enum Colors
 {
     COLOR_RESET = 0,
+    COLOR_REVERSE = 7,
     COLOR_BLACK = 30,
     COLOR_RED = 31,
     COLOR_GREEN = 32,

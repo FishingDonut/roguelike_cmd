@@ -21,7 +21,7 @@ void collision_enemy(Enemy &enemy)
         enemy.setPosition();
 
         map[oldPosition.Y][oldPosition.X] = previousObject;
-        map[position.Y][position.X] = ENEMY;
+        map[position.Y][position.X] = enemy.valueMap;
         break;
     case WALL:
         newPosition = oldPosition;

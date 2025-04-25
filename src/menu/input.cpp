@@ -9,34 +9,34 @@ namespace Menu
     void handle_input()
     {
         const int maxOptions = gameData.menuData.maxOptions;
-        StateMachine selectState[maxOptions + 1] = {STATE_MAP_CONSTRUCTION, STATE_MENU, STATE_GAME_OVER};
+        StateMachine selectState[maxOptions + 1] = {
+            STATE_MAP_CONSTRUCTION,
+            STATE_MENU,
+            STATE_GAME_OVER};
+
         int &cursorOldPosition = gameData.menuData.cursorOldPosition;
         int &cursorPosition = gameData.menuData.cursorPosition;
+        Config config = gameData.config;
+
         int keyBoard = getch();
         cursorOldPosition = cursorPosition;
 
-        switch (keyBoard)
+        if (keyBoard == 'q' || keyBoard == 'Q' || keyBoard == 27) // ESC
         {
-        case 113:
-        case 81:
-        case 27:
             nextState = STATE_GAME_OVER;
-            break;
-        case 119:
+        }
+        else if (keyBoard == config.UP)
+        {
             cursorPosition > 0 ? cursorPosition-- : cursorPosition = maxOptions;
-            break;
-        case 115:
+        }
+        else if (keyBoard == config.DOWN)
+        {
             cursorPosition < maxOptions ? cursorPosition++ : cursorPosition = 0;
-            break;
-        case 100:
-        case 32:
-        case 13:
+        }
+        else if (keyBoard == config.RIGHT || keyBoard == ' ' || keyBoard == 13) // espaço ou enter
+        {
             nextState = selectState[cursorPosition];
             stateChanged = true;
-            break;
-        default:
-            break;
         }
-        return;
     }
 }

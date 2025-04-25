@@ -9,39 +9,54 @@ namespace Playing
 {
     void handle_input()
     {
+        Config config = gameData.config;
         HANDLE hConsole = gameData.hConsole;
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
 
         int keyBoard = getch();
 
-        switch (keyBoard)
+        if (keyBoard == 27) // ESC
         {
-        case 27:
             nextState = STATE_PAUSED;
-            break;
-        case 102:
+        }
+        else if (keyBoard == 'f') // debug matriz
+        {
             printMatriz(hConsole, map);
-            break;
-        case 113:
-        case 81:
+        }
+        else if (keyBoard == 'q' || keyBoard == 'Q') // sair
+        {
             nextState = STATE_GAME_OVER;
-            break;
-        case 119:
-            newPosition.Y > 0 ? newPosition.Y-- : 0;
-            break;
-        case 115:
-            newPosition.Y < height - 1 ? newPosition.Y++ : 0;
-            break;
-        case 97:
-            newPosition.X > 0 ? newPosition.X-- : 0;
-            break;
-        case 100:
-            newPosition.X < width - 1 ? newPosition.X++ : 0;
-            break;
-        default:
+        }
+        else if (keyBoard == 32) // attack
+        {
+            gameData.player.isAttackUpdate = true;
+            gameData.player.isAttackFrame = true;
+        }
+        else if (keyBoard == config.UP)
+        {
+            if (newPosition.Y > 0)
+                newPosition.Y--;
+        }
+        else if (keyBoard == config.DOWN)
+        {
+            if (newPosition.Y < height - 1)
+                newPosition.Y++;
+        }
+        else if (keyBoard == config.LEFT)
+        {
+            if (newPosition.X > 0)
+                newPosition.X--;
+        }
+        else if (keyBoard == config.RIGHT)
+        {
+            if (newPosition.X < width - 1)
+                newPosition.X++;
+        }
+        else
+        {
+            SetConsoleCursorPosition(hConsole, {width / 2, 3});
             cout << keyBoard << endl;
-            break;
         }
     }
 }

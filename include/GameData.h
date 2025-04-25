@@ -5,6 +5,7 @@
 #include "entity/player.h"
 #include "Data/mapData.h"
 #include "Data/MenuData.h"
+#include "Data/ConfigData.h"
 
 struct GameData
 {
@@ -12,6 +13,7 @@ struct GameData
     Player player = Player();
     MapData mapData = MapData();
     MenuData menuData = MenuData();
+    Config config = Config();
     bool running = true;
     int seed;
 };
