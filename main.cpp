@@ -16,6 +16,7 @@
 #include "./include/states/playing_state.h"
 #include "./include/states/paused_state.h"
 #include "./include/states/game_over_state.h"
+#include "./include/states/credits_state.h"
 
 using namespace std;
 
@@ -55,6 +56,9 @@ void switchState()
     case STATE_GAME_OVER:
         game_over_exit();
         break;
+    case STATE_CREDITS:
+        credits_exit();
+        break;
     }
 
     previousState = currentState;
@@ -80,6 +84,9 @@ void switchState()
         break;
     case STATE_GAME_OVER:
         game_over_enter();
+        break;
+    case STATE_CREDITS:
+        credits_enter();
         break;
     }
 
@@ -113,6 +120,9 @@ void loopGame()
             break;
         case STATE_GAME_OVER:
             game_over_update();
+            break;
+        case STATE_CREDITS:
+            credits_exit();
             break;
         default:
             break;

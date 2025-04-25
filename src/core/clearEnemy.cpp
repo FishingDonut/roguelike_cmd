@@ -4,6 +4,7 @@
 #include "GameData.h"
 
 void clearEnemy(Enemy &enemy){
+    gameData.score += 10;
     auto& world = gameData.mapData.world;
     enemy.skin = mapValueToChar(FLOOR);
     enemy.valueMap = FLOOR;
@@ -12,6 +13,7 @@ void clearEnemy(Enemy &enemy){
 }
 
 void clearBoss(Boss &boss){
+    gameData.score += 10;
     auto& world = gameData.mapData.world;
     boss.skin = mapValueToChar(FLOOR);
     boss.valueMap = FLOOR;
@@ -29,4 +31,6 @@ void clearBoss(Boss &boss){
             world[y][x] = FLOOR;
         }
     }
+    nextState = STATE_CREDITS;
+    stateChanged = true;
 }

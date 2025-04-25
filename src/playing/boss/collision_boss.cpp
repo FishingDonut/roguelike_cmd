@@ -8,6 +8,7 @@ void collision_boss()
     if (!gameData.bossFloor)
         return;
 
+    Player &player = gameData.player;
     Boss &boss = gameData.boss;
     auto &oldPosition = boss.oldPosition;
     auto &position = boss.position;
@@ -33,6 +34,12 @@ void collision_boss()
             if (tile == WALL)
             {
                 newPosition = oldPosition; // Cancela o movimento
+                return;
+            }
+            else if (tile == PLAYER)
+            {
+                newPosition = oldPosition; // Cancela o movimento
+                player.updateHealth(-boss.damage);
                 return;
             }
         }

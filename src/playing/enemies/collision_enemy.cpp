@@ -4,6 +4,7 @@
 
 void collision_enemy(Enemy &enemy)
 {
+    Player &player = gameData.player;
     COORD &oldPosition = enemy.oldPosition;
     COORD &position = enemy.position;
     COORD &newPosition = enemy.newPosition;
@@ -28,6 +29,7 @@ void collision_enemy(Enemy &enemy)
         return;
         break;
     case PLAYER:
+        player.updateHealth(-enemy.damage);
         return;
         break;
     default:

@@ -30,29 +30,29 @@ void attack()
                 }
             }
         }
+    }
 
-        for (int i = 0; i < maxRooms; i++)
+    for (int i = 0; i < maxRooms; i++)
+    {
+        auto &enemyCount = rooms[i].enemyCount;
+        auto &enemies = rooms[i].enemies;
+
+        if (enemyCount <= 0)
         {
-            auto &enemyCount = rooms[i].enemyCount;
-            auto &enemies = rooms[i].enemies;
+            continue;
+        }
 
-            if (enemyCount <= 0)
+        for (int j = 0; j < enemyCount; j++)
+        {
+            auto &enemy = enemies[j];
+
+            for (int k = 1; k <= attackDistance; k++)
             {
-                continue;
-            }
-
-            for (int j = 0; j < enemyCount; j++)
-            {
-                auto &enemy = enemies[j];
-
-                for (int k = 1; k <= attackDistance; k++)
+                int y = player.position.Y + player.dirY * k;
+                int x = player.position.X + player.dirX * k;
+                if (enemy.position.Y == y && enemy.position.X == x)
                 {
-                    int y = player.position.Y + player.dirY * k;
-                    int x = player.position.X + player.dirX * k;
-                    if (enemy.position.Y == y && enemy.position.X == x)
-                    {
-                        enemy.updateHealth(-player.damage);
-                    }
+                    enemy.updateHealth(-player.damage);
                 }
             }
         }

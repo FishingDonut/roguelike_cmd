@@ -20,6 +20,7 @@ struct GameData
     int floorCount = 0;
     bool bossFloor = false;
     int seed;
+    int score = 0;
 };
 
 extern GameData gameData;

@@ -6,7 +6,8 @@ enum StateMachine {
     STATE_MAP_CONSTRUCTION,
     STATE_PLAYING,
     STATE_PAUSED,
-    STATE_GAME_OVER
+    STATE_GAME_OVER,
+    STATE_CREDITS
 };
 
 extern StateMachine currentState;

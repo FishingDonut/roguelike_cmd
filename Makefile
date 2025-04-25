@@ -13,6 +13,7 @@ SRC = \
     src/core/setConfigKey.cpp \
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
+    src/states/credits_state.cpp \
     src/states/menu_state.cpp \
     src/states/info_state.cpp \
     src/states/map_construction_state.cpp \
