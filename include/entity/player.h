@@ -15,7 +15,7 @@ struct Player
 
     int health = 100;
     int damage = 1;
-    Colors color = COLOR_WHITE;
+    Colors color = COLOR_YELLOW;
     char skin = '@';
     int currentObject = FLOOR;
     int previousObject = FLOOR;

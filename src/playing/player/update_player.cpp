@@ -5,7 +5,20 @@
 #include "include/playing/player/update_player.h"
 #include "include/playing/player/attack.h"
 
-bool check_collision(int tile)
+void handle_collision(int tile){
+    switch (tile)
+    {
+    case STAIR:
+        nextState = STATE_MAP_CONSTRUCTION;
+        stateChanged = true;
+        break;
+    default:
+        break;
+    }
+    return;
+}
+
+bool is_collision(int tile)
 {
     switch (tile)
     {
@@ -20,6 +33,9 @@ bool check_collision(int tile)
         break;
     case ENEMY:
         return false;
+        break;
+    case STAIR:
+        return true;
         break;
     default:
         return true;
@@ -62,8 +78,9 @@ void update_player()
     oldPosition = player.position;
     nearbyObject = map[newPosition.Y][newPosition.X];
 
-    if (check_collision(nearbyObject))
+    if (is_collision(nearbyObject))
     {
+        handle_collision(nearbyObject);
         newPosition = oldPosition;
         return;
     }
