@@ -15,7 +15,7 @@ struct Boss
     COORD newPosition;
     COORD oldPosition;
 
-    Colors color = COLOR_CYAN;
+    Colors color = COLOR_GREEN;
     char skin = 'O';
     int health = 0;
     int damage = 0;
