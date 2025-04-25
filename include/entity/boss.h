@@ -21,7 +21,7 @@ struct Boss
     int damage = 0;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
-    int valueMap = ENEMY;
+    int valueMap = BOSS;
     int width = 3;
     int height = 3;
     bool alive = true;
