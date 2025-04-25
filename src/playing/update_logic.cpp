@@ -5,6 +5,7 @@
 #include "include/playing/update_logic.h"
 #include "include/playing/player/update_player.h"
 #include "include/playing/enemies/update_enemies.h"
+#include "include/playing/boss/update_boss.h"
 
 namespace Playing
 {
@@ -12,6 +13,7 @@ namespace Playing
     {
         update_player();
         update_enemies();
+        update_boss();
         return;
     }
 }
