@@ -2,6 +2,7 @@
 #include "../GameData.h"
 #include "include/playing/boss/update_boss.h"
 #include "playing/boss/direction_boss.h"
+#include "playing/boss/collision_boss.h"
 
 void update_boss()
 {
@@ -14,5 +15,6 @@ void update_boss()
     }
 
     direction_boss();
+    collision_boss();
     return;
 }
