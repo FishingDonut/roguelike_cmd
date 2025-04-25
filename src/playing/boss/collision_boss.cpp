@@ -6,40 +6,65 @@
 void collision_boss()
 {
     if (!gameData.bossFloor)
-    {
         return;
-    }
 
     Boss &boss = gameData.boss;
-    COORD &oldPosition = boss.oldPosition;
-    COORD &position = boss.position;
-    COORD &newPosition = boss.newPosition;
+    auto &oldPosition = boss.oldPosition;
+    auto &position = boss.position;
+    auto &newPosition = boss.newPosition;
+    auto &map = gameData.mapData.world;
+
     int &previousObject = boss.previousObject;
     int &currentObject = boss.currentObject;
-    auto &map = gameData.mapData.world;
-    int nearbyObject = map[newPosition.Y][newPosition.X];
 
-    switch (nearbyObject)
+    int initY = newPosition.Y - (boss.height / 2);
+    int initX = newPosition.X - (boss.width / 2);
+
+    // Verificar se TODA a área 3x3 do boss está livre
+    for (int i = 0; i < boss.height; i++)
     {
-    case FLOOR:
-    case BOSS:
-        previousObject = currentObject;
-        currentObject = nearbyObject;
+        for (int j = 0; j < boss.width; j++)
+        {
+            int y = initY + i;
+            int x = initX + j;
 
-        boss.setPosition();
+            int tile = map[y][x];
 
-        map[oldPosition.Y][oldPosition.X] = previousObject;
-        map[position.Y][position.X] = boss.valueMap;
-        break;
-    case WALL:
-        newPosition = oldPosition;
-        return;
-        break;
-    case PLAYER:
-        return;
-        break;
-    default:
-        break;
+            if (tile == WALL)
+            {
+                newPosition = oldPosition; // Cancela o movimento
+                return;
+            }
+        }
     }
-    return;
+
+    // Se passou pelo loop, é seguro mover
+    previousObject = currentObject;
+    currentObject = map[newPosition.Y][newPosition.X];
+
+    boss.setPosition();
+
+    // Limpa área anterior
+    int oldInitY = oldPosition.Y - (boss.height / 2);
+    int oldInitX = oldPosition.X - (boss.width / 2);
+    for (int i = 0; i < boss.height; i++)
+    {
+        for (int j = 0; j < boss.width; j++)
+        {
+            int y = oldInitY + i;
+            int x = oldInitX + j;
+            map[y][x] = FLOOR;
+        }
+    }
+
+    // Preenche nova posição com valor do boss
+    for (int i = 0; i < boss.height; i++)
+    {
+        for (int j = 0; j < boss.width; j++)
+        {
+            int y = initY + i;
+            int x = initX + j;
+            map[y][x] = boss.valueMap;
+        }
+    }
 }
