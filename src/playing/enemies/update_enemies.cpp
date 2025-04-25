@@ -18,6 +18,11 @@ void update_enemies()
         for (int i = 0; i < room.enemyCount; i++)
         {
             Enemy &enemy = room.enemies[i];
+
+            if(!enemy.alive){
+                continue;
+            }
+            
             direction_enemy(isPlayerInRoom, enemy, room);
             collision_enemy(enemy);
         }

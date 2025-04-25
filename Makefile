@@ -5,6 +5,7 @@ CXXFLAGS = -std=c++17 -Wall -Iinclude -Isrc -I. -Iinclude/tools
 # Fontes existentes no projeto
 SRC = \
     main.cpp \
+    src/core/clearEnemy.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
     src/core/colorChar.cpp\

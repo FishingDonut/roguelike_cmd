@@ -5,8 +5,9 @@
 
 #include "core/Colors.h"
 #include "TileMapvalue.h"
-
-using namespace std;
+#include "core/mapValueToChar.h"
+#include "core/clearEnemy.h"
+#include "entity/enemy.h"
 
 struct Enemy
 {
@@ -20,16 +21,29 @@ struct Enemy
     int damage = 0;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
+    int valueMap = ENEMY;
+    bool alive = true;
 
     void setPosition()
     {
+        if(!alive){
+            return;
+        }
         position.X = newPosition.X;
         position.Y = newPosition.Y;
+        return;
     }
 
-    int updateHealth(int health)
+    void updateHealth(int health)
     {
+        if(!alive){
+            return;
+        }
+        if(health <= 0){
+            clearEnemy(*this);
+            return;
+        }
         health += health;
-        return health;
+        return;
     }
 };

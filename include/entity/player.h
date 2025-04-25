@@ -14,11 +14,14 @@ struct Player
     COORD oldPosition;
 
     int health = 100;
+    int damage = 1;
     Colors color = COLOR_WHITE;
     char skin = '@';
     int currentObject = FLOOR;
     int previousObject = FLOOR;
     bool isAttack = false;
+    const int maxAttackDistance = 20;
+    int attackDistance = 3;
     int dirY = -1;
     int dirX = 0;
 
