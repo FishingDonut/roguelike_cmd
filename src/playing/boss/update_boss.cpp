@@ -6,5 +6,8 @@
 
 void update_boss()
 {
+    if(!gameData.floorCount){
+        return;
+    }
     return;
 }
