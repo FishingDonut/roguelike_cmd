@@ -30,7 +30,7 @@ int generate_rooms()
     while (countRoom < maxRooms)
     {
 
-        if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom > 0)
+        if (!gameData.bossFloor && gameData.floorCount >= 1 && countRoom >= maxRooms - 1)
         {
             room = generateRandomBossRoom(height, width, border);
         }
@@ -49,11 +49,11 @@ int generate_rooms()
                 continue;
             }
 
-            if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom > 0)
+            if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom >= maxRooms - 1)
             {
                 gameData.bossFloor = true;
                 listRoom[countRoom++] = room;
-                generateBoss(listRoom[countRoom - 1], map);
+                generateBoss(listRoom[maxRooms - 1], map);                
                 continue;
             }
 
