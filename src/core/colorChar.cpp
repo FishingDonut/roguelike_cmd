@@ -7,6 +7,8 @@ std::string colorChar(Colors color)
     std::string textColor;
     switch (color)
     {
+    case COLOR_REVERSE:
+        return "\x1b[7m";
     case COLOR_RED:
         return "\x1b[31m";
     case COLOR_GREEN:
