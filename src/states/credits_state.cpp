@@ -19,8 +19,10 @@ void credits_enter()
 
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
     std::cout << "Parabens voce ganhou!";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 8), (SHORT)(height / 2) - 1});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
     std::cout << "score: " << gameData.score;
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
+    std::cout << "kills: " << gameData.status.kills;
     getch();
     gameData.running = false;
     return;
