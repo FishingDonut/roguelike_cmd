@@ -1,11 +1,15 @@
+#include <random>
 #include "core/clearEntity.h"
 #include "entity/boss.h"
 #include "entity/enemy.h"
 #include "GameData.h"
 
 void clearEnemy(Enemy &enemy){
-    gameData.player.kills++;
-    gameData.score += 10;
+    gameData.score += 1 + (rand() % (20 - 1 + 1));
+    auto& player = gameData.player;
+    player.gold = 1 + (rand() % (7 - 1 + 1));
+    player.xp = 2 + (rand() % (8 - 2 + 1));
+    player.kills++;
     auto& world = gameData.mapData.world;
     enemy.skin = mapValueToChar(FLOOR);
     enemy.valueMap = FLOOR;
