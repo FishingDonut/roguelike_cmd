@@ -11,12 +11,20 @@ void render_status()
     Player &player = gameData.player;
     Status &status = gameData.status;
 
+    if(player.xp != status.xp){
+        status.xp = player.xp;
+        SetConsoleCursorPosition(hConsole, {45, (SHORT)height - 1});
+        cout << "--------------";
+        SetConsoleCursorPosition(hConsole, {45, (SHORT)height - 1});
+        cout << "[ xp: " << colorChar(COLOR_CYAN) << player.xp << colorChar(COLOR_RESET) << " ]";
+    }
+
     if(player.gold != status.gold){
         status.gold = player.gold;
         SetConsoleCursorPosition(hConsole, {33, (SHORT)height - 1});
-        cout << "--------------";
+        cout << "-----------";
         SetConsoleCursorPosition(hConsole, {33, (SHORT)height - 1});
-        cout << "[ gold: " << colorChar(COLOR_YELLOW) << player.kills << colorChar(COLOR_RESET) << " ]";
+        cout << "[ gold: " << colorChar(COLOR_YELLOW) << player.gold << colorChar(COLOR_RESET) << " ]";
     }
 
     if(player.kills != status.kills){
