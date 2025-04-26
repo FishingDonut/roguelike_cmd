@@ -20,6 +20,7 @@ SRC = \
     src/states/playing_state.cpp \
     src/states/paused_state.cpp \
     src/states/game_over_state.cpp \
+    src/playing/status/render_status.cpp \
     src/playing/input.cpp \
     src/playing/render.cpp \
     src/playing/update_logic.cpp \

@@ -4,6 +4,7 @@
 #include "GameData.h"
 
 void clearEnemy(Enemy &enemy){
+    gameData.player.kills++;
     gameData.score += 10;
     auto& world = gameData.mapData.world;
     enemy.skin = mapValueToChar(FLOOR);

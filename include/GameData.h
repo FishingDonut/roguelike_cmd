@@ -4,6 +4,7 @@
 #include "global.h"
 #include "entity/player.h"
 #include "entity/boss.h"
+#include "Data/Status.h"
 #include "Data/mapData.h"
 #include "Data/MenuData.h"
 #include "Data/ConfigData.h"
@@ -21,6 +22,7 @@ struct GameData
     bool bossFloor = false;
     int seed;
     int score = 0;
+    Status status = Status(); 
 };
 
 extern GameData gameData;
