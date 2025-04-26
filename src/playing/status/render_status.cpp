@@ -6,17 +6,42 @@
 #include "include/core/mapValueToChar.h"
 #include "include/core/colorChar.h"
 
-void clearStatus(stringstream &stream, int size, COORD position){
+int visualLength(std::string text, int spacing)
+{
+    int count = spacing;
+    bool inEscape = false;
+
+    for (char c : text)
+    {
+        if (c == '\x1b')
+        {
+            inEscape = true;
+            continue;
+        }
+
+        if (inEscape)
+        {
+            if (c == 'm')
+                inEscape = false;
+            continue;
+        }
+
+        count++;
+    }
+    return count;
+}
+
+void clearStatus(stringstream &stream, int size, COORD position)
+{
     HANDLE hConsole = gameData.hConsole;
     stream.str("");
     stream.clear();
-    
+
     SetConsoleCursorPosition(hConsole, {position});
     for (int i = 0; i < size; i++)
     {
         cout << "-";
     }
-    
 }
 
 void render_status()
@@ -40,9 +65,11 @@ void render_status()
 
         stream << "[ HP: " << colorChar(COLOR_GREEN) << status.hp << colorChar(COLOR_RESET) << " ]";
         hpText = stream.str();
-        clearStatus(stream, hpText.size(), {(SHORT)status.spacingHp, (SHORT)height - 1});
+        int textLength = visualLength(hpText, spacingText);
 
-        status.spacingKills = status.spacingHp + hpText.size() + spacingText;
+        clearStatus(stream, textLength, {(SHORT)status.spacingHp, (SHORT)height - 1});
+
+        status.spacingKills = status.spacingHp + textLength + spacingText;
 
         SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingHp, (SHORT)height - 1});
         cout << hpText;
@@ -55,10 +82,11 @@ void render_status()
 
         stream << "[ KILLS: " << colorChar(COLOR_REVERSE) << status.kills << colorChar(COLOR_RESET) << " ]";
         killsText = stream.str();
-        clearStatus(stream, killsText.size(), {(SHORT)status.spacingKills, (SHORT)height - 1});
+        int textLength = visualLength(killsText, spacingText);
 
+        clearStatus(stream, textLength, {(SHORT)status.spacingKills, (SHORT)height - 1});
 
-        status.spacingGold = status.spacingKills + killsText.size() + spacingText;
+        status.spacingGold = status.spacingKills + textLength + spacingText;
 
         SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingKills, (SHORT)height - 1});
         cout << killsText;
@@ -71,10 +99,11 @@ void render_status()
 
         stream << "[ GOLD: " << colorChar(COLOR_YELLOW) << status.gold << colorChar(COLOR_RESET) << " ]";
         goldText = stream.str();
-        clearStatus(stream, goldText.size(), {(SHORT)status.spacingGold, (SHORT)height - 1});
+        int textLength = visualLength(goldText, spacingText);
 
+        clearStatus(stream, textLength, {(SHORT)status.spacingGold, (SHORT)height - 1});
 
-        status.spacingXp = status.spacingGold + goldText.size() + spacingText;
+        status.spacingXp = status.spacingGold + textLength + spacingText;
 
         SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingGold, (SHORT)height - 1});
         cout << goldText;
@@ -87,8 +116,9 @@ void render_status()
 
         stream << "[ XP: " << colorChar(COLOR_CYAN) << player.xp << colorChar(COLOR_RESET) << " ]";
         xpText = stream.str();
-        clearStatus(stream, xpText.size(), {(SHORT)status.spacingXp, (SHORT)height - 1});
+        int textLength = visualLength(xpText, spacingText);
 
+        clearStatus(stream, textLength, {(SHORT)status.spacingXp, (SHORT)height - 1});
 
         SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingXp, (SHORT)height - 1});
         cout << xpText;
