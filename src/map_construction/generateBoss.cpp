@@ -9,7 +9,7 @@ void generateBoss(Room &room, int (&world)[height][width])
     Boss &boss = gameData.boss;
     boss.room = room;
     boss.alive = true;
-    boss.health = 10;
+    boss.health = 20;
     boss.damage = 2;
     boss.newPosition.Y = room.centerY();
     boss.newPosition.X = room.centerX();

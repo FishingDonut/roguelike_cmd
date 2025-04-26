@@ -11,7 +11,6 @@ void collision_boss()
     Player &player = gameData.player;
     Boss &boss = gameData.boss;
     auto &oldPosition = boss.oldPosition;
-    auto &position = boss.position;
     auto &newPosition = boss.newPosition;
     auto &map = gameData.mapData.world;
 
@@ -21,7 +20,6 @@ void collision_boss()
     int initY = newPosition.Y - (boss.height / 2);
     int initX = newPosition.X - (boss.width / 2);
 
-    // Verificar se TODA a área 3x3 do boss está livre
     for (int i = 0; i < boss.height; i++)
     {
         for (int j = 0; j < boss.width; j++)
@@ -33,25 +31,23 @@ void collision_boss()
 
             if (tile == WALL)
             {
-                newPosition = oldPosition; // Cancela o movimento
+                newPosition = oldPosition; 
                 return;
             }
             else if (tile == PLAYER)
             {
-                newPosition = oldPosition; // Cancela o movimento
+                newPosition = oldPosition; 
                 player.updateHealth(-boss.damage);
                 return;
             }
         }
     }
 
-    // Se passou pelo loop, é seguro mover
     previousObject = currentObject;
     currentObject = map[newPosition.Y][newPosition.X];
 
     boss.setPosition();
 
-    // Limpa área anterior
     int oldInitY = oldPosition.Y - (boss.height / 2);
     int oldInitX = oldPosition.X - (boss.width / 2);
     for (int i = 0; i < boss.height; i++)
@@ -64,7 +60,6 @@ void collision_boss()
         }
     }
 
-    // Preenche nova posição com valor do boss
     for (int i = 0; i < boss.height; i++)
     {
         for (int j = 0; j < boss.width; j++)
