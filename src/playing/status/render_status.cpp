@@ -80,7 +80,7 @@ void render_status()
     {
         status.kills = player.kills;
 
-        stream << "[ KILLS: " << colorChar(COLOR_REVERSE) << status.kills << colorChar(COLOR_RESET) << " ]";
+        stream << "[ KILLS: " << colorChar(COLOR_MAGENTA) << status.kills << colorChar(COLOR_RESET) << " ]";
         killsText = stream.str();
         int textLength = visualLength(killsText, spacingText);
 
