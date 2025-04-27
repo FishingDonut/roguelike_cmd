@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include "stateMachine.h"
 #include "core/Colors.h"
 #include "TileMapValue.h"
 
@@ -15,6 +16,9 @@ struct Player
 
     int health = 100;
     int damage = 1;
+    int kills = 0;
+    int gold = 0;
+    int xp = 0;
     Colors color = COLOR_YELLOW;
     char skin = '@';
     int currentObject = FLOOR;
@@ -32,10 +36,15 @@ struct Player
         position.Y = y;
     }
 
-    int updateHealth(int health)
+    void updateHealth(int newHealth)
     {
-        health += health;
-        return health;
+        health += newHealth;
+        if (health <= 0)
+        {
+            nextState = STATE_GAME_OVER;
+            stateChanged = true;
+        }
+        return;
     }
 
     void setDirection()

@@ -6,7 +6,7 @@
 #include "core/Colors.h"
 #include "TileMapvalue.h"
 #include "core/mapValueToChar.h"
-#include "core/clearEnemy.h"
+#include "core/clearEntity.h"
 #include "entity/enemy.h"
 
 struct Enemy
@@ -17,8 +17,8 @@ struct Enemy
     
     Colors color = COLOR_GREEN;
     char skin = 'S';
-    int health = 0;
-    int damage = 0;
+    int health = 2;
+    int damage = 2;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
     int valueMap = ENEMY;

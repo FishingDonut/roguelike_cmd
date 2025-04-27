@@ -10,6 +10,27 @@ void attack()
     auto &player = gameData.player;
     auto &attackDistance = gameData.player.attackDistance;
     auto &rooms = gameData.mapData.rooms;
+    auto &world = gameData.mapData.world;
+
+    if (gameData.bossFloor)
+    {
+        auto &boss = gameData.boss;
+        for (int i = 0; i < boss.height; i++)
+        {
+            for (int j = 0; j < boss.width; j++)
+            {
+                for (int k = 1; k <= attackDistance; k++)
+                {
+                    int y = player.position.Y + player.dirY * k;
+                    int x = player.position.X + player.dirX * k;
+                    if (world[y][x] == BOSS)
+                    {
+                        boss.updateHealth(-player.damage);
+                    }
+                }
+            }
+        }
+    }
 
     for (int i = 0; i < maxRooms; i++)
     {
@@ -32,6 +53,8 @@ void attack()
                 if (enemy.position.Y == y && enemy.position.X == x)
                 {
                     enemy.updateHealth(-player.damage);
+                    gameData.currentEnemy = enemy;
+                    gameData.status.currentEnemyDamage = enemy.damage;
                 }
             }
         }

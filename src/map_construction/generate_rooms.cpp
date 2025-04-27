@@ -23,16 +23,40 @@ int generate_rooms()
     int min = 5;
     int max = 20;
     int border = 3;
+    Room room;
 
     clearMap(map);
 
     while (countRoom < maxRooms)
     {
-        Room room = generateRandomRoom(height, width, min, max, border);
+
+        if (!gameData.bossFloor && gameData.floorCount >= 1 && countRoom >= maxRooms - 1)
+        {
+            room = generateRandomBossRoom(height, width, border);
+        }
+        else
+        {
+            room = generateRandomRoom(height, width, min, max, border);
+        }
 
         if (!isColliding(listRoom, countRoom, room, 1))
         {
             createRoom(room, map);
+
+            if (0 >= countRoom)
+            {
+                listRoom[countRoom++] = room;
+                continue;
+            }
+
+            if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom >= maxRooms - 1)
+            {
+                gameData.bossFloor = true;
+                listRoom[countRoom++] = room;
+                generateBoss(listRoom[maxRooms - 1], map);                
+                continue;
+            }
+
             listRoom[countRoom++] = room;
             generateEnemy(listRoom[countRoom - 1], map);
         }
@@ -41,6 +65,6 @@ int generate_rooms()
     connectRoom(listRoom, map);
     set_position_player(listRoom[0], map);
     set_position_stair(listRoom[maxRooms - 1], map);
-
+    gameData.floorCount++;
     return 0;
 }

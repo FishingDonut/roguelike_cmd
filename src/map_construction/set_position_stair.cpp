@@ -5,6 +5,9 @@
 
 void set_position_stair(Room room, int (&map)[height][width])
 {
+    if(gameData.bossFloor){
+        return;
+    }
     map[room.centerY()][room.centerX()] = STAIR;
     return;
 }

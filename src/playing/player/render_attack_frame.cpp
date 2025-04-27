@@ -26,9 +26,6 @@ void render_attack_frame()
         
         SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
         std::cout << colorChar(COLOR_REVERSE) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);
-        if(world[y][x] == ENEMY){
-            Sleep(350);
-        }
         Sleep(30);
         SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
         std::cout << colorChar(COLOR_RESET) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);

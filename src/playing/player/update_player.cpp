@@ -37,6 +37,9 @@ bool is_collision(int tile)
     case STAIR:
         return true;
         break;
+    case BOSS:
+        return false;
+        break;
     default:
         return true;
         break;

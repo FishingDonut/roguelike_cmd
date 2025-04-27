@@ -22,4 +22,12 @@ struct Config
         LEFT = 'h';  // 104
         RIGHT = 'l'; // 108
     }
+
+    void setArrow()
+    {
+        UP = 72;
+        DOWN = 80;
+        LEFT = 75;
+        RIGHT = 77;
+    }
 };

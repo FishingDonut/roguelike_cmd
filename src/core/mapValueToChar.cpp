@@ -4,6 +4,7 @@
 #include "core/mapValueToChar.h"
 #include "include/GameData.h"
 #include "include/entity/enemy.h"
+#include "include/entity/boss.h"
 
 char mapValueToChar(int i)
 {
@@ -33,6 +34,8 @@ char mapValueToChar(int i)
         {
             return '<';
         }
+    case BOSS:
+        return Boss().skin;
     default:
         return '?';
     }

@@ -35,22 +35,34 @@ void connectRoom(Room (&rooms)[gameData.mapData.maxRooms], int (&map)[height][wi
         {
             for (int x = std::min(ax, bx); x <= std::max(ax, bx); x++)
             {
-                map[ay][x] = FLOOR;
+                if (map[ay][x] == WALL)
+                {
+                    map[ay][x] = FLOOR;
+                }
             }
             for (int y = std::min(ay, by); y <= std::max(ay, by); y++)
             {
-                map[y][bx] = FLOOR;
+                if (map[y][bx] == WALL)
+                {
+                    map[y][bx] = FLOOR;
+                }
             }
         }
         else
         {
             for (int x = std::min(ax, bx); x <= std::max(ax, bx); x++)
             {
-                map[by][x] = FLOOR;
+                if (map[by][x] == WALL)
+                {
+                    map[by][x] = FLOOR;
+                }
             }
             for (int y = std::min(ay, by); y <= std::max(ay, by); y++)
             {
-                map[y][ax] = FLOOR;
+                if (map[y][ax] == WALL)
+                {
+                    map[y][ax] = FLOOR;
+                }
             }
         }
     }
