@@ -53,6 +53,8 @@ void attack()
                 if (enemy.position.Y == y && enemy.position.X == x)
                 {
                     enemy.updateHealth(-player.damage);
+                    gameData.currentEnemy = enemy;
+                    gameData.status.currentEnemyDamage = enemy.damage;
                 }
             }
         }

@@ -14,6 +14,7 @@ struct GameData
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     Player player = Player();
     Boss boss;
+    Enemy currentEnemy;
     MapData mapData = MapData();
     MenuData menuData = MenuData();
     Config config = Config();

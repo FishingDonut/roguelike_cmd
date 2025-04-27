@@ -7,8 +7,8 @@
 void clearEnemy(Enemy &enemy){
     gameData.score += 1 + (rand() % (20 - 1 + 1));
     auto& player = gameData.player;
-    player.gold = 1 + (rand() % (7 - 1 + 1));
-    player.xp = 2 + (rand() % (8 - 2 + 1));
+    player.gold += 1 + (rand() % (7 - 1 + 1));
+    player.xp += 2 + (rand() % (8 - 2 + 1));
     player.kills++;
     auto& world = gameData.mapData.world;
     enemy.skin = mapValueToChar(FLOOR);

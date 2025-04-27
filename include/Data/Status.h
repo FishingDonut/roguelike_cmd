@@ -10,4 +10,8 @@ struct Status
     int spacingXp = 0;
     int kills = 0;
     int spacingKills = 0;
+    int currentEnemyHp = 0;
+    int spacingCurrentEnemyHp = 0;
+    int currentEnemyDamage = 0;
+    int spacingCurrentEnemyDamage = 0;
 };

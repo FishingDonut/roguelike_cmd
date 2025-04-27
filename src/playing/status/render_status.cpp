@@ -31,96 +31,52 @@ int visualLength(std::string text, int spacing)
     return count;
 }
 
-void clearStatus(stringstream &stream, int size, COORD position)
+void clearStatus(int size, COORD position)
 {
     HANDLE hConsole = gameData.hConsole;
+
+    SetConsoleCursorPosition(hConsole, position);
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << "-";
+    }
+}
+
+void updateStatus(std::stringstream& stream, const std::string& label, Colors color, int& currentValue, int newValue, int& spacing, int& nextSpacing, int spacingText)
+{
+    HANDLE hConsole = gameData.hConsole;
+
     stream.str("");
     stream.clear();
 
-    SetConsoleCursorPosition(hConsole, {position});
-    for (int i = 0; i < size; i++)
+    stream << "[ " << label << ": " << colorChar(color) << newValue << colorChar(COLOR_RESET) << " ]";
+    std::string text = stream.str();
+    int textLength = visualLength(text, spacingText);
+
+    if (currentValue != newValue)
     {
-        cout << "-";
+        currentValue = newValue;
+        clearStatus(textLength, {(SHORT)spacing, (SHORT)height - 1});
+
+        SetConsoleCursorPosition(hConsole, {(SHORT)spacing, (SHORT)height - 1});
+        std::cout << text;
     }
+
+    nextSpacing = spacing + textLength + spacingText;
 }
 
 void render_status()
 {
-    HANDLE hConsole = gameData.hConsole;
-    Player &player = gameData.player;
-    Status &status = gameData.status;
+    Player& player = gameData.player;
+    Status& status = gameData.status;
 
     std::stringstream stream;
-    std::string hpText;
-    std::string killsText;
-    std::string goldText;
-    std::string xpText;
-
     int spacingText = 3;
 
-    // HP
-    if (status.hp != player.health)
-    {
-        status.hp = player.health;
-
-        stream << "[ HP: " << colorChar(COLOR_GREEN) << status.hp << colorChar(COLOR_RESET) << " ]";
-        hpText = stream.str();
-        int textLength = visualLength(hpText, spacingText);
-
-        clearStatus(stream, textLength, {(SHORT)status.spacingHp, (SHORT)height - 1});
-
-        status.spacingKills = status.spacingHp + textLength + spacingText;
-
-        SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingHp, (SHORT)height - 1});
-        cout << hpText;
-    }
-
-    // KILLS
-    if (player.kills != status.kills)
-    {
-        status.kills = player.kills;
-
-        stream << "[ KILLS: " << colorChar(COLOR_MAGENTA) << status.kills << colorChar(COLOR_RESET) << " ]";
-        killsText = stream.str();
-        int textLength = visualLength(killsText, spacingText);
-
-        clearStatus(stream, textLength, {(SHORT)status.spacingKills, (SHORT)height - 1});
-
-        status.spacingGold = status.spacingKills + textLength + spacingText;
-
-        SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingKills, (SHORT)height - 1});
-        cout << killsText;
-    }
-
-    // GOLD
-    if (player.gold != status.gold)
-    {
-        status.gold = player.gold;
-
-        stream << "[ GOLD: " << colorChar(COLOR_YELLOW) << status.gold << colorChar(COLOR_RESET) << " ]";
-        goldText = stream.str();
-        int textLength = visualLength(goldText, spacingText);
-
-        clearStatus(stream, textLength, {(SHORT)status.spacingGold, (SHORT)height - 1});
-
-        status.spacingXp = status.spacingGold + textLength + spacingText;
-
-        SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingGold, (SHORT)height - 1});
-        cout << goldText;
-    }
-
-    // XP
-    if (player.xp != status.xp)
-    {
-        status.xp = player.xp;
-
-        stream << "[ XP: " << colorChar(COLOR_CYAN) << player.xp << colorChar(COLOR_RESET) << " ]";
-        xpText = stream.str();
-        int textLength = visualLength(xpText, spacingText);
-
-        clearStatus(stream, textLength, {(SHORT)status.spacingXp, (SHORT)height - 1});
-
-        SetConsoleCursorPosition(hConsole, {(SHORT)status.spacingXp, (SHORT)height - 1});
-        cout << xpText;
-    }
+    updateStatus(stream, "HP", COLOR_GREEN, status.hp, player.health, status.spacingHp, status.spacingKills, spacingText);
+    updateStatus(stream, "KILLS", COLOR_MAGENTA, status.kills, player.kills, status.spacingKills, status.spacingGold, spacingText);
+    updateStatus(stream, "GOLD", COLOR_YELLOW, status.gold, player.gold, status.spacingGold, status.spacingXp, spacingText);
+    updateStatus(stream, "XP", COLOR_CYAN, status.xp, player.xp, status.spacingXp, status.spacingCurrentEnemyHp, spacingText);
+    updateStatus(stream, "EHP", COLOR_RED, status.currentEnemyHp, gameData.currentEnemy.health, status.spacingCurrentEnemyHp, status.spacingCurrentEnemyDamage, spacingText);
+    updateStatus(stream, "DMG", COLOR_YELLOW, status.currentEnemyDamage, gameData.currentEnemy.damage, status.spacingCurrentEnemyDamage, status.spacingCurrentEnemyDamage, spacingText);
 }
