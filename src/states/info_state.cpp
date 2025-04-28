@@ -1,9 +1,12 @@
 #include <iostream>
+#include <sstream>
 #include <windows.h>
 #include <conio.h>
 
 #include "states/info_state.h"
 #include "core/mapValueToChar.h"
+#include "core/colorChar.h"
+#include "core/visualLength.h"
 #include "core/render.h"
 #include "stateMachine.h"
 #include "GameData.h"
@@ -11,20 +14,45 @@
 extern StateMachine nextState;
 extern bool stateChanged;
 
+
+void drawText(string label, int y, Colors color = COLOR_RESET){
+    std::stringstream stream;
+    stream.str("");
+    stream.clear();
+    stream << colorChar(color) << label << colorChar(COLOR_RESET);
+    
+    std::string text = stream.str();
+    int textLength = visualLength(text, 0);
+
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - (textLength / 2)), (SHORT)((height / 2) + y)});
+    cout << text;
+}
+
 void info_enter()
 {
     HANDLE hConsole = gameData.hConsole;
+    std::stringstream stream;
+    auto& config = gameData.config;
+
     system("cls");
     drawMargin(hConsole);
     
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)2, (SHORT)(height / 2) - 2});
-    std::cout << gameData.player.skin << " - Player";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)2, (SHORT)(height / 2) - 1});
-    std::cout << Enemy().skin << " - Enemy";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)2, (SHORT)(height / 2)});
-    std::cout << mapValueToChar(STAIR) << " - Stair";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)2, (SHORT)(height / 2) + 1});
-    std::cout << "As salas são geradas aleatoriamente, suba os andares até que o chefe aparessa, matando ele vc vence o jogo.";
+    
+    drawText("As salas são geradas aleatoriamente,", 1);
+    drawText("suba os andares até que o chefe aparessa, matando ele vc vence o jogo.", 2);
+  
+    drawText(std::string(1, gameData.player.skin) + " - Player", 3, COLOR_YELLOW);
+    drawText(std::string(1, Enemy().skin) + " - Enemy", 4, COLOR_RED);
+    drawText(std::string(1, mapValueToChar(STAIR)) + " - Stair", 5);   
+    drawText(std::string(1, Trap().visibleSkin) + " - Trap", 6, Trap().color);
+    
+    drawText("Controles", 7);
+    drawText(" UP = " + std::string(1, config.UP),8);
+    drawText(" DOWN = " + std::string(1, config.DOWN), 9);
+    drawText(" LEFT = " + std::string(1, config.LEFT), 10);
+    drawText(" RIGHT = " + std::string(1, config.RIGHT), 11);
+
+
     return;
 }
 
