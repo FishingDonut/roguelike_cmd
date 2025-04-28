@@ -17,6 +17,9 @@ void render_frame_enemy()
         for (int i = 0; i < room.enemyCount; i++)
         {
             Enemy &enemy = room.enemies[i];
+            if(!enemy.alive){
+                continue;
+            }
             SetConsoleCursorPosition(hConsole, {enemy.oldPosition});
             cout << mapValueToChar(enemy.previousObject);
             SetConsoleCursorPosition(hConsole, {enemy.position});
