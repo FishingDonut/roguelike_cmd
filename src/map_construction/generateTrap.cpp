@@ -7,26 +7,26 @@
 #include "Data/MapData.h"
 #include "map_construction/generateTrap.h"
 
-void generateTrap(Room &room, int (&world)[height][width])
+void generateTrap(int (&world)[height][width])
 {
     const int MAX_TRAPS = gameData.mapData.MAX_TRAPS;
-    int countTraps = 0;
     auto &traps = gameData.mapData.traps;
+    auto &countTraps = gameData.mapData.countTraps;
+    countTraps = 0;
     Trap trap;
 
-    for (int i = room.y; i < room.y + room.height; i++)
+    while (countTraps < MAX_TRAPS)
     {
-        for (int j = room.x; j < room.x + room.width; j++)
-        {
-            if ((rand() % 10 > 8) && world[i][j] == FLOOR && countTraps < MAX_TRAPS)
-            {
-                world[i][j] = TRAP;
+        int y = rand() % height;
+        int x = rand() % width;
 
-                Trap trap = Trap();
-                trap.init(i, j);
+        if(world[y][x] != FLOOR)
+            continue;
 
-                traps[countTraps++] = trap;
-            }
-        }
+        world[y][x] = TRAP;
+
+        Trap trap = Trap();
+        trap.init(x, y);
+        traps[countTraps++] = trap;
     }
 }

@@ -1,3 +1,3 @@
 #pragma once
 
-void generateTrap(Room &room, int (&world)[height][width]);
+void generateTrap(int (&world)[height][width]);

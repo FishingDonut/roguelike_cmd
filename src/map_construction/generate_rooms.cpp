@@ -59,10 +59,10 @@ int generate_rooms()
 
             listRoom[countRoom++] = room;
             generateEnemy(listRoom[countRoom - 1], map);
-            generateTrap(listRoom[countRoom - 1], map);
         }
     }
-
+    
+    generateTrap(map);
     connectRoom(listRoom, map);
     set_position_player(listRoom[0], map);
     set_position_stair(listRoom[MAX_ROOMS - 1], map);
