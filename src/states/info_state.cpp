@@ -38,8 +38,8 @@ void info_enter()
     drawMargin(hConsole);
     
     
-    drawText("As salas são geradas aleatoriamente,", 1);
-    drawText("suba os andares até que o chefe aparessa, matando ele vc vence o jogo.", 2);
+    drawText("As salas são geradas aleatoriamente, use armadilhas ou paredes para driblar inimigos.", 1);
+    drawText("Suba os andares até que o chefe aparessa, matando ele vc vence o jogo.", 2);
   
     drawText(std::string(1, gameData.player.skin) + " - Player", 3, COLOR_YELLOW);
     drawText(std::string(1, Enemy().skin) + " - Enemy", 4, COLOR_RED);
@@ -51,6 +51,9 @@ void info_enter()
     drawText(" DOWN = " + std::string(1, config.DOWN), 9);
     drawText(" LEFT = " + std::string(1, config.LEFT), 10);
     drawText(" RIGHT = " + std::string(1, config.RIGHT), 11);
+    drawText(" ATTACK = ESPAÇO", 12);
+    drawText(" PAUSE = ESC", 13);
+    drawText(" EXIT = Q", 14);
 
 
     return;
