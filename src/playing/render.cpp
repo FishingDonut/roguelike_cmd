@@ -9,6 +9,7 @@
 #include "include/tools/getCharAtPosition.h"
 #include "include/playing/render.h"
 #include "include/status/render_status.h"
+#include "playing/traps/render_frame_trap.h"
 
 namespace Playing
 {
@@ -23,6 +24,8 @@ namespace Playing
         SetConsoleCursorPosition(hConsole, {player.oldPosition});
         cout << mapValueToChar(player.previousObject);
 
+        
+        render_frame_trap();
         render_frame_enemy();
         render_frame_boss();
         render_attack_frame();

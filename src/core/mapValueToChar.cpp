@@ -5,6 +5,7 @@
 #include "include/GameData.h"
 #include "include/entity/enemy.h"
 #include "include/entity/boss.h"
+#include "include/entity/trap.h"
 
 char mapValueToChar(int i)
 {
@@ -36,6 +37,8 @@ char mapValueToChar(int i)
         }
     case BOSS:
         return Boss().skin;
+    case TRAP:
+        return Trap().currentSkin;
     default:
         return '?';
     }

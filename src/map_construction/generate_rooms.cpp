@@ -16,8 +16,8 @@ int generate_rooms()
 {
     int (&map)[height][width] = gameData.mapData.world;
 
-    const int maxRooms = gameData.mapData.maxRooms;
-    Room(&listRoom)[maxRooms] = gameData.mapData.rooms;
+    const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
+    Room(&listRoom)[MAX_ROOMS] = gameData.mapData.rooms;
 
     int countRoom = 0;
     int min = 5;
@@ -27,10 +27,10 @@ int generate_rooms()
 
     clearMap(map);
 
-    while (countRoom < maxRooms)
+    while (countRoom < MAX_ROOMS)
     {
 
-        if (!gameData.bossFloor && gameData.floorCount >= 1 && countRoom >= maxRooms - 1)
+        if (!gameData.bossFloor && gameData.floorCount >= 1 && countRoom >= MAX_ROOMS - 1)
         {
             room = generateRandomBossRoom(height, width, border);
         }
@@ -49,11 +49,11 @@ int generate_rooms()
                 continue;
             }
 
-            if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom >= maxRooms - 1)
+            if (!gameData.bossFloor && gameData.floorCount >= 2 && countRoom >= MAX_ROOMS - 1)
             {
                 gameData.bossFloor = true;
                 listRoom[countRoom++] = room;
-                generateBoss(listRoom[maxRooms - 1], map);                
+                generateBoss(listRoom[MAX_ROOMS - 1], map);                
                 continue;
             }
 
@@ -61,10 +61,11 @@ int generate_rooms()
             generateEnemy(listRoom[countRoom - 1], map);
         }
     }
-
+    
+    generateTrap(map);
     connectRoom(listRoom, map);
     set_position_player(listRoom[0], map);
-    set_position_stair(listRoom[maxRooms - 1], map);
+    set_position_stair(listRoom[MAX_ROOMS - 1], map);
     gameData.floorCount++;
     return 0;
 }

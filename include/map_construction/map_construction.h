@@ -7,6 +7,7 @@
 #include "generate_rooms.h"
 #include "generateBoss.h"
 #include "generateEnemy.h"
+#include "generateTrap.h"
 #include "generateRandomRoom.h"
 #include "generate_rooms.h"
 #include "isColliding.h"
