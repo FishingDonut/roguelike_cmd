@@ -17,7 +17,7 @@ struct Player
     int health = 25;
     int damage = 1;
     int kills = 0;
-    int gold = 0;
+    int gold = 1;
     int xp = 0;
     Colors color = COLOR_YELLOW;
     char skin = '@';
