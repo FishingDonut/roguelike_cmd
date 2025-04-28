@@ -13,17 +13,17 @@ struct Trap
     bool visible = false;
 
     void init(int x, int y){
-        COORD position = {(SHORT)x, (SHORT)y};
-        int damage = 1;
-        int valueMap = TRAP;
-        Colors color = COLOR_BLUE;
-        char skin = '#';
-        bool visible = true;
+        position = {(SHORT)x, (SHORT)y};
+        damage = 1;
+        valueMap = TRAP;
+        color = COLOR_BLUE;
+        skin = '#';
+        visible = true;
         return;
     }
 
     void reset(){
-        position;
+        position = {0, 0};
         damage = 0;
         valueMap = FLOOR;
         color = COLOR_WHITE;
