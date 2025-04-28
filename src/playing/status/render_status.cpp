@@ -5,31 +5,7 @@
 #include "include/status/render_status.h"
 #include "include/core/mapValueToChar.h"
 #include "include/core/colorChar.h"
-
-int visualLength(std::string text, int spacing)
-{
-    int count = spacing;
-    bool inEscape = false;
-
-    for (char c : text)
-    {
-        if (c == '\x1b')
-        {
-            inEscape = true;
-            continue;
-        }
-
-        if (inEscape)
-        {
-            if (c == 'm')
-                inEscape = false;
-            continue;
-        }
-
-        count++;
-    }
-    return count;
-}
+#include "include/core/visualLength.h"
 
 void clearStatus(int size, COORD position)
 {

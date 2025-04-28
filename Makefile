@@ -12,6 +12,7 @@ SRC = \
     src/core/mapValueToChar.cpp\
     src/core/setConfigKey.cpp \
     src/core/searchEntity.cpp \
+    src/core/visualLength.cpp \
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
     src/states/credits_state.cpp \
