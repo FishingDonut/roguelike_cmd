@@ -41,10 +41,10 @@ void info_enter()
     drawText("As salas são geradas aleatoriamente, use armadilhas ou paredes para driblar inimigos.", 1);
     drawText("Suba os andares até que o chefe aparessa, matando ele vc vence o jogo.", 2);
   
-    drawText(std::string(1, gameData.player.skin) + " - Player", 3, COLOR_YELLOW);
-    drawText(std::string(1, Enemy().skin) + " - Enemy", 4, COLOR_RED);
-    drawText(std::string(1, mapValueToChar(STAIR)) + " - Stair", 5);   
-    drawText(std::string(1, Trap().visibleSkin) + " - Trap", 6, Trap().color);
+    drawText(std::string(1, gameData.player.skin) + " - Jogador", 3, COLOR_YELLOW);
+    drawText(std::string(1, Enemy().skin) + " - Inimigo", 4, COLOR_RED);
+    drawText(std::string(1, mapValueToChar(STAIR)) + " - Escada", 5);   
+    drawText(std::string(1, Trap().visibleSkin) + " - Armadilha", 6, Trap().color);
     
     drawText("Controles", 7);
     drawText(" UP = " + std::string(1, config.UP),8);

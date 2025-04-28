@@ -14,7 +14,7 @@ struct Player
     COORD newPosition;
     COORD oldPosition;
 
-    int health = 100;
+    int health = 25;
     int damage = 1;
     int kills = 0;
     int gold = 0;
