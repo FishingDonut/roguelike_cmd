@@ -2,10 +2,13 @@
 
 #include "global.h"
 #include "entity/room.h"
+#include "entity/trap.h"
 
 struct MapData
 {
-    static constexpr int maxRooms = 12;
+    static constexpr int MAX_ROOMS = 12;
+    static constexpr int MAX_TRAPS = 12;
     int world[height][width];
-    Room rooms[maxRooms];
+    Room rooms[MAX_ROOMS];
+    Trap traps[MAX_TRAPS];
 };

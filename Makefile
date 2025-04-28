@@ -44,6 +44,7 @@ SRC = \
     src/map_construction/generate_rooms.cpp \
     src/map_construction/generateBoss.cpp \
     src/map_construction/generateEnemy.cpp \
+    src/map_construction/generateTrap.cpp \
     src/map_construction/generateRandomRoom.cpp \
     src/map_construction/isColliding.cpp \
     src/map_construction/set_position_player.cpp \

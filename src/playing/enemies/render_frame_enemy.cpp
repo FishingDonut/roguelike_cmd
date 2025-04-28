@@ -7,11 +7,11 @@
 
 void render_frame_enemy()
 {
-    const int maxRooms = gameData.mapData.maxRooms;
+    const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
     HANDLE hConsole = gameData.hConsole;
-    Room(&rooms)[maxRooms] = gameData.mapData.rooms;
+    Room(&rooms)[MAX_ROOMS] = gameData.mapData.rooms;
 
-    for (int j = 0; j < maxRooms; j++)
+    for (int j = 0; j < MAX_ROOMS; j++)
     {
         Room &room = rooms[j];
         for (int i = 0; i < room.enemyCount; i++)

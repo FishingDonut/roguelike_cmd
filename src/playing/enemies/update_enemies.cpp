@@ -6,11 +6,11 @@
 
 void update_enemies()
 {
-    const int maxRooms = gameData.mapData.maxRooms;
-    Room(&rooms)[maxRooms] = gameData.mapData.rooms;
+    const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
+    Room(&rooms)[MAX_ROOMS] = gameData.mapData.rooms;
     Player &player = gameData.player;
 
-    for (int j = 0; j < maxRooms; j++)
+    for (int j = 0; j < MAX_ROOMS; j++)
     {
         Room &room = rooms[j];
         bool isPlayerInRoom = room.isInRoom(player.position);
