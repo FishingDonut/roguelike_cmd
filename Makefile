@@ -11,6 +11,7 @@ SRC = \
     src/core/colorChar.cpp\
     src/core/mapValueToChar.cpp\
     src/core/setConfigKey.cpp \
+    src/core/searchEntity.cpp \
     src/tools/getCharAtPosition.cpp \
     src/tools/debugMatriz.cpp \
     src/states/credits_state.cpp \
@@ -35,6 +36,7 @@ SRC = \
     src/playing/boss/update_boss.cpp \
     src/playing/boss/render_frame_boss.cpp \
     src/playing/boss/direction_boss.cpp \
+    src/playing/traps/render_frame_trap.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
     src/map_construction/clearMap.cpp \

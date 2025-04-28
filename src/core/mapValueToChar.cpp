@@ -38,7 +38,7 @@ char mapValueToChar(int i)
     case BOSS:
         return Boss().skin;
     case TRAP:
-        return Trap().skin;
+        return Trap().currentSkin;
     default:
         return '?';
     }

@@ -11,4 +11,5 @@ struct MapData
     int world[height][width];
     Room rooms[MAX_ROOMS];
     Trap traps[MAX_TRAPS];
+    int countTraps = 0;
 };

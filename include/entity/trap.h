@@ -5,20 +5,24 @@
 
 struct Trap
 {
-    COORD position;
+    COORD position = {0, 0};
     int damage = 0;
     int valueMap = TRAP;
     Colors color = COLOR_BLUE;
-    char skin = '#';
+    char hidleSkin = ' ';
+    char visibleSkin = '#';
+    char currentSkin = hidleSkin;
     bool visible = false;
+    bool active = false;
 
     void init(int x, int y){
         position = {(SHORT)x, (SHORT)y};
         damage = 1;
         valueMap = TRAP;
         color = COLOR_BLUE;
-        skin = '#';
-        visible = true;
+        currentSkin = visibleSkin;
+        visible = false;
+        active = true;
         return;
     }
 
@@ -27,8 +31,9 @@ struct Trap
         damage = 0;
         valueMap = FLOOR;
         color = COLOR_WHITE;
-        skin = ' ';
+        currentSkin = ' ';
         visible = false;
+        active = false;
         return;
     }
 };

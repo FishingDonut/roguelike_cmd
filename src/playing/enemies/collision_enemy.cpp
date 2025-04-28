@@ -1,5 +1,6 @@
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "stateMachine.h"
+#include "GameData.h"
+#include "core/searchEntity.h"
 #include "include/playing/enemies/collision_enemy.h"
 
 void collision_enemy(Enemy &enemy)
@@ -12,6 +13,7 @@ void collision_enemy(Enemy &enemy)
     int &currentObject = enemy.currentObject;
     auto &map = gameData.mapData.world;
     int nearbyObject = map[newPosition.Y][newPosition.X];
+    Trap trap = searchTrap(newPosition);
 
     switch (nearbyObject)
     {
@@ -30,6 +32,21 @@ void collision_enemy(Enemy &enemy)
         break;
     case PLAYER:
         player.updateHealth(-enemy.damage);
+        return;
+        break;
+    case TRAP:
+        previousObject = currentObject;
+        currentObject = nearbyObject;
+
+        enemy.setPosition();
+
+        map[oldPosition.Y][oldPosition.X] = previousObject;
+        map[position.Y][position.X] = enemy.valueMap;
+        
+        if(trap.active){
+            enemy.updateHealth(-trap.damage);
+        }
+
         return;
         break;
     default:

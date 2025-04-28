@@ -4,6 +4,7 @@
 #include "../GameData.h"
 #include "include/playing/player/update_player.h"
 #include "include/playing/player/attack.h"
+#include "core/searchEntity.h"
 
 void handle_collision(int tile){
     switch (tile)
@@ -20,6 +21,7 @@ void handle_collision(int tile){
 
 bool is_collision(int tile)
 {
+    Trap trap;
     switch (tile)
     {
     case FLOOR:
@@ -38,6 +40,11 @@ bool is_collision(int tile)
         return true;
         break;
     case BOSS:
+        return false;
+        break;
+    case TRAP:
+        trap = searchTrap(gameData.player.newPosition);
+        gameData.player.updateHealth(-trap.damage);
         return false;
         break;
     default:
