@@ -14,7 +14,7 @@ void render_frame_boss()
 
     Boss &boss = gameData.boss;
     auto &oldPosition = gameData.boss.oldPosition;
-    auto &hConsole = game_data.hConsole;
+    auto &hConsole = gameData.hConsole;
     auto &world = gameData.mapData.world;
 
     int oldInitY = oldPosition.Y - (boss.height / 2);

@@ -15,7 +15,7 @@ void clearEnemy(Enemy &enemy){
     enemy.valueMap = FLOOR;
     enemy.alive = false;
     world[enemy.position.Y][enemy.position.X] = enemy.currentObject;
-    SetConsoleCursorPosition(game_data.hConsole, {enemy.oldPosition});
+    SetConsoleCursorPosition(gameData.hConsole, {enemy.oldPosition});
     cout << mapValueToChar(enemy.previousObject);
 }
 

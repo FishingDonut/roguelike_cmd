@@ -13,15 +13,15 @@ extern bool stateChanged;
 
 void credits_enter()
 {
-    HANDLE hConsole = game_data.hConsole;
+    HANDLE hConsole = gameData.hConsole;
     system("cls");
     drawMargin(hConsole);
 
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
     std::cout << "Parabens voce ganhou!";
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
     std::cout << "score: " << gameData.score;
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
     std::cout << "kills: " << gameData.status.kills;
     getch();
     gameData.running = false;

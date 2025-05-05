@@ -24,13 +24,13 @@ void drawText(string label, int y, Colors color = COLOR_RESET){
     std::string text = stream.str();
     int textLength = visualLength(text, 0);
 
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - (textLength / 2)), (SHORT)((height / 2) + y)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - (textLength / 2)), (SHORT)((height / 2) + y)});
     cout << text;
 }
 
 void info_enter()
 {
-    HANDLE hConsole = game_data.hConsole;
+    HANDLE hConsole = gameData.hConsole;
     std::stringstream stream;
     auto& config = gameData.config;
 

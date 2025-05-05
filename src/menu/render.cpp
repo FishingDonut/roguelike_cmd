@@ -10,7 +10,7 @@ namespace Menu
 {
     void render_frame()
     {
-        HANDLE hConsole = game_data.hConsole;
+        HANDLE hConsole = gameData.hConsole;
         int cursorOldPosition = gameData.menuData.cursorOldPosition;
         int cursorPosition = gameData.menuData.cursorPosition;
 

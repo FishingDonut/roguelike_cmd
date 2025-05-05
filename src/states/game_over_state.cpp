@@ -13,7 +13,7 @@ extern bool stateChanged;
 
 void game_over_enter()
 {
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 7, (SHORT)(height / 2)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 7, (SHORT)(height / 2)});
     std::cout << "[ GAME OVER ]";
     getch();
     return;
@@ -22,7 +22,7 @@ void game_over_enter()
 void game_over_update()
 {
     system("cls");
-    SetConsoleCursorPosition(game_data.hConsole, gameData.player.position);
+    SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
     cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << endl;
     gameData.running = false;
     return;

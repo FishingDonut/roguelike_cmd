@@ -8,7 +8,7 @@ void render_frame_trap()
 {
     const int MAX_TRAPS = gameData.mapData.MAX_TRAPS;
     auto& traps = gameData.mapData.traps;
-    auto& hConsole = game_data.hConsole;
+    auto& hConsole = gameData.hConsole;
 
     for (int i = 0; i < MAX_TRAPS; i++)
     {

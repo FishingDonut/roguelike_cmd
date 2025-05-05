@@ -9,7 +9,7 @@
 
 void clearStatus(int size, COORD position)
 {
-    HANDLE hConsole = game_data.hConsole;
+    HANDLE hConsole = gameData.hConsole;
 
     SetConsoleCursorPosition(hConsole, position);
     for (int i = -2; i < size; i++)
@@ -20,7 +20,7 @@ void clearStatus(int size, COORD position)
 
 void updateStatus(std::stringstream& stream, const std::string& label, Colors color, int& currentValue, int newValue, int& spacing, int& nextSpacing, int spacingText)
 {
-    HANDLE hConsole = game_data.hConsole;
+    HANDLE hConsole = gameData.hConsole;
 
     stream.str("");
     stream.clear();

@@ -11,7 +11,7 @@ void render_attack_frame()
         return;
     }
     
-    auto &hConsole = game_data.hConsole;
+    auto &hConsole = gameData.hConsole;
     auto &player = gameData.player;
     auto &position = player.position;
     auto &world = gameData.mapData.world;

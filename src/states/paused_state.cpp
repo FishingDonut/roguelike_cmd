@@ -15,7 +15,7 @@ void paused_enter(){
 };
 
 void paused_update(){
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
     std::cout << "===PAUSED===";
     getch();
 
@@ -24,6 +24,6 @@ void paused_update(){
 };
 
 void paused_exit(){
-    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
     std::cout << "===SAIDA===";
 };

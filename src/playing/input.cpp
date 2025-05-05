@@ -10,7 +10,7 @@ namespace Playing
     void handle_input()
     {
         Config config = gameData.config;
-        HANDLE hConsole = game_data.hConsole;
+        HANDLE hConsole = gameData.hConsole;
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
 

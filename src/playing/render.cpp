@@ -15,7 +15,7 @@ namespace Playing
 {
     void render_frame()
     {
-        HANDLE hConsole = game_data.hConsole;
+        HANDLE hConsole = gameData.hConsole;
         Player &player = gameData.player;
 
         // SetConsoleCursorPosition(hConsole, {0, 0});
