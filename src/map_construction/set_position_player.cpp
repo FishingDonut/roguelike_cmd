@@ -1,5 +1,5 @@
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 #include "entity/room.h"
 #include "entity/player.h"
 #include "map_construction/set_position_player.h"

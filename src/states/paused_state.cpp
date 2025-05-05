@@ -4,8 +4,8 @@
 
 #include "global.h"
 #include "states/paused_state.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -15,7 +15,7 @@ void paused_enter(){
 };
 
 void paused_update(){
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
     std::cout << "===PAUSED===";
     getch();
 
@@ -24,6 +24,6 @@ void paused_update(){
 };
 
 void paused_exit(){
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
     std::cout << "===SAIDA===";
 };

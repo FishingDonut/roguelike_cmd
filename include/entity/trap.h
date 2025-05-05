@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include "core/Colors.h"
+#include "core/colors.h"
 
 struct Trap
 {

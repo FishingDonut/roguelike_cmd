@@ -1,16 +1,16 @@
 #include <windows.h>
 
 #include "global.h"
-#include "include/stateMachine.h"
-#include "include/GameData.h"
-#include "include/core/mapValueToChar.h"
+#include "include/state_machine.h"
+#include "include/game_data.h"
+#include "include/core/map_value_to_char.h"
 #include "include/playing/render.h"
 
 namespace Menu
 {
     void render_frame()
     {
-        HANDLE hConsole = gameData.hConsole;
+        HANDLE hConsole = game_data.hConsole;
         int cursorOldPosition = gameData.menuData.cursorOldPosition;
         int cursorPosition = gameData.menuData.cursorPosition;
 

@@ -3,25 +3,25 @@
 #include <conio.h>
 
 #include "states/credits_state.h"
-#include "core/mapValueToChar.h"
+#include "core/map_value_to_char.h"
 #include "core/render.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
 
 void credits_enter()
 {
-    HANDLE hConsole = gameData.hConsole;
+    HANDLE hConsole = game_data.hConsole;
     system("cls");
     drawMargin(hConsole);
 
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
     std::cout << "Parabens voce ganhou!";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
     std::cout << "score: " << gameData.score;
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
     std::cout << "kills: " << gameData.status.kills;
     getch();
     gameData.running = false;

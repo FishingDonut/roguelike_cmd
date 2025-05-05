@@ -4,12 +4,12 @@
 #include <conio.h>
 
 #include "states/info_state.h"
-#include "core/mapValueToChar.h"
-#include "core/colorChar.h"
-#include "core/visualLength.h"
+#include "core/map_value_to_char.h"
+#include "core/color_char.h"
+#include "core/visual_length.h"
 #include "core/render.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -24,13 +24,13 @@ void drawText(string label, int y, Colors color = COLOR_RESET){
     std::string text = stream.str();
     int textLength = visualLength(text, 0);
 
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - (textLength / 2)), (SHORT)((height / 2) + y)});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)((width / 2) - (textLength / 2)), (SHORT)((height / 2) + y)});
     cout << text;
 }
 
 void info_enter()
 {
-    HANDLE hConsole = gameData.hConsole;
+    HANDLE hConsole = game_data.hConsole;
     std::stringstream stream;
     auto& config = gameData.config;
 

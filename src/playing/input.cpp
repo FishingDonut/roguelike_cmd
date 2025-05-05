@@ -1,16 +1,16 @@
 #include <conio.h>
 
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "include/playing/input.h"
-#include "tools/debugMatriz.h"
+#include "tools/debug_matriz.h"
 
 namespace Playing
 {
     void handle_input()
     {
         Config config = gameData.config;
-        HANDLE hConsole = gameData.hConsole;
+        HANDLE hConsole = game_data.hConsole;
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
 

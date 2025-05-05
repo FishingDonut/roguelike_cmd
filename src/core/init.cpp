@@ -3,11 +3,11 @@
 #include <conio.h>
 #include <ctime>
 #include "global.h"
-#include "TileMapValue.h"
+#include "tile_map_value.h"
 #include "core/init.h"
 #include "core/render.h"
-#include "GameData.h"
-#include "stateMachine.h"
+#include "game_data.h"
+#include "state_machine.h"
 #include "states/menu_state.h"
 
 void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])

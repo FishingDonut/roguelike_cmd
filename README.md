@@ -17,10 +17,10 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 ```
 /root
 ├── include/                            # Cabeçalhos (.h) com declarações e interfaces do projeto
-│   ├── GameData.h                      # Struct principal contendo os dados do jogo (jogador, mapa, inimigos etc.)
+│   ├── game_data.h                      # Struct principal contendo os dados do jogo (jogador, mapa, inimigos etc.)
 │   ├── global.h                        # Variáveis globais ou definições amplamente usadas
 │   ├── mapData.h                       # Estrutura ou constantes específicas do mapa
-│   ├── stateMachine.h                  # Declaração da máquina de estados do jogo
+│   ├── state_machine.h                  # Declaração da máquina de estados do jogo
 │
 │   ├── core/                           # Funções e lógica centrais e independentes de estados
 │   │   ├── init.h                      # Inicialização de variáveis e recursos
@@ -33,13 +33,13 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 │   │   └── room.h                      # Representação de salas no mapa
 │
 │   ├── map_construction/               # Lógica de geração procedural de mapas
-│   │   ├── clearMap.h                  # Função para limpar o mapa
-│   │   ├── connectRoom.h               # Conectar salas com corredores
-│   │   ├── createRoom.h                # Criação de uma única sala
+│   │   ├── clear_map.h                  # Função para limpar o mapa
+│   │   ├── connect_room.h               # Conectar salas com corredores
+│   │   ├── create_room.h                # Criação de uma única sala
 │   │   ├── generate_rooms.h            # Geração geral de múltiplas salas
-│   │   ├── generateEnemy.h             # Spawning de inimigos
-│   │   ├── generateRandomRoom.h        # Criar uma sala aleatória
-│   │   ├── isColliding.h               # Verifica colisões entre salas
+│   │   ├── generate_enemy.h             # Spawning de inimigos
+│   │   ├── generate_random_room.h        # Criar uma sala aleatória
+│   │   ├── is_colliding.h               # Verifica colisões entre salas
 │   │   ├── map_construction.h          # Header geral para incluir todos acima
 │   │   └── set_position_player.h       # Define posição inicial do jogador
 │
@@ -56,8 +56,8 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 │   │   └── playing_state.h             # Estado ativo de gameplay
 │
 │   └── tools/                          # Ferramentas utilitárias
-│       ├── debugMatriz.h               # Funções de debug para imprimir matrizes
-│       └── getCharAtPosition.h         # Retorna caractere em certa posição no mapa
+│       ├── debug_matriz.h               # Funções de debug para imprimir matrizes
+│       └── get_char_at_position.h         # Retorna caractere em certa posição no mapa
 │
 ├── src/                                # Implementações (.cpp) das funções declaradas em include/
 │   ├── core/
@@ -70,7 +70,7 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 │   │   ├── connectRoom.cpp
 │   │   ├── createRoom.cpp
 │   │   ├── generate_rooms.cpp
-│   │   ├── generateEnemy.cpp
+│   │   ├── generate_enemy.cpp
 │   │   ├── generateRandomRoom.cpp
 │   │   ├── isColliding.cpp
 │   │   └── set_position_player.cpp
@@ -88,8 +88,8 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 │   │   └── playing_state.cpp
 │
 │   ├── tools/
-│   │   ├── debugMatriz.cpp
-│   │   └── getCharAtPosition.cpp
+│   │   ├── debug_matriz.cpp
+│   │   └── get_char_at_position.cpp
 │
 │   └── global.cpp                      # Implementação de variáveis/funções globais
 │

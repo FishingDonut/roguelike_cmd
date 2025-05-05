@@ -4,16 +4,16 @@
 
 #include "global.h"
 #include "states/game_over_state.h"
-#include "stateMachine.h"
-#include "GameData.h"
-#include "core/colorChar.h"
+#include "state_machine.h"
+#include "game_data.h"
+#include "core/color_char.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
 
 void game_over_enter()
 {
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 7, (SHORT)(height / 2)});
+    SetConsoleCursorPosition(game_data.hConsole, {(SHORT)(width / 2) - 7, (SHORT)(height / 2)});
     std::cout << "[ GAME OVER ]";
     getch();
     return;
@@ -22,7 +22,7 @@ void game_over_enter()
 void game_over_update()
 {
     system("cls");
-    SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
+    SetConsoleCursorPosition(game_data.hConsole, gameData.player.position);
     cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << endl;
     gameData.running = false;
     return;

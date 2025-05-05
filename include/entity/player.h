@@ -2,9 +2,9 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-#include "stateMachine.h"
-#include "core/Colors.h"
-#include "TileMapValue.h"
+#include "state_machine.h"
+#include "core/colors.h"
+#include "tile_map_value.h"
 
 using namespace std;
 

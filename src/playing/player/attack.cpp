@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "include/playing/player/attack.h"
 
 void attack()

@@ -1,15 +1,15 @@
 #include <sstream>
 #include <windows.h>
 
-#include "include/GameData.h"
+#include "include/game_data.h"
 #include "include/status/render_status.h"
-#include "include/core/mapValueToChar.h"
-#include "include/core/colorChar.h"
-#include "include/core/visualLength.h"
+#include "include/core/map_value_to_char.h"
+#include "include/core/color_char.h"
+#include "include/core/visual_length.h"
 
 void clearStatus(int size, COORD position)
 {
-    HANDLE hConsole = gameData.hConsole;
+    HANDLE hConsole = game_data.hConsole;
 
     SetConsoleCursorPosition(hConsole, position);
     for (int i = -2; i < size; i++)
@@ -20,7 +20,7 @@ void clearStatus(int size, COORD position)
 
 void updateStatus(std::stringstream& stream, const std::string& label, Colors color, int& currentValue, int newValue, int& spacing, int& nextSpacing, int spacingText)
 {
-    HANDLE hConsole = gameData.hConsole;
+    HANDLE hConsole = game_data.hConsole;
 
     stream.str("");
     stream.clear();

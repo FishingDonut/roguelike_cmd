@@ -1,6 +1,6 @@
-#include "stateMachine.h"
-#include "GameData.h"
-#include "core/colorChar.h"
+#include "state_machine.h"
+#include "game_data.h"
+#include "core/color_char.h"
 #include "entity/boss.h"
 #include "playing/boss/direction_boss.h"
 

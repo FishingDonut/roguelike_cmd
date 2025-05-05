@@ -1,8 +1,8 @@
 #include <windows.h>
 
-#include "include/GameData.h"
-#include "include/core/mapValueToChar.h"
-#include "include/core/colorChar.h"
+#include "include/game_data.h"
+#include "include/core/map_value_to_char.h"
+#include "include/core/color_char.h"
 #include "include/playing/boss/render_frame_boss.h"
 
 void render_frame_boss()
@@ -14,7 +14,7 @@ void render_frame_boss()
 
     Boss &boss = gameData.boss;
     auto &oldPosition = gameData.boss.oldPosition;
-    auto &hConsole = gameData.hConsole;
+    auto &hConsole = game_data.hConsole;
     auto &world = gameData.mapData.world;
 
     int oldInitY = oldPosition.Y - (boss.height / 2);
