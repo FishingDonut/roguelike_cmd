@@ -1,6 +1,6 @@
 #include "global.h"
 #include "entity/room.h"
-#include "map_construction/generateEnemy.h"
+#include "map_construction/generate_enemy.h"
 
 void generateEnemy(Room &newRoom, int (&map)[height][width])
 {

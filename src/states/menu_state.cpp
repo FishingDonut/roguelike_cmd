@@ -2,14 +2,14 @@
 #include <windows.h>
 #include <conio.h>
 
-#include "core/setConfigKey.h"
+#include "core/set_config_key.h"
 #include "states/menu_state.h"
-#include "stateMachine.h"
+#include "state_machine.h"
 #include "core/render.h"
 #include "menu/render.h"
 #include "menu/input.h"
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;

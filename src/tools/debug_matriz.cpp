@@ -1,8 +1,8 @@
 #include "iostream"
 #include "windows.h"
 #include "global.h"
-#include "TileMapValue.h"
-#include "tools/debugMatriz.h"
+#include "tile_map_value.h"
+#include "tools/debug_matriz.h"
 
 void printMatriz(HANDLE hConsole, int matriz[height][width])
 {

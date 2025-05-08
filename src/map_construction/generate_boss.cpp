@@ -1,7 +1,7 @@
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 #include "entity/room.h"
-#include "map_construction/generateBoss.h"
+#include "map_construction/generate_boss.h"
 
 void generateBoss(Room &room, int (&world)[height][width])
 {

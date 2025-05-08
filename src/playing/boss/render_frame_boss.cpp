@@ -1,8 +1,8 @@
 #include <windows.h>
 
-#include "include/GameData.h"
-#include "include/core/mapValueToChar.h"
-#include "include/core/colorChar.h"
+#include "include/game_data.h"
+#include "include/core/map_value_to_char.h"
+#include "include/core/color_char.h"
 #include "include/playing/boss/render_frame_boss.h"
 
 void render_frame_boss()

@@ -1,7 +1,7 @@
 #include <conio.h>
 
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "include/menu/input.h"
 
 namespace Menu

@@ -1,6 +1,6 @@
-#include "GameData.h"
+#include "game_data.h"
 #include "global.h"
-#include "map_construction/connectRoom.h"
+#include "map_construction/connect_room.h"
 
 void connectRoom(Room (&rooms)[gameData.mapData.MAX_ROOMS], int (&map)[height][width])
 {

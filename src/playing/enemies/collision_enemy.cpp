@@ -1,6 +1,6 @@
-#include "stateMachine.h"
-#include "GameData.h"
-#include "core/searchEntity.h"
+#include "state_machine.h"
+#include "game_data.h"
+#include "core/search_entity.h"
 #include "include/playing/enemies/collision_enemy.h"
 
 void collision_enemy(Enemy &enemy)

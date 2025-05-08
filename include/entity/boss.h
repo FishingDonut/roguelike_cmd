@@ -3,10 +3,10 @@
 #include <conio.h>
 #include <windows.h>
 
-#include "core/Colors.h"
-#include "TileMapvalue.h"
-#include "core/mapValueToChar.h"
-#include "core/clearEntity.h"
+#include "core/colors.h"
+#include "tile_map_value.h"
+#include "core/map_value_to_char.h"
+#include "core/clear_entity.h"
 #include "entity/room.h"
 
 struct Boss

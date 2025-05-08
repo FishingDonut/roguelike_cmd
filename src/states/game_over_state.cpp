@@ -4,9 +4,9 @@
 
 #include "global.h"
 #include "states/game_over_state.h"
-#include "stateMachine.h"
-#include "GameData.h"
-#include "core/colorChar.h"
+#include "state_machine.h"
+#include "game_data.h"
+#include "core/color_char.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;

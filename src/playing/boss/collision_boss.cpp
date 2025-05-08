@@ -1,5 +1,5 @@
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "entity/boss.h"
 #include "include/playing/boss/collision_boss.h"
 

@@ -1,10 +1,10 @@
 #include <windows.h>
 
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "include/playing/player/update_player.h"
 #include "include/playing/player/attack.h"
-#include "core/searchEntity.h"
+#include "core/search_entity.h"
 
 void handle_collision(int tile){
     switch (tile)

@@ -1,8 +1,8 @@
 #include "windows.h"
 
-#include "GameData.h"
-#include "core/colorChar.h"
-#include "core/mapValueToChar.h"
+#include "game_data.h"
+#include "core/color_char.h"
+#include "core/map_value_to_char.h"
 #include "playing/player/render_attack_frame.h"
 
 void render_attack_frame()

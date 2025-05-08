@@ -4,8 +4,8 @@
 
 #include "global.h"
 #include "states/paused_state.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;

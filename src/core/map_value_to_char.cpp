@@ -1,8 +1,8 @@
 #include "random"
 #include "ctime"
 
-#include "core/mapValueToChar.h"
-#include "include/GameData.h"
+#include "core/map_value_to_char.h"
+#include "include/game_data.h"
 #include "include/entity/enemy.h"
 #include "include/entity/boss.h"
 #include "include/entity/trap.h"

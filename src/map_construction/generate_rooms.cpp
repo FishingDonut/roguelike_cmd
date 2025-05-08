@@ -6,7 +6,7 @@
 #include <ctime>
 // my libs
 #include "include/global.h"
-#include "include/GameData.h"
+#include "include/game_data.h"
 #include "include/entity/room.h"
 // map_construction
 #include "map_construction/generate_rooms.h"

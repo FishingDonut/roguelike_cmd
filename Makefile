@@ -5,16 +5,16 @@ CXXFLAGS = -std=c++17 -Wall -Iinclude -Isrc -I. -Iinclude/tools
 # Fontes existentes no projeto
 SRC = \
     main.cpp \
-    src/core/clearEnemy.cpp \
+    src/core/clear_enemy.cpp \
     src/core/init.cpp \
     src/core/render.cpp\
-    src/core/colorChar.cpp\
-    src/core/mapValueToChar.cpp\
-    src/core/setConfigKey.cpp \
-    src/core/searchEntity.cpp \
-    src/core/visualLength.cpp \
-    src/tools/getCharAtPosition.cpp \
-    src/tools/debugMatriz.cpp \
+    src/core/color_char.cpp\
+    src/core/map_value_to_char.cpp\
+    src/core/set_config_key.cpp \
+    src/core/search_entity.cpp \
+    src/core/visual_length.cpp \
+    src/tools/get_char_at_position.cpp \
+    src/tools/debug_matriz.cpp \
     src/states/credits_state.cpp \
     src/states/menu_state.cpp \
     src/states/info_state.cpp \
@@ -40,16 +40,16 @@ SRC = \
     src/playing/traps/render_frame_trap.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
-    src/map_construction/clearMap.cpp \
-    src/map_construction/connectRoom.cpp \
-    src/map_construction/createRoom.cpp \
-    src/map_construction/generateRandomBossRoom.cpp \
+    src/map_construction/clear_map.cpp \
+    src/map_construction/connect_room.cpp \
+    src/map_construction/create_room.cpp \
+    src/map_construction/generate_random_boss_room.cpp \
     src/map_construction/generate_rooms.cpp \
-    src/map_construction/generateBoss.cpp \
-    src/map_construction/generateEnemy.cpp \
-    src/map_construction/generateTrap.cpp \
-    src/map_construction/generateRandomRoom.cpp \
-    src/map_construction/isColliding.cpp \
+    src/map_construction/generate_boss.cpp \
+    src/map_construction/generate_enemy.cpp \
+    src/map_construction/generate_trap.cpp \
+    src/map_construction/generate_random_room.cpp \
+    src/map_construction/is_colliding.cpp \
     src/map_construction/set_position_player.cpp \
     src/map_construction/set_position_stair.cpp
 

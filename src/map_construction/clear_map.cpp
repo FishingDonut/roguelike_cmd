@@ -1,6 +1,6 @@
 #include "global.h"
-#include "TileMapValue.h"
-#include "map_construction/clearMap.h"
+#include "tile_map_value.h"
+#include "map_construction/clear_map.h"
 
 void clearMap(int (&map)[height][width])
 {

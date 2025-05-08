@@ -1,5 +1,5 @@
 #include <sstream>
-#include "include/core/visualLength.h"
+#include "include/core/visual_length.h"
 
 int visualLength(std::string text, int spacing)
 {

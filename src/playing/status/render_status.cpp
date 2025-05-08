@@ -1,11 +1,11 @@
 #include <sstream>
 #include <windows.h>
 
-#include "include/GameData.h"
+#include "include/game_data.h"
 #include "include/status/render_status.h"
-#include "include/core/mapValueToChar.h"
-#include "include/core/colorChar.h"
-#include "include/core/visualLength.h"
+#include "include/core/map_value_to_char.h"
+#include "include/core/color_char.h"
+#include "include/core/visual_length.h"
 
 void clearStatus(int size, COORD position)
 {

@@ -1,6 +1,6 @@
 #include <windows.h>
 #include "../global.h"
-#include "../include/tools/getCharAtPosition.h"
+#include "../include/tools/get_char_at_position.h"
 
 char getCharAtPosition(HANDLE hConsole, COORD position)
 {

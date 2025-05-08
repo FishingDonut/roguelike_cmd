@@ -1,5 +1,5 @@
 #include "entity/room.h"
-#include "map_construction/isColliding.h"
+#include "map_construction/is_colliding.h"
 
 bool isColliding(Room rooms[], int roomCount, Room newRoom, int padding = 1)
 {

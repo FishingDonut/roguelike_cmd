@@ -1,8 +1,8 @@
 #include <random>
-#include "core/clearEntity.h"
+#include "core/clear_entity.h"
 #include "entity/boss.h"
 #include "entity/enemy.h"
-#include "GameData.h"
+#include "game_data.h"
 
 void clearEnemy(Enemy &enemy){
     gameData.score += 1 + (rand() % (20 - 1 + 1));

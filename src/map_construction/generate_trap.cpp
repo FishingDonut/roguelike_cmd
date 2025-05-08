@@ -1,11 +1,11 @@
 #include "ctime"
 
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 #include "entity/room.h"
 #include "entity/trap.h"
 #include "Data/MapData.h"
-#include "map_construction/generateTrap.h"
+#include "map_construction/generate_trap.h"
 
 void generateTrap(int (&world)[height][width])
 {

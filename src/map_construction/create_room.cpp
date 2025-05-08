@@ -1,6 +1,6 @@
 #include "global.h"
 #include "entity/room.h"
-#include "map_construction/createRoom.h"
+#include "map_construction/create_room.h"
 
 void createRoom(Room newRoom, int (&map)[height][width])
 {

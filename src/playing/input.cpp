@@ -1,9 +1,9 @@
 #include <conio.h>
 
-#include "../stateMachine.h"
-#include "../GameData.h"
+#include "../state_machine.h"
+#include "../game_data.h"
 #include "include/playing/input.h"
-#include "tools/debugMatriz.h"
+#include "tools/debug_matriz.h"
 
 namespace Playing
 {

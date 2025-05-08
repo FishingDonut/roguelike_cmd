@@ -1,7 +1,7 @@
 #include <conio.h>
 
-#include "GameData.h"
-#include "core/setConfigKey.h"
+#include "game_data.h"
+#include "core/set_config_key.h"
 
 void setConfigKey()
 {

@@ -6,12 +6,12 @@
 
 // Internos do projeto
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 #include "entity/player.h"
-#include "tools/getCharAtPosition.h"
-#include "tools/debugMatriz.h"
+#include "tools/get_char_at_position.h"
+#include "tools/debug_matriz.h"
 #include "core/render.h"
-#include "stateMachine.h"
+#include "state_machine.h"
 #include "states/playing_state.h"
 #include "playing/input.h"
 #include "playing/render.h"

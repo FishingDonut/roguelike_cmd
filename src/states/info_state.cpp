@@ -4,12 +4,12 @@
 #include <conio.h>
 
 #include "states/info_state.h"
-#include "core/mapValueToChar.h"
-#include "core/colorChar.h"
-#include "core/visualLength.h"
+#include "core/map_value_to_char.h"
+#include "core/color_char.h"
+#include "core/visual_length.h"
 #include "core/render.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;

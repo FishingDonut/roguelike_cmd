@@ -1,7 +1,7 @@
 
 #include <windows.h>
-#include "GameData.h"
-#include "core/colorChar.h"
+#include "game_data.h"
+#include "core/color_char.h"
 #include "playing/traps/render_frame_trap.h"
 
 void render_frame_trap()

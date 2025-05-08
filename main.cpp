@@ -5,10 +5,10 @@
 #include <windows.h>
 // person libs
 #include "global.h"
-#include "stateMachine.h"
+#include "state_machine.h"
 #include "./include/core/init.h"
 #include "./include/entity/player.h"
-#include "GameData.h"
+#include "game_data.h"
 // states
 #include "./include/states/menu_state.h"
 #include "./include/states/info_state.h"

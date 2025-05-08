@@ -2,8 +2,8 @@
 
 #include <windows.h>
 
-#include "GameData.h"
+#include "game_data.h"
 #include "entity/trap.h"
-#include "core/searchEntity.h"
+#include "core/search_entity.h"
 
 Trap searchTrap(COORD position);

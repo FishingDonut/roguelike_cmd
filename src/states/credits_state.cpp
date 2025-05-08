@@ -3,10 +3,10 @@
 #include <conio.h>
 
 #include "states/credits_state.h"
-#include "core/mapValueToChar.h"
+#include "core/map_value_to_char.h"
 #include "core/render.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;

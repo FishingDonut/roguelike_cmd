@@ -1,9 +1,9 @@
 #include <iostream>
 #include <windows.h>
 #include "core/render.h"
-#include "core/mapValueToChar.h"
+#include "core/map_value_to_char.h"
 #include "global.h"
-#include "GameData.h"
+#include "game_data.h"
 
 void drawMap(HANDLE &hConsole, int matriz[height][width])
 {

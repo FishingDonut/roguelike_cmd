@@ -4,8 +4,8 @@
 
 #include "global.h"
 #include "states/map_construction_state.h"
-#include "stateMachine.h"
-#include "GameData.h"
+#include "state_machine.h"
+#include "game_data.h"
 #include "include/map_construction/generate_rooms.h"
 
 extern StateMachine nextState;
