@@ -14,6 +14,7 @@ SRC = \
     src/core/search_entity.cpp \
     src/core/visual_length.cpp \
     src/core/is_numeric.cpp \
+    src/file_manager/score/score_in.cpp \
     src/tools/get_char_at_position.cpp \
     src/tools/debug_matriz.cpp \
     src/states/credits_state.cpp \
