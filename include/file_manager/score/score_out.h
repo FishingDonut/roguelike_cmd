@@ -1,0 +1,1 @@
+void scoreOut(vector<string> &linhas);
