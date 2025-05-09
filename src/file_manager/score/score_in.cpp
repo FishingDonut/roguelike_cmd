@@ -11,15 +11,15 @@
 
 using namespace std;
 
-void scoreIn(vector<string> &linhas, int pontos, string newName)
+vector<string> scoreIn(vector<string> &linhas, int pontos, string newName)
 {
     string linha, oldName;
 
-    ifstream fileR("pontos.txt");
+    ifstream fileR("scores.txt");
 
     if (!fileR.is_open())
     {
-        return;
+        return linhas;
     }
 
     int countLine = -1;
@@ -51,4 +51,5 @@ void scoreIn(vector<string> &linhas, int pontos, string newName)
             cerr << "Erro ao converter: " << linha << endl;
         }
     }
+    return linhas;
 }
