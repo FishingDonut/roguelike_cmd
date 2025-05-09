@@ -16,6 +16,7 @@ SRC = \
     src/core/is_numeric.cpp \
     src/file_manager/score/score_in.cpp \
     src/file_manager/score/score_out.cpp \
+    src/file_manager/score/score_manager.cpp \
     src/tools/get_char_at_position.cpp \
     src/tools/debug_matriz.cpp \
     src/states/credits_state.cpp \
