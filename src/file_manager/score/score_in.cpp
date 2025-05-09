@@ -11,15 +11,15 @@
 
 using namespace std;
 
-vector<string> scoreIn(vector<string> &linhas, int pontos, string newName)
+void scoreIn(vector<string> &linhas, int pontos, string newName)
 {
     string linha, oldName;
 
-    ifstream fileR("scores.txt");
+    ifstream fileR("saves/scores.txt");
 
     if (!fileR.is_open())
     {
-        return linhas;
+        return;
     }
 
     int countLine = -1;
@@ -44,6 +44,37 @@ vector<string> scoreIn(vector<string> &linhas, int pontos, string newName)
                 newName = oldName;
                 continue;
             }
+            linhas.push_back(linha);
+        }
+        catch (invalid_argument &e)
+        {
+            cerr << "Erro ao converter: " << linha << endl;
+        }
+    }
+    return;
+}
+
+std::vector<std::string> scoreRead()
+{
+    ifstream fileR("saves/scores.txt");
+    vector<string> linhas;
+    string linha;
+
+    if (!fileR.is_open())
+    {
+        return linhas;
+    }
+
+    while (getline(fileR, linha))
+    {
+        try
+        {
+            if (!isNumeric(linha) || linha.empty())
+            {
+                linhas.push_back(linha);
+                continue;
+            }
+
             linhas.push_back(linha);
         }
         catch (invalid_argument &e)

@@ -10,7 +10,7 @@ void scoreOut(vector<string> &linhas)
 {
     string linha;
 
-    ofstream file("scores.txt", ios::trunc);
+    ofstream file("saves/scores.txt", ios::trunc);
 
     if (!file.is_open())
     {
