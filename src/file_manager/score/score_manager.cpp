@@ -3,20 +3,10 @@
 #include "file_manager/score/score_in.h"
 
 #include <vector>
-#include <ctime>
-#include <random>
 
-using namespace std;
-
-int scoreManager()
+int scoreManager(long long pontos, std::string name)
 {
-    vector<string> linhas;
-    time_t now = time(0);
-    srand(now);
-    tm data = *localtime(&now);
-
-    long long pontos = 0 + (rand() % (6000 - 0) - 1);
-    string name = "Edu";
+    std::vector<std::string> linhas;
 
     scoreIn(linhas, pontos, name);
     scoreOut(linhas);

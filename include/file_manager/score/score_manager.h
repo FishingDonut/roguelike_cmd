@@ -1,3 +1,5 @@
 #pragma once
 
-int scoreManager();
+#include <string>
+
+int scoreManager(long long pontos, std::string name);

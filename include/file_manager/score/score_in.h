@@ -1,7 +1,6 @@
-#include <string>
+#pragma once
+
 #include <vector>
-#include <cctype>
+#include <string>
 
-using namespace std;
-
-void scoreIn(vector<string> &linhas, int pontos, string newName);
+void scoreIn(std::vector<std::string>& linhas, int pontos, std::string newName);
