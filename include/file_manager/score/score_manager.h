@@ -1,1 +1,3 @@
-int scoreupdate();
+#pragma once
+
+int scoreManager();
