@@ -54,6 +54,7 @@ void game_over_enter()
         }
     }
 
+    system("cls");
     scoreManager(gameData.score, gameData.player.name);
 
     vector<string> scores;
