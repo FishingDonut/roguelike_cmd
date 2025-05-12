@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <cctype>
 #include <windows.h>
 #include <string.h>
 
@@ -10,6 +11,7 @@
 #include "core/color_char.h"
 #include "file_manager/score/score_manager.h"
 #include "file_manager/score/score_in.h"
+#include "include/core/visual_length.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -22,6 +24,35 @@ void game_over_enter()
 
     SetConsoleCursorPosition(gameData.hConsole, coord);
     std::cout << "[ GAME OVER ]";
+    getch();
+    system("cls");
+
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(coord.X - 14), coord.Y});
+    std::cout << "[ Insira o nome no placar ]";
+
+    int c;
+    auto &name = gameData.player.name;
+
+    while (c != 13)
+    {
+        c = getch();
+        SetConsoleCursorPosition(gameData.hConsole, {coord.X, (SHORT)(coord.Y + 2)});
+
+        if (c == 8 && !name.empty())
+        {
+            name.pop_back();
+            if (!name.empty())
+            {
+                cout << name << " ";
+            }
+            continue;
+        }
+        name += c;
+        if (isprint(c))
+        {
+            cout << name;
+        }
+    }
 
     scoreManager(gameData.score, gameData.player.name);
 
