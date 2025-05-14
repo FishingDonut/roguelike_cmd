@@ -5,10 +5,11 @@
 #include <string.h>
 
 #include "global.h"
+#include "core/color_char.h"
+#include "core/render.h"
 #include "states/game_over_state.h"
 #include "state_machine.h"
 #include "game_data.h"
-#include "core/color_char.h"
 #include "file_manager/score/score_manager.h"
 #include "file_manager/score/score_in.h"
 #include "include/core/visual_length.h"
@@ -16,72 +17,85 @@
 extern StateMachine nextState;
 extern bool stateChanged;
 
-void game_over_enter()
+// Função utilitária para imprimir centralizado
+void print_centered(short y, const std::string &text)
 {
     COORD coord;
-    coord.X = (SHORT)(width / 2) - 7;
-    coord.Y = (SHORT)(height / 2);
-
+    coord.X = (SHORT)(width / 2 - text.length() / 2);
+    coord.Y = y;
     SetConsoleCursorPosition(gameData.hConsole, coord);
-    std::cout << "[ GAME OVER ]";
+    std::cout << text;
+}
+
+// Função para capturar nome do jogador
+void capture_player_name(short y)
+{
+    auto &name = gameData.player.name;
+    int c = 0;
+
+    while (c != 13) // Enter
+    {
+        c = getch();
+
+        if (c == 8 && !name.empty()) // Backspace
+        {
+            name.pop_back();
+        }
+        else if (isprint(c))
+        {
+            name += c;
+        }
+
+        COORD coord = {(SHORT)(width / 2 - name.length() / 2), y};
+        SetConsoleCursorPosition(gameData.hConsole, coord);
+        std::cout << name << " ";
+    }
+}
+
+// Função para exibir placar
+void show_scoreboard()
+{
+    system("cls");
+
+    std::vector<std::string> scores = scoreRead();
+    short y = (SHORT)(height / 2);
+    size_t i = 1;
+
+    for (const std::string &score : scores)
+    {
+        print_centered(y + i++, score);
+    }
+
+    drawMargin(gameData.hConsole);
+    getch();
+}
+
+void game_over_enter()
+{
+    system("cls");
+    short centerY = (SHORT)(height / 2);
+
+    print_centered(centerY, "[ GAME OVER ]");
     getch();
     system("cls");
 
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(coord.X - 14), coord.Y});
-    std::cout << "[ Insira o nome no placar ]";
-
-    int c;
-    auto &name = gameData.player.name;
-
-    while (c != 13)
-    {
-        c = getch();
-        SetConsoleCursorPosition(gameData.hConsole, {coord.X, (SHORT)(coord.Y + 2)});
-
-        if (c == 8 && !name.empty())
-        {
-            name.pop_back();
-            if (!name.empty())
-            {
-                cout << name << " ";
-            }
-            continue;
-        }
-        name += c;
-        if (isprint(c))
-        {
-            cout << name;
-        }
-    }
+    print_centered(centerY, "[ Insira o nome no placar ]");
+    capture_player_name(centerY + 2);
 
     system("cls");
     scoreManager(gameData.score, gameData.player.name);
-
-    vector<string> scores;
-    size_t i = 1;
-
-    for (string score : scoreRead())
-    {
-        coord.Y = (SHORT)((height / 2) + i++);
-        coord.X = (SHORT)((width / 2) - (score.length() / 2));
-        SetConsoleCursorPosition(gameData.hConsole, coord);
-        cout << score << endl;
-    }
-
-    getch();
-    return;
+    show_scoreboard();
 }
 
 void game_over_update()
 {
     system("cls");
     SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
-    cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << endl;
+    std::cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << std::endl;
     gameData.running = false;
-    return;
 }
 
 void game_over_exit()
 {
-    return;
+    // Nada a fazer aqui por enquanto
 }
