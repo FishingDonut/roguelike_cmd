@@ -58,7 +58,7 @@ void show_scoreboard()
     system("cls");
 
     std::vector<std::string> scores = scoreRead();
-    short y = (SHORT)(height / 2);
+    short y = (SHORT)((height / 2) - (scores.size() / 2));
     size_t i = 1;
 
     for (const std::string &score : scores)
