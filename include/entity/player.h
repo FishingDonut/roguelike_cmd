@@ -14,6 +14,7 @@ struct Player
     COORD newPosition;
     COORD oldPosition;
 
+    std::string name = "";
     int health = 25;
     int damage = 1;
     int kills = 0;
