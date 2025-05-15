@@ -48,7 +48,7 @@ void capture_player_name(short y)
 
         COORD coord = {(SHORT)(width / 2 - name.length() / 2), y};
         SetConsoleCursorPosition(gameData.hConsole, coord);
-        std::cout << name << " ";
+        std::cout << " " << name << " ";
     }
 }
 
