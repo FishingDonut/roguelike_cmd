@@ -14,6 +14,10 @@ namespace Playing
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
 
+        if(!kbhit()){
+            return;
+        }
+         
         int keyBoard = getch();
 
         if (keyBoard == 27) // ESC
