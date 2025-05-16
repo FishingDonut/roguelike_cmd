@@ -3,10 +3,12 @@
 #include "../state_machine.h"
 #include "../game_data.h"
 #include "include/playing/player/update_player.h"
+#include "include/playing/player/time_player.h"
 #include "include/playing/player/attack.h"
 #include "core/search_entity.h"
 
-void handle_collision(int tile){
+void handle_collision(int tile)
+{
     switch (tile)
     {
     case STAIR:
@@ -75,7 +77,13 @@ void update_player()
     int &previousObject = gameData.player.previousObject;
     int nearbyObject;
 
-    if(player.isAttackUpdate){
+    if (!player.IsUpdate)
+    {
+        return;
+    }
+
+    if (player.isAttackUpdate)
+    {
         attack();
         player.isAttackUpdate = false;
     }
