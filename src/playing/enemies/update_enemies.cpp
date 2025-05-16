@@ -3,6 +3,7 @@
 #include "include/playing/enemies/update_enemies.h"
 #include "include/playing/enemies/direction_enemy.h"
 #include "include/playing/enemies/collision_enemy.h"
+#include "include/playing/enemies/time_enemy.h"
 
 void update_enemies()
 {
@@ -19,7 +20,9 @@ void update_enemies()
         {
             Enemy &enemy = room.enemies[i];
 
-            if(!enemy.alive){
+            time_enemy(enemy);
+
+            if(!enemy.alive || !enemy.IsUpdate){
                 continue;
             }
             

@@ -38,6 +38,7 @@ SRC = \
     src/playing/enemies/direction_enemy.cpp \
     src/playing/enemies/collision_enemy.cpp \
     src/playing/enemies/render_frame_enemy.cpp \
+    src/playing/enemies/time_enemy.cpp \
     src/playing/boss/collision_boss.cpp \
     src/playing/boss/update_boss.cpp \
     src/playing/boss/render_frame_boss.cpp \
