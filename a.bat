@@ -11,7 +11,7 @@ if errorlevel 1 (
 )
 
 rem Compila o projeto
-make >nul
+make -j >nul
 if errorlevel 1 (
     echo [ERRO] na compilação:
     make 2>&1
