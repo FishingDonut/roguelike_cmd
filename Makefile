@@ -44,6 +44,7 @@ SRC = \
     src/playing/boss/update_boss.cpp \
     src/playing/boss/render_frame_boss.cpp \
     src/playing/boss/direction_boss.cpp \
+    src/playing/boss/time_boss.cpp \
     src/playing/traps/render_frame_trap.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
