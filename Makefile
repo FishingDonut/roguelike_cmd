@@ -1,6 +1,7 @@
 # Compilador e flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Iinclude -Isrc -I. -Iinclude/tools
+LDFLAGS = -mconsole
 
 # Fontes existentes no projeto
 SRC = \
@@ -33,14 +34,17 @@ SRC = \
     src/playing/player/attack.cpp \
     src/playing/player/update_player.cpp \
     src/playing/player/render_attack_frame.cpp \
+    src/playing/player/time_player.cpp \
     src/playing/enemies/update_enemies.cpp \
     src/playing/enemies/direction_enemy.cpp \
     src/playing/enemies/collision_enemy.cpp \
     src/playing/enemies/render_frame_enemy.cpp \
+    src/playing/enemies/time_enemy.cpp \
     src/playing/boss/collision_boss.cpp \
     src/playing/boss/update_boss.cpp \
     src/playing/boss/render_frame_boss.cpp \
     src/playing/boss/direction_boss.cpp \
+    src/playing/boss/time_boss.cpp \
     src/playing/traps/render_frame_trap.cpp \
     src/menu/input.cpp \
     src/menu/render.cpp \
@@ -68,7 +72,7 @@ all: $(TARGET)
 
 # Linkagem
 $(TARGET): $(OBJ)
-	$(CXX) $(OBJ) -o $(TARGET)
+	$(CXX) $(LDFLAGS) $(OBJ) -o $(TARGET)
 
 # Regra para compilar .cpp → .o
 %.o: %.cpp
@@ -76,4 +80,4 @@ $(TARGET): $(OBJ)
 
 # Limpeza (Windows)
 clean:
-	del /Q $(subst /,\,$(OBJ)) $(TARGET)
+	rm -f $(OBJ) $(TARGET)

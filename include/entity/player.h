@@ -1,12 +1,14 @@
 #pragma once
 #include <iostream>
 #include <conio.h>
+#include <chrono> 
 #include <windows.h>
 #include "state_machine.h"
 #include "core/colors.h"
 #include "tile_map_value.h"
 
 using namespace std;
+using namespace std::chrono;
 
 struct Player
 {
@@ -15,21 +17,24 @@ struct Player
     COORD oldPosition;
 
     std::string name = "";
+    Colors color = COLOR_YELLOW;
+    char skin = '@';
+    bool isAttackUpdate = false;
+    bool isAttackFrame = false;
+    bool IsUpdate = true;
+    const int maxAttackDistance = 20;
     int health = 25;
     int damage = 1;
     int kills = 0;
     int gold = 1;
     int xp = 0;
-    Colors color = COLOR_YELLOW;
-    char skin = '@';
     int currentObject = FLOOR;
     int previousObject = FLOOR;
-    bool isAttackUpdate = false;
-    bool isAttackFrame = false;
-    const int maxAttackDistance = 20;
     int attackDistance = 3;
     int dirY = -1;
     int dirX = 0;
+    float delay = 0.2f;
+    steady_clock::time_point lastTime = steady_clock::now();
 
     void setPosition(int x, int y)
     {

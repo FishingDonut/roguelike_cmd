@@ -3,6 +3,7 @@
 #include "../state_machine.h"
 #include "../game_data.h"
 #include "include/playing/input.h"
+#include "include/playing/player/time_player.h"
 #include "tools/debug_matriz.h"
 
 namespace Playing
@@ -13,8 +14,20 @@ namespace Playing
         HANDLE hConsole = gameData.hConsole;
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
+        int keyBoard;
 
-        int keyBoard = getch();
+        time_player(gameData.player);
+
+        if (!kbhit() || !gameData.player.IsUpdate)
+        {
+            return;
+        }
+
+        while (kbhit())
+        {
+            keyBoard = getch();
+        }
+        
 
         if (keyBoard == 27) // ESC
         {

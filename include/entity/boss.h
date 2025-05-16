@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <conio.h>
+#include <chrono>
 #include <windows.h>
 
 #include "core/colors.h"
@@ -8,6 +9,8 @@
 #include "core/map_value_to_char.h"
 #include "core/clear_entity.h"
 #include "entity/room.h"
+
+using namespace std::chrono;
 
 struct Boss
 {
@@ -26,6 +29,10 @@ struct Boss
     int height = 3;
     bool alive = true;
     Room room;
+
+    float delay = 0.4f;
+    bool IsUpdate = true;
+    steady_clock::time_point lastTime = steady_clock::now();
 
     void setPosition()
     {
