@@ -30,7 +30,7 @@ void setConfigKey()
         config.setArrow();
         break;
     default:
-        config.setDefaultKeys();
+        config.setArrow();
         break;
     }
 };
