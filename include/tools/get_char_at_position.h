@@ -1,3 +1,3 @@
 #pragma once
 
-char getCharAtPosition(HANDLE hConsole, COORD position);
+char getCharAtPosition(COORD position);
