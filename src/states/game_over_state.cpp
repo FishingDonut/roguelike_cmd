@@ -13,6 +13,7 @@
 #include "file_manager/score/score_manager.h"
 #include "file_manager/score/score_in.h"
 #include "include/core/visual_length.h"
+#include "BearLibTerminal.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -55,7 +56,7 @@ void capture_player_name(short y)
 // Função para exibir placar
 void show_scoreboard()
 {
-    system("cls");
+    terminal_clear();
 
     std::vector<std::string> scores = scoreRead();
     short y = (SHORT)((height / 2) - (scores.size() / 2));
@@ -72,24 +73,24 @@ void show_scoreboard()
 
 void game_over_enter()
 {
-    system("cls");
+    terminal_clear();
     short centerY = (SHORT)(height / 2);
 
     print_centered(centerY, "[ GAME OVER ]");
     getch();
-    system("cls");
+    terminal_clear();
 
     print_centered(centerY, "[ Insira o nome no placar ]");
     capture_player_name(centerY + 2);
 
-    system("cls");
+    terminal_clear();
     scoreManager(gameData.score, gameData.player.name);
     show_scoreboard();
 }
 
 void game_over_update()
 {
-    system("cls");
+    terminal_clear();
     SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
     std::cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << std::endl;
     gameData.running = false;

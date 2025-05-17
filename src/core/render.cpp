@@ -4,11 +4,12 @@
 #include "core/map_value_to_char.h"
 #include "global.h"
 #include "game_data.h"
+#include "BearLibTerminal.h"
 
 void drawMap(HANDLE &hConsole, int matriz[height][width])
 {
     char c;
-    system("cls");
+    terminal_clear();
     for (short i = 0; i < height; ++i)
     {
         for (short j = 0; j < width; ++j)

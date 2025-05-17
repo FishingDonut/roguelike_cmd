@@ -10,13 +10,14 @@
 #include "menu/input.h"
 #include "global.h"
 #include "game_data.h"
+#include "BearLibTerminal.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
 
 void menu_enter()
 {
-    system("cls");
+    terminal_clear();
     drawMargin(gameData.hConsole);
     
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});

@@ -7,6 +7,7 @@
 #include "core/render.h"
 #include "state_machine.h"
 #include "game_data.h"
+#include "BearLibTerminal.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -14,7 +15,7 @@ extern bool stateChanged;
 void credits_enter()
 {
     HANDLE hConsole = gameData.hConsole;
-    system("cls");
+    terminal_clear();
     drawMargin(hConsole);
 
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});

@@ -6,12 +6,13 @@
 #include "states/paused_state.h"
 #include "state_machine.h"
 #include "game_data.h"
+#include "BearLibTerminal.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
 
 void paused_enter(){
-    system("cls");
+    terminal_clear();
 };
 
 void paused_update(){

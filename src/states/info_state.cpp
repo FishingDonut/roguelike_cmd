@@ -10,6 +10,7 @@
 #include "core/render.h"
 #include "state_machine.h"
 #include "game_data.h"
+#include "BearLibTerminal.h"
 
 extern StateMachine nextState;
 extern bool stateChanged;
@@ -34,7 +35,7 @@ void info_enter()
     std::stringstream stream;
     auto& config = gameData.config;
 
-    system("cls");
+    terminal_clear();
     drawMargin(hConsole);
     
     

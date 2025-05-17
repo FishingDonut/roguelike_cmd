@@ -9,6 +9,7 @@
 #include "game_data.h"
 #include "state_machine.h"
 #include "states/menu_state.h"
+#include "BearLibTerminal.h"
 
 void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
 {
@@ -30,8 +31,8 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
 {
     gameData.seed = time(0);
     srand(gameData.seed);
-    
-    system("cls");
+
+    terminal_clear();
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
@@ -39,7 +40,7 @@ void init(HANDLE &hConsole, int (&matriz)[height][width])
     GetConsoleCursorInfo(hConsole, &cursorInfo);
     cursorInfo.bVisible = FALSE; // Oculta o cursor
     SetConsoleCursorInfo(hConsole, &cursorInfo);
-    
+
     menu_enter();
     // assembleMap(hConsole, matriz);
     return;
