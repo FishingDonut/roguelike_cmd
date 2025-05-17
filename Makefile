@@ -1,7 +1,8 @@
 # Compilador e flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Iinclude -Isrc -I. -Iinclude/tools
-LDFLAGS = -mconsole
+LDFLAGS = -mconsole -Llib
+LDLIBS = -lBearLibTerminal
 
 # Fontes existentes no projeto
 SRC = \
@@ -72,7 +73,7 @@ all: $(TARGET)
 
 # Linkagem
 $(TARGET): $(OBJ)
-	$(CXX) $(LDFLAGS) $(OBJ) -o $(TARGET)
+	$(CXX) $(LDFLAGS) $(OBJ) -o $(TARGET) $(LDLIBS)
 
 # Regra para compilar .cpp → .o
 %.o: %.cpp
@@ -80,4 +81,4 @@ $(TARGET): $(OBJ)
 
 # Limpeza (Windows)
 clean:
-	rm -f $(OBJ) $(TARGET)
+	del /f /q $(subst /,\,$(OBJ)) $(TARGET) 2>NUL || true
