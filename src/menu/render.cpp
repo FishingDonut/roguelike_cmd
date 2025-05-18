@@ -23,9 +23,6 @@ namespace Menu
         // Desenho do novo cursor
         terminal_put(((gameData.width / 2) - 5), (gameData.height / 2) + cursorPosition, '>');
         terminal_put((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition, '<');
-        
-        terminal_print((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition + 5, std::to_string(terminal_state(TK_HEIGHT)).c_str());
-        terminal_print((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition + 6, std::to_string(terminal_state(TK_WIDTH)).c_str());
 
         // Um único refresh após todas as operações
         terminal_refresh();

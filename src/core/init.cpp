@@ -1,3 +1,4 @@
+#include <string.h>
 
 #include "core/init.h"
 #include "game_data.h"
@@ -7,8 +8,9 @@
 void init()
 {
     terminal_open();
-    terminal_set("window: title='Castle Rogue', size= 156x44, fullscreen=true");
-    terminal_set("font: Media/HackNerdFontMono-Regular.ttf, size = 10");
+    std::string config = "window: title='Castle Rogue', size= " + std::to_string(gameData.width) +"x" + std::to_string(gameData.height) + ", fullscreen=true";
+    terminal_set(config.c_str());
+    terminal_set("font: Media/HackNerdFontMono-Regular.ttf, size = 11");
     terminal_clear();
     gameData.seed = time(0);
     srand(gameData.seed);
