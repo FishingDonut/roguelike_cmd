@@ -1,4 +1,4 @@
-#include <conio.h>
+#include "BearLibTerminal.h"
 
 #include "../state_machine.h"
 #include "../game_data.h"
@@ -11,33 +11,32 @@ namespace Playing
     void handle_input()
     {
         Config config = gameData.config;
-        HANDLE hConsole = gameData.hConsole;
         COORD &newPosition = gameData.player.newPosition;
         int (&map)[height][width] = gameData.mapData.world;
         int keyBoard;
 
         time_player(gameData.player);
 
-        if (!kbhit() || !gameData.player.IsUpdate)
+        if (!terminal_has_input() || !gameData.player.IsUpdate)
         {
             return;
         }
 
-        while (kbhit())
+        while (terminal_has_input())
         {
-            keyBoard = getch();
+            keyBoard = terminal_read();
         }
         
 
-        if (keyBoard == 27) // ESC
+        if (keyBoard == TK_ESCAPE) // ESC
         {
             nextState = STATE_PAUSED;
         }
         else if (keyBoard == 'f') // debug matriz
         {
-            printMatriz(hConsole, map);
+            printMatriz(map);
         }
-        else if (keyBoard == 'q' || keyBoard == 'Q') // sair
+        else if (keyBoard == TK_Q || keyBoard == TK_CLOSE) // sair
         {
             nextState = STATE_GAME_OVER;
         }
@@ -68,8 +67,7 @@ namespace Playing
         }
         else
         {
-            SetConsoleCursorPosition(hConsole, {width / 2, 3});
-            cout << keyBoard << endl;
+            terminal_printf(width / 2, 3, "Key: %d", keyBoard);
         }
     }
 }

@@ -1,4 +1,4 @@
-#include <conio.h>
+#include "BearLibTerminal.h"
 
 #include "game_data.h"
 #include "core/set_config_key.h"
@@ -7,14 +7,14 @@ void setConfigKey()
 {
     auto &config = gameData.config;
 
-    char c = getch();
+    int c = terminal_read();
 
     switch (c)
     {
-    case 'w':
-    case 'a':
-    case 's':
-    case 'd':
+    case TK_W:
+    case TK_A:
+    case TK_S:
+    case TK_D:
         config.setDefaultKeys();
         break;
     case 'h':

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BearLibTerminal.h"
+
 struct Config
 {
     int UP;
@@ -9,25 +11,25 @@ struct Config
 
     void setDefaultKeys()
     {
-        UP = 'w';    // 119
-        DOWN = 's';  // 115
-        LEFT = 'a';  // 97
-        RIGHT = 'd'; // 100
+        UP = TK_W;    // 119
+        DOWN = TK_S;  // 115
+        LEFT = TK_A;  // 97
+        RIGHT = TK_D; // 100
     }
 
     void setVimKeys()
     {
-        UP = 'k';    // 107
-        DOWN = 'j';  // 106
-        LEFT = 'h';  // 104
-        RIGHT = 'l'; // 108
+        UP = TK_K;    // 107
+        DOWN = TK_J;  // 106
+        LEFT = TK_K;  // 104
+        RIGHT = TK_L; // 108
     }
 
     void setArrow()
     {
-        UP = 72;
-        DOWN = 80;
-        LEFT = 75;
-        RIGHT = 77;
+        UP = TK_UP;
+        DOWN = TK_DOWN;
+        LEFT = TK_LEFT;
+        RIGHT = TK_RIGHT;
     }
 };

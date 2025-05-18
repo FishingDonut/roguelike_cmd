@@ -1,4 +1,4 @@
-#include <conio.h>
+#include "BearLibTerminal.h"
 
 #include "../state_machine.h"
 #include "../game_data.h"
@@ -18,10 +18,10 @@ namespace Menu
         int &cursorPosition = gameData.menuData.cursorPosition;
         Config config = gameData.config;
 
-        int keyBoard = getch();
+        int keyBoard = terminal_read();
         cursorOldPosition = cursorPosition;
 
-        if (keyBoard == 'q' || keyBoard == 'Q' || keyBoard == 27) // ESC
+        if (keyBoard == TK_Q || keyBoard == TK_ESCAPE || keyBoard == TK_CLOSE) // ESC
         {
             nextState = STATE_GAME_OVER;
         }
@@ -33,7 +33,7 @@ namespace Menu
         {
             cursorPosition < maxOptions ? cursorPosition++ : cursorPosition = 0;
         }
-        else if (keyBoard == config.RIGHT || keyBoard == ' ' || keyBoard == 13) // espaço ou enter
+        else if (keyBoard == config.RIGHT || keyBoard == TK_SPACE || keyBoard == TK_ENTER) // espaço ou enter
         {
             nextState = selectState[cursorPosition];
             stateChanged = true;
