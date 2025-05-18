@@ -1,13 +1,13 @@
 #include "ctime"
 
-#include "global.h"
+
 #include "game_data.h"
 #include "entity/room.h"
 #include "entity/trap.h"
 #include "Data/MapData.h"
 #include "map_construction/generate_trap.h"
 
-void generateTrap(int (&world)[height][width])
+void generateTrap(int (&world)[gameData.height][gameData.width])
 {
     const int MAX_TRAPS = gameData.mapData.MAX_TRAPS;
     auto &traps = gameData.mapData.traps;
@@ -17,8 +17,8 @@ void generateTrap(int (&world)[height][width])
 
     while (countTraps < MAX_TRAPS)
     {
-        int y = rand() % height;
-        int x = rand() % width;
+        int y = rand() % gameData.height;
+        int x = rand() % gameData.width;
 
         if(world[y][x] != FLOOR)
             continue;

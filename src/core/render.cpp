@@ -3,17 +3,17 @@
 
 #include "core/render.h"
 #include "core/map_value_to_char.h"
-#include "global.h"
+
 #include "game_data.h"
 #include "BearLibTerminal.h"
 
-void drawMap(int matriz[height][width])
+void drawMap(int matriz[gameData.height][gameData.width])
 {
     char c;
     terminal_clear();
-    for (short i = 0; i < height; ++i)
+    for (short i = 0; i < gameData.height; ++i)
     {
-        for (short j = 0; j < width; ++j)
+        for (short j = 0; j < gameData.width; ++j)
         {
             c = mapValueToChar(matriz[i][j]);
 
@@ -25,17 +25,17 @@ void drawMap(int matriz[height][width])
 
 void drawMargin()
 {
-    for (short i = 0; i < height; ++i)
+    for (short i = 0; i < gameData.height; ++i)
     {
-        for (short j = 0; j < width; ++j)
+        for (short j = 0; j < gameData.width; ++j)
         {
             char c = ' ';
-            if (j == 0 || j == width - 1)
+            if (j == 0 || j == gameData.width - 1)
             {
                 c = '|';
                 terminal_put(j, i, c);
             }
-            else if (i == 0 || i == height - 1)
+            else if (i == 0 || i == gameData.height - 1)
             {
                 c = '-';
                 terminal_put(j, i, c);

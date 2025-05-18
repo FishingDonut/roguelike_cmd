@@ -5,16 +5,15 @@
 #include <random>
 #include <ctime>
 // my libs
-#include "include/global.h"
-#include "include/game_data.h"
-#include "include/entity/room.h"
+#include "game_data.h"
+#include "entity/room.h"
 // map_construction
 #include "map_construction/generate_rooms.h"
 #include "map_construction/map_construction.h"
 
 int generate_rooms()
 {
-    int (&map)[height][width] = gameData.mapData.world;
+    int (&map)[gameData.height][gameData.width] = gameData.mapData.world;
 
     const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
     Room(&listRoom)[MAX_ROOMS] = gameData.mapData.rooms;
@@ -32,11 +31,11 @@ int generate_rooms()
 
         if (!gameData.bossFloor && gameData.floorCount >= 1 && countRoom >= MAX_ROOMS - 1)
         {
-            room = generateRandomBossRoom(height, width, border);
+            room = generateRandomBossRoom(gameData.height, gameData.width, border);
         }
         else
         {
-            room = generateRandomRoom(height, width, min, max, border);
+            room = generateRandomRoom(gameData.height, gameData.width, min, max, border);
         }
 
         if (!isColliding(listRoom, countRoom, room, 1))

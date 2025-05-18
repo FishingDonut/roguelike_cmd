@@ -18,7 +18,7 @@ Codigo de exemplo do professor [link](https://github.com/alexrese/roguelike).
 /root
 ├── include/                            # Cabeçalhos (.h) com declarações e interfaces do projeto
 │   ├── game_data.h                      # Struct principal contendo os dados do jogo (jogador, mapa, inimigos etc.)
-│   ├── global.h                        # Variáveis globais ou definições amplamente usadas
+
 │   ├── mapData.h                       # Estrutura ou constantes específicas do mapa
 │   ├── state_machine.h                  # Declaração da máquina de estados do jogo
 │

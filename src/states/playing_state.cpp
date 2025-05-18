@@ -5,7 +5,7 @@
 #include <locale.h>
 
 // Internos do projeto
-#include "global.h"
+
 #include "game_data.h"
 #include "entity/player.h"
 #include "tools/get_char_at_position.h"

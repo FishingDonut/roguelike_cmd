@@ -1,6 +1,6 @@
 #include "BearLibTerminal.h"
 
-#include "global.h"
+
 #include "include/state_machine.h"
 #include "include/game_data.h"
 #include "include/core/map_value_to_char.h"
@@ -16,16 +16,16 @@ namespace Menu
         // Limpeza do cursor antigo
         if (cursorPosition != cursorOldPosition)
         {
-            terminal_put(((width / 2) - 5), (height / 2) + cursorOldPosition, ' ');
-            terminal_put((width / 2) + 3, (height / 2) + cursorOldPosition, ' ');
+            terminal_put(((gameData.width / 2) - 5), (gameData.height / 2) + cursorOldPosition, ' ');
+            terminal_put((gameData.width / 2) + 3, (gameData.height / 2) + cursorOldPosition, ' ');
         }
 
         // Desenho do novo cursor
-        terminal_put(((width / 2) - 5), (height / 2) + cursorPosition, '>');
-        terminal_put((width / 2) + 3, (height / 2) + cursorPosition, '<');
+        terminal_put(((gameData.width / 2) - 5), (gameData.height / 2) + cursorPosition, '>');
+        terminal_put((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition, '<');
         
-        terminal_put((width / 2) + 3, (height / 2) + cursorPosition + 5, width);
-        terminal_put((width / 2) + 3, (height / 2) + cursorPosition + 6, height);
+        terminal_print((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition + 5, std::to_string(terminal_state(TK_HEIGHT)).c_str());
+        terminal_print((gameData.width / 2) + 3, (gameData.height / 2) + cursorPosition + 6, std::to_string(terminal_state(TK_WIDTH)).c_str());
 
         // Um único refresh após todas as operações
         terminal_refresh();

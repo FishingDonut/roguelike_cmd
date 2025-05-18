@@ -1,8 +1,8 @@
 #include "game_data.h"
-#include "global.h"
+
 #include "map_construction/connect_room.h"
 
-void connectRoom(Room (&rooms)[gameData.mapData.MAX_ROOMS], int (&map)[height][width])
+void connectRoom(Room (&rooms)[gameData.mapData.MAX_ROOMS], int (&map)[gameData.height][gameData.width])
 {
     Room room, nearest;
 

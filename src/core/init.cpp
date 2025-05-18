@@ -1,4 +1,4 @@
-#include "global.h"
+
 #include "core/init.h"
 #include "game_data.h"
 #include "states/menu_state.h"

@@ -1,3 +1,3 @@
 #pragma once
 
-void generateBoss(Room &room, int (&world)[height][width]);
+void generateBoss(Room &room, int (&world)[gameData.height][gameData.width]);

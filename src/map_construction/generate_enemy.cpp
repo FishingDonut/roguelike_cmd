@@ -1,8 +1,9 @@
-#include "global.h"
+
 #include "entity/room.h"
+#include "game_data.h"
 #include "map_construction/generate_enemy.h"
 
-void generateEnemy(Room &newRoom, int (&map)[height][width])
+void generateEnemy(Room &newRoom, int (&map)[gameData.height][gameData.width])
 {
     int &countEnemy = newRoom.enemyCount;
 

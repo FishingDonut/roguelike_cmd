@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <windows.h>
 
-#include "global.h"
+
 #include "states/map_construction_state.h"
 #include "state_machine.h"
 #include "game_data.h"

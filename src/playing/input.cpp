@@ -12,7 +12,7 @@ namespace Playing
     {
         Config config = gameData.config;
         COORD &newPosition = gameData.player.newPosition;
-        int (&map)[height][width] = gameData.mapData.world;
+        int (&map)[gameData.height][gameData.width] = gameData.mapData.world;
         int keyBoard;
 
         time_player(gameData.player);
@@ -52,7 +52,7 @@ namespace Playing
         }
         else if (keyBoard == config.DOWN)
         {
-            if (newPosition.Y < height - 1)
+            if (newPosition.Y < gameData.height - 1)
                 newPosition.Y++;
         }
         else if (keyBoard == config.LEFT)
@@ -62,12 +62,12 @@ namespace Playing
         }
         else if (keyBoard == config.RIGHT)
         {
-            if (newPosition.X < width - 1)
+            if (newPosition.X < gameData.width - 1)
                 newPosition.X++;
         }
         else
         {
-            terminal_printf(width / 2, 3, "Key: %d", keyBoard);
+            terminal_printf(gameData.width / 2, 3, "Key: %d", keyBoard);
         }
     }
 }

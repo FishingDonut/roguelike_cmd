@@ -1,9 +1,9 @@
-#include "global.h"
+
 #include "game_data.h"
 #include "entity/room.h"
 #include "map_construction/generate_boss.h"
 
-void generateBoss(Room &room, int (&world)[height][width])
+void generateBoss(Room &room, int (&world)[gameData.height][gameData.width])
 {
     gameData.boss = Boss();
     Boss &boss = gameData.boss;

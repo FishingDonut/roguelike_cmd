@@ -2,7 +2,7 @@
 #include <cctype>
 #include <string.h>
 
-#include "global.h"
+
 #include "core/color_char.h"
 #include "core/render.h"
 #include "states/game_over_state.h"
@@ -20,7 +20,7 @@ extern bool stateChanged;
 void print_centered(short y, const std::string &text)
 {
     COORD coord;
-    coord.X = (SHORT)(width / 2 - text.length() / 2);
+    coord.X = (SHORT)(gameData.width / 2 - text.length() / 2);
     coord.Y = y;
     terminal_printf(coord.X, coord.Y, "%d", text);
 }
@@ -44,7 +44,7 @@ void capture_player_name(short y)
             name += c;
         }
 
-        COORD coord = {(SHORT)(width / 2 - name.length() / 2), y};
+        COORD coord = {(SHORT)(gameData.width / 2 - name.length() / 2), y};
         terminal_printf(coord.X, coord.Y, " %d ", name);
     }
 }
@@ -55,7 +55,7 @@ void show_scoreboard()
     terminal_clear();
 
     std::vector<std::string> scores = scoreRead();
-    short y = (SHORT)((height / 2) - (scores.size() / 2));
+    short y = (SHORT)((gameData.height / 2) - (scores.size() / 2));
     size_t i = 1;
 
     for (const std::string &score : scores)
@@ -70,7 +70,7 @@ void show_scoreboard()
 void game_over_enter()
 {
     terminal_clear();
-    short centerY = (SHORT)(height / 2);
+    short centerY = (SHORT)(gameData.height / 2);
 
     print_centered(centerY, "[ GAME OVER ]");
     terminal_read();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "global.h"
+
 #include "entity/room.h"
 
-void generateEnemy(Room &newRoom, int (&map)[height][width]);
+void generateEnemy(Room &newRoom, int (&map)[gameData.height][gameData.width]);

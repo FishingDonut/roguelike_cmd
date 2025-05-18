@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include "global.h"
+#include "./game_data.h"
 
-void drawMap(int matriz[height][width]);
+void drawMap(int matriz[gameData.height][gameData.width]);
 void drawMargin();
