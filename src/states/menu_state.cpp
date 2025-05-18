@@ -1,6 +1,4 @@
 #include <iostream>
-#include <windows.h>
-#include <conio.h>
 
 #include "core/set_config_key.h"
 #include "states/menu_state.h"
@@ -18,18 +16,13 @@ extern bool stateChanged;
 void menu_enter()
 {
     terminal_clear();
-    drawMargin(gameData.hConsole);
-    
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});
-    std::cout << "[ APERTE WASD, Setas ou HJKL PARA COMEÇAR ]";
+    drawMargin();
+    terminal_print(width / 2 - 22, height / 2 - 2, "[ APERTE WASD, Setas ou HJKL PARA COMEÇAR ]");
     setConfigKey();
-
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2)});
-    std::cout << "START";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 1});
-    std::cout << "INFO";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 2});
-    std::cout << "EXIT";
+    terminal_print(width / 2 - 3, height / 2, "START");
+    terminal_print(width / 2 - 3, height / 2 + 1, "INFO");
+    terminal_print(width / 2 - 3, height / 2 + 2, "EXIT");
+    terminal_refresh();
 }
 
 void menu_update()
@@ -40,23 +33,17 @@ void menu_update()
 
 void menu_exit()
 {
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});
-    std::cout << "                                            ";
-
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2)});
-    std::cout << "         ";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 1});
-    std::cout << "         ";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 2});
-    std::cout << "         ";
-
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 1, (SHORT)(height / 2)});
-    std::cout << "[3]";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 1, (SHORT)(height / 2)});
-    Sleep(100);
-    std::cout << "[2]";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 1, (SHORT)(height / 2)});
-    Sleep(100);
-    std::cout << "[1]";
-    Sleep(100);
+    terminal_print(width / 2 - 22, height / 2 - 2, "                                            ");
+    terminal_print(width / 2 - 5, height / 2, "         "); 
+    terminal_print(width / 2 - 5, height / 2 + 1, "         ");
+    terminal_print(width / 2 - 5, height / 2 + 2, "         ");
+    terminal_print(width / 2 - 1, height / 2, "[3]");
+    terminal_refresh();
+    terminal_delay(100);
+    terminal_print(width / 2 - 1, height / 2, "[2]");
+    terminal_refresh();
+    terminal_delay(100);
+    terminal_print(width / 2 - 1, height / 2, "[1]");
+    terminal_refresh();
+    terminal_delay(100);
 }

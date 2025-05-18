@@ -1,4 +1,4 @@
-#include "windows.h"
+#include "BearLibTerminal.h"
 
 #include "game_data.h"
 #include "core/color_char.h"
@@ -11,7 +11,6 @@ void render_attack_frame()
         return;
     }
     
-    auto &hConsole = gameData.hConsole;
     auto &player = gameData.player;
     auto &position = player.position;
     auto &world = gameData.mapData.world;
@@ -24,11 +23,13 @@ void render_attack_frame()
         int y = position.Y + dirY * i;
         int x = position.X + dirX * i;
         
-        SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
-        std::cout << colorChar(COLOR_REVERSE) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);
+        terminal_color(color_from_name("black"));
+        terminal_bkcolor(color_from_name("white"));
+        terminal_put(x, y , mapValueToChar(world[y][x]));
         Sleep(30);
-        SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
-        std::cout << colorChar(COLOR_RESET) << mapValueToChar(world[y][x]) << colorChar(COLOR_RESET);
+        terminal_color(color_from_name("white"));
+        terminal_bkcolor(color_from_name("black"));
+        terminal_put(x, y , mapValueToChar(world[y][x]));
     }
     
     gameData.player.isAttackFrame = false;

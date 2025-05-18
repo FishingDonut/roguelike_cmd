@@ -1,27 +1,30 @@
+#include "BearLibTerminal.h"
+
 #include <random>
 #include "core/clear_entity.h"
 #include "entity/boss.h"
 #include "entity/enemy.h"
 #include "game_data.h"
 
-void clearEnemy(Enemy &enemy){
+void clearEnemy(Enemy &enemy)
+{
     gameData.score += 1 + (rand() % (20 - 1 + 1));
-    auto& player = gameData.player;
+    auto &player = gameData.player;
     player.gold += 1 + (rand() % (7 - 1 + 1));
     player.xp += 2 + (rand() % (8 - 2 + 1));
     player.kills++;
-    auto& world = gameData.mapData.world;
+    auto &world = gameData.mapData.world;
     enemy.skin = mapValueToChar(FLOOR);
     enemy.valueMap = FLOOR;
     enemy.alive = false;
     world[enemy.position.Y][enemy.position.X] = enemy.currentObject;
-    SetConsoleCursorPosition(gameData.hConsole, {enemy.oldPosition});
-    cout << mapValueToChar(enemy.previousObject);
+    terminal_put(enemy.oldPosition.X, enemy.oldPosition.Y, enemy.skin);
 }
 
-void clearBoss(Boss &boss){
+void clearBoss(Boss &boss)
+{
     gameData.score += 10;
-    auto& world = gameData.mapData.world;
+    auto &world = gameData.mapData.world;
     boss.skin = mapValueToChar(FLOOR);
     boss.valueMap = FLOOR;
     boss.alive = false;

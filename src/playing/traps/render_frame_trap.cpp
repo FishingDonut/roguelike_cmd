@@ -1,5 +1,6 @@
 
-#include <windows.h>
+#include "BearLibTerminal.h"
+
 #include "game_data.h"
 #include "core/color_char.h"
 #include "playing/traps/render_frame_trap.h"
@@ -8,7 +9,6 @@ void render_frame_trap()
 {
     const int MAX_TRAPS = gameData.mapData.MAX_TRAPS;
     auto& traps = gameData.mapData.traps;
-    auto& hConsole = gameData.hConsole;
 
     for (int i = 0; i < MAX_TRAPS; i++)
     {
@@ -18,8 +18,7 @@ void render_frame_trap()
             continue;
         }
 
-        SetConsoleCursorPosition(hConsole, {trap.position});
-        cout << colorChar(trap.color) << trap.currentSkin << colorChar(COLOR_RESET);
+        terminal_put(trap.position.X, trap.position.Y,trap.currentSkin);
     }
     return;
 }

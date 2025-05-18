@@ -1,17 +1,10 @@
-#include <iostream>
-#include <windows.h>
-#include <conio.h>
-#include <ctime>
 #include "global.h"
-#include "tile_map_value.h"
 #include "core/init.h"
-#include "core/render.h"
 #include "game_data.h"
-#include "state_machine.h"
 #include "states/menu_state.h"
 #include "BearLibTerminal.h"
 
-void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
+void assembleMap(int (&matriz)[height][width])
 {
     for (short i = 0; i < height; ++i)
     {
@@ -27,21 +20,14 @@ void assembleMap(HANDLE &hConsole, int (&matriz)[height][width])
     }
 }
 
-void init(HANDLE &hConsole, int (&matriz)[height][width])
+void init(int (&matriz)[height][width])
 {
+    terminal_open();
+    terminal_set("window: title='Castle Rogue', size= 156x44, fullscreen=true");
+    terminal_set("font: Media/HackNerdFontMono-Regular.ttf, size = 10");
+    terminal_clear();
     gameData.seed = time(0);
     srand(gameData.seed);
-
-    terminal_clear();
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(hConsole, &cursorInfo);
-    cursorInfo.bVisible = FALSE; // Oculta o cursor
-    SetConsoleCursorInfo(hConsole, &cursorInfo);
-
     menu_enter();
-    // assembleMap(hConsole, matriz);
     return;
 }

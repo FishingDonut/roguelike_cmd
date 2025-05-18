@@ -1,4 +1,4 @@
-#include <windows.h>
+#include "BearLibTerminal.h"
 
 #include "include/game_data.h"
 #include "include/core/map_value_to_char.h"
@@ -8,7 +8,6 @@
 void render_frame_enemy()
 {
     const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
-    HANDLE hConsole = gameData.hConsole;
     Room(&rooms)[MAX_ROOMS] = gameData.mapData.rooms;
 
     for (int j = 0; j < MAX_ROOMS; j++)
@@ -23,10 +22,8 @@ void render_frame_enemy()
                 continue;
             }
 
-            SetConsoleCursorPosition(hConsole, {enemy.oldPosition});
-            cout << mapValueToChar(enemy.previousObject);
-            SetConsoleCursorPosition(hConsole, {enemy.position});
-            cout << colorChar(enemy.color) << enemy.skin << colorChar(COLOR_RESET);
+            terminal_put(enemy.oldPosition.X ,enemy.oldPosition.Y, mapValueToChar(enemy.previousObject));
+            terminal_put(enemy.position.X ,enemy.position.Y, enemy.skin);
         }
     }
 }

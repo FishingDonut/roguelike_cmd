@@ -1,4 +1,4 @@
-#include <windows.h>
+#include "BearLibTerminal.h"
 
 #include "global.h"
 #include "include/state_machine.h"
@@ -10,20 +10,24 @@ namespace Menu
 {
     void render_frame()
     {
-        HANDLE hConsole = gameData.hConsole;
         int cursorOldPosition = gameData.menuData.cursorOldPosition;
         int cursorPosition = gameData.menuData.cursorPosition;
 
-        if(cursorPosition != cursorOldPosition){
-            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 5), (SHORT)((height / 2) + cursorOldPosition)});
-            cout << " ";
-            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 3), (SHORT)((height / 2) + cursorOldPosition)});
-            cout << " ";
+        // Limpeza do cursor antigo
+        if (cursorPosition != cursorOldPosition)
+        {
+            terminal_put(((width / 2) - 5), (height / 2) + cursorOldPosition, ' ');
+            terminal_put((width / 2) + 3, (height / 2) + cursorOldPosition, ' ');
         }
 
-        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 5), (SHORT)((height / 2) + cursorPosition)});
-        cout << ">";
-        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 3), (SHORT)((height / 2) + cursorPosition)});
-        cout << "<";
+        // Desenho do novo cursor
+        terminal_put(((width / 2) - 5), (height / 2) + cursorPosition, '>');
+        terminal_put((width / 2) + 3, (height / 2) + cursorPosition, '<');
+        
+        terminal_put((width / 2) + 3, (height / 2) + cursorPosition + 5, width);
+        terminal_put((width / 2) + 3, (height / 2) + cursorPosition + 6, height);
+
+        // Um único refresh após todas as operações
+        terminal_refresh();
     }
 }

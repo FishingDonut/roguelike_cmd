@@ -1,11 +1,7 @@
-#include <iostream>
-#include <windows.h>
-#include <conio.h>
+#include "BearLibTerminal.h"
 
 #include "states/credits_state.h"
-#include "core/map_value_to_char.h"
 #include "core/render.h"
-#include "state_machine.h"
 #include "game_data.h"
 #include "BearLibTerminal.h"
 
@@ -14,17 +10,14 @@ extern bool stateChanged;
 
 void credits_enter()
 {
-    HANDLE hConsole = gameData.hConsole;
     terminal_clear();
-    drawMargin(hConsole);
+    drawMargin();
 
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 11), (SHORT)(height / 2) - 2});
-    std::cout << "Parabens voce ganhou!";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2) - 1});
-    std::cout << "score: " << gameData.score;
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)((width / 2) - 5), (SHORT)(height / 2)});
-    std::cout << "kills: " << gameData.status.kills;
-    getch();
+    terminal_printf((width / 2) - 11, (height / 2) - 2, "Parabens voce ganhou!");
+    terminal_printf((width / 2) - 5, (height / 2) - 1, "score: %d", gameData.score);
+    terminal_printf((width / 2) - 5, (height / 2), "kills: %d", gameData.status.kills);
+
+    terminal_read();
     gameData.running = false;
     return;
 }

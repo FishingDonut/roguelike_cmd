@@ -1,4 +1,4 @@
-#include <windows.h>
+#include "BearLibTerminal.h"
 
 #include "include/game_data.h"
 #include "include/core/map_value_to_char.h"
@@ -14,7 +14,6 @@ void render_frame_boss()
 
     Boss &boss = gameData.boss;
     auto &oldPosition = gameData.boss.oldPosition;
-    auto &hConsole = gameData.hConsole;
     auto &world = gameData.mapData.world;
 
     int oldInitY = oldPosition.Y - (boss.height / 2);
@@ -26,11 +25,10 @@ void render_frame_boss()
             int y = oldInitY + i;
             int x = oldInitX + j;
 
-            SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
-            std::cout << mapValueToChar(world[y][x]);
+            terminal_put(x, y, mapValueToChar(world[y][x]));
         }
     }
-    
+
     int initY = boss.position.Y - (boss.height / 2);
     int initX = boss.position.X - (boss.width / 2);
 
@@ -41,8 +39,7 @@ void render_frame_boss()
             int y = initY + i;
             int x = initX + j;
 
-            SetConsoleCursorPosition(hConsole, {(SHORT)x, (SHORT)y});
-            std::cout << colorChar(boss.color) << boss.skin << colorChar(COLOR_RESET);
+            terminal_put(x, y, boss.skin);
         }
     }
 

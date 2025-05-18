@@ -19,8 +19,8 @@
 
 void playing_enter()
 {
-    drawMap(gameData.hConsole, gameData.mapData.world);
-    drawMargin(gameData.hConsole);
+    drawMap(gameData.mapData.world);
+    drawMargin();
     return;
 }
 

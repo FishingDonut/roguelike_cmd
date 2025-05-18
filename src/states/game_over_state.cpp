@@ -1,7 +1,5 @@
 #include <iostream>
-#include <conio.h>
 #include <cctype>
-#include <windows.h>
 #include <string.h>
 
 #include "global.h"
@@ -24,8 +22,7 @@ void print_centered(short y, const std::string &text)
     COORD coord;
     coord.X = (SHORT)(width / 2 - text.length() / 2);
     coord.Y = y;
-    SetConsoleCursorPosition(gameData.hConsole, coord);
-    std::cout << text;
+    terminal_printf(coord.X, coord.Y, "%d", text);
 }
 
 // Função para capturar nome do jogador
@@ -36,7 +33,7 @@ void capture_player_name(short y)
 
     while (c != 13) // Enter
     {
-        c = getch();
+        c = terminal_read();
 
         if (c == 8 && !name.empty()) // Backspace
         {
@@ -48,8 +45,7 @@ void capture_player_name(short y)
         }
 
         COORD coord = {(SHORT)(width / 2 - name.length() / 2), y};
-        SetConsoleCursorPosition(gameData.hConsole, coord);
-        std::cout << " " << name << " ";
+        terminal_printf(coord.X, coord.Y, " %d ", name);
     }
 }
 
@@ -67,8 +63,8 @@ void show_scoreboard()
         print_centered(y + i++, score);
     }
 
-    drawMargin(gameData.hConsole);
-    getch();
+    drawMargin();
+    terminal_read();
 }
 
 void game_over_enter()
@@ -77,11 +73,11 @@ void game_over_enter()
     short centerY = (SHORT)(height / 2);
 
     print_centered(centerY, "[ GAME OVER ]");
-    getch();
+    terminal_read();
     terminal_clear();
 
     print_centered(centerY, "[ Insira o nome no placar ]");
-    capture_player_name(centerY + 2);
+    // capture_player_name(centerY + 2);
 
     terminal_clear();
     scoreManager(gameData.score, gameData.player.name);
@@ -91,8 +87,7 @@ void game_over_enter()
 void game_over_update()
 {
     terminal_clear();
-    SetConsoleCursorPosition(gameData.hConsole, gameData.player.position);
-    std::cout << "✞" << colorChar(COLOR_GREEN) << gameData.seed << colorChar(COLOR_RESET) << std::endl;
+    terminal_printf(gameData.player.position.X, gameData.player.position.Y, "✞ %d ✞", gameData.seed);
     gameData.running = false;
 }
 

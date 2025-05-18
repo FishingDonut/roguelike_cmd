@@ -16,15 +16,13 @@ void paused_enter(){
 };
 
 void paused_update(){
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
-    std::cout << "===PAUSED===";
-    getch();
+    terminal_printf((width / 2) - 6, (height / 2), "===PAUSED===");
+    terminal_read();
 
     nextState = previousState;
     stateChanged = true;
 };
 
 void paused_exit(){
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6,(SHORT)(height / 2)});
-    std::cout << "===SAIDA===";
+    terminal_printf((width / 2) - 6, (height / 2), "===SAIDA===");
 };

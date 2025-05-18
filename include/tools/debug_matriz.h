@@ -1,3 +1,3 @@
 #pragma once
 
-void printMatriz(HANDLE hConsole,int matriz[height][width]);
+void printMatriz(int matriz[height][width]);
