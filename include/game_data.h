@@ -1,7 +1,6 @@
 #pragma once
 
 #include <windows.h>
-#include "global.h"
 #include "entity/player.h"
 #include "entity/boss.h"
 #include "Data/Status.h"
@@ -11,10 +10,12 @@
 
 struct GameData
 {
+    static constexpr int width = 156;
+    static constexpr int height = 44;
     Player player = Player();
     Boss boss;
     Enemy currentEnemy;
-    MapData mapData = MapData();
+    MapData<height, width> mapData;
     MenuData menuData = MenuData();
     Config config = Config();
     bool running = true;
