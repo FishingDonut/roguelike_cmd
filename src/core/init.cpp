@@ -4,23 +4,7 @@
 #include "states/menu_state.h"
 #include "BearLibTerminal.h"
 
-void assembleMap(int (&matriz)[height][width])
-{
-    for (short i = 0; i < height; ++i)
-    {
-        for (short j = 0; j < width; ++j)
-        {
-            matriz[i][j] = FLOOR;
-
-            if (i == 0 || i == height - 1 || j == 0 || j == width - 1)
-            {
-                matriz[i][j] = WALL;
-            }
-        }
-    }
-}
-
-void init(int (&matriz)[height][width])
+void init()
 {
     terminal_open();
     terminal_set("window: title='Castle Rogue', size= 156x44, fullscreen=true");
