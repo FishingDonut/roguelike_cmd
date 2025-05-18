@@ -3,7 +3,7 @@
 #include <iostream>
 #include "BearLibTerminal.h"
 // person libs
-#include "global.h"
+
 #include "state_machine.h"
 #include "./include/core/init.h"
 #include "./include/entity/player.h"
@@ -132,7 +132,7 @@ void loopGame()
 
 int main()
 {
-    init(gameData.mapData.world);
+    init();
     loopGame();
     terminal_close();
     return 0;
