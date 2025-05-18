@@ -1,8 +1,7 @@
 // libs
-#include <conio.h>
 #include <locale.h>
 #include <iostream>
-#include <windows.h>
+#include "BearLibTerminal.h"
 // person libs
 #include "global.h"
 #include "state_machine.h"
@@ -45,7 +44,7 @@ void switchState()
         info_exit();
         break;
     case STATE_MAP_CONSTRUCTION:
-        map_construction_enter();
+        map_construction_exit();
         break;
     case STATE_PLAYING:
         playing_exit();
@@ -74,7 +73,7 @@ void switchState()
         info_enter();
         break;
     case STATE_MAP_CONSTRUCTION:
-        map_construction_update();
+        map_construction_enter();
         break;
     case STATE_PLAYING:
         playing_enter();
@@ -110,7 +109,7 @@ void loopGame()
             info_update();
             break;
         case STATE_MAP_CONSTRUCTION:
-            map_construction_exit();
+            map_construction_update();
             break;
         case STATE_PLAYING:
             playing_update();
@@ -122,7 +121,7 @@ void loopGame()
             game_over_update();
             break;
         case STATE_CREDITS:
-            credits_exit();
+            credits_update();
             break;
         default:
             break;
@@ -133,8 +132,8 @@ void loopGame()
 
 int main()
 {
-    init(gameData.hConsole, gameData.mapData.world);
+    init(gameData.mapData.world);
     loopGame();
-
+    terminal_close();
     return 0;
 }
