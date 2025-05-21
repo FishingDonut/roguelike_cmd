@@ -21,17 +21,22 @@ namespace Playing
         // SetConsoleCursorPosition(hConsole, {0, 0});
         // cout << getCharAtPosition(hConsole, newPos);
 
-        SetConsoleCursorPosition(hConsole, {player.oldPosition});
-        cout << mapValueToChar(player.previousObject);
+        if (player.moveOn)
+        {
+            SetConsoleCursorPosition(hConsole, {player.oldPosition});
+            cout << mapValueToChar(player.previousObject);
+        }
 
-        
         render_frame_trap();
         render_frame_enemy();
         render_frame_boss();
         render_attack_frame();
         render_status();
 
-        SetConsoleCursorPosition(hConsole, {player.position});
-        cout << colorChar(player.color) << player.skin << colorChar(COLOR_RESET);
+        if (player.moveOn)
+        {
+            SetConsoleCursorPosition(hConsole, {player.position});
+            cout << colorChar(player.color) << player.skin << colorChar(COLOR_RESET);
+        }
     }
 }

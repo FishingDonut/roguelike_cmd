@@ -20,6 +20,7 @@ namespace Playing
 
         if (!kbhit() || !gameData.player.IsUpdate)
         {
+            gameData.player.moveOn = false;
             return;
         }
 
@@ -27,7 +28,6 @@ namespace Playing
         {
             keyBoard = getch();
         }
-        
 
         if (keyBoard == 27) // ESC
         {
@@ -48,23 +48,31 @@ namespace Playing
         }
         else if (keyBoard == config.UP)
         {
-            if (newPosition.Y > 0)
+            if (newPosition.Y > 0){
                 newPosition.Y--;
+                gameData.player.moveOn = true;
+            }
         }
         else if (keyBoard == config.DOWN)
         {
-            if (newPosition.Y < height - 1)
+            if (newPosition.Y < height - 1){
                 newPosition.Y++;
+                gameData.player.moveOn = true;
+            }
         }
         else if (keyBoard == config.LEFT)
         {
-            if (newPosition.X > 0)
+            if (newPosition.X > 0){
                 newPosition.X--;
+                gameData.player.moveOn = true;
+            }
         }
         else if (keyBoard == config.RIGHT)
         {
-            if (newPosition.X < width - 1)
+            if (newPosition.X < width - 1){
                 newPosition.X++;
+                gameData.player.moveOn = true;
+            }
         }
         else
         {

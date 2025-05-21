@@ -22,6 +22,7 @@ struct Player
     bool isAttackUpdate = false;
     bool isAttackFrame = false;
     bool IsUpdate = true;
+    bool moveOn = false;
     const int maxAttackDistance = 20;
     int health = 25;
     int damage = 1;
