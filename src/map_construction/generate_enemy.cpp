@@ -1,6 +1,7 @@
 #include "global.h"
 #include "entity/room.h"
 #include "map_construction/generate_enemy.h"
+#include "map_construction/random_enemy_type.h"
 
 void generateEnemy(Room &newRoom, int (&map)[height][width])
 {
@@ -28,6 +29,8 @@ void generateEnemy(Room &newRoom, int (&map)[height][width])
             enemy.currentObject = FLOOR;
             enemy.previousObject = FLOOR;
             enemy.setPosition();
+
+            randomEnemyType(enemy);
 
             map[newPY][newPX] = ENEMY;
             newRoom.enemies[countEnemy] = enemy;
