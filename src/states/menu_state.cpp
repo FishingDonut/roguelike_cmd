@@ -18,7 +18,7 @@ void menu_enter()
 {
     system("cls");
     drawMargin(gameData.hConsole);
-    
+
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 22, (SHORT)(height / 2) - 2});
     std::cout << "[ APERTE WASD, Setas ou HJKL PARA COMEÇAR ]";
     setConfigKey();
@@ -27,7 +27,11 @@ void menu_enter()
     std::cout << "START";
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 1});
     std::cout << "INFO";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 2});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6, (SHORT)(height / 2) + 2});
+    std::cout << "DIFFICULTY";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 3});
+    std::cout << "SCORE";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 3, (SHORT)(height / 2) + 4});
     std::cout << "EXIT";
 }
 
@@ -46,7 +50,11 @@ void menu_exit()
     std::cout << "         ";
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 1});
     std::cout << "         ";
-    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 2});
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 6, (SHORT)(height / 2) + 2});
+    std::cout << "          ";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 3});
+    std::cout << "         ";
+    SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 5, (SHORT)(height / 2) + 4});
     std::cout << "         ";
 
     SetConsoleCursorPosition(gameData.hConsole, {(SHORT)(width / 2) - 1, (SHORT)(height / 2)});

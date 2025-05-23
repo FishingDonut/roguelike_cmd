@@ -15,15 +15,15 @@ namespace Menu
         int cursorPosition = gameData.menuData.cursorPosition;
 
         if(cursorPosition != cursorOldPosition){
-            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 5), (SHORT)((height / 2) + cursorOldPosition)});
+            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 8), (SHORT)((height / 2) + cursorOldPosition)});
             cout << " ";
-            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 3), (SHORT)((height / 2) + cursorOldPosition)});
+            SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 6), (SHORT)((height / 2) + cursorOldPosition)});
             cout << " ";
         }
 
-        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 5), (SHORT)((height / 2) + cursorPosition)});
+        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) - 8), (SHORT)((height / 2) + cursorPosition)});
         cout << ">";
-        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 3), (SHORT)((height / 2) + cursorPosition)});
+        SetConsoleCursorPosition(hConsole, {(SHORT)((width / 2) + 6), (SHORT)((height / 2) + cursorPosition)});
         cout << "<";
     }
 }
