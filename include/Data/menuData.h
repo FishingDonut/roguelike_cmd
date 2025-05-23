@@ -2,7 +2,7 @@
 
 struct MenuData
 {
-    const int maxOptions = 2; // enter info exit. 
+    const int maxOptions = 4; // enter info exit. 
     int cursorPosition = 0;
     int cursorOldPosition = 0;
 };

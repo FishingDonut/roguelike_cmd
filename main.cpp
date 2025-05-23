@@ -17,6 +17,7 @@
 #include "./include/states/paused_state.h"
 #include "./include/states/game_over_state.h"
 #include "./include/states/credits_state.h"
+#include "./include/states/difficulty_state.h"
 
 using namespace std;
 
@@ -43,6 +44,11 @@ void switchState()
         break;
     case STATE_INFO:
         info_exit();
+        break;
+    case STATE_DIFFICULTY:
+        difficulty_exit();
+        break;
+    case STATE_SCORE:
         break;
     case STATE_MAP_CONSTRUCTION:
         map_construction_enter();
@@ -72,6 +78,11 @@ void switchState()
         break;
     case STATE_INFO:
         info_enter();
+        break;
+    case STATE_DIFFICULTY:
+        difficulty_enter();
+        break;
+    case STATE_SCORE:
         break;
     case STATE_MAP_CONSTRUCTION:
         map_construction_update();
@@ -108,6 +119,11 @@ void loopGame()
             break;
         case STATE_INFO:
             info_update();
+            break;
+        case STATE_DIFFICULTY:
+            difficulty_update();
+            break;
+        case STATE_SCORE:
             break;
         case STATE_MAP_CONSTRUCTION:
             map_construction_exit();

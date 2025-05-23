@@ -1,8 +1,11 @@
 #pragma once
 
-enum StateMachine {
+enum StateMachine
+{
     STATE_MENU,
     STATE_INFO,
+    STATE_DIFFICULTY,
+    STATE_SCORE,
     STATE_MAP_CONSTRUCTION,
     STATE_PLAYING,
     STATE_PAUSED,
