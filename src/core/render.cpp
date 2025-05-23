@@ -1,9 +1,12 @@
 #include <iostream>
 #include <windows.h>
+#include <string>
+#include <vector>
 #include "core/render.h"
 #include "core/map_value_to_char.h"
 #include "global.h"
 #include "game_data.h"
+#include "file_manager/score/score_in.h"
 
 void drawMap(HANDLE &hConsole, int matriz[height][width])
 {
@@ -45,4 +48,30 @@ void drawMargin(HANDLE &hConsole)
         }
     }
     return;
+}
+
+void print_centered(short y, const std::string &text)
+{
+    COORD coord;
+    coord.X = (SHORT)(width / 2 - text.length() / 2);
+    coord.Y = y;
+    SetConsoleCursorPosition(gameData.hConsole, coord);
+    std::cout << text;
+}
+
+void show_scoreboard()
+{
+    system("cls");
+
+    std::vector<std::string> scores = scoreRead();
+    short y = (SHORT)((height / 2) - (scores.size() / 2));
+    size_t i = 1;
+
+    for (const std::string &score : scores)
+    {
+        print_centered(y + i++, score);
+    }
+
+    drawMargin(gameData.hConsole);
+    getch();
 }

@@ -17,16 +17,6 @@
 extern StateMachine nextState;
 extern bool stateChanged;
 
-// Função utilitária para imprimir centralizado
-void print_centered(short y, const std::string &text)
-{
-    COORD coord;
-    coord.X = (SHORT)(width / 2 - text.length() / 2);
-    coord.Y = y;
-    SetConsoleCursorPosition(gameData.hConsole, coord);
-    std::cout << text;
-}
-
 // Função para capturar nome do jogador
 void capture_player_name(short y)
 {
@@ -50,24 +40,6 @@ void capture_player_name(short y)
         SetConsoleCursorPosition(gameData.hConsole, coord);
         std::cout << " " << name << " ";
     }
-}
-
-// Função para exibir placar
-void show_scoreboard()
-{
-    system("cls");
-
-    std::vector<std::string> scores = scoreRead();
-    short y = (SHORT)((height / 2) - (scores.size() / 2));
-    size_t i = 1;
-
-    for (const std::string &score : scores)
-    {
-        print_centered(y + i++, score);
-    }
-
-    drawMargin(gameData.hConsole);
-    getch();
 }
 
 void game_over_enter()
