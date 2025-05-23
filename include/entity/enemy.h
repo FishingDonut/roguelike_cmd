@@ -64,7 +64,7 @@ struct Enemy
         skin = 'S';
         health = 2;
         damage = 1;
-        delay = 0.19f;
+        delay = 0.3f;
     }
 
     void enemyRed()
@@ -83,5 +83,12 @@ struct Enemy
         health = 2;
         damage = 2;
         delay = 0.5f;
+    }
+
+    void levelUp(int floor)
+    {
+        health += (floor / 2);
+        damage += (floor / 2);
+        (delay -= 0.03f) > 0.01f ? delay -= 0.02f : 0;
     }
 };
