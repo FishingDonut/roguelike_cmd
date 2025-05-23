@@ -29,6 +29,8 @@ struct Player
     int kills = 0;
     int gold = 1;
     int xp = 0;
+    int nextXpLevel = 12;
+    int level = 1;
     int currentObject = FLOOR;
     int previousObject = FLOOR;
     int attackDistance = 3;

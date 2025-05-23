@@ -17,7 +17,7 @@ void map_construction_enter(){
 };
 
 void map_construction_update(){
-    nextState = STATE_PLAYING;
+    nextState = STATE_LEVEL_UP;
     stateChanged = true;
     return;
 };
