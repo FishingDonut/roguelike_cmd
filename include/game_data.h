@@ -19,11 +19,12 @@ struct GameData
     MenuData menuData = MenuData();
     Config config = Config();
     bool running = true;
-    int floorCount = 0;
+    int floorCount = 1;
+    int bossFloorCount = 3;
     bool bossFloor = false;
     int seed;
     int score = 0;
-    Status status = Status(); 
+    Status status = Status();
 };
 
 extern GameData gameData;
