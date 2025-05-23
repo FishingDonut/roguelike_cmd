@@ -16,6 +16,8 @@ extern bool stateChanged;
 void score_enter()
 {
     system("cls");
+    print_centered(height / 2, "O jogador ganha pontos conforme mata os inimigos");
+    getch();
     show_scoreboard();
     getch();
     nextState = STATE_MENU;
