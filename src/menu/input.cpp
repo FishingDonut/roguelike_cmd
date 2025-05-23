@@ -12,8 +12,8 @@ namespace Menu
         StateMachine selectState[maxOptions + 1] = {
             STATE_MAP_CONSTRUCTION,
             STATE_INFO,
-            STATE_INFO,
-            STATE_INFO,
+            STATE_DIFFICULTY,
+            STATE_SCORE,
             STATE_GAME_OVER};
 
         int &cursorOldPosition = gameData.menuData.cursorOldPosition;
