@@ -17,8 +17,10 @@ struct Enemy
     COORD position;
     COORD newPosition;
     COORD oldPosition;
-    
-    Colors color = COLOR_GREEN;
+
+    Colors hideColor = COLOR_GREEN;
+    Colors color = hideColor;
+    Colors seenColor = hideColor;
     char skin = 'S';
     int health = 2;
     int damage = 2;
@@ -32,7 +34,8 @@ struct Enemy
 
     void setPosition()
     {
-        if(!alive){
+        if (!alive)
+        {
             return;
         }
         position.X = newPosition.X;
@@ -42,14 +45,50 @@ struct Enemy
 
     void updateHealth(int newhealth)
     {
-        if(!alive){
+        if (!alive)
+        {
             return;
         }
-        if(health <= 0){
+        if (health <= 0)
+        {
             clearEnemy(*this);
             return;
         }
         health += newhealth;
         return;
+    }
+
+    void enemyBlue()
+    {
+        seenColor = COLOR_CYAN;
+        skin = 'S';
+        health = 2;
+        damage = 1;
+        delay = 0.3f;
+    }
+
+    void enemyRed()
+    {
+        seenColor = COLOR_RED;
+        skin = 'R';
+        health = 4;
+        damage = 4;
+        delay = 0.8f;
+    }
+
+    void enemyYellow()
+    {
+        seenColor = COLOR_YELLOW;
+        skin = 'P';
+        health = 2;
+        damage = 2;
+        delay = 0.5f;
+    }
+
+    void levelUp(int floor)
+    {
+        health += (floor / 2);
+        damage += (floor / 2);
+        (delay -= 0.03f) > 0.01f ? delay -= 0.02f : 0;
     }
 };
