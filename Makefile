@@ -29,6 +29,7 @@ SRC = \
     src/states/game_over_state.cpp \
     src/states/difficulty_state.cpp \
     src/states/score_state.cpp \
+    src/states/level_up_state.cpp \
     src/playing/status/render_status.cpp \
     src/playing/input.cpp \
     src/playing/render.cpp \
@@ -62,7 +63,8 @@ SRC = \
     src/map_construction/is_colliding.cpp \
     src/map_construction/set_position_player.cpp \
     src/map_construction/set_position_stair.cpp \
-    src/map_construction/random_enemy_type.cpp
+    src/map_construction/random_enemy_type.cpp \
+    src/level_up/update_next_level.cpp \
 
 # Gera nomes dos arquivos .o
 OBJ = $(SRC:.cpp=.o)
