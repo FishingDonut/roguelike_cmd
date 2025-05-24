@@ -19,7 +19,7 @@ namespace Playing
         update_enemies();
         update_boss();
         
-        std::this_thread::sleep_for(milliseconds(32));
+        std::this_thread::sleep_for(milliseconds(8));
         return;
     }
 }

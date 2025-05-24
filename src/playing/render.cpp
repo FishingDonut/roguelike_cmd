@@ -18,8 +18,23 @@ namespace Playing
         HANDLE hConsole = gameData.hConsole;
         Player &player = gameData.player;
 
-        // SetConsoleCursorPosition(hConsole, {0, 0});
-        // cout << getCharAtPosition(hConsole, newPos);
+        //clock
+        SetConsoleCursorPosition(hConsole, {(SHORT)(width / 2) - 3, 0});
+
+        if (9 >= gameData.clockData.minute)
+        {
+            std::cout << "0";
+        }
+
+        std::cout << gameData.clockData.minute << ":";
+
+        if (9 >= gameData.clockData.second)
+        {
+            std::cout << "0";
+        }
+
+        std::cout << gameData.clockData.second;
+        //clock
 
         if (player.moveOn)
         {

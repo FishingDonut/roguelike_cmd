@@ -18,7 +18,7 @@ void clearStatus(int size, COORD position)
     }
 }
 
-void updateStatus(std::stringstream& stream, const std::string& label, Colors color, int& currentValue, int newValue, int& spacing, int& nextSpacing, int spacingText)
+void updateStatus(std::stringstream &stream, const std::string &label, Colors color, int &currentValue, int newValue, int &spacing, int &nextSpacing, int spacingText)
 {
     HANDLE hConsole = gameData.hConsole;
 
@@ -43,8 +43,8 @@ void updateStatus(std::stringstream& stream, const std::string& label, Colors co
 
 void render_status()
 {
-    Player& player = gameData.player;
-    Status& status = gameData.status;
+    Player &player = gameData.player;
+    Status &status = gameData.status;
 
     std::stringstream stream;
     int spacingText = 3;

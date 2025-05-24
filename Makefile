@@ -15,6 +15,7 @@ SRC = \
     src/core/search_entity.cpp \
     src/core/visual_length.cpp \
     src/core/is_numeric.cpp \
+    src/core/clock.cpp \
     src/file_manager/score/score_in.cpp \
     src/file_manager/score/score_out.cpp \
     src/file_manager/score/score_manager.cpp \
