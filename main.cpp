@@ -6,8 +6,9 @@
 // person libs
 #include "global.h"
 #include "state_machine.h"
-#include "./include/core/init.h"
-#include "./include/entity/player.h"
+#include "core/init.h"
+#include "core/clock.h"
+#include "entity/player.h"
 #include "game_data.h"
 // states
 #include "./include/states/menu_state.h"
@@ -120,6 +121,8 @@ void loopGame()
 {
     while (gameData.running)
     {
+        time_clock();
+
         switchState();
 
         switch (currentState)

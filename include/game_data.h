@@ -7,6 +7,7 @@
 #include "Data/Status.h"
 #include "Data/mapData.h"
 #include "Data/MenuData.h"
+#include "Data/ClockData.h"
 #include "Data/ConfigData.h"
 
 struct GameData
@@ -18,6 +19,7 @@ struct GameData
     MapData mapData = MapData();
     MenuData menuData = MenuData();
     Config config = Config();
+    ClockData clockData = ClockData();
     bool running = true;
     int floorCount = 1;
     int bossFloorCount = 3;
