@@ -16,6 +16,7 @@ SRC = \
     src/core/visual_length.cpp \
     src/core/is_numeric.cpp \
     src/core/clock.cpp \
+    src/core/search_item.cpp \
     src/file_manager/score/score_in.cpp \
     src/file_manager/score/score_out.cpp \
     src/file_manager/score/score_manager.cpp \
@@ -59,6 +60,7 @@ SRC = \
     src/map_construction/generate_rooms.cpp \
     src/map_construction/generate_boss.cpp \
     src/map_construction/generate_enemy.cpp \
+    src/map_construction/generate_item.cpp \
     src/map_construction/generate_trap.cpp \
     src/map_construction/generate_random_room.cpp \
     src/map_construction/is_colliding.cpp \

@@ -16,8 +16,10 @@ enum ItemType
 struct Item
 {
     ItemType itemType = NONE;
-    char* name = "empty";
+    const char* name = "empty";
     float value = 0;
+    int x, y = 0;
+    char skin = '*';
 };
 
 const Item ITEM_DATABASE[] = {

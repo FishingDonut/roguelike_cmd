@@ -19,6 +19,8 @@ int generate_rooms()
     const int MAX_ROOMS = gameData.mapData.MAX_ROOMS;
     Room(&listRoom)[MAX_ROOMS] = gameData.mapData.rooms;
 
+    gameData.mapData.countItens = 0;
+    gameData.mapData.countTraps = 0;
     int countRoom = 0;
     int min = 5;
     int max = 20;
@@ -58,6 +60,7 @@ int generate_rooms()
             }
 
             listRoom[countRoom++] = room;
+            generateItem(listRoom[countRoom - 1], map);
             generateEnemy(listRoom[countRoom - 1], map);
         }
     }

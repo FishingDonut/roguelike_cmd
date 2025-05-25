@@ -7,6 +7,7 @@
 #include "generate_rooms.h"
 #include "generate_boss.h"
 #include "generate_enemy.h"
+#include "generate_item.h"
 #include "generate_trap.h"
 #include "generate_random_room.h"
 #include "generate_rooms.h"
