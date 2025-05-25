@@ -6,6 +6,7 @@
 #include "state_machine.h"
 #include "core/colors.h"
 #include "tile_map_value.h"
+#include "entity/item.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -16,6 +17,7 @@ struct Player
     COORD newPosition;
     COORD oldPosition;
 
+    Item inventory = Item();
     std::string name = "";
     Colors color = COLOR_YELLOW;
     char skin = '@';
