@@ -1,5 +1,4 @@
 #include <windows.h>
-
 #include "game_data.h"
 #include "entity/trap.h"
 #include "core/search_entity.h"
@@ -21,7 +20,23 @@ Trap searchTrap(COORD position)
         }
     }
 
-    Trap trap = Trap();
+    Trap trap;
     trap.reset();
     return trap;
+}
+
+Item searchItem(COORD position)
+{
+    int count = gameData.mapData.countItens;
+    Item* items = gameData.mapData.itens;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (position.Y == items[i].y && position.X == items[i].x)
+        {
+            return items[i];
+        }
+    }
+
+    return Item(); // retorno vazio
 }

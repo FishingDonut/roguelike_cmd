@@ -9,7 +9,6 @@ using namespace std::chrono;
 void time_clock()
 {
     auto &lastTime = gameData.clockData.lastTime;
-    auto &delay = gameData.clockData.delay;
     auto &second = gameData.clockData.second;
     auto &minute = gameData.clockData.minute;
     auto &hour = gameData.clockData.hour;

@@ -16,14 +16,23 @@ enum ItemType
 struct Item
 {
     ItemType itemType = NONE;
-    const char* name = "empty";
+    const char *name = "none";
     float value = 0;
     int x, y = 0;
     char skin = '*';
+
+    void empty()
+    {
+        itemType = POT_NONE;
+        name = "Pot empty";
+        value = 0;
+    }
 };
 
 const Item ITEM_DATABASE[] = {
     { POT_HP, "Pot none", 0 },
+    { POT_HP, "Pot hp", 10 },
+    { POT_HP, "Pot hp", 10 },
     { POT_HP, "Pot hp", 10 },
     { POT_HP, "Pot xp", 20 },
     { POT_HP, "Pot speed", 0.05 },

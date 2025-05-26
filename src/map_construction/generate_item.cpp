@@ -15,7 +15,7 @@ void generateItem(Room &newRoom, int (&map)[height][width])
 
     for (int i = 0; i < MAX_ITENS; i++)
     {
-        if ((rand() % 10) > 8 && countItens < MAX_ITENS)
+        if ((rand() % 10) > 8 && countItens < MAX_ITENS && gameData.mapData.countItens < MAX_ITENS)
         {
             do
             {
@@ -26,6 +26,9 @@ void generateItem(Room &newRoom, int (&map)[height][width])
             Item item = ITEM_DATABASE[rand() % ITEM_DATABASE_SIZE];
             item.y = newPY;
             item.x = newPX;
+
+            // Salva no gameData
+            gameData.mapData.itens[gameData.mapData.countItens++] = item;
 
             map[newPY][newPX] = ITEM;
             countItens++;

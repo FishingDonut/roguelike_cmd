@@ -49,12 +49,13 @@ struct Enemy
         {
             return;
         }
+
+        health += newhealth;
         if (health <= 0)
         {
             clearEnemy(*this);
             return;
         }
-        health += newhealth;
         return;
     }
 

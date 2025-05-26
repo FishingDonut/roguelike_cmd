@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <vector>
 
 #include "../state_machine.h"
 #include "../game_data.h"
@@ -7,80 +8,88 @@
 #include "include/playing/player/attack.h"
 #include "core/search_entity.h"
 
+void removeItemAt(COORD position)
+{
+    Item *items = gameData.mapData.itens;
+    int &count = gameData.mapData.countItens;
+
+    for (int i = 0; i < count; ++i)
+    {
+        if (items[i].x == position.X && items[i].y == position.Y)
+        {
+            items[i] = items[count - 1];
+            count--;
+            return;
+        }
+    }
+}
+
 void handle_collision(int tile)
 {
-    switch (tile)
+    if (tile == STAIR)
     {
-    case STAIR:
         nextState = STATE_MAP_CONSTRUCTION;
         stateChanged = true;
-        break;
-    default:
-        break;
     }
-    return;
 }
 
 bool is_collision(int tile)
 {
     Trap trap;
+    Item item;
     switch (tile)
     {
     case FLOOR:
         return false;
-        break;
     case WALL:
-        return true;
-        break;
     case PLAYER:
         return true;
-        break;
     case ENEMY:
-        return false;
-        break;
-    case STAIR:
-        return true;
-        break;
     case BOSS:
         return false;
-        break;
+    case STAIR:
+        return true;
     case TRAP:
         trap = searchTrap(gameData.player.newPosition);
         gameData.player.updateHealth(-trap.damage);
         return false;
-        break;
+    case ITEM:
+    {
+        int (&map)[height][width] = gameData.mapData.world;
+        item = searchItem(gameData.player.newPosition);
+        gameData.player.inventory = item;
+
+        map[gameData.player.newPosition.Y][gameData.player.newPosition.X] = FLOOR;
+        removeItemAt(gameData.player.newPosition);
+
+        return false;
+    }
     default:
         return true;
-        break;
     }
 }
 
 void update_map()
 {
     Player &player = gameData.player;
-    COORD &oldPosition = gameData.player.oldPosition;
+    COORD &oldPosition = player.oldPosition;
     int (&map)[height][width] = gameData.mapData.world;
-    int &previousObject = gameData.player.previousObject;
+    int &previousObject = player.previousObject;
 
     map[oldPosition.Y][oldPosition.X] = previousObject;
     map[player.position.Y][player.position.X] = PLAYER;
-    return;
 }
 
 void update_player()
 {
     Player &player = gameData.player;
-    COORD &newPosition = gameData.player.newPosition;
-    COORD &oldPosition = gameData.player.oldPosition;
+    COORD &newPosition = player.newPosition;
+    COORD &oldPosition = player.oldPosition;
     int (&map)[height][width] = gameData.mapData.world;
-    int &currentObject = gameData.player.currentObject;
-    int &previousObject = gameData.player.previousObject;
     int nearbyObject;
 
     if (!player.IsUpdate)
-    {
         return;
-    }
 
     if (player.isAttackUpdate)
     {
@@ -88,7 +97,8 @@ void update_player()
         player.isAttackUpdate = false;
     }
 
-    if(newPosition.Y == player.position.Y && newPosition.X == player.position.X){
+    if (newPosition.Y == player.position.Y && newPosition.X == player.position.X)
+    {
         update_map();
         return;
     }
@@ -103,11 +113,8 @@ void update_player()
         return;
     }
 
+    // player.previousObject = nearbyObject;
     player.setPosition(newPosition.X, newPosition.Y);
     player.setDirection();
-    previousObject = currentObject;
-    currentObject = nearbyObject;
-
     update_map();
-    return;
 }
