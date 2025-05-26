@@ -41,6 +41,29 @@ void updateStatus(std::stringstream &stream, const std::string &label, Colors co
     nextSpacing = spacing + textLength + spacingText;
 }
 
+void updateStatus(std::stringstream &stream, const std::string &label, Colors color, std::string &currentValue, const std::string &newValue, int &spacing, int &nextSpacing, int spacingText)
+{
+    HANDLE hConsole = gameData.hConsole;
+
+    stream.str("");
+    stream.clear();
+
+    stream << "[ " << label << ": " << colorChar(color) << newValue << colorChar(COLOR_RESET) << " ]";
+    std::string text = stream.str();
+    int textLength = visualLength(text, spacingText);
+
+    if (currentValue != newValue)
+    {
+        currentValue = newValue;
+        clearStatus(textLength, {(SHORT)spacing, (SHORT)height - 1});
+
+        SetConsoleCursorPosition(hConsole, {(SHORT)spacing, (SHORT)height - 1});
+        std::cout << text;
+    }
+
+    nextSpacing = spacing + textLength + spacingText;
+}
+
 void render_status()
 {
     Player &player = gameData.player;
@@ -54,5 +77,6 @@ void render_status()
     updateStatus(stream, "GOLD", COLOR_YELLOW, status.gold, player.gold, status.spacingGold, status.spacingXp, spacingText);
     updateStatus(stream, "XP", COLOR_CYAN, status.xp, player.xp, status.spacingXp, status.spacingCurrentEnemyHp, spacingText);
     updateStatus(stream, "EHP", COLOR_RED, status.currentEnemyHp, gameData.currentEnemy.health, status.spacingCurrentEnemyHp, status.spacingCurrentEnemyDamage, spacingText);
-    updateStatus(stream, "DMG", COLOR_YELLOW, status.currentEnemyDamage, gameData.currentEnemy.damage, status.spacingCurrentEnemyDamage, status.spacingCurrentEnemyDamage, spacingText);
+    updateStatus(stream, "DMG ", COLOR_YELLOW, status.currentEnemyDamage, gameData.currentEnemy.damage, status.spacingCurrentEnemyDamage, status.spacingItem, spacingText);
+    updateStatus(stream, "INV ", COLOR_WHITE, status.currentItem, gameData.player.inventory.name, status.spacingItem, status.spacingItem, spacingText);
 }

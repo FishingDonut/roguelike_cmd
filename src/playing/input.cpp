@@ -47,8 +47,6 @@ namespace Playing
             auto &player = gameData.player;
             auto &item = player.inventory;
 
-            std::cout << item.name;
-
             switch (item.itemType)
             {
             case POT_NONE:

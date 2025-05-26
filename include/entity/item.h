@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string.h>
+
 enum ItemType
 {
     NONE,
@@ -16,7 +18,7 @@ enum ItemType
 struct Item
 {
     ItemType itemType = NONE;
-    const char *name = "none";
+    std::string name = "none";
     float value = 0;
     int x, y = 0;
     char skin = '*';
@@ -30,16 +32,17 @@ struct Item
 };
 
 const Item ITEM_DATABASE[] = {
-    { POT_HP, "Pot none", 0 },
-    { POT_HP, "Pot hp", 10 },
-    { POT_HP, "Pot hp", 10 },
-    { POT_HP, "Pot hp", 10 },
-    { POT_HP, "Pot xp", 20 },
-    { POT_HP, "Pot speed", 0.05 },
-    { POT_HP, "Pot money", 25 },
-    { POT_HP, "Pot dist", 1 },
-    { POT_HP, "Pot kill", 9999 },
-    { POT_HP, "Pot trap", 1 },
+    {POT_NONE,  "Pot none",  0},
+    {POT_HP,    "Pot hp",    10},
+    {POT_HP,    "Pot hp",    10},
+    {POT_HP,    "Pot hp",    10},
+    {POT_XP,    "Pot xp",    20},
+    {POT_SPEED, "Pot speed", 0.05},
+    {POT_MONEY, "Pot money", 25},
+    {POT_DIST,  "Pot dist",  1},
+    {POT_KILL,  "Pot kill",  9999},
+    {POT_TRAP,  "Pot trap",  1},
 };
+
 
 const int ITEM_DATABASE_SIZE = sizeof(ITEM_DATABASE) / sizeof(Item);
