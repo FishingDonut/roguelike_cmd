@@ -38,7 +38,7 @@ void level_up_update()
     auto &xp = player.xp;
     auto &nextXpLevel = player.nextXpLevel;
     auto &level = player.level;
-    auto &health = player.health;
+    auto &health = player.healthMax;
     auto &speed = player.delay;
     auto &power = player.damage;
 

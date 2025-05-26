@@ -26,7 +26,8 @@ struct Player
     bool IsUpdate = true;
     bool moveOn = false;
     const int maxAttackDistance = 20;
-    int health = 25;
+    int healthMax = 25;
+    int health = healthMax;
     int damage = 1;
     int kills = 0;
     int gold = 1;
@@ -49,7 +50,10 @@ struct Player
 
     void updateHealth(int newHealth)
     {
-        health += newHealth;
+        if (health + newHealth < healthMax){
+            health += newHealth;
+        }
+
         if (health <= 0)
         {
             nextState = STATE_GAME_OVER;
