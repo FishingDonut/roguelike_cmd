@@ -14,13 +14,13 @@
 extern StateMachine nextState;
 extern bool stateChanged;
 
-
-void drawText(string label, int y, Colors color = COLOR_RESET){
+void drawText(string label, int y, Colors color = COLOR_RESET)
+{
     std::stringstream stream;
     stream.str("");
     stream.clear();
     stream << colorChar(color) << label << colorChar(COLOR_RESET);
-    
+
     std::string text = stream.str();
     int textLength = visualLength(text, 0);
 
@@ -32,22 +32,21 @@ void info_enter()
 {
     HANDLE hConsole = gameData.hConsole;
     std::stringstream stream;
-    auto& config = gameData.config;
+    auto &config = gameData.config;
 
     system("cls");
     drawMargin(hConsole);
-    
-    
+
     drawText("As salas são geradas aleatoriamente, use armadilhas ou paredes para driblar inimigos.", 1);
     drawText("Suba os andares até que o chefe aparessa, matando ele vc vence o jogo.", 2);
-  
+
     drawText(std::string(1, gameData.player.skin) + " - Jogador", 3, COLOR_YELLOW);
     drawText(std::string(1, Enemy().skin) + " - Inimigo", 4, COLOR_RED);
-    drawText(std::string(1, mapValueToChar(STAIR)) + " - Escada", 5);   
+    drawText(std::string(1, mapValueToChar(STAIR)) + " - Escada", 5);
     drawText(std::string(1, Trap().visibleSkin) + " - Armadilha", 6, Trap().color);
-    
+
     drawText("Controles", 7);
-    drawText(" UP = " + std::string(1, config.UP),8);
+    drawText(" UP = " + std::string(1, config.UP), 8);
     drawText(" DOWN = " + std::string(1, config.DOWN), 9);
     drawText(" LEFT = " + std::string(1, config.LEFT), 10);
     drawText(" RIGHT = " + std::string(1, config.RIGHT), 11);
@@ -55,7 +54,20 @@ void info_enter()
     drawText(" PAUSE = ESC", 13);
     drawText(" EXIT = Q", 14);
 
+    getch();
+    system("cls");
+    drawText("Potions explicativas:", -3, COLOR_WHITE);
+    drawText("Pot hp     - Recupera vida", -1, COLOR_GREEN);
+    drawText("Pot xp     - Ganha experiencia", 0, COLOR_CYAN);
+    drawText("Pot speed  - Aumenta a velocidade de ataque", 1, COLOR_BLUE);
+    drawText("Pot money  - Ganha ouro", 2, COLOR_YELLOW);
+    drawText("Pot dist   - Aumenta a distancia do ataque", 3, COLOR_MAGENTA);
+    drawText("Pot kill   - Mata todos os inimigos da sala", 4, COLOR_RED);
+    drawText("Pot trap   - Permite colocar uma armadilha no chão", 5, COLOR_WHITE);
+    drawText("Pot none   - Poção vazia (sem efeito)", 6, COLOR_RESET);
 
+    getch();
+    system("cls");
     return;
 }
 

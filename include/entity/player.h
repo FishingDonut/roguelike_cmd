@@ -38,7 +38,7 @@ struct Player
     int attackDistance = 3;
     int dirY = -1;
     int dirX = 0;
-    float delay = 0.01f;
+    float delay = 0.12f;
     steady_clock::time_point lastTime = steady_clock::now();
 
     void setPosition(int x, int y)
